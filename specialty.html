@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% from "_parts.html" import crumbs, complete_bar %}
+{% block og_type %}article{% endblock %}
+{% block main %}
+<div class="wrap">
+  {{ crumbs([("Specialties", "/specialties/"), (spec.name, None)]) }}
+</div>
+<article class="wrap lesson-grid">
+  <header class="lesson-head">
+    <h1>{{ spec.name }} billing guide</h1>
+    <p class="lede">{{ spec.summary }}</p>
+    <p class="meta">
+      <span>{{ icon("clock", 16) }} {{ spec.minutes or 8 }} min read</span>
+      <span class="lvl lvl-{{ (spec.level or 'Intermediate') | slug }}">{{ spec.level or "Intermediate" }}</span>
+      <span class="done-flag" data-done-flag="{{ spec.url }}" hidden>{{ icon("check", 16) }} Completed</span>
+    </p>
+  </header>
+
+  <aside class="lesson-side">
+    <details class="toc" open data-toc>
+      <summary>On this page</summary>
+      <ol>
+        <li><a href="#what">What it is</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#codes">Key CPT and HCPCS codes</a></li>
+        {% if spec.icd %}<li><a href="#icd">Common diagnoses</a></li>{% endif %}
+        {% if spec.modifiers %}<li><a href="#modifiers">Modifiers</a></li>{% endif %}
+        <li><a href="#prereqs">Before you bill</a></li>
+        <li><a href="#denials">Denials to expect</a></li>
+      </ol>
+    </details>
+  </aside>
+
+  <div class="prose">
+    <h2 id="what">What it is</h2>
+    {% for para in spec.definition.strip().split('\n\n') %}<p>{{ para | md }}</p>{% endfor %}
+
+    <div class="spec-facts">
+      {% if spec.providers %}<div class="fbox"><p class="fbox-label">Who provides it</p><p>{{ spec.providers | md }}</p></div>{% endif %}
+      {% if spec.settings %}<div class="fbox"><p class="fbox-label">Where it happens</p><p>{{ spec.settings | md }}</p></div>{% endif %}
+    </div>
+
+    <h2 id="services">Services they provide</h2>
+    <ul>{% for s in spec.services %}<li>{{ s | md }}</li>{% endfor %}</ul>
+
+    <h2 id="codes">Key CPT and HCPCS codes</h2>
+    {% set has_notes = spec.codes | selectattr("note") | list | length > 0 %}
+    <div class="table-wrap" tabindex="0"><table class="code-tbl">
+      <thead><tr><th scope="col">Code</th><th scope="col">What it covers</th>{% if has_notes %}<th scope="col">Billing note</th>{% endif %}</tr></thead>
+      <tbody>
+      {% for c in spec.codes %}<tr><td class="mono">{{ c.code }}</td><td>{{ c.desc | md }}</td>{% if has_notes %}<td>{{ (c.note or "") | md }}</td>{% endif %}</tr>{% endfor %}
+      </tbody>
+    </table></div>
+    <p class="small-note">Descriptions are simplified. Always code from the current CPT, HCPCS and ICD-10 books.</p>
+
+    {% if spec.icd %}
+    <h2 id="icd">Common diagnoses (ICD-10-CM)</h2>
+    <div class="table-wrap" tabindex="0"><table class="code-tbl">
+      <thead><tr><th scope="col">Code</th><th scope="col">Condition</th></tr></thead>
+      <tbody>{% for c in spec.icd %}<tr><td class="mono">{{ c.code }}</td><td>{{ c.desc | md }}</td></tr>{% endfor %}</tbody>
+    </table></div>
+    {% endif %}
+
+    {% if spec.modifiers %}
+    <h2 id="modifiers">Modifiers you'll use</h2>
+    <dl class="mods">{% for m in spec.modifiers %}<div><dt class="mono">{{ m.mod }}</dt><dd>{{ m.use | md }}</dd></div>{% endfor %}</dl>
+    {% endif %}
+
+    <h2 id="prereqs">Before you bill: prerequisites</h2>
+    <ul class="ticks">{% for p in spec.prerequisites %}<li>{{ p | md }}</li>{% endfor %}</ul>
+
+    <h2 id="denials">Denials to expect and how to prevent them</h2>
+    <div class="table-wrap" tabindex="0"><table class="den-tbl">
+      <thead><tr><th scope="col">Denial</th><th scope="col">Why it happens</th><th scope="col">Prevention or fix</th></tr></thead>
+      <tbody>
+      {% for d in spec.denials %}<tr><td>{% if d.code %}<span class="mono">{{ d.code }}</span>{% endif %}</td><td>{{ d.issue | md }}</td><td>{{ d.prevent | md }}</td></tr>{% endfor %}
+      </tbody>
+    </table></div>
+
+    {% if spec.tips %}
+    <div class="admonition tip">
+      <p class="admonition-title">Auditor's notes</p>
+      <ul>{% for t in spec.tips %}<li>{{ t | md }}</li>{% endfor %}</ul>
+    </div>
+    {% endif %}
+
+    {% if spec.interview %}
+    <div class="admonition interview">
+      <p class="admonition-title">If an interviewer asks</p>
+      <p>{{ spec.interview | md }}</p>
+    </div>
+    {% endif %}
+
+    {{ complete_bar(spec.url, prev, next) }}
+  </div>
+</article>
+{% endblock %}

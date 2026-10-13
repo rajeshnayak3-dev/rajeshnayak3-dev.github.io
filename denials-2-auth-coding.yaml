@@ -1,0 +1,401 @@
+codes:
+  # ---------------------------------------------------------------- authorization
+  - code: CO-197
+    carc: "197"
+    group: CO
+    category: auth
+    featured: true
+    title: Precertification, notification or authorization absent
+    summary: The service needed prior authorization or notification, and the payer has none on file.
+    meaning: >-
+      The plan requires approval before this service (or notification of an admission), and
+      the payer couldn't find a valid authorization for this member, provider, service and date.
+    causes:
+      - Authorization never requested.
+      - Authorization obtained but the number wasn't on the claim (box 23 or FL 63).
+      - Authorization was for a different CPT code, provider, facility or date range.
+      - Inpatient admission not notified within the payer's window.
+      - Service moved from one site to another after approval.
+    ask:
+      - Is there any authorization on file for this member and date, under any provider?
+      - What codes, units and dates does it cover?
+      - Does the plan allow retro-authorization, and within what time?
+      - What are the reconsideration or appeal options and deadline?
+    steps:
+      - Search the billing system, scheduling notes and payer portal for an authorization.
+      - If one exists and matches, send a corrected claim with the number, or ask the payer to reprocess.
+      - If it exists but doesn't match (code or date), ask the payer whether it can be updated, then reprocess.
+      - If none exists, check whether retro-authorization is allowed and route to the auth team with the deadline.
+      - For emergencies or urgent cases, appeal with records showing why prior approval wasn't possible.
+      - If none of these apply and the contract holds the patient harmless, write off with the correct adjustment code and approval.
+    prevention:
+      - Check payer authorization lists at scheduling, by CPT and place of service.
+      - Hold claims for services that need authorization until the number is attached.
+      - Update the authorization whenever the procedure or site changes.
+    rarc:
+      - code: N54
+        text: Claim information is inconsistent with pre-certified or authorized services.
+      - code: M62
+        text: Missing, incomplete or invalid treatment authorization code.
+    professional: Imaging, surgeries, injections and specialty drugs are the main sources.
+    hospital: Inpatient admissions need notification, often within 24 to 48 hours; extra days need concurrent review approval.
+    example: >-
+      MRI 72148 performed 09/10. Auth A77812 on file for 72148, valid 09/01 to 09/30, but the
+      number wasn't in box 23. The analyst adds it and sends a corrected claim (frequency 7). Root
+      cause: charge entry, auth number not attached.
+    interview: >-
+      CO-197 means authorization was absent. I first check whether an auth exists but wasn't on
+      the claim; if so I send a corrected claim. If not, I check retro-auth options or appeal for
+      urgent care, and tag the root cause for the authorization team.
+
+  - code: CO-198
+    carc: "198"
+    group: CO
+    category: auth
+    title: Precertification, notification or authorization exceeded
+    summary: An authorization exists, but the service went beyond the approved units, visits or days.
+    meaning: >-
+      The payer approved a limited number of units, visits or days, and this claim goes beyond them.
+    causes:
+      - Therapy visits beyond the approved count.
+      - Inpatient days beyond what concurrent review approved.
+      - More drug units billed than approved.
+      - Services after the authorization's end date.
+    ask:
+      - How many units or visits were approved, and how many have been used?
+      - Can an extension be requested, including retroactively?
+    steps:
+      - Compare the units and dates billed with the approval.
+      - If the claim's units are wrong, send a corrected claim.
+      - If more services were needed, request an extension or retro update with clinical notes.
+      - Appeal with records if the payer refuses and the services were necessary.
+    prevention:
+      - Track used versus approved visits and request extensions before they run out.
+    hospital: Common on long inpatient stays and skilled nursing; concurrent review notes are key evidence.
+    interview: >-
+      CO-198 means we exceeded the authorization. I compare units and dates billed with what was
+      approved, correct the claim if it's a billing error, otherwise request an extension or appeal
+      with clinical documentation.
+
+  - code: CO-15
+    carc: "15"
+    group: CO
+    category: auth
+    title: Authorization number missing, invalid or does not apply
+    summary: The authorization on the claim is wrong, invalid or belongs to another service or provider.
+    meaning: >-
+      The claim has an authorization number, but it's invalid, expired or not for this service or provider.
+    causes:
+      - Typo in the authorization number.
+      - Referral number entered where an authorization number was needed (or the reverse).
+      - Authorization issued to a different rendering provider or facility.
+    ask:
+      - What authorization is on file and for which provider, codes and dates?
+    steps:
+      - Check the authorization details and correct the number on the claim.
+      - If it's for a different provider or site, ask the payer to update it.
+      - Send a corrected claim.
+    prevention:
+      - Copy authorization numbers directly from the approval; check provider and site match.
+    interview: >-
+      CO-15 means the auth on the claim is invalid or doesn't apply. I confirm the correct
+      authorization details, correct the claim or get the auth updated, and resubmit.
+
+  - code: CO-242
+    carc: "242"
+    group: CO
+    category: auth
+    title: Services not provided by network or primary care providers
+    summary: The plan only pays in-network or PCP-directed care, and this service wasn't.
+    meaning: >-
+      Under the member's plan (often HMO or EPO), the service had to be provided by a network
+      provider or the assigned primary care provider, or referred by them.
+    causes:
+      - Provider not in the HMO or EPO network.
+      - Specialist visit without a PCP referral.
+      - Patient seen by a provider who isn't their assigned PCP.
+    ask:
+      - Is the provider in network for this specific plan?
+      - Is a referral on file, and who is the assigned PCP?
+    steps:
+      - Confirm network status and referral requirements.
+      - Get a referral or PCP change from the plan if allowed retroactively.
+      - Appeal for emergency or continuity-of-care situations.
+      - Otherwise follow the patient waiver and client policy.
+    prevention:
+      - Verify network participation by plan (not just by payer) and check referrals before the visit.
+    interview: >-
+      CO-242 means the service wasn't from a network or PCP-directed provider. I check network
+      status and referrals, request a retro referral or PCP update if possible, or appeal for
+      emergencies.
+
+  # ---------------------------------------------------------------- coding
+  - code: CO-16
+    carc: "16"
+    group: CO
+    category: coding
+    featured: true
+    title: Claim lacks information or has submission or billing errors
+    summary: Something on the claim is missing or invalid. The remark code says what.
+    meaning: >-
+      The payer can't process the claim or line as submitted because information is missing,
+      incomplete or invalid. CARC 16 always comes with at least one RARC that names the problem.
+    causes:
+      - Missing or invalid rendering, referring or ordering provider (N290, N265).
+      - Missing or invalid NDC for a drug line (M119).
+      - Missing or invalid procedure code or modifier (M51).
+      - Missing or invalid diagnosis (M76).
+      - Missing CLIA number for lab tests (MA120).
+      - Missing primary payer information on a secondary claim (MA04).
+    ask:
+      - What exactly is missing or invalid? Which remark code applies?
+      - Should I send a corrected claim or a new claim?
+    steps:
+      - Read every RARC on the line to identify the missing or invalid item.
+      - Find the correct information in the record, registration or provider set-up.
+      - Send a corrected claim (or a new claim if the payer treated it as unprocessable, such as Medicare MA130).
+      - Document the RARC, the fix and the submission date.
+    prevention:
+      - Add scrubber edits for the top CO-16 remark codes your payers use.
+      - Keep provider NPIs, CLIA numbers and drug NDCs up to date in the billing system.
+    rarc:
+      - code: N290
+        text: Missing, incomplete or invalid rendering provider primary identifier.
+      - code: M51
+        text: Missing, incomplete or invalid procedure code(s).
+      - code: M76
+        text: Missing, incomplete or invalid diagnosis or condition.
+      - code: M119
+        text: Missing, incomplete, invalid, deactivated or withdrawn National Drug Code (NDC).
+      - code: MA120
+        text: Missing, incomplete or invalid CLIA certification number.
+      - code: N265
+        text: Missing, incomplete or invalid ordering provider primary identifier.
+    example: >-
+      Line J3301 (triamcinolone injection) denies CO-16 with M119. The NDC was missing. The
+      analyst adds the NDC in 5-4-2 format with qualifier N4 and the unit of measure, and sends a
+      corrected claim.
+    interview: >-
+      CO-16 means missing or invalid information. The remark code tells me what's missing, for
+      example N290 for the rendering NPI or M119 for the NDC. I fix that item and send a corrected
+      claim, or a new claim if it was unprocessable.
+
+  - code: CO-4
+    carc: "4"
+    group: CO
+    category: coding
+    featured: true
+    title: Procedure code inconsistent with the modifier, or a required modifier is missing
+    summary: The modifier is wrong for the code, or a modifier the payer requires isn't there.
+    meaning: >-
+      The payer's edits found that the modifier doesn't fit the procedure, or that the procedure
+      needs a modifier (for example RT/LT, 26/TC, 25, 50) that wasn't billed.
+    causes:
+      - Sided procedure billed without RT or LT.
+      - Diagnostic test billed with 26 by a provider who should bill global, or without 26 in a facility.
+      - Bilateral procedure billed in the wrong format for the payer (50 vs RT/LT lines).
+      - Modifier that doesn't apply to that code (for example 50 on a code that's inherently bilateral).
+      - Anaesthesia claims missing AA, QK, QX, QY or QZ.
+    ask:
+      - Which modifier is missing or invalid on which line?
+      - How does this payer want bilateral procedures billed?
+    steps:
+      - Check the documentation for side, component and circumstances.
+      - Have coding confirm the correct modifier.
+      - Send a corrected claim with the right modifier.
+    prevention:
+      - Scrubber rules for payer-specific modifier requirements.
+      - Coder and charge entry training on side and component modifiers.
+    rarc:
+      - code: N519
+        text: Invalid combination of HCPCS modifiers.
+    interview: >-
+      CO-4 means the modifier is inconsistent or missing. I check the record for side,
+      professional or technical component, or distinct service, get coding to confirm, and send a
+      corrected claim with the right modifier.
+
+  - code: CO-11
+    carc: "11"
+    group: CO
+    category: coding
+    title: Diagnosis inconsistent with the procedure
+    summary: The diagnosis on the line doesn't support the procedure billed.
+    meaning: >-
+      The payer's edits don't accept the linked diagnosis as a reason for this procedure.
+    causes:
+      - Diagnosis pointer linked to the wrong diagnosis.
+      - Unspecified or symptom code when the payer needs a definitive diagnosis.
+      - Supporting diagnosis documented but not coded.
+      - Diagnosis for the wrong side (laterality mismatch).
+    ask:
+      - Which diagnoses does the payer accept for this procedure?
+    steps:
+      - Review the note and the diagnosis pointers.
+      - Have coding correct the diagnosis or pointer if the record supports it.
+      - Send a corrected claim; if the coding was right, appeal with records and the payer's policy.
+    prevention:
+      - Check diagnosis pointers at charge entry; use LCD and payer policy diagnosis lists.
+    interview: >-
+      CO-11 means the diagnosis doesn't support the procedure. I check pointers and documentation,
+      have coding correct it if supported, and send a corrected claim, or appeal if the coding was right.
+
+  - code: CO-5
+    carc: "5"
+    group: CO
+    category: coding
+    title: Procedure code or type of bill inconsistent with the place of service
+    summary: The service can't be billed with the place of service or bill type used.
+    meaning: >-
+      The code or bill type doesn't make sense for the location reported, for example an office
+      visit code with an inpatient POS, or a facility-only service on a professional claim.
+    causes:
+      - Wrong POS selected at charge entry (11 instead of 22, 21 or 23).
+      - Hospital visit codes billed with POS 11.
+      - Telehealth billed with the wrong POS (02 vs 10) for the payer's policy.
+    ask:
+      - Which POS or bill type does the payer expect for this code?
+    steps:
+      - Confirm where the service took place from the note.
+      - Correct the POS (or TOB) and send a corrected claim.
+    prevention:
+      - Default POS by location in the billing system; scrubber edits for code and POS pairs.
+    interview: >-
+      CO-5 means the code doesn't fit the place of service. I confirm the actual location, correct
+      the POS and resubmit.
+
+  - code: CO-6
+    carc: "6"
+    group: CO
+    category: coding
+    title: Procedure or revenue code inconsistent with the patient's age
+    summary: The code is meant for a different age group than the patient's.
+    meaning: >-
+      The payer's edits found that the code doesn't fit the patient's age, for example a
+      pediatric preventive code for an adult.
+    causes:
+      - Wrong age-specific preventive visit code (99381 to 99397 ranges).
+      - Wrong date of birth in registration.
+      - Newborn codes billed after the newborn period.
+    steps:
+      - Confirm the patient's DOB.
+      - Correct the DOB or the code and send a corrected claim.
+    prevention:
+      - Scrubber age edits; DOB checked against the insurance card.
+    interview: >-
+      CO-6 is an age mismatch. I check the DOB and whether the age-specific code is right, then
+      correct and resubmit.
+
+  - code: CO-146
+    carc: "146"
+    group: CO
+    category: coding
+    title: Diagnosis was invalid for the date of service
+    summary: The ICD-10-CM code wasn't valid on the date of service, or isn't billable.
+    meaning: >-
+      The diagnosis code was deleted, not yet effective, or is a non-billable header code
+      (missing required characters) on the date of service.
+    causes:
+      - Code deleted in the October 1 ICD-10-CM update.
+      - Category code billed without its required 4th to 7th characters.
+      - Missing 7th character on injury codes.
+    steps:
+      - Look up the code in the ICD-10-CM edition for the DOS.
+      - Have coding select the valid, specific code.
+      - Send a corrected claim.
+    prevention:
+      - Load ICD-10-CM updates on time each October (and April when issued); scrubber validity edits.
+    rarc:
+      - code: M76
+        text: Missing, incomplete or invalid diagnosis or condition.
+    interview: >-
+      CO-146 means the diagnosis was invalid for the date. I have coding pick the valid,
+      fully specified code for that year's code set and resubmit.
+
+  - code: CO-181
+    carc: "181"
+    group: CO
+    category: coding
+    title: Procedure code was invalid on the date of service
+    summary: The CPT or HCPCS code was deleted or not yet effective on the date of service.
+    meaning: >-
+      The procedure code didn't exist (or wasn't valid for this payer) on the date of service.
+    causes:
+      - CPT deleted in the January 1 update but still in the charge master or fee schedule.
+      - Quarterly HCPCS change not loaded.
+      - New code used before its effective date.
+    steps:
+      - Check the code's effective dates.
+      - Have coding select the valid code for the DOS.
+      - Send a corrected claim.
+    prevention:
+      - Update fee schedules and charge masters for every CPT and HCPCS release.
+    interview: >-
+      CO-181 means the procedure code was invalid on that date. I get the valid replacement code
+      from coding and send a corrected claim.
+
+  - code: CO-189
+    carc: "189"
+    group: CO
+    category: coding
+    title: Unlisted or NOC code billed when a specific code exists
+    summary: A "not otherwise classified" or unlisted code was used even though a specific code describes the service.
+    meaning: >-
+      The payer says a specific CPT or HCPCS code exists for this service, so the unlisted or NOC
+      code isn't accepted.
+    causes:
+      - Unlisted CPT (ending in 99) used out of habit.
+      - J3490 or J3590 used for a drug that now has its own J-code.
+    steps:
+      - Identify the specific code with coding.
+      - Send a corrected claim with the specific code (and NDC for drugs).
+    prevention:
+      - Review unlisted and NOC codes quarterly against new code releases.
+    interview: >-
+      CO-189 means we used an unlisted or NOC code when a specific code exists. Coding identifies
+      the right code and we send a corrected claim.
+
+  - code: CO-199
+    carc: "199"
+    group: CO
+    category: coding
+    title: Revenue code and procedure code do not match
+    summary: On a facility claim, the revenue code doesn't fit the HCPCS code on the same line.
+    meaning: >-
+      The UB-04 line pairs a revenue code with a CPT or HCPCS code that doesn't belong to that
+      revenue centre, for example a lab code under a radiology revenue code.
+    causes:
+      - Charge master item mapped to the wrong revenue code.
+      - Drug HCPCS billed under 0250 when the payer requires 0636.
+    steps:
+      - Identify the correct revenue code for the HCPCS.
+      - Fix the charge master if the mapping is wrong.
+      - Send a replacement claim (TOB xx7).
+    prevention:
+      - Regular charge master reviews; scrubber edits for revenue and HCPCS pairs.
+    hospital: A facility-only denial; fixing the charge master stops it across all future claims.
+    interview: >-
+      CO-199 is a revenue code and HCPCS mismatch on a UB-04. We correct the revenue code, fix the
+      charge master mapping and send a replacement claim.
+
+  - code: CO-B16
+    carc: B16
+    group: CO
+    category: coding
+    title: New patient qualifications were not met
+    summary: A new patient E/M code was billed for a patient the payer considers established.
+    meaning: >-
+      The patient received professional services from this physician, or another of the same
+      specialty and subspecialty in the same group, within the past three years, so a new patient
+      code doesn't apply.
+    causes:
+      - Patient seen by another doctor of the same specialty in the group within 3 years.
+      - Practice merged or provider changed groups and history wasn't checked.
+    steps:
+      - Check the patient's visit history in the group.
+      - Have coding change to the established patient code at the supported level.
+      - Send a corrected claim.
+    prevention:
+      - Registration flags for prior visits within 3 years by specialty.
+    interview: >-
+      CO-B16 means new patient criteria weren't met: the patient was seen by the same specialty in
+      the group within three years. We recode to the established visit and resubmit.

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% from "_parts.html" import crumbs, complete_bar %}
+{% block main %}
+<div class="wrap">
+  {{ crumbs([("Scenarios", "/scenarios/"), (sc.title, None)]) }}
+</div>
+<article class="wrap scenario">
+  <header class="lesson-head">
+    <h1>{{ sc.title }}</h1>
+    <p class="lede">{{ sc.summary }}</p>
+    <p class="meta">
+      <span>{{ icon("clock", 16) }} {{ sc.minutes or 6 }} min</span>
+      <span class="lvl lvl-{{ (sc.level or 'Intermediate') | slug }}">{{ sc.level or "Intermediate" }}</span>
+      {% if sc.tag %}<span class="tag">{{ sc.tag }}</span>{% endif %}
+      <span class="done-flag" data-done-flag="{{ sc.url }}" hidden>{{ icon("check", 16) }} Completed</span>
+    </p>
+  </header>
+
+  <section class="sc-setup fbox fbox-lg">
+    <h2 class="fbox-label">The claim in front of you</h2>
+    <div class="prose">{{ sc.setup_html | safe }}</div>
+  </section>
+
+  <div class="sc-stage-wrap" data-scenario>
+    <noscript><p>Turn on JavaScript to play this scenario.</p></noscript>
+  </div>
+  <script type="application/json" data-scenario-data>{{ data_json | safe }}</script>
+
+  <div class="sc-end" data-scenario-end hidden>
+    {{ complete_bar(sc.url, None, next) }}
+  </div>
+</article>
+{% endblock %}

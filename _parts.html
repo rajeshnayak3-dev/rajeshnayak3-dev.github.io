@@ -1,0 +1,59 @@
+{% from "_icons.html" import icon %}
+
+{% macro crumbs(items) -%}
+<nav class="crumbs" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    {% for label, href in items %}
+      {% if href %}<li><a href="{{ href }}">{{ label }}</a></li>{% else %}<li aria-current="page">{{ label }}</li>{% endif %}
+    {% endfor %}
+  </ol>
+</nav>
+{%- endmacro %}
+
+{% macro quiz(questions, page_url) -%}
+{% if questions %}
+<section class="quiz" data-quiz data-quiz-id="{{ page_url }}" aria-labelledby="quiz-h">
+  <h2 id="quiz-h">Check your understanding</h2>
+  <p class="quiz-intro">{{ questions|length }} questions. Pick an answer to see the explanation.</p>
+  <ol class="quiz-list">
+    {% for q in questions %}
+    {% set qi = loop.index0 %}
+    <li class="quiz-q" data-answer="{{ q.answer }}">
+      <p class="quiz-prompt">{{ q.q | md }}</p>
+      <div class="quiz-options" role="group" aria-label="Answers for question {{ loop.index }}">
+        {% for opt in q.options %}
+        <button type="button" class="quiz-opt" data-i="{{ loop.index0 }}">{{ opt | md }}</button>
+        {% endfor %}
+      </div>
+      <div class="quiz-why" hidden><p>{{ q.why | md }}</p></div>
+    </li>
+    {% endfor %}
+  </ol>
+  <div class="quiz-score" data-quiz-score hidden></div>
+</section>
+{% endif %}
+{%- endmacro %}
+
+{% macro complete_bar(page_url, prev, next) -%}
+<div class="lesson-end">
+  <button type="button" class="btn btn-done" data-complete="{{ page_url }}">
+    {{ icon("check", 18) }}<span data-complete-label>Mark as complete</span>
+  </button>
+  <nav class="pager" aria-label="Previous and next">
+    {% if prev %}<a class="pager-link prev" href="/{{ prev.url }}"><small>Previous</small><span>{{ prev.short or prev.title or prev.name }}</span></a>{% else %}<span></span>{% endif %}
+    {% if next %}<a class="pager-link next" href="/{{ next.url }}"><small>Next</small><span>{{ next.short or next.title or next.name }}</span></a>{% endif %}
+  </nav>
+</div>
+{%- endmacro %}
+
+{% macro toc_box(toc) -%}
+{% if toc and toc|length > 1 %}
+<details class="toc" open data-toc>
+  <summary>On this page</summary>
+  <ol>
+    {% for t in toc %}<li><a href="#{{ t.id }}">{{ t.name }}</a></li>{% endfor %}
+  </ol>
+</details>
+{% endif %}
+{%- endmacro %}

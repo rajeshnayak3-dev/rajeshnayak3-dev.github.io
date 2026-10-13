@@ -1,0 +1,383 @@
+/* REVEX site behaviour: theme, menu, search, progress, quizzes,
+   scenarios, filters, hero claim animation, certificate. No libraries. */
+(function () {
+  "use strict";
+
+  var body = document.body;
+  var ROOT = body.getAttribute("data-root") || "./";
+  var PREVIEW = body.getAttribute("data-preview") === "1";
+  var PAGE = body.getAttribute("data-page") || "";
+  var $ = function (s, el) { return (el || document).querySelector(s); };
+  var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
+
+  function href(u) {
+    var path = u, frag = "";
+    var i = u.indexOf("#");
+    if (i >= 0) { path = u.slice(0, i); frag = u.slice(i); }
+    if (PREVIEW && (path === "" || path.slice(-1) === "/")) path += "index.html";
+    return ROOT + path + frag;
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  /* ------------------------------------------------ storage */
+  var KEY = "revex-progress-v1";
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY)) || { done: {}, quiz: {} }; }
+    catch (e) { return { done: {}, quiz: {} }; }
+  }
+  function save(st) { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
+  var state = load();
+  state.done = state.done || {}; state.quiz = state.quiz || {};
+
+  /* ------------------------------------------------ theme */
+  var themeBtn = $("[data-theme-toggle]");
+  if (themeBtn) themeBtn.addEventListener("click", function () {
+    var next = document.documentElement.getAttribute("data-mode") === "dark" ? "light" : "dark";
+    if (next === "dark") document.documentElement.setAttribute("data-mode", "dark");
+    else document.documentElement.removeAttribute("data-mode");
+    try { localStorage.setItem("revex-theme", next); } catch (e) {}
+  });
+
+  /* ------------------------------------------------ topics menu */
+  var topicsBtn = $("[data-topics]"), topicsPanel = $("#topics-panel");
+  function setTopics(open) {
+    if (!topicsBtn) return;
+    topicsBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    topicsPanel.hidden = !open;
+    if (open && innerWidth <= 860) body.style.overflow = "hidden"; else body.style.overflow = "";
+  }
+  if (topicsBtn) {
+    topicsBtn.addEventListener("click", function () { setTopics(topicsPanel.hidden); });
+    $$("[data-topics-close]").forEach(function (b) { b.addEventListener("click", function () { setTopics(false); topicsBtn.focus(); }); });
+    document.addEventListener("click", function (e) {
+      if (!topicsPanel.hidden && !topicsPanel.contains(e.target) && !topicsBtn.contains(e.target)) setTopics(false);
+    });
+  }
+
+  /* ------------------------------------------------ search */
+  var modal = $("[data-search-modal]"), input = $("[data-search-input]"),
+      results = $("[data-search-results]"), hint = $("[data-search-hint]");
+  var index = null, active = -1, lastFocus = null;
+
+  function loadIndex() {
+    if (index) return Promise.resolve(index);
+    return fetch(ROOT + "static/search-index.json").then(function (r) { return r.json(); })
+      .then(function (d) { index = d; return d; })
+      .catch(function () { index = []; return index; });
+  }
+  function norm(s) { return String(s || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim(); }
+  function score(item, q, words) {
+    var t = norm(item.t), k = norm(item.k), d = norm(item.d), s = 0;
+    var qn = norm(q);
+    if (t === qn) s += 100;
+    if (t.indexOf(qn) === 0) s += 50;
+    if (t.indexOf(qn) >= 0) s += 30;
+    for (var i = 0; i < words.length; i++) {
+      var w = words[i];
+      if (t.indexOf(w) >= 0) s += 10; else if (k.indexOf(w) >= 0) s += 6; else if (d.indexOf(w) >= 0) s += 3; else return 0;
+    }
+    if (item.y === "lesson") s += 2;
+    if (item.y === "code") s += 1;
+    return s;
+  }
+  function runSearch() {
+    var q = input.value.trim();
+    if (!q) { results.innerHTML = ""; hint.hidden = false; return; }
+    loadIndex().then(function (idx) {
+      var words = norm(q).split(" ").filter(Boolean);
+      var hits = idx.map(function (it) { return { it: it, s: score(it, q, words) }; })
+        .filter(function (h) { return h.s > 0; })
+        .sort(function (a, b) { return b.s - a.s; }).slice(0, 12);
+      active = hits.length ? 0 : -1;
+      hint.hidden = hits.length > 0;
+      if (!hits.length) { hint.textContent = "No results for “" + q + "”. Try a shorter word, or a code number like 197."; }
+      results.innerHTML = hits.map(function (h, i) {
+        var it = h.it;
+        return '<li><a href="' + esc(href(it.u)) + '"' + (i === 0 ? ' class="is-active"' : "") + '>' +
+          (it.s ? '<span class="sr-sec">' + esc(it.y === "term" ? "Glossary" : it.s) + "</span>" : "") +
+          "<strong>" + esc(it.t) + "</strong>" + (it.d ? "<small>" + esc(it.d) + "</small>" : "") + "</a></li>";
+      }).join("");
+    });
+  }
+  function openSearch() {
+    if (!modal) return;
+    lastFocus = document.activeElement;
+    modal.hidden = false; body.style.overflow = "hidden";
+    input.value = ""; results.innerHTML = ""; hint.hidden = false;
+    hint.textContent = "Try “timely filing”, “CO-45”, “spend down” or “modifier 25”.";
+    setTimeout(function () { input.focus(); }, 10);
+    loadIndex();
+  }
+  function closeSearch() {
+    if (!modal || modal.hidden) return;
+    modal.hidden = true; body.style.overflow = "";
+    if (lastFocus) lastFocus.focus();
+  }
+  $$("[data-search-open]").forEach(function (b) { b.addEventListener("click", openSearch); });
+  $$("[data-search-close]").forEach(function (b) { b.addEventListener("click", closeSearch); });
+  if (input) {
+    input.addEventListener("input", runSearch);
+    input.addEventListener("keydown", function (e) {
+      var links = $$("a", results);
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        if (!links.length) return;
+        active = (active + (e.key === "ArrowDown" ? 1 : -1) + links.length) % links.length;
+        links.forEach(function (l, i) { l.classList.toggle("is-active", i === active); });
+        links[active].scrollIntoView({ block: "nearest" });
+      } else if (e.key === "Enter" && links[active]) {
+        e.preventDefault(); location.href = links[active].href;
+      }
+    });
+  }
+  document.addEventListener("keydown", function (e) {
+    var tag = (e.target.tagName || "").toLowerCase();
+    var typing = tag === "input" || tag === "textarea" || e.target.isContentEditable;
+    if ((e.key === "/" && !typing) || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k")) {
+      e.preventDefault(); openSearch();
+    } else if (e.key === "Escape") {
+      closeSearch(); if (topicsPanel && !topicsPanel.hidden) { setTopics(false); topicsBtn.focus(); }
+    }
+  });
+  // ?q= support so Google sitelinks search works
+  try {
+    var q0 = new URLSearchParams(location.search).get("q");
+    if (q0 && input) { openSearch(); input.value = q0; runSearch(); }
+  } catch (e) {}
+
+  /* ------------------------------------------------ completion */
+  function markUI() {
+    $$("[data-topic]").forEach(function (a) {
+      var li = a.closest("li") || a;
+      li.classList.toggle("is-complete", !!state.done[a.getAttribute("data-topic")]);
+    });
+    $$("[data-done-flag]").forEach(function (el) { el.hidden = !state.done[el.getAttribute("data-done-flag")]; });
+    $$("[data-complete]").forEach(function (b) {
+      var done = !!state.done[b.getAttribute("data-complete")];
+      b.classList.toggle("is-done", done);
+      var lbl = $("[data-complete-label]", b);
+      if (lbl) lbl.textContent = done ? "Completed" : "Mark as complete";
+      b.setAttribute("aria-pressed", done ? "true" : "false");
+    });
+    $$("[data-section-progress]").forEach(function (el) {
+      var id = el.getAttribute("data-section-progress");
+      var n = Object.keys(state.done).filter(function (u) { return u.indexOf(id + "/") === 0 && u !== "denials/codes/"; }).length;
+      if (!n) { el.textContent = ""; return; }
+      el.textContent = el.hasAttribute("data-verbose") ? "You've completed " + n + " in this section." : n + " done";
+    });
+  }
+  $$("[data-complete]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var u = b.getAttribute("data-complete");
+      if (state.done[u]) delete state.done[u]; else state.done[u] = Date.now();
+      save(state); markUI();
+    });
+  });
+  markUI();
+
+  /* ------------------------------------------------ TOC highlight */
+  var tocLinks = $$(".toc a");
+  if (tocLinks.length && "IntersectionObserver" in window) {
+    var map = {};
+    tocLinks.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
+    var heads = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          tocLinks.forEach(function (a) { a.classList.remove("is-active"); });
+          map[en.target.id].classList.add("is-active");
+        }
+      });
+    }, { rootMargin: "-20% 0px -70% 0px" });
+    heads.forEach(function (h) { io.observe(h); });
+    if (innerWidth <= 1000) $$("[data-toc]").forEach(function (d) { d.open = false; });
+  }
+
+  /* ------------------------------------------------ quizzes */
+  $$("[data-quiz]").forEach(function (quiz) {
+    var id = quiz.getAttribute("data-quiz-id");
+    var qs = $$(".quiz-q", quiz), answered = 0, right = 0;
+    var scoreEl = $("[data-quiz-score]", quiz);
+    qs.forEach(function (q) {
+      var ans = parseInt(q.getAttribute("data-answer"), 10);
+      var opts = $$(".quiz-opt", q);
+      opts.forEach(function (o) {
+        o.addEventListener("click", function () {
+          var pick = parseInt(o.getAttribute("data-i"), 10);
+          opts.forEach(function (x) { x.disabled = true; });
+          opts[ans].classList.add("is-right");
+          if (pick !== ans) o.classList.add("is-wrong"); else right++;
+          $(".quiz-why", q).hidden = false;
+          answered++;
+          if (answered === qs.length) {
+            var pass = right / qs.length >= 0.7;
+            scoreEl.hidden = false;
+            scoreEl.classList.toggle("is-pass", pass);
+            scoreEl.textContent = "You scored " + right + " out of " + qs.length + ". " +
+              (pass ? "Well done. This topic is marked complete." : "Reread the sections you missed, then reload the page to try again.");
+            var prev = state.quiz[id];
+            if (!prev || right >= prev.s) state.quiz[id] = { s: right, t: qs.length, d: Date.now() };
+            if (pass) state.done[id] = state.done[id] || Date.now();
+            save(state); markUI();
+          }
+        });
+      });
+    });
+  });
+
+  /* ------------------------------------------------ filters (codes, glossary) */
+  function setupFilter(inputSel, itemSel, groupSel, emptySel) {
+    var inp = $(inputSel);
+    if (!inp) return;
+    inp.addEventListener("input", function () {
+      var q = norm(inp.value), any = false;
+      $$(itemSel).forEach(function (el) {
+        var hit = !q || norm(el.getAttribute("data-text")).indexOf(q) >= 0;
+        el.hidden = !hit; if (hit) any = true;
+      });
+      $$(groupSel).forEach(function (g) { g.hidden = !$$(itemSel, g).some(function (el) { return !el.hidden; }); });
+      $(emptySel).hidden = any;
+    });
+  }
+  setupFilter("[data-code-filter]", "[data-code-row]", "[data-code-group]", "[data-code-empty]");
+  setupFilter("[data-gloss-filter]", "[data-gloss-item]", "[data-gloss-letter]", "[data-gloss-empty]");
+
+  /* ------------------------------------------------ scenarios */
+  var scWrap = $("[data-scenario]"), scData = $("[data-scenario-data]");
+  if (scWrap && scData) {
+    var data = JSON.parse(scData.textContent);
+    var stages = data.stages, idx = 0, best = 0;
+    var VERDICT = { best: "Best move", ok: "Works, but not the best", wrong: "That would cause a problem" };
+    function md(s) {
+      return esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/`(.+?)`/g, "<code>$1</code>");
+    }
+    function renderStage(i) {
+      var st = stages[i];
+      var el = document.createElement("section");
+      el.className = "sc-stage";
+      el.innerHTML = '<p class="sc-stage-n">Decision ' + (i + 1) + " of " + stages.length + "</p>" +
+        "<h2>" + md(st.q) + "</h2>" + (st.context ? '<p class="sc-situation">' + md(st.context) + "</p>" : "") +
+        '<div class="sc-choices"></div><div class="sc-feedback" hidden></div>';
+      var box = $(".sc-choices", el), fb = $(".sc-feedback", el);
+      st.choices.forEach(function (c) {
+        var b = document.createElement("button");
+        b.type = "button"; b.className = "sc-choice"; b.innerHTML = md(c.text);
+        b.addEventListener("click", function () {
+          var btns = $$(".sc-choice", box);
+          btns.forEach(function (x) { x.disabled = true; });
+          b.classList.add("is-picked", "v-" + c.v);
+          if (c.v !== "best") {
+            st.choices.forEach(function (o, j) { if (o.v === "best") btns[j].classList.add("v-best"); });
+          } else best++;
+          fb.hidden = false; fb.className = "sc-feedback v-" + c.v;
+          fb.innerHTML = "<strong>" + VERDICT[c.v] + "</strong>" + md(c.why);
+          var nb = document.createElement("button");
+          nb.type = "button"; nb.className = "btn btn-primary sc-next";
+          nb.textContent = i + 1 < stages.length ? "Next decision" : "See the outcome";
+          nb.addEventListener("click", function () {
+            nb.remove();
+            if (i + 1 < stages.length) { var n = renderStage(i + 1); n.scrollIntoView({ behavior: "smooth", block: "start" }); $("button", n).focus(); }
+            else finish();
+          });
+          fb.after(nb);
+        });
+        box.appendChild(b);
+      });
+      scWrap.appendChild(el);
+      return el;
+    }
+    function finish() {
+      var el = document.createElement("section");
+      el.className = "sc-summary";
+      el.innerHTML = "<h2>You made the best call " + best + " of " + stages.length + " times</h2>" +
+        (data.takeaways.length ? "<p><strong>Takeaways</strong></p><ul>" + data.takeaways.map(function (t) { return "<li>" + md(t) + "</li>"; }).join("") + "</ul>" : "");
+      scWrap.appendChild(el);
+      $("[data-scenario-end]").hidden = false;
+      var u = PAGE; state.done[u] = state.done[u] || Date.now();
+      state.quiz[u] = { s: best, t: stages.length, d: Date.now() };
+      save(state); markUI();
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    renderStage(0);
+  }
+
+  /* ------------------------------------------------ progress page */
+  var trackEl = $("[data-track]");
+  if (trackEl) {
+    var track = JSON.parse(trackEl.textContent);
+    var titles = JSON.parse($("[data-sections]").textContent);
+    var ids = JSON.parse($("[data-section-ids]").textContent);
+    function drawProgress() {
+      var done = track.filter(function (t) { return state.done[t.u]; }).length;
+      var quizzes = Object.keys(state.quiz).map(function (k) { return state.quiz[k]; });
+      var qs = quizzes.reduce(function (a, q) { return a + q.s; }, 0), qt = quizzes.reduce(function (a, q) { return a + q.t; }, 0);
+      var pct = track.length ? Math.round(done / track.length * 100) : 0;
+      $("[data-prog-summary]").innerHTML =
+        '<div class="prog-stat"><b>' + pct + '%</b><span>of REVEX completed</span></div>' +
+        '<div class="prog-stat"><b>' + done + " / " + track.length + '</b><span>lessons, guides and scenarios</span></div>' +
+        '<div class="prog-stat"><b>' + (qt ? Math.round(qs / qt * 100) + "%" : "–") + '</b><span>average quiz score' + (qt ? " (" + quizzes.length + " taken)" : "") + "</span></div>";
+      $("[data-prog-sections]").innerHTML = ids.map(function (id, i) {
+        var items = track.filter(function (t) { return t.s === id; });
+        if (!items.length) return "";
+        var d = items.filter(function (t) { return state.done[t.u]; }).length;
+        var p = Math.round(d / items.length * 100);
+        return '<div class="prog-row"><a href="' + esc(href(id + "/")) + '">' + esc(titles[i]) + '</a><div class="prog-bar" role="img" aria-label="' + p + '% complete"><i style="width:' + p + '%"></i></div><span class="mono">' + d + "/" + items.length + "</span></div>";
+      }).join("");
+      var unlocked = pct >= 80;
+      $("[data-cert-locked]").hidden = unlocked;
+      $("[data-cert-form]").hidden = !unlocked;
+      var cc = $("[data-cert-count]"); if (cc) cc.textContent = done + " modules completed";
+    }
+    drawProgress();
+    $("[data-cert-form]").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = $("#cert-name").value.trim(); if (!name) return;
+      $("[data-cert-name]").textContent = name;
+      $("[data-cert-date]").textContent = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+      body.classList.add("printing-cert");
+      window.print();
+      setTimeout(function () { body.classList.remove("printing-cert"); }, 500);
+    });
+    $("[data-prog-reset]").addEventListener("click", function () {
+      if (!confirm("Clear all completed lessons and quiz scores on this device?")) return;
+      state = { done: {}, quiz: {} }; save(state); drawProgress(); markUI();
+    });
+  }
+
+  /* ------------------------------------------------ hero claim ticket */
+  var ticket = $("[data-claim]");
+  if (ticket) {
+    var steps = $$("[data-ct-track] li", ticket), status = $("[data-ct-status]", ticket),
+        result = $("[data-ct-result]", ticket), resultText = $("[data-ct-result-text]", ticket),
+        caption = $("[data-ct-caption]", ticket), timers = [];
+    var captions = [
+      "The visit is coded and the charge is entered.",
+      "The scrubber checks the claim before it leaves.",
+      "The clearinghouse and payer accept the claim (277CA).",
+      "Medicare allows $140.50. $39.50 is a CO-45 contractual write-off, and 20% coinsurance ($28.10) is the patient's share (PR-2).",
+      "Payment posts from the ERA. The claim is closed."
+    ];
+    function setStep(i) {
+      steps.forEach(function (s, j) { s.classList.toggle("is-done", j <= i); });
+      status.textContent = steps[i].getAttribute("data-msg");
+      caption.textContent = captions[i];
+      var paid = i >= 3;
+      result.classList.toggle("is-paid", i === 4);
+      status.classList.toggle("is-paid", i === 4);
+      resultText.textContent = paid ? "Paid $112.40, CO-45 $39.50, PR-2 $28.10" : "Pending";
+    }
+    function play() {
+      timers.forEach(clearTimeout); timers = [];
+      var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) { setStep(4); return; }
+      setStep(0);
+      for (var i = 1; i < steps.length; i++) (function (k) { timers.push(setTimeout(function () { setStep(k); }, k * 1500)); })(i);
+    }
+    $("[data-ct-replay]", ticket).addEventListener("click", play);
+    play();
+  }
+})();

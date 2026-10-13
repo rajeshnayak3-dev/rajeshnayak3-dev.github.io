@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% from "_parts.html" import crumbs %}
+{% block main %}
+<div class="wrap">
+  {{ crumbs([("Denials", "/denials/"), ("Code library", None)]) }}
+  <header class="section-head">
+    <span class="sh-ico">{{ icon("alert", 28) }}</span>
+    <div>
+      <h1>Denial code library</h1>
+      <p class="lede">{{ count }} claim adjustment reason codes (CARC) you'll meet on ERAs, grouped by why the claim failed. Open any code for causes, call questions, resolution steps and prevention.</p>
+    </div>
+  </header>
+
+  <div class="filter-row">
+    <label class="filter">
+      {{ icon("search", 18) }}
+      <input type="search" placeholder="Filter by code or meaning, e.g. 197 or authorization" data-code-filter aria-label="Filter denial codes">
+    </label>
+    <p class="filter-hint"><a href="/denials/read-an-era/">How to read CO, PR, OA and PI group codes</a></p>
+  </div>
+
+  <nav class="jump" aria-label="Categories">
+    {% for g in groups %}<a href="#{{ g.cat.id }}">{{ g.cat.title }}</a>{% endfor %}
+  </nav>
+
+  {% for g in groups %}
+  <section class="code-group" id="{{ g.cat.id }}" data-code-group>
+    <h2>{{ g.cat.title }}</h2>
+    <p class="cg-blurb">{{ g.cat.blurb }}</p>
+    <ul class="code-table">
+      {% for c in g.codes %}
+      <li data-code-row data-text="{{ (c.code ~ ' ' ~ c.carc ~ ' ' ~ c.title ~ ' ' ~ (c.summary or ''))|lower }}">
+        <a href="/{{ c.url }}" data-topic="{{ c.url }}">
+          <span class="mono ct-code">{{ c.code }}</span>
+          <span class="ct-text"><strong>{{ c.title }}</strong>{% if c.summary %}<small>{{ c.summary }}</small>{% endif %}</span>
+          <span class="topic-check" aria-hidden="true">{{ icon("check", 18) }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+  <p class="empty" data-code-empty hidden>No codes match that filter. Try the number only, such as 16, or a word like “eligibility”.</p>
+</div>
+{% endblock %}

@@ -1,0 +1,434 @@
+codes:
+  # ---------------------------------------------------------------- bundling
+  - code: CO-97
+    carc: "97"
+    group: CO
+    category: bundling
+    featured: true
+    title: Benefit included in the payment for another service already adjudicated
+    summary: The payer bundled this service into another service paid on the same claim or day.
+    meaning: >-
+      The payer considers this service part of another procedure or visit (for example a global
+      surgery package, an NCCI pair, or a payer bundling policy), so it isn't paid separately.
+    causes:
+      - E/M billed on the same day as a procedure without modifier 25.
+      - E/M or minor procedure during a global surgical period without 24, 58, 78 or 79.
+      - Two procedures that NCCI bundles, without a valid distinct-service modifier.
+      - Supplies or services the payer includes in a primary service.
+    ask:
+      - Which service or claim was this bundled into?
+      - Which edit or policy was applied (NCCI, global period, payer policy)?
+      - Will the payer accept a corrected claim with a modifier?
+    steps:
+      - Identify the primary service and the bundling rule.
+      - Review documentation to see if the service was significant and separately identifiable or distinct.
+      - If supported, have coding add the right modifier (25, 59, XE/XS/XP/XU, 24, 79) and send a corrected claim.
+      - If the edit is correct, adjust off per client policy (it's not billable to the patient).
+      - If the payer bundled incorrectly against NCCI or contract, ask for reprocessing or appeal.
+    prevention:
+      - NCCI and global period edits in the scrubber.
+      - Coder education on 25 and 59/X modifiers, with documentation standards.
+    rarc:
+      - code: M80
+        text: Not covered when performed during the same session or date as a previously processed service for the patient.
+      - code: M15
+        text: Separately billed services or tests have been bundled as they are considered components of the same procedure.
+      - code: M144
+        text: Pre- or post-operative care payment is included in the allowance for the surgery or procedure.
+    example: >-
+      99213 billed with 11102 (skin biopsy) the same day; 99213 denies CO-97. The note shows the
+      visit addressed a separate problem (hypertension medication change). Coding adds 25 to
+      99213 and a corrected claim is sent.
+    interview: >-
+      CO-97 means the service was bundled into another one. I identify which service and which
+      rule, check whether documentation supports a distinct service, add the correct modifier
+      through coding if it does, and otherwise adjust it off since it can't be billed to the patient.
+
+  - code: CO-236
+    carc: "236"
+    group: CO
+    category: bundling
+    title: Procedure or modifier combination not compatible under NCCI
+    summary: An NCCI procedure-to-procedure edit denied this line.
+    meaning: >-
+      The procedure (or procedure and modifier combination) isn't compatible with another procedure
+      on the same day under the National Correct Coding Initiative, or a state workers' comp rule.
+    causes:
+      - Column 2 code billed with its column 1 code without a valid modifier.
+      - Modifier used that the NCCI edit doesn't allow (modifier indicator 0).
+      - Mutually exclusive procedures billed together.
+    ask:
+      - Which code pair triggered the edit? Is a modifier allowed?
+    steps:
+      - Look up the pair in the current NCCI tables and check its modifier indicator.
+      - If the indicator is 1 and documentation supports a distinct service, send a corrected claim with the modifier.
+      - If the indicator is 0, the column 2 code can't be paid; adjust off.
+    prevention:
+      - Update NCCI edits quarterly in the scrubber.
+    interview: >-
+      CO-236 is an NCCI incompatibility. I check the pair's modifier indicator: if a modifier is
+      allowed and supported I correct the claim; if not, the code isn't separately payable.
+
+  - code: CO-234
+    carc: "234"
+    group: CO
+    category: bundling
+    title: This procedure is not paid separately
+    summary: The payer doesn't pay this code on its own, such as packaged services or add-on items.
+    meaning: >-
+      The service is always packaged or never separately reimbursed under the payer's policy (for
+      example packaged services under OPPS or some supply codes).
+    causes:
+      - Packaged hospital outpatient service (OPPS status indicator N).
+      - Supply or service the payer includes in the visit.
+    steps:
+      - Confirm the payer's packaging policy.
+      - If correct, adjust off per policy; it can't be billed to the patient.
+      - If the payer misapplied it, request reprocessing.
+    prevention:
+      - Know packaged and non-payable codes per payer to avoid wasted follow-up.
+    hospital: Common on outpatient facility claims where OPPS packages items into the primary APC.
+    interview: >-
+      CO-234 means the service isn't paid separately. If the payer's packaging rule is correct, we
+      adjust it off; it isn't patient responsibility.
+
+  # ---------------------------------------------------------------- necessity / coverage
+  - code: CO-50
+    carc: "50"
+    group: CO
+    category: necessity
+    featured: true
+    title: Non-covered service because it is not deemed a medical necessity by the payer
+    summary: The payer says the service wasn't medically necessary for the diagnosis or circumstances.
+    meaning: >-
+      Based on the diagnosis codes, its coverage policy (LCD, NCD or medical policy) or a record
+      review, the payer doesn't consider the service reasonable and necessary.
+    causes:
+      - Diagnosis on the claim isn't on the policy's covered list.
+      - Less specific diagnosis coded than documented.
+      - Frequency or criteria in the policy not met (for example, conservative therapy first).
+      - Documentation doesn't show why the service was needed.
+    ask:
+      - Which policy, LCD or NCD was applied?
+      - Which diagnoses or criteria are required?
+      - Will the payer review medical records on reconsideration?
+      - Is a peer-to-peer available?
+    steps:
+      - Pull the payer's policy and compare it with the claim's diagnoses and the record.
+      - If a supporting diagnosis is documented but not coded, have coding correct it and send a corrected claim.
+      - If the claim was right, appeal with records, pointing to each policy criterion the record meets.
+      - If an ABN or waiver was signed (and GA billed for Medicare), the denial should be PR-50; bill the patient.
+      - Without an ABN or waiver, a valid CO-50 can't be billed to the patient; adjust per policy after appeals.
+    prevention:
+      - Check LCDs, NCDs and payer policies at scheduling for high-risk services.
+      - Issue ABNs (Medicare) or waivers when coverage is doubtful.
+      - Document medical necessity clearly in the order and note.
+    rarc:
+      - code: N115
+        text: This decision was based on a Local Coverage Determination (LCD).
+      - code: N386
+        text: This decision was based on a National Coverage Determination (NCD).
+      - code: N130
+        text: Consult plan benefit documents or guidelines for information about restrictions for this service.
+    professional: Labs, imaging, therapy and certain procedures with diagnosis lists are frequent targets.
+    hospital: Inpatient medical necessity disputes are usually level-of-care denials with clinical review.
+    example: >-
+      Vitamin D test (82306) for a Medicare patient with diagnosis Z00.00 (routine exam) denies
+      CO-50, N115. The LCD covers it for listed conditions only, none documented. No ABN was
+      obtained, so it can't be billed to the patient. Root cause: ABN process at the lab order.
+    interview: >-
+      CO-50 is a medical necessity denial. I check the payer's policy or LCD against the
+      diagnosis and documentation; if a supporting diagnosis was missed, coding corrects it,
+      otherwise I appeal with records. With a valid ABN it becomes patient responsibility; without
+      one, it can't be billed to the patient.
+
+  - code: CO-167
+    carc: "167"
+    group: CO
+    category: necessity
+    title: This diagnosis is not covered
+    summary: The diagnosis on the claim isn't covered by the plan for this service.
+    meaning: >-
+      The payer doesn't cover the service for the diagnosis reported, often because of a policy
+      exclusion or a diagnosis list.
+    causes:
+      - Diagnosis outside the policy's covered list.
+      - Primary diagnosis sequenced incorrectly.
+      - Plan excludes the condition (for example, some plans exclude infertility or obesity treatment).
+    steps:
+      - Review documentation and the payer's policy.
+      - If a covered diagnosis is documented, have coding correct and resequence, then send a corrected claim.
+      - If excluded, check for a waiver; otherwise adjust or bill per policy.
+    prevention:
+      - Check diagnosis-driven coverage at scheduling.
+    interview: >-
+      CO-167 means the diagnosis isn't covered. I check whether a covered diagnosis was
+      documented and missed, correct it through coding if so, or follow the waiver policy.
+
+  - code: CO-96
+    carc: "96"
+    group: CO
+    category: necessity
+    title: Non-covered charge(s)
+    summary: The plan doesn't cover this service, usually with a remark code explaining why.
+    meaning: >-
+      The service isn't covered under the plan or program. CARC 96 requires a remark code that
+      gives the specific reason (for example statutory exclusion or not a benefit).
+    causes:
+      - Service excluded by the plan (cosmetic, routine foot care, hearing aids, some preventive services).
+      - Medicare statutory exclusion (routine physicals other than covered preventive visits, cosmetic surgery).
+      - Consultation codes billed to Medicare.
+    ask:
+      - What's the specific reason, and is it an exclusion in the member's plan?
+      - Is there a covered alternative code?
+    steps:
+      - Read the RARC to find the reason.
+      - Check whether a covered code applies (for example, an E/M instead of a consult code for Medicare) and correct if so.
+      - If excluded and the patient signed a waiver (or ABN/GX for Medicare), bill the patient.
+      - Otherwise adjust per policy.
+    prevention:
+      - Verify coverage for non-routine services; get waivers for known non-covered services.
+    rarc:
+      - code: N425
+        text: Statutorily excluded service(s).
+      - code: N130
+        text: Consult plan benefit documents or guidelines for information about restrictions for this service.
+    interview: >-
+      CO-96 means non-covered charges. The remark code tells me why. I check if a covered code
+      applies, and if it's a true exclusion, bill the patient only with a signed waiver.
+
+  - code: CO-204
+    carc: "204"
+    group: CO
+    category: necessity
+    title: Service, equipment or drug not covered under the patient's current benefit plan
+    summary: The member's specific plan doesn't include this benefit.
+    meaning: >-
+      The service may be covered by other plans, but this member's benefit plan doesn't include it.
+    causes:
+      - Plan has no benefit for the service (for example, no chiropractic or infertility benefit).
+      - Benefit carved out to another vendor (vision, behavioral health, lab).
+    steps:
+      - Confirm the benefit with the payer.
+      - Check for a carve-out vendor and bill them if applicable.
+      - If not covered, bill the patient per waiver and policy.
+    prevention:
+      - Check specific benefits (not just eligibility) for specialty services.
+    interview: >-
+      CO-204 means the member's plan doesn't cover this benefit. I check for a carve-out vendor,
+      and if it's truly not a benefit, bill per the patient's waiver and policy.
+
+  - code: CO-55
+    carc: "55"
+    group: CO
+    category: necessity
+    title: Procedure, treatment or drug deemed experimental or investigational
+    summary: The payer considers the service experimental or not proven.
+    meaning: >-
+      The payer's policy treats the service, device or drug as experimental or investigational, so it isn't covered.
+    causes:
+      - Category III CPT codes.
+      - New technologies or off-label drug uses not in the payer's policy.
+    steps:
+      - Check the payer's policy and whether clinical trial rules apply (Q0/Q1 modifiers for Medicare trials).
+      - Appeal with peer-reviewed evidence and the physician's letter if justified.
+      - Bill the patient only with a signed waiver.
+    prevention:
+      - Prior authorization or pre-determination for new technologies.
+    interview: >-
+      CO-55 is an experimental or investigational denial. We appeal with clinical evidence if
+      justified, check clinical trial billing rules, and bill the patient only with a waiver.
+
+  - code: CO-49
+    carc: "49"
+    group: CO
+    category: necessity
+    title: Routine or preventive service not covered
+    summary: A routine exam, or a screening done with a routine exam, isn't covered by the plan.
+    meaning: >-
+      The service is a routine or preventive exam, or a diagnostic or screening procedure done
+      with one, and the plan (or Medicare) doesn't cover it.
+    causes:
+      - Medicare billed for a routine physical (99381 to 99397) instead of a covered annual wellness visit.
+      - Plan without preventive benefits for that service.
+      - Problem visit billed with only preventive diagnosis codes.
+    steps:
+      - Check whether a covered preventive code exists (for example G0438 or G0439 for Medicare wellness visits).
+      - If a problem was addressed, bill the problem-oriented E/M with modifier 25 and the right diagnosis.
+      - Bill the patient for non-covered routine services with a valid ABN/GY or waiver.
+    prevention:
+      - Know Medicare's covered preventive services; use GY for statutorily excluded routine physicals.
+    interview: >-
+      CO-49 means a routine service isn't covered. For Medicare, I check whether the annual
+      wellness visit codes apply instead, and bill the patient only with proper notice.
+
+  - code: CO-B9
+    carc: B9
+    group: CO
+    category: necessity
+    title: Patient is enrolled in a hospice
+    summary: The patient has elected Medicare hospice, so related services belong to the hospice.
+    meaning: >-
+      While a Medicare patient has elected hospice, services related to the terminal illness are
+      paid through the hospice. Other providers must bill the hospice or show the service is unrelated.
+    causes:
+      - Service related to the terminal diagnosis billed directly to Medicare.
+      - Unrelated service billed without the right modifier (GW) or condition code.
+      - Hospice election not checked at registration.
+    steps:
+      - Check hospice election dates on Medicare eligibility.
+      - If related, bill the hospice under the arrangement.
+      - If unrelated, have coding confirm and send a corrected claim with modifier GW (service not related to the hospice terminal condition).
+      - If the attending physician isn't employed by the hospice, use modifier GV as applicable.
+    prevention:
+      - Check hospice status in Medicare eligibility for elderly and seriously ill patients.
+    interview: >-
+      CO-B9 means the patient is in hospice. Related services go to the hospice; unrelated ones
+      are billed to Medicare with modifier GW after confirming they aren't related.
+
+  # ---------------------------------------------------------------- frequency
+  - code: CO-119
+    carc: "119"
+    group: CO
+    category: frequency
+    title: Benefit maximum for this time period or occurrence has been reached
+    summary: The patient has used up the plan's limit for this service.
+    meaning: >-
+      The plan limits how many times, visits or dollars it pays for this service in a period, and the limit is reached.
+    causes:
+      - Therapy, chiropractic or behavioral health visit limits used.
+      - Preventive service frequency (for example, one per year) already used, possibly at another provider.
+    ask:
+      - What is the limit and how much has been used? Can an exception be requested?
+    steps:
+      - Confirm the limit and usage.
+      - Request an exception or appeal if medically necessary.
+      - Bill secondary insurance or the patient (with prior notice) per policy.
+    prevention:
+      - Track visit counts during verification and inform patients before limits are reached.
+    interview: >-
+      CO-119 means the benefit maximum is reached. I confirm usage, appeal for medical necessity
+      if justified, or bill secondary or the patient if they were informed.
+
+  - code: CO-151
+    carc: "151"
+    group: CO
+    category: frequency
+    title: Information submitted does not support this many or this frequency of services
+    summary: The units or frequency billed exceed what the payer accepts for this code.
+    meaning: >-
+      The payer's edits (such as MUEs or frequency policies) consider the units or how often the
+      service was billed to be more than is supported.
+    causes:
+      - Units above the Medically Unlikely Edit (MUE) for one day.
+      - Service repeated sooner than policy allows.
+      - Units billed incorrectly (for example, drug units not converted to the HCPCS descriptor).
+    steps:
+      - Check units against documentation and the code descriptor.
+      - Correct units if wrong and send a corrected claim.
+      - If correct and necessary, appeal with records (MUEs adjudicated per line may need modifiers like 76 or 91 on separate lines, or an appeal).
+    prevention:
+      - Unit conversion tables for drugs; MUE edits in the scrubber.
+    rarc:
+      - code: N362
+        text: The number of days or units of service exceeds our acceptable maximum.
+    interview: >-
+      CO-151 means the units or frequency aren't supported. I check documentation and code
+      definitions, fix units if wrong, or appeal with records if they were necessary.
+
+  # ---------------------------------------------------------------- duplicate
+  - code: CO-18
+    carc: "18"
+    group: CO
+    category: duplicate
+    featured: true
+    title: Exact duplicate claim or service
+    summary: The payer already has the same claim or line for this patient, provider and date.
+    meaning: >-
+      The payer found a claim or line matching this one (same patient, provider, date, code and
+      often charge), so it denied the second as a duplicate. Some payers use group OA instead of CO.
+    causes:
+      - Claim resubmitted as a new original while the first was in process or already processed.
+      - Corrected claim sent without frequency code 7 and the original claim number.
+      - Repeat or bilateral procedure billed without 76, 77, 91, RT/LT or 50.
+      - Two providers' claims for the same service.
+    ask:
+      - What is the original claim number, its status, and the paid amount and date if paid?
+    steps:
+      - Find the original claim and its outcome.
+      - If the original was paid, close the duplicate (and find the payment if not posted).
+      - If the original denied, work that denial instead.
+      - If the services were truly separate, send a corrected claim with the right modifier (76, 77, 91, RT/LT).
+    prevention:
+      - Always check claim status before resubmitting.
+      - Use frequency 7 for corrections.
+    rarc:
+      - code: N522
+        text: Duplicate of a claim processed, or to be processed, as a crossover claim.
+    interview: >-
+      CO-18 is a duplicate. I check the original claim: if it's paid, I close the duplicate; if
+      denied, I work that denial; if the second service was a real repeat, I add the right
+      modifier on a corrected claim. To prevent it, we check status before resubmitting.
+
+  - code: CO-B13
+    carc: B13
+    group: CO
+    category: duplicate
+    title: Previously paid
+    summary: Payment for this service may already have been made on another claim.
+    meaning: >-
+      The payer says it already paid this service, possibly on a different claim or to a different provider number.
+    causes:
+      - Service paid on an earlier claim that wasn't posted.
+      - Payment made to another NPI or tax ID in the group.
+    ask:
+      - When and to whom was it paid? What's the check or EFT number?
+    steps:
+      - Locate the original payment (ERA, bank deposit, unapplied cash).
+      - Post it to the right account, or request a reissue if paid to the wrong provider.
+    prevention:
+      - Keep unapplied cash cleared; track payments by trace number.
+    interview: >-
+      B13 means it was previously paid. I get the payment details from the payer, find the
+      payment in posting or unapplied cash, and post it correctly.
+
+  # ---------------------------------------------------------------- timely
+  - code: CO-29
+    carc: "29"
+    group: CO
+    category: timely
+    featured: true
+    title: The time limit for filing has expired
+    summary: The payer received the claim after its timely filing deadline.
+    meaning: >-
+      The claim reached the payer after the filing limit in the contract or program rules (for
+      example, 12 months from the date of service for Medicare).
+    causes:
+      - Claim held for a missing charge, auth or documentation too long.
+      - Rejections not worked, so the claim never reached the payer in time.
+      - Claim billed to the wrong payer first, and the right payer billed too late.
+      - Secondary claim sent late after the primary's EOB.
+      - Late charge entry.
+    ask:
+      - What date was the claim first received? What is the filing limit?
+      - Is proof of timely filing accepted, and how should it be sent?
+    steps:
+      - Search for proof that the claim was filed on time to this payer (clearinghouse acceptance report, 277CA, payer acknowledgment, prior call reference).
+      - If the claim went to the wrong payer in time, gather that payer's denial as proof (many payers accept it).
+      - Submit a reconsideration or appeal with the proof.
+      - Without proof, adjust off as a timely filing write-off (provider liability; can't be billed to the patient).
+    prevention:
+      - Work rejection queues daily and follow up no-response claims by 30 days.
+      - Track each payer's filing limit and age claims against it.
+      - Keep acceptance reports for every batch.
+    professional: Usually low-dollar but high-volume; patterns point to rejection or charge lag problems.
+    hospital: Late interim bills and long stays need extra care; check rules for discharge-date-based limits.
+    example: >-
+      Claim for DOS 01/10 billed to Cigna on 02/01; it rejected for an invalid member ID and was
+      never fixed. It was resent 07/30 and denied CO-29 (Cigna's 90-day limit). The 277CA shows a
+      rejection, which isn't proof of receipt, so the claim is written off. Root cause: rejection
+      queue not worked.
+    interview: >-
+      CO-29 is a timely filing denial. I look for proof we filed on time, such as a clearinghouse
+      acceptance report or 277CA, or another payer's denial within the limit, and appeal with it.
+      Without proof, it's a provider write-off, not billable to the patient.

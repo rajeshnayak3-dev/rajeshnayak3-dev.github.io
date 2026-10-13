@@ -1,0 +1,397 @@
+codes:
+  # ---------------------------------------------------------------- provider
+  - code: CO-B7
+    carc: B7
+    group: CO
+    category: provider
+    featured: true
+    title: Provider not certified or eligible to be paid for this service on this date
+    summary: The payer has no active enrollment or certification for this provider on the date of service.
+    meaning: >-
+      The rendering or billing provider wasn't enrolled, credentialed, certified or eligible with
+      this payer for this service on the date of service.
+    causes:
+      - New provider seen patients before payer credentialing was effective.
+      - Provider not linked to the group's tax ID with this payer.
+      - Enrollment lapsed (revalidation missed, CAQH not attested).
+      - Service requires a certification the provider or facility lacks (for example CLIA level, mammography certification).
+    ask:
+      - Is the provider enrolled, and from what effective date? Under which NPI and tax ID?
+      - Can claims be reprocessed if the effective date is backdated?
+    steps:
+      - Check the credentialing tracker for the provider's status and effective dates with this payer.
+      - If enrollment is pending, hold similar claims and track the effective date.
+      - If the effective date covers the DOS (including retroactive effective dates), request reprocessing or resubmit.
+      - If the provider will never be effective for that date, check whether billing under a supervising provider is allowed by the payer; otherwise adjust per policy.
+    prevention:
+      - Don't schedule new providers with a payer until credentialing is effective.
+      - Track revalidation and CAQH attestation dates.
+    rarc:
+      - code: N290
+        text: Missing, incomplete or invalid rendering provider primary identifier.
+    interview: >-
+      CO-B7 means the provider wasn't eligible with the payer on that date, usually a
+      credentialing gap. I confirm enrollment dates with credentialing, hold or reprocess claims
+      once effective, and help prevent it by holding new providers' claims until they're effective.
+
+  - code: CO-185
+    carc: "185"
+    group: CO
+    category: provider
+    title: Rendering provider is not eligible to perform the service billed
+    summary: The rendering provider's type, specialty or enrollment doesn't allow this service.
+    meaning: >-
+      The payer doesn't allow this rendering provider to perform or bill the service, because of
+      enrollment, specialty or scope of practice.
+    causes:
+      - Non-physician practitioner billing a service the payer restricts to physicians.
+      - Provider's specialty or taxonomy on file doesn't match the service.
+      - Provider not enrolled as rendering under the group.
+    steps:
+      - Check the provider's taxonomy and enrollment with the payer.
+      - Correct the rendering provider if the wrong one was billed.
+      - Update enrollment or taxonomy with credentialing if needed, then reprocess.
+    prevention:
+      - Keep provider taxonomies and payer enrollment aligned with the services they perform.
+    interview: >-
+      CO-185 means the rendering provider isn't eligible for the service. I check enrollment,
+      specialty and taxonomy, correct the rendering provider or fix enrollment, and resubmit.
+
+  - code: CO-170
+    carc: "170"
+    group: CO
+    category: provider
+    title: Payment is denied when performed or billed by this type of provider
+    summary: The payer doesn't pay this service from this provider type.
+    meaning: >-
+      The payer's policy doesn't allow the service from this kind of provider (for example a
+      certain therapist type, a lab type, or an NP for a service requiring a physician).
+    causes:
+      - Service outside the provider type's allowed services under the payer's policy.
+      - Incident-to billing rules not met.
+    steps:
+      - Check the payer's provider type policy.
+      - If another eligible provider performed or supervised it per rules, correct the claim.
+      - Otherwise adjust per policy.
+    prevention:
+      - Map services to allowed provider types per payer during set-up.
+    interview: >-
+      CO-170 means the payer doesn't pay this service from this type of provider. I check the
+      policy and correct the claim only if an eligible provider actually performed it.
+
+  - code: CO-208
+    carc: "208"
+    group: CO
+    category: provider
+    title: National Provider Identifier (NPI) not matched
+    summary: The NPI on the claim doesn't match the payer's records for this provider.
+    meaning: >-
+      The payer couldn't match the NPI with the provider record it holds (often a mismatch
+      between NPI, tax ID, name or address).
+    causes:
+      - Billing NPI linked to a different tax ID at the payer.
+      - Individual NPI used where the group NPI is required, or the reverse.
+      - Provider's NPPES data or payer record outdated.
+    steps:
+      - Compare the NPI, tax ID and name on the claim with the payer's enrollment.
+      - Correct the claim, or have credentialing update the payer's record.
+      - Resubmit.
+    prevention:
+      - Keep NPPES, payer enrollment and billing system set-up in sync.
+    interview: >-
+      CO-208 is an NPI mismatch. I check the NPI and tax ID combination against payer
+      enrollment, fix the claim or the enrollment, and resubmit.
+
+  # ---------------------------------------------------------------- injury
+  - code: CO-19
+    carc: "19"
+    group: CO
+    category: injury
+    title: Work-related injury or illness; liability of the workers' compensation carrier
+    summary: The health plan believes workers' comp should pay because the injury is work-related.
+    meaning: >-
+      The health plan considers the condition work-related, so the employer's workers'
+      compensation carrier is responsible.
+    causes:
+      - Box 10a marked "yes" for employment-related.
+      - Member told the plan the injury happened at work.
+      - Diagnosis and history suggest a work injury.
+    ask:
+      - What information does the plan have about the work injury?
+      - If WC denies, what does the plan need to reprocess (WC denial letter)?
+    steps:
+      - Contact the patient or employer for the WC carrier, claim number and adjuster.
+      - Bill the WC carrier with records.
+      - If the injury isn't work-related, correct box 10a and ask the plan to reprocess with the patient's statement.
+      - If WC denies the claim, send the WC denial to the health plan.
+    prevention:
+      - Ask about work injuries at registration and capture WC details.
+    interview: >-
+      CO-19 means the plan thinks workers' comp is responsible. I get the WC carrier and claim
+      number and bill them; if WC denies or it isn't work-related, I send the denial or a
+      correction to the health plan.
+
+  - code: CO-20
+    carc: "20"
+    group: CO
+    category: injury
+    title: Injury or illness covered by the liability carrier
+    summary: The health plan believes a liability insurer (another party) should pay.
+    meaning: >-
+      The plan believes a third party's liability insurance is responsible for the injury, for
+      example a slip and fall or an at-fault driver.
+    causes:
+      - Member reported an accident involving another party.
+      - Accident questionnaire answered with liability details.
+    steps:
+      - Get liability carrier and claim details from the patient or their attorney.
+      - Bill the liability carrier, or follow the client's policy on letters of protection.
+      - If no liability coverage applies, have the patient update the health plan and request reprocessing.
+    prevention:
+      - Capture accident details at registration.
+    interview: >-
+      CO-20 means a liability carrier should pay. I gather the liability claim details and bill
+      them, or have the patient confirm to the plan that no liability coverage applies.
+
+  - code: CO-21
+    carc: "21"
+    group: CO
+    category: injury
+    title: Injury or illness is the liability of the no-fault carrier
+    summary: The health plan believes auto no-fault (PIP) coverage should pay first.
+    meaning: >-
+      The plan believes the injury came from an auto accident and the patient's no-fault or PIP coverage is primary.
+    causes:
+      - Box 10b marked "auto accident".
+      - Member reported an auto accident on the questionnaire.
+    steps:
+      - Get the auto insurer, claim number and adjuster.
+      - Bill the auto carrier (PIP or MedPay).
+      - Once PIP is exhausted or denied, send the exhaustion or denial letter to the health plan.
+    prevention:
+      - Capture auto accident details and PIP information at the first visit.
+    interview: >-
+      CO-21 means the no-fault auto carrier is primary. I bill PIP with the claim number, and once
+      PIP is exhausted, bill the health plan with the exhaustion letter.
+
+  # ---------------------------------------------------------------- info
+  - code: CO-226
+    carc: "226"
+    group: CO
+    category: info
+    title: Information requested from the provider was not provided, was late, or was insufficient
+    summary: The payer asked for records or information and didn't get what it needed in time.
+    meaning: >-
+      The payer requested medical records or other information from the provider, and it wasn't
+      received, arrived after the deadline, or didn't answer the question.
+    causes:
+      - Records request letter not routed to the right team.
+      - Records sent to the wrong address or fax.
+      - Incomplete records (missing signature, missing procedure note).
+    ask:
+      - What exactly was requested, when, and where should it be sent?
+      - Can the claim be reopened once records are received?
+    steps:
+      - Get the request details and send complete records through the payer's preferred channel (portal upload, fax, 275).
+      - Keep proof of submission.
+      - Follow up for reprocessing; appeal if the payer won't reopen.
+    prevention:
+      - Central tracking of payer records requests with deadlines.
+    interview: >-
+      CO-226 means the payer didn't get the information it requested. I find out exactly what was
+      needed, send complete records with proof, and follow up for reprocessing.
+
+  - code: PR-227
+    carc: "227"
+    group: PR
+    category: info
+    title: Information requested from the patient was not provided or was insufficient
+    summary: The payer is waiting on the member, usually a COB, accident or other questionnaire.
+    meaning: >-
+      The payer asked the patient for information (often other insurance or accident details)
+      and didn't receive it. The group is PR, but you should help the patient respond before billing them.
+    causes:
+      - Member ignored the payer's COB or accident questionnaire.
+      - Member's mailing address outdated at the payer.
+    steps:
+      - Call the patient, explain what the payer needs and how to respond (phone, portal or form).
+      - Follow up with the payer once the member responds and request reprocessing.
+      - If the patient doesn't respond after outreach, bill the patient per policy.
+    prevention:
+      - Tell patients at registration that their plan may send questionnaires that must be answered.
+    interview: >-
+      PR-227 means the payer is waiting for information from the patient. I contact the patient to
+      respond to the payer, then request reprocessing; only after that would I bill the patient.
+
+  - code: CO-252
+    carc: "252"
+    group: CO
+    category: info
+    title: An attachment or other documentation is required to adjudicate this claim
+    summary: The payer needs an attachment (records, invoice, report) before it can process the claim.
+    meaning: >-
+      The payer needs supporting documents for this service, such as an operative report,
+      invoice for an unlisted item, or certificate of medical necessity.
+    causes:
+      - Unlisted procedure or NOC drug billed without a report or invoice.
+      - Modifier 22 billed without the operative report.
+      - DME requiring a certificate of medical necessity.
+    steps:
+      - Identify the required attachment from the RARC or payer call.
+      - Send it with the claim (paper, portal upload or electronic attachment with a PWK reference).
+      - Follow up for processing.
+    prevention:
+      - Attach documents automatically for codes that always need them.
+    rarc:
+      - code: N706
+        text: Missing documentation.
+    interview: >-
+      CO-252 means an attachment is required. I find out which document, send it the way the
+      payer accepts, and follow up.
+
+  # ---------------------------------------------------------------- adjustments
+  - code: CO-45
+    carc: "45"
+    group: CO
+    category: adjustments
+    featured: true
+    title: Charge exceeds fee schedule or contracted amount
+    summary: The contractual write-off between the billed charge and the allowed amount. Not a denial.
+    meaning: >-
+      The provider billed more than the payer's allowed amount under the contract or fee schedule.
+      The difference is written off. It's the most common adjustment on any ERA.
+    causes:
+      - Normal. Billed charges are set above any payer's allowed amount.
+      - Abnormal only if the allowed amount is lower than the contract rate (an underpayment).
+    steps:
+      - Post the CO-45 amount as a contractual adjustment.
+      - Spot-check the allowed amount against the contract or fee schedule; flag underpayments.
+      - Never bill the patient for CO-45 amounts (in-network).
+    prevention:
+      - Load contracted fee schedules into the billing system so expected payments can be compared automatically.
+    professional: Check allowed amounts by CPT against the payer fee schedule.
+    hospital: Check DRG, per diem or percentage-of-charge calculations; underpayments are often large.
+    interview: >-
+      CO-45 isn't a denial; it's the contractual adjustment between billed and allowed amounts.
+      We write it off and never bill it to the patient, but we check the allowed amount against
+      the contract to catch underpayments.
+
+  - code: PR-1
+    carc: "1"
+    group: PR
+    category: adjustments
+    title: Deductible amount
+    summary: The patient's deductible. Bill the secondary payer or the patient.
+    meaning: >-
+      The allowed amount (or part of it) was applied to the patient's deductible. The claim
+      processed correctly; this amount is patient responsibility.
+    causes:
+      - Patient hasn't met the plan's deductible for the year (or benefit period for Medicare Part A).
+    steps:
+      - Post the $0 or partial payment and contractual adjustment.
+      - Transfer the PR-1 amount to the secondary payer, or to the patient if none.
+    prevention:
+      - Estimate and collect deductible amounts at the time of service when policy allows.
+    interview: >-
+      PR-1 is the deductible. It's patient responsibility, not a denial, so we transfer it to the
+      secondary or bill the patient.
+
+  - code: PR-2
+    carc: "2"
+    group: PR
+    category: adjustments
+    featured: true
+    title: Coinsurance amount
+    summary: The patient's percentage share of the allowed amount.
+    meaning: >-
+      The patient owes a percentage of the allowed amount (for example 20%) under their plan.
+    causes:
+      - Plan coinsurance after the deductible is met.
+    steps:
+      - Transfer to the secondary payer (for Medicare, often by crossover) or bill the patient.
+      - For QMB patients, don't bill the patient for Medicare coinsurance.
+    prevention:
+      - Give patients estimates and collect at the time of service when possible.
+    interview: >-
+      PR-2 is coinsurance, the patient's percentage share. It goes to the secondary or the
+      patient, except for QMB patients, who can't be billed Medicare cost-sharing.
+
+  - code: PR-3
+    carc: "3"
+    group: PR
+    category: adjustments
+    title: Co-payment amount
+    summary: The patient's fixed copay for the visit or service.
+    meaning: >-
+      The plan applied the member's fixed copay (for example $30 for a specialist visit).
+    causes:
+      - Plan copay for the service type.
+    steps:
+      - Check whether the copay was collected at check-in; apply it.
+      - Bill any uncollected copay to the patient (or secondary if it covers copays).
+    prevention:
+      - Collect copays at check-in.
+    interview: >-
+      PR-3 is the copay. We check if it was collected at the front desk and bill the patient if not.
+
+  - code: CO-24
+    carc: "24"
+    group: CO
+    category: adjustments
+    title: Charges covered under a capitation agreement or managed care plan
+    summary: The provider is paid a fixed monthly amount for this patient, so the line pays $0.
+    meaning: >-
+      The service is covered by the provider's capitation payment, so it isn't paid per claim.
+      It can also mean the patient is in a managed care plan that should be billed instead.
+    causes:
+      - Normal for capitated HMO and Medicare Advantage contracts.
+      - Wrong payer billed (Original Medicare for a Medicare Advantage member) when used with managed-care remarks.
+    steps:
+      - If the provider is capitated for this service, adjust off per client policy.
+      - If the remark points to a managed care plan, bill that plan.
+    prevention:
+      - Maintain the list of capitated services and plans in the billing system.
+    interview: >-
+      CO-24 means the service is covered under capitation. We adjust it off as expected, unless it
+      shows we billed the wrong payer for a managed care member.
+
+  - code: OA-23
+    carc: "23"
+    group: OA
+    category: adjustments
+    title: Impact of prior payer adjudication, including payments and adjustments
+    summary: On a secondary claim, the amount already handled by the primary payer.
+    meaning: >-
+      The secondary payer is showing how the primary payer's payment and adjustments reduced what
+      it owes. Often the secondary pays little or nothing because the primary paid more than the
+      secondary's allowed amount.
+    causes:
+      - Normal on secondary claims.
+    steps:
+      - Post the secondary payment and the OA-23 adjustment per client mapping.
+      - Bill the patient only for any remaining PR amount the secondary assigns.
+    prevention:
+      - Send complete primary adjudication data with secondary claims so the secondary calculates correctly.
+    interview: >-
+      OA-23 is the impact of the prior payer's adjudication on a secondary claim. It isn't a
+      denial; it shows the primary already covered that amount.
+
+  - code: CO-253
+    carc: "253"
+    group: CO
+    category: adjustments
+    title: Sequestration, reduction in federal payment
+    summary: Medicare's 2% payment reduction required by federal law.
+    meaning: >-
+      Federal sequestration reduces Medicare payments by 2%. It applies to the payment amount and
+      can't be billed to the patient.
+    causes:
+      - Normal on Medicare and some Medicare Advantage payments.
+    steps:
+      - Post as a contractual-type adjustment per client mapping.
+      - Don't bill the patient or secondary.
+    prevention:
+      - None needed; expect it in Medicare payment calculations.
+    interview: >-
+      CO-253 is the 2% Medicare sequestration reduction. We adjust it off; it isn't patient
+      responsibility.

@@ -1,0 +1,306 @@
+# Denial code library.
+# Categories are listed here; codes live in this file and in data/denials-*.yaml.
+# Each code: code, carc, group, title, category, summary, meaning, causes, ask,
+# steps, prevention, rarc (list of code/text), professional, hospital, example,
+# interview, featured (true shows it on the home page).
+
+categories:
+  - id: eligibility
+    title: Eligibility and registration
+    blurb: The payer can't match the patient, or coverage wasn't active on the date of service.
+  - id: cob
+    title: Coordination of benefits
+    blurb: Another payer should pay first, or the payer needs the primary's payment details.
+  - id: auth
+    title: Authorization and referral
+    blurb: Required approval was missing, didn't match the service, expired or was exceeded.
+  - id: coding
+    title: Coding and billing errors
+    blurb: Codes, modifiers, places of service or claim data are missing, invalid or inconsistent.
+  - id: bundling
+    title: Bundling and NCCI
+    blurb: The service is considered part of another service paid on the same day.
+  - id: necessity
+    title: Medical necessity and coverage
+    blurb: The service isn't medically necessary for the diagnosis, or isn't a covered benefit.
+  - id: frequency
+    title: Frequency and benefit limits
+    blurb: Too many units or visits, too soon, or the plan's maximum is used up.
+  - id: duplicate
+    title: Duplicates
+    blurb: The payer believes it already processed this claim or service.
+  - id: timely
+    title: Timely filing
+    blurb: The claim reached the payer after its filing deadline.
+  - id: provider
+    title: Provider and credentialing
+    blurb: The payer doesn't recognise the provider as eligible to bill this service on this date.
+  - id: injury
+    title: Injury and liability
+    blurb: Workers' compensation, auto (no-fault) or a liability insurer should pay.
+  - id: info
+    title: Information requests
+    blurb: Records, attachments or answers the payer asked for weren't received.
+  - id: adjustments
+    title: Payment adjustments (not denials)
+    blurb: Codes that explain normal payments, patient responsibility and contractual write-offs.
+
+codes:
+  # ---------------------------------------------------------------- eligibility
+  - code: CO-27
+    carc: "27"
+    group: CO
+    category: eligibility
+    featured: true
+    title: Expenses incurred after coverage terminated
+    summary: The patient's plan had ended before the date of service.
+    meaning: >-
+      The payer is saying the patient was not covered on the date of service because the policy
+      had already ended. Until another payer is found, nothing can be collected from this one.
+    causes:
+      - Patient changed jobs or plans and the old insurance was still on file.
+      - Patient turned 26 and aged out of a parent's plan.
+      - Coverage ended for unpaid premiums (including ACA grace period terminations).
+      - Retroactive termination by the employer or plan after the visit.
+      - COBRA not yet elected at the time the claim was processed.
+    ask:
+      - What were the effective and termination dates of this coverage?
+      - Is there any other coverage on file for the member, or a new policy?
+      - Was the termination retroactive, and when was it applied?
+      - If COBRA is pending, will claims be reprocessed once it's elected?
+    steps:
+      - Check eligibility on the portal for the date of service and confirm the termination date.
+      - Search for active coverage on other payer portals, Medicare (HETS) and the state Medicaid portal.
+      - Contact the patient for new insurance details or COBRA status, and note the response.
+      - If new coverage is found, update registration and bill the new payer as a new claim.
+      - If COBRA is elected later, ask the payer to reprocess the claim.
+      - If there is no coverage, move the balance to the patient per client policy (with self-pay discount if applicable).
+    prevention:
+      - Run eligibility within a few days of the visit and again at check-in.
+      - Scan insurance cards at every visit and ask if coverage has changed.
+      - Flag patients who mention job changes for COBRA follow-up.
+    rarc:
+      - code: N30
+        text: Patient ineligible for this service.
+    professional: Usually a single visit; resolution depends on reaching the patient quickly.
+    hospital: For inpatient stays, check whether coverage ended mid-stay; days before termination may still be payable.
+    example: >-
+      DOS 08/04. Aetna denies CO-27; portal shows coverage ended 07/31. The patient's new job
+      started 08/01 with a Cigna plan. The analyst updates registration and bills Cigna. Root
+      cause: registration, insurance not updated at check-in.
+    interview: >-
+      CO-27 means services were after coverage ended. I confirm the termination date, look for
+      new coverage through the patient and portals, bill the correct payer, and if none exists,
+      transfer to patient responsibility per policy.
+
+  - code: CO-26
+    carc: "26"
+    group: CO
+    category: eligibility
+    title: Expenses incurred prior to coverage
+    summary: The date of service is before the patient's coverage started.
+    meaning: >-
+      The payer is saying the policy wasn't yet effective on the date of service. Either the
+      patient had different coverage at the time, or the date of service or effective date is wrong.
+    causes:
+      - New plan billed for a visit that happened before the plan started.
+      - Wrong date of service entered at charge entry.
+      - Newborn or new dependent not yet added to the policy.
+      - Retroactive enrollment not yet processed by the payer.
+    ask:
+      - What is the coverage effective date?
+      - Was there earlier coverage with this payer under a different ID?
+      - Is an enrollment change pending (newborn, marriage, retro enrollment)?
+    steps:
+      - Confirm the date of service in the medical record and charge.
+      - Confirm the effective date on the portal or by call.
+      - If the DOS was wrong, send a corrected claim with the right date.
+      - If the patient had prior coverage on that date, bill that payer.
+      - For newborns or pending enrollment, ask the subscriber to add the dependent, then request reprocessing.
+    prevention:
+      - Verify eligibility for the actual date of service, not just "current" coverage.
+      - At the start of a year or plan change, recheck all scheduled patients.
+    professional: Common in January after plan changes.
+    hospital: Newborn claims often deny CO-26 until the baby is added to the parent's policy; most plans allow retro addition within 30 to 60 days of birth.
+    interview: >-
+      CO-26 means the service was before coverage started. I verify the DOS and effective date,
+      bill the prior insurance if there was one, or have the subscriber complete enrollment and
+      request reprocessing.
+
+  - code: CO-31
+    carc: "31"
+    group: CO
+    category: eligibility
+    featured: true
+    title: Patient cannot be identified as our insured
+    summary: The payer can't find a member matching the name, date of birth and ID on the claim.
+    meaning: >-
+      The payer couldn't match the patient to any member record. Usually the demographic or ID
+      details on the claim don't match what the payer holds.
+    causes:
+      - Member ID typed wrong, or missing prefix or suffix.
+      - Name spelled differently, nickname used, or name changed after marriage.
+      - Date of birth entered incorrectly.
+      - Patient entered as the subscriber when they are a dependent.
+      - Claim sent to the wrong payer or wrong Blue plan.
+    ask:
+      - Can you find the member by name and date of birth, or by subscriber details?
+      - What ID, name spelling and DOB do you have on file?
+      - Is the member's coverage with a different plan or line of business?
+    steps:
+      - Compare the claim with the scanned insurance card and registration.
+      - Search the payer portal with different combinations (subscriber name, DOB, ID).
+      - Correct the demographics or subscriber details in the billing system.
+      - Send a corrected claim (or a new claim if the payer treats it as never on file).
+      - If no coverage can be found, contact the patient for current insurance.
+    prevention:
+      - Copy names exactly from the insurance card, including suffixes.
+      - Scan the card front and back every visit.
+      - Use eligibility (270/271) results to auto-correct demographics before billing.
+    rarc:
+      - code: N382
+        text: Missing, incomplete or invalid patient identifier.
+      - code: MA61
+        text: Missing, incomplete or invalid social security number or health insurance claim number.
+    interview: >-
+      CO-31 means the payer can't identify the patient. I compare the claim to the insurance
+      card, search the portal using the subscriber and DOB, correct the name, ID or subscriber
+      details, and resubmit.
+
+  - code: CO-32
+    carc: "32"
+    group: CO
+    category: eligibility
+    title: Patient is not an eligible dependent
+    summary: The patient isn't covered as a dependent under this subscriber's policy.
+    meaning: >-
+      The payer found the subscriber, but the patient isn't listed or eligible as their dependent
+      on the date of service.
+    causes:
+      - Child over the plan's age limit (usually 26).
+      - Spouse removed after divorce.
+      - Dependent never added to the policy (for example, a newborn or stepchild).
+      - Wrong subscriber chosen at registration (child linked to the wrong parent's plan).
+    ask:
+      - Which dependents are covered under this subscriber and from what dates?
+      - Is the patient covered under a different subscriber or policy?
+    steps:
+      - Verify the relationship and subscriber in registration.
+      - Check the other parent's or spouse's coverage.
+      - If the dependent should be covered, ask the subscriber to update enrollment with the employer, then request reprocessing.
+      - Otherwise, bill the correct coverage or move to patient responsibility per policy.
+    prevention:
+      - Confirm subscriber and relationship during eligibility checks.
+      - Recheck dependents turning 26 and after life events.
+    interview: >-
+      CO-32 means the patient isn't an eligible dependent under that subscriber. I check whether
+      another parent's or spouse's plan covers them, or have the subscriber fix enrollment.
+
+  - code: CO-140
+    carc: "140"
+    group: CO
+    category: eligibility
+    title: Patient or insured name and ID do not match
+    summary: The member ID on the claim belongs to someone with a different name.
+    meaning: >-
+      The payer found the ID, but the name on the claim doesn't match the name on that member record.
+    causes:
+      - Patient's name changed (marriage, legal change) and isn't updated on one side.
+      - Typo in first or last name, or hyphenated name entered differently.
+      - Subscriber's ID used for a dependent with a different suffix.
+    ask:
+      - What name is on file for this member ID?
+      - Do dependents have separate suffixes or IDs?
+    steps:
+      - Check the insurance card for the exact name and any dependent suffix.
+      - Correct the name or ID in registration.
+      - Send a corrected claim.
+      - If the patient's legal name changed, ask them to update the payer's records too.
+    prevention:
+      - Copy names exactly as on the card; ask about recent name changes.
+    interview: >-
+      CO-140 is a name and ID mismatch. I match the claim to the exact name and suffix on the
+      card, correct it and resubmit.
+
+  # ---------------------------------------------------------------- cob
+  - code: CO-22
+    carc: "22"
+    group: CO
+    category: cob
+    featured: true
+    title: This care may be covered by another payer per coordination of benefits
+    summary: The payer thinks another insurance should pay first.
+    meaning: >-
+      The payer's records show other coverage that is primary, or it needs to confirm the
+      member's other insurance before it pays.
+    causes:
+      - Claim billed to the secondary payer as primary.
+      - Payer has outdated other-insurance information on file.
+      - Member hasn't answered the payer's COB questionnaire.
+      - Medicare Secondary Payer record shows an employer plan as primary.
+      - Birthday rule or custody rules applied incorrectly for a child.
+    ask:
+      - What other coverage do you have on file, with what dates?
+      - Which plan is primary according to your records?
+      - Does the member need to update COB, and how?
+      - Can the claim be reprocessed once COB is updated?
+    steps:
+      - Check registration for all policies and confirm the correct order of benefits.
+      - Verify the other coverage is active on the date of service.
+      - If the other plan is primary, bill it first, then send this payer the primary's adjudication.
+      - If the payer's other-coverage record is outdated, ask the patient to update COB with the payer (phone, portal or form) and follow up.
+      - Once updated, ask for reprocessing.
+    prevention:
+      - Ask "Do you have any other insurance?" at every visit.
+      - Complete the MSP questionnaire for Medicare patients.
+      - Apply COB rules (birthday rule, active vs retiree, Medicare rules) at registration.
+    rarc:
+      - code: MA04
+        text: Secondary payment cannot be considered without the identity of or payment information from the primary payer.
+      - code: N479
+        text: Missing explanation of benefits (coordination of benefits or Medicare Secondary Payer).
+    professional: High volume; often fixed by a patient call to update COB.
+    hospital: Large balances; MSP errors on Medicare inpatient claims lead to recoveries, so confirm the MSP questionnaire before billing.
+    example: >-
+      A 10-year-old is billed to Dad's plan. The plan denies CO-22 because Mom's birthday (02/03)
+      is earlier than Dad's (07/19), so Mom's plan is primary. The analyst bills Mom's plan, posts
+      its payment, then sends the balance to Dad's plan with Mom's EOB.
+    interview: >-
+      CO-22 means another payer may be primary. I confirm the order of benefits using COB rules,
+      bill the primary first, and if the payer's record is outdated I have the patient update COB
+      and then request reprocessing.
+
+  - code: CO-109
+    carc: "109"
+    group: CO
+    category: cob
+    title: Claim not covered by this payer; send to the correct payer
+    summary: This payer isn't responsible for the claim. A different payer or contractor is.
+    meaning: >-
+      The payer says the claim belongs to another payer or contractor, for example a Medicare
+      Advantage plan instead of Original Medicare, a different MAC jurisdiction, or a Medicaid MCO
+      instead of fee-for-service Medicaid.
+    causes:
+      - Patient enrolled in a Medicare Advantage plan but billed to Original Medicare.
+      - Medicaid member assigned to an MCO, billed to state fee-for-service.
+      - DME billed to the A/B MAC instead of the DME MAC, or wrong jurisdiction.
+      - Blue Cross claim sent to the wrong Blue plan.
+      - Behavioral health or vision carved out to a separate vendor.
+    ask:
+      - Which payer or plan is responsible on this date of service?
+      - Do you have the payer ID or address for that plan?
+    steps:
+      - Check eligibility (HETS for Medicare, state portal for Medicaid) to find the responsible plan.
+      - Update the insurance in registration.
+      - Bill the correct payer as a new claim, watching its timely filing.
+      - Keep the denial as proof if timely filing is close.
+    prevention:
+      - Check Medicare Advantage and Medicaid plan assignment every visit.
+      - Maintain carve-out lists (behavioral health, lab, imaging) by plan.
+    rarc:
+      - code: N418
+        text: Misrouted claim. See the payer's claim submission instructions.
+    interview: >-
+      CO-109 means we billed the wrong payer. I identify the responsible plan, such as the
+      Medicare Advantage plan or Medicaid MCO, update registration and bill them within their
+      timely filing limit.

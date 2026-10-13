@@ -1,0 +1,590 @@
+- name: Chiropractic
+  slug: chiropractic
+  level: Intermediate
+  minutes: 7
+  summary: Spinal manipulation billed by number of regions, with Medicare's active-treatment rule and the AT modifier.
+  definition: |
+    Chiropractors diagnose and treat musculoskeletal problems, mainly of the spine, using manual adjustment (chiropractic manipulative treatment, or CMT) and related therapies.
+
+    Medicare covers only manual manipulation of the spine to correct a subluxation, and only during active treatment. Commercial plans often cover more but limit visits.
+  providers: Doctors of chiropractic (DC).
+  settings: Office (POS 11).
+  services:
+    - Spinal and extraspinal manipulation
+    - Evaluation and re-evaluation
+    - Therapeutic exercise and modalities (commercial plans)
+  codes:
+    - code: "98940"
+      desc: Chiropractic manipulative treatment, spinal, 1–2 regions
+    - code: "98941"
+      desc: CMT, spinal, 3–4 regions
+    - code: "98942"
+      desc: CMT, spinal, 5 regions
+    - code: "98943"
+      desc: CMT, extraspinal, one or more regions
+      note: Not covered by Medicare
+    - code: 99202–99215
+      desc: E/M visits
+      note: Medicare doesn't pay E/M by chiropractors; commercial plans may with 25
+  icd:
+    - code: M99.01–M99.05
+      desc: Segmental and somatic dysfunction (subluxation) by region
+    - code: M54.2
+      desc: Cervicalgia (neck pain)
+    - code: M54.50
+      desc: Low back pain, unspecified
+  modifiers:
+    - mod: AT
+      use: Active/corrective treatment (Medicare); without it, CMT is treated as maintenance and denied
+    - mod: GA
+      use: ABN on file for expected maintenance-care denial
+    - mod: "25"
+      use: Separate E/M with CMT (commercial plans that allow it)
+  prerequisites:
+    - For Medicare, document subluxation (by X-ray or PART exam), a treatment plan with goals, and progress.
+    - Use the number of spinal regions actually treated to choose 98940–98942, with diagnoses supporting each region.
+    - Add AT for active treatment; give an ABN and use GA when care becomes maintenance.
+    - Check commercial visit limits and authorization requirements.
+  denials:
+    - code: CO-50
+      issue: Maintenance care, or no documented subluxation
+      prevent: PART documentation and AT only during active treatment
+    - code: CO-96
+      issue: Extraspinal or E/M billed to Medicare
+      prevent: Know Medicare's limited chiropractic benefit
+    - code: CO-119
+      issue: Visit limit reached
+      prevent: Track visits per year
+    - code: CO-11
+      issue: Number of regions billed not supported by diagnoses
+      prevent: A subluxation diagnosis for each region treated
+  interview: >-
+    Chiropractic bills CMT by number of spinal regions (98940–98942). Medicare covers only active
+    treatment of spinal subluxation with the AT modifier; maintenance care needs an ABN and GA.
+
+- name: Podiatry
+  slug: podiatry
+  level: Intermediate
+  minutes: 8
+  summary: Foot and ankle care, where Medicare's routine foot care exclusion and class findings decide whether nail and callus care is payable.
+  definition: |
+    Podiatrists diagnose and treat conditions of the foot and ankle, from nail and skin problems to diabetic foot ulcers, deformities and foot surgery.
+
+    Routine foot care (trimming nails, removing corns and calluses) is excluded by Medicare unless the patient has a qualifying systemic condition, such as diabetes with neuropathy or peripheral vascular disease, documented with specific findings.
+  providers: Doctors of podiatric medicine (DPM).
+  settings: Office, nursing facilities, ASCs and hospital outpatient for surgery.
+  services:
+    - Nail debridement and treatment of ingrown nails
+    - Callus and corn paring
+    - Diabetic foot care and wound care
+    - Orthotics and diabetic shoes
+    - Bunion and other foot surgery
+  codes:
+    - code: 11720 / 11721
+      desc: Debridement of nails, 1–5 / 6 or more
+    - code: 11055 / 11056 / 11057
+      desc: Paring of corns or calluses, 1 / 2–4 / more than 4 lesions
+    - code: "11730"
+      desc: Avulsion of nail plate, single
+    - code: "11750"
+      desc: Excision of nail and nail matrix (permanent removal)
+    - code: 97597
+      desc: Selective wound debridement, first 20 sq cm
+    - code: 11042
+      desc: Debridement, subcutaneous tissue, first 20 sq cm
+    - code: "28296"
+      desc: Bunion correction with distal metatarsal osteotomy
+    - code: A5500
+      desc: Diabetic shoe, off-the-shelf (DME, specific supplier rules)
+  icd:
+    - code: B35.1
+      desc: Tinea unguium (onychomycosis)
+    - code: L84
+      desc: Corns and callosities
+    - code: E11.42
+      desc: Type 2 diabetes with polyneuropathy
+    - code: L60.0
+      desc: Ingrowing nail
+  modifiers:
+    - mod: Q7 / Q8 / Q9
+      use: Class findings that make routine foot care covered (one class A / two class B / one class B and two class C)
+    - mod: T1–TA
+      use: Toe location modifiers
+    - mod: RT / LT
+      use: Side of the body
+  prerequisites:
+    - For Medicare routine foot care, document the systemic condition, class findings and (for some conditions) the treating physician's name and last visit date.
+    - Apply frequency limits (often no more than every 60 days for routine care).
+    - For mycotic nail debridement, document symptoms such as pain or infection and the nails treated.
+    - Diabetic shoes need a certifying physician statement and supplier enrollment.
+  denials:
+    - code: CO-96
+      issue: Routine foot care without qualifying condition or class findings
+      prevent: Document the systemic condition and Q-modifier findings
+    - code: CO-119
+      issue: Routine care billed more often than allowed
+      prevent: Track last service dates
+    - code: CO-4
+      issue: Missing Q7–Q9 or toe modifiers
+      prevent: Scrubber rules for podiatry modifiers
+    - code: CO-97
+      issue: E/M with nail debridement without a separate problem
+      prevent: Separate documentation and modifier 25
+  interview: >-
+    Podiatry billing depends on Medicare's routine foot care rules. Nail and callus care is covered
+    only with a qualifying systemic condition and class findings, shown by modifiers Q7, Q8 or Q9,
+    within frequency limits.
+
+- name: Gastroenterology
+  slug: gastroenterology
+  level: Intermediate
+  minutes: 9
+  summary: Endoscopy-heavy specialty where screening versus diagnostic colonoscopy rules change what the patient owes.
+  definition: |
+    Gastroenterology treats the digestive system: oesophagus, stomach, intestines, liver, pancreas and gallbladder.
+
+    Most procedures are endoscopies: upper endoscopy (EGD) and colonoscopy. Billing hinges on whether a colonoscopy is screening (no symptoms, often no cost-sharing) or diagnostic (symptoms or findings), and what was done during it (biopsy, polyp removal).
+  providers: Gastroenterologists, hepatologists, NPs and PAs.
+  settings: Office, ASCs (POS 24), hospital outpatient endoscopy units.
+  services:
+    - Office consultations and follow-ups
+    - Screening and diagnostic colonoscopy
+    - Upper endoscopy (EGD) with biopsies
+    - Polyp removal
+    - Liver disease management
+  codes:
+    - code: "45378"
+      desc: Colonoscopy, diagnostic
+    - code: "45380"
+      desc: Colonoscopy with biopsy
+    - code: "45385"
+      desc: Colonoscopy with removal of lesion by snare
+    - code: "45384"
+      desc: Colonoscopy with removal by hot biopsy forceps
+    - code: G0121
+      desc: Medicare screening colonoscopy, not high risk
+    - code: G0105
+      desc: Medicare screening colonoscopy, high risk
+    - code: "43235"
+      desc: EGD, diagnostic
+    - code: "43239"
+      desc: EGD with biopsy
+    - code: "88305"
+      desc: Surgical pathology of tissue (billed by pathology)
+  icd:
+    - code: Z12.11
+      desc: Encounter for screening for malignant neoplasm of colon
+    - code: Z86.010x
+      desc: Personal history of colonic polyps
+    - code: K63.5
+      desc: Polyp of colon
+    - code: K21.9
+      desc: Gastro-oesophageal reflux disease without oesophagitis
+  modifiers:
+    - mod: PT
+      use: Medicare screening colonoscopy that became diagnostic or therapeutic (cost-sharing rules apply)
+    - mod: "33"
+      use: Commercial screening that became therapeutic, so preventive cost-sharing waiver applies
+    - mod: "53"
+      use: Incomplete colonoscopy discontinued for patient safety
+    - mod: "52"
+      use: Reduced service, such as incomplete colonoscopy for other reasons where payer requires
+    - mod: "59 / XS"
+      use: Separate lesions treated with different techniques
+  prerequisites:
+    - Decide screening versus diagnostic from the reason for the procedure, not the findings.
+    - Medicare screening intervals depend on risk (for example, every 10 years for average risk, more often for high risk); check last colonoscopy date.
+    - Add PT (Medicare) or 33 (commercial) when screening turns into polyp removal or biopsy.
+    - Prior authorization may be required for diagnostic endoscopies on some plans and for anaesthesia.
+    - Anaesthesia for screening colonoscopy has its own coding and modifier rules.
+  denials:
+    - code: CO-119
+      issue: Screening colonoscopy before the allowed interval
+      prevent: Check prior colonoscopy date and risk level at scheduling
+    - code: CO-4
+      issue: Missing PT or 33 on screening converted to therapeutic
+      prevent: Charge entry checklist for screening cases
+    - code: CO-11
+      issue: Diagnostic code sequencing doesn't support screening or diagnostic code
+      prevent: Screening Z code first when the intent was screening
+    - code: CO-97
+      issue: Biopsy and snare on the same lesion billed separately
+      prevent: Bill separate techniques only for separate lesions with documentation
+  tips:
+    - Patients often complain when a screening becomes diagnostic and they get a bill. Explain possible cost-sharing before the procedure.
+  interview: >-
+    In GI, the key rule is screening versus diagnostic colonoscopy. Screening is based on the reason
+    for the procedure; if a polyp is removed, Medicare uses modifier PT and commercial plans 33 so
+    preventive benefits still apply. Frequency limits drive many denials.
+
+- name: General surgery
+  slug: general-surgery
+  level: Intermediate
+  minutes: 9
+  summary: Abdominal, hernia, gallbladder, breast and skin surgery with 90-day globals, assistant surgeon rules and multiple procedure reductions.
+  definition: |
+    General surgeons operate on the abdomen and its organs, the breast, skin and soft tissue, and hernias, and handle many emergency surgeries such as appendectomy.
+
+    Surgical billing is shaped by the **global surgical package**: the surgery fee includes the pre-op visit the day before or day of surgery, the surgery, and routine post-op care for 0, 10 or 90 days.
+  providers: General surgeons, surgical PAs and NPs, assistant surgeons.
+  settings: Hospital inpatient and outpatient, ASCs, office for minor procedures.
+  services:
+    - Laparoscopic cholecystectomy
+    - Hernia repair
+    - Appendectomy
+    - Breast biopsy and lumpectomy
+    - Excision of masses and cysts
+    - Consultations and post-op care
+  codes:
+    - code: "47562"
+      desc: Laparoscopic cholecystectomy
+    - code: "44970"
+      desc: Laparoscopic appendectomy
+    - code: "49505"
+      desc: Open repair of initial inguinal hernia, age 5 or older, reducible
+    - code: 49650
+      desc: Laparoscopic repair of initial inguinal hernia
+    - code: 19301
+      desc: Partial mastectomy (lumpectomy)
+    - code: "19083"
+      desc: Breast biopsy with placement of localisation device, ultrasound guided
+    - code: "10060"
+      desc: Incision and drainage of abscess, simple
+    - code: "99024"
+      desc: Post-operative follow-up visit included in global (no charge)
+  icd:
+    - code: K80.20
+      desc: Gallstones without cholecystitis, without obstruction
+    - code: K40.90
+      desc: Unilateral inguinal hernia without obstruction or gangrene
+    - code: K35.80
+      desc: Unspecified acute appendicitis
+  modifiers:
+    - mod: "57"
+      use: Decision for major surgery on the day of or before
+    - mod: "51"
+      use: Multiple procedures (often applied by the payer)
+    - mod: "58 / 78 / 79"
+      use: Staged, unplanned return to OR, or unrelated procedure in the global period
+    - mod: "80 / 82 / AS"
+      use: Assistant at surgery (physician / when no resident / non-physician)
+    - mod: "62"
+      use: Co-surgeons
+  prerequisites:
+    - Check prior authorization for elective surgery for both the surgeon and the facility.
+    - Track 10 and 90 day global periods; bill post-op visits as 99024.
+    - Check whether the payer pays an assistant surgeon for the procedure (some codes never allow one).
+    - Bill the decision-for-surgery E/M with 57 for major surgery; 25 for minor procedures.
+  denials:
+    - code: CO-197
+      issue: Elective surgery without prior authorization
+      prevent: Auth check at scheduling; match codes after surgery
+    - code: CO-97
+      issue: E/M or procedure within the global period
+      prevent: Correct use of 24, 57, 58, 78, 79
+    - code: CO-54
+      issue: Assistant surgeon not covered for this procedure
+      prevent: Check assistant-at-surgery indicators before billing
+    - code: CO-236
+      issue: Laparoscopic and open procedures of the same area billed together
+      prevent: NCCI edits; open converted procedures are coded as open only
+  interview: >-
+    General surgery billing revolves around the global package: the fee covers pre-op on the day
+    before or day of surgery, the surgery and routine post-op care. Modifiers 57, 58, 78, 79 and 24
+    explain services that fall outside or inside the global period.
+
+- name: Radiology and imaging
+  slug: radiology
+  level: Intermediate
+  minutes: 9
+  summary: X-ray, CT, MRI, ultrasound and mammography billed in professional and technical components, with heavy prior authorization and ordering-provider rules.
+  definition: |
+    Radiology uses imaging to diagnose and sometimes treat disease. Diagnostic radiologists interpret images; interventional radiologists perform image-guided procedures.
+
+    Every imaging study has a **technical component** (equipment, staff, supplies) and a **professional component** (interpretation and report). Who owns the equipment decides how it's billed.
+  providers: Radiologists, interventional radiologists, imaging centres, hospitals.
+  settings: Hospital outpatient and inpatient, independent diagnostic testing facilities (IDTFs), imaging centres, offices.
+  services:
+    - X-rays
+    - CT and MRI
+    - Ultrasound
+    - Mammography and breast imaging
+    - Nuclear medicine and PET
+    - Image-guided biopsies and drainages
+  codes:
+    - code: "71046"
+      desc: Chest X-ray, 2 views
+    - code: "70450"
+      desc: CT head or brain without contrast
+    - code: "74177"
+      desc: CT abdomen and pelvis with contrast
+    - code: "72148"
+      desc: MRI lumbar spine without contrast
+    - code: "70553"
+      desc: MRI brain without and with contrast
+    - code: "76700"
+      desc: Ultrasound abdomen, complete
+    - code: "77067"
+      desc: Screening mammography, bilateral, including CAD
+    - code: "77066"
+      desc: Diagnostic mammography, bilateral
+    - code: 78815
+      desc: PET with concurrently acquired CT, skull base to mid-thigh
+  icd:
+    - code: R10.9
+      desc: Unspecified abdominal pain
+    - code: Z12.31
+      desc: Screening mammogram for malignant neoplasm of breast
+    - code: M54.16
+      desc: Radiculopathy, lumbar region
+  modifiers:
+    - mod: "26 / TC"
+      use: Professional / technical component
+    - mod: RT / LT / 50
+      use: Side or bilateral where the code isn't inherently bilateral
+    - mod: "76 / 77"
+      use: Repeat study same day, same / different physician
+    - mod: GG
+      use: Screening and diagnostic mammogram on the same day (Medicare)
+  prerequisites:
+    - Advanced imaging (CT, MRI, PET, nuclear cardiology) usually needs prior authorization, often through a radiology benefit manager.
+    - The ordering provider's name and NPI are required, and the order must state the reason.
+    - Bill the diagnosis from the order and findings (for outpatient tests, code confirmed findings in the report, otherwise the symptoms).
+    - Contrast and the type of study (with, without, or without and with) must match the authorization.
+    - Medicare advanced imaging has had appropriate use criteria requirements that have changed over time; check the current status.
+  denials:
+    - code: CO-197
+      issue: CT or MRI performed without authorization, or with/without contrast differs from the auth
+      prevent: Auth matching and updates when the radiologist changes protocol
+    - code: CO-16
+      issue: Missing ordering provider (remark N265)
+      prevent: Required field at registration and charge entry
+    - code: CO-4
+      issue: Global billed by a radiologist reading in the hospital
+      prevent: Component rules by place of service
+    - code: CO-50
+      issue: Diagnosis doesn't support the imaging under policy
+      prevent: Code symptoms from the order; check policy diagnosis lists
+  tips:
+    - When a radiologist changes a study (for example adds contrast), the authorization usually must be updated within a short window.
+  interview: >-
+    Radiology splits into professional (26) and technical (TC) components. Advanced imaging usually
+    needs prior authorization, which must match the exact study and contrast, and the ordering provider
+    is required on the claim.
+
+- name: Anesthesiology
+  slug: anesthesiology
+  level: Advanced
+  minutes: 10
+  summary: Time-based billing using base units plus time units, physical status modifiers and medical direction rules.
+  definition: |
+    Anesthesiology provides anaesthesia and pain control for surgery and procedures, and monitors patients' vital functions. Anaesthesia is billed very differently from other services: by **base units** for the procedure, plus **time units**, multiplied by a **conversion factor**.
+
+    > Payment = (base units + time units + any modifying units) × conversion factor
+  providers: Anesthesiologists, certified registered nurse anaesthetists (CRNAs), anaesthesiologist assistants.
+  settings: Hospitals, ASCs, endoscopy suites, labour and delivery.
+  services:
+    - General anaesthesia
+    - Regional anaesthesia (spinal, epidural, nerve blocks)
+    - Monitored anaesthesia care (MAC)
+    - Labour epidurals
+    - Post-operative pain blocks
+  codes:
+    - code: 00100–01999
+      desc: Anaesthesia codes by body area and procedure
+    - code: "00811"
+      desc: Anaesthesia for lower intestinal endoscopy, not otherwise specified
+    - code: "00812"
+      desc: Anaesthesia for screening colonoscopy
+    - code: "01402"
+      desc: Anaesthesia for open or arthroscopic total knee arthroplasty
+    - code: "01967"
+      desc: Neuraxial labour analgesia for planned vaginal delivery
+    - code: 64447
+      desc: Femoral nerve block injection (post-op pain, separate when documented)
+    - code: 99100 / 99116 / 99135 / 99140
+      desc: Qualifying circumstances (extreme age, hypothermia, hypotension, emergency) add-on codes
+      note: Medicare doesn't pay these; some commercial payers do
+  icd:
+    - code: Same as the surgery
+      desc: Anaesthesia claims use the surgical diagnosis
+  modifiers:
+    - mod: AA
+      use: Personally performed by an anesthesiologist
+    - mod: QK
+      use: Medical direction of 2–4 concurrent cases by an anesthesiologist
+    - mod: QY
+      use: Medical direction of one CRNA
+    - mod: QX
+      use: CRNA with medical direction
+    - mod: QZ
+      use: CRNA without medical direction
+    - mod: QS
+      use: Monitored anaesthesia care
+    - mod: G8 / G9
+      use: MAC for deep complex procedures / patient with severe cardiopulmonary history
+    - mod: P1–P6
+      use: Physical status, from healthy patient (P1) to brain-dead organ donor (P6)
+    - mod: "47"
+      use: Anaesthesia by the surgeon (not paid by Medicare)
+  prerequisites:
+    - Document start and stop times exactly; time units are usually 15 minutes each (Medicare uses actual minutes ÷ 15).
+    - Use the right anaesthesia code crosswalked from the surgical CPT.
+    - Apply medical direction rules; when both the anesthesiologist (QK/QY) and CRNA (QX) bill, each is paid 50%.
+    - Physical status modifiers can add units with some payers (P3 to P5).
+    - Authorization usually follows the surgery's authorization.
+  denials:
+    - code: CO-4
+      issue: Missing AA, QK, QX, QY or QZ
+      prevent: Provider-type modifier rules in charge entry
+    - code: CO-16
+      issue: Missing anaesthesia time or units
+      prevent: Time captured from the anaesthesia record
+    - code: CO-197
+      issue: Surgery not authorized, so anaesthesia denies too
+      prevent: Share authorization details with anaesthesia billing
+    - code: CO-97
+      issue: Nerve block billed when it was the primary anaesthetic
+      prevent: Bill blocks separately only for post-op pain when documented as separate
+  interview: >-
+    Anaesthesia is paid as base units plus time units times a conversion factor. Claims need start
+    and stop time, the anaesthesia code that matches the surgery, provider modifiers like AA, QK, QX,
+    QY or QZ, and physical status modifiers.
+
+- name: Pain management
+  slug: pain-management
+  level: Advanced
+  minutes: 9
+  summary: Interventional spine procedures with strict LCD criteria, frequency limits, imaging guidance and prior authorization.
+  definition: |
+    Pain medicine treats chronic and acute pain, especially from the spine and joints, using medications, injections, nerve procedures and devices.
+
+    Interventional pain procedures are closely watched by payers. Medicare LCDs set detailed criteria: duration of pain, failed conservative care, imaging, functional scores and how often procedures can be repeated.
+  providers: Pain medicine physicians (often anaesthesiology or physical medicine trained), NPs and PAs.
+  settings: Office, ASCs, hospital outpatient.
+  services:
+    - Epidural steroid injections
+    - Facet joint injections and medial branch blocks
+    - Radiofrequency ablation
+    - Spinal cord stimulator trials and implants
+    - Trigger point injections
+    - Medication management
+  codes:
+    - code: "62321"
+      desc: Cervical or thoracic interlaminar epidural injection, with imaging guidance
+    - code: "62323"
+      desc: Lumbar or sacral interlaminar epidural injection, with imaging guidance
+    - code: 64483 / 64484
+      desc: Transforaminal epidural injection, lumbar or sacral, single level / each additional
+    - code: 64493 / 64494
+      desc: Facet joint or medial branch block, lumbar, single level / second level
+    - code: "64635 / 64636"
+      desc: Radiofrequency ablation of lumbar facet nerves, single / each additional level
+    - code: 20552 / 20553
+      desc: Trigger point injections, 1–2 muscles / 3 or more muscles
+    - code: "63650"
+      desc: Percutaneous implantation of spinal cord stimulator electrode array
+  icd:
+    - code: M54.16
+      desc: Radiculopathy, lumbar region
+    - code: M47.816
+      desc: Spondylosis without myelopathy or radiculopathy, lumbar region
+    - code: M51.16
+      desc: Intervertebral disc disorders with radiculopathy, lumbar region
+  modifiers:
+    - mod: RT / LT / 50
+      use: Side of injection; 50 for bilateral facet procedures
+    - mod: "59 / XS"
+      use: Separate spinal regions where allowed
+  prerequisites:
+    - Check the LCD or payer policy criteria (pain duration, failed conservative therapy, pain scores).
+    - Most plans require prior authorization, often per level and side.
+    - Facet RFA usually requires two diagnostic medial branch blocks with documented relief first.
+    - Track frequency limits per region (for example, a maximum number of epidural sessions per year).
+    - Imaging guidance is included in many of these codes; don't bill it separately.
+  denials:
+    - code: CO-50
+      issue: LCD criteria not documented (duration, relief from blocks, function)
+      prevent: Template documentation that captures each criterion
+    - code: CO-197
+      issue: Procedure or level not authorized
+      prevent: Auth per level and side; update when changed
+    - code: CO-119
+      issue: Too many sessions in 12 months
+      prevent: Track sessions per region
+    - code: CO-97
+      issue: Fluoroscopy billed separately when included
+      prevent: Know which codes include imaging guidance
+  interview: >-
+    Pain management procedures like epidurals, facet blocks and radiofrequency ablation follow strict
+    LCD and payer criteria, need prior authorization per level and side, and have frequency limits.
+    Documentation of pain duration, conservative care and relief from diagnostic blocks is essential.
+
+- name: Emergency medicine and urgent care
+  slug: emergency-medicine
+  level: Intermediate
+  minutes: 9
+  summary: ED visit levels, critical care time, procedures in the ED, the No Surprises Act and the prudent layperson standard.
+  definition: |
+    Emergency physicians evaluate and stabilise patients with acute illness or injury in the hospital emergency department (ED). Urgent care centres handle non-life-threatening urgent problems outside the hospital.
+
+    An ED visit produces a professional claim (physician, POS 23) and a facility claim (hospital, revenue code 0450).
+  providers: Emergency physicians, PAs and NPs; urgent care physicians.
+  settings: Hospital ED (POS 23), freestanding EDs, urgent care centres (POS 20).
+  services:
+    - ED evaluation and management
+    - Critical care
+    - Laceration repair, splinting and fracture care
+    - Procedures such as intubation and central lines
+    - Observation decisions and admissions
+  codes:
+    - code: 99281–99285
+      desc: Emergency department visits, levels by MDM
+    - code: 99291 / 99292
+      desc: Critical care, first 30–74 minutes / each additional 30 minutes
+    - code: 12001–12007
+      desc: Simple repair of superficial wounds, by length
+    - code: "31500"
+      desc: Emergency endotracheal intubation
+    - code: "36556"
+      desc: Insertion of central venous catheter, age 5 or older
+    - code: S9083 / S9088
+      desc: Urgent care global fee / services provided in urgent care (some commercial payers)
+  icd:
+    - code: R07.9
+      desc: Chest pain, unspecified
+    - code: S01.81XA
+      desc: Laceration of other part of head, initial encounter
+    - code: J18.9
+      desc: Pneumonia, unspecified organism
+  modifiers:
+    - mod: "25"
+      use: ED visit plus a procedure on the same day
+    - mod: FS
+      use: Split or shared visit between physician and NPP (Medicare)
+    - mod: "57"
+      use: ED visit resulting in decision for major surgery (surgeon's E/M)
+  prerequisites:
+    - No prior authorization for emergency care; payers must use the **prudent layperson** standard (symptoms a reasonable person would see as an emergency), not the final diagnosis.
+    - Out-of-network ED care is protected by the **No Surprises Act**; patients pay in-network cost-sharing, and payment disputes go through independent dispute resolution.
+    - Document critical care time, excluding separately billable procedures.
+    - Notify the payer of admissions from the ED within the payer's window.
+  denials:
+    - code: CO-50
+      issue: Payer downcodes or denies based on final diagnosis as “non-emergent”
+      prevent: Appeal using presenting symptoms and the prudent layperson standard
+    - code: CO-97
+      issue: Procedure bundled with ED visit without 25
+      prevent: Separate documentation and modifier 25
+    - code: CO-151
+      issue: Critical care time not supported
+      prevent: Document total critical care minutes
+    - code: CO-22
+      issue: Accident-related visits needing auto or WC information
+      prevent: Capture accident details at triage registration
+  tips:
+    - Many ED patients arrive without insurance details. Registration teams often find coverage after discharge, so expect retro-eligibility work.
+  interview: >-
+    ED visits are coded 99281–99285 by medical decision making, with critical care 99291/99292 by
+    time. Emergency care doesn't need prior authorization, payers must apply the prudent layperson
+    standard, and the No Surprises Act protects patients from out-of-network balance bills.

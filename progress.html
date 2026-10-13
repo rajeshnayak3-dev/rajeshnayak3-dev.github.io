@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% from "_parts.html" import crumbs %}
+{% block head %}<meta name="robots" content="noindex">{% endblock %}
+{% block main %}
+<div class="wrap">
+  {{ crumbs([("Your progress", None)]) }}
+  <header class="section-head">
+    <span class="sh-ico">{{ icon("chart", 28) }}</span>
+    <div>
+      <h1>Your progress</h1>
+      <p class="lede">Progress is saved in this browser only. Nothing is sent anywhere, so use the same device and browser to keep your record.</p>
+    </div>
+  </header>
+
+  <div class="prog-summary" data-prog-summary></div>
+  <div class="prog-sections" data-prog-sections></div>
+
+  <section class="cert-block fbox fbox-lg" aria-labelledby="cert-h">
+    <h2 class="fbox-label" id="cert-h">Certificate of completion</h2>
+    <div data-cert-locked>
+      <p>Complete at least 80% of the lessons, specialties and scenarios to unlock a printable REVEX certificate.</p>
+    </div>
+    <form class="cert-form" data-cert-form hidden>
+      <label for="cert-name">Your name as it should appear</label>
+      <div class="cert-row">
+        <input id="cert-name" type="text" maxlength="60" required autocomplete="name">
+        <button class="btn btn-primary" type="submit">{{ icon("print", 18) }} Create certificate</button>
+      </div>
+      <p class="small-note">Your browser's print window opens. Choose “Save as PDF” to keep a copy.</p>
+    </form>
+  </section>
+
+  <p class="prog-reset"><button type="button" class="link-btn" data-prog-reset>{{ icon("reset", 16) }} Clear my progress on this device</button></p>
+</div>
+
+<div class="certificate" data-certificate aria-hidden="true">
+  <div class="cert-inner">
+    <p class="cert-brand">{{ site.name }}</p>
+    <p class="cert-kicker">Certificate of completion</p>
+    <p class="cert-name" data-cert-name></p>
+    <p class="cert-text">has completed the REVEX US Healthcare Revenue Cycle Management programme, covering the RCM cycle, insurance and payers, claim forms, denial management, specialty billing and applied AR scenarios.</p>
+    <p class="cert-meta"><span data-cert-date></span><span data-cert-count></span></p>
+    <p class="cert-foot">Self-paced learning record issued by {{ site.name }}. Not an accredited certification.</p>
+  </div>
+</div>
+<script type="application/json" data-track>{{ track_json | safe }}</script>
+<script type="application/json" data-sections>{{ sections | map(attribute="title") | list | tojson }}</script>
+<script type="application/json" data-section-ids>{{ sections | map(attribute="id") | list | tojson }}</script>
+{% endblock %}

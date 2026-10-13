@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% from "_parts.html" import crumbs %}
+{% block main %}
+<div class="wrap">
+  {{ crumbs([("RCM terminology", None)]) }}
+  <header class="section-head">
+    <span class="sh-ico">{{ icon("book", 28) }}</span>
+    <div>
+      <h1>RCM terminology</h1>
+      <p class="lede">{{ count }} terms you'll hear on the floor, in payer calls and in interviews, each explained in plain language.</p>
+    </div>
+  </header>
+
+  <div class="filter-row">
+    <label class="filter">
+      {{ icon("search", 18) }}
+      <input type="search" placeholder="Filter terms, e.g. deductible or MSP" data-gloss-filter aria-label="Filter terms">
+    </label>
+  </div>
+  <nav class="jump jump-letters" aria-label="Jump to letter">
+    {% for ch in letters %}<a href="#letter-{{ ch }}">{{ ch }}</a>{% endfor %}
+  </nav>
+
+  <div class="gloss">
+    {% for ch, terms in letters.items() %}
+    <section class="gloss-letter" id="letter-{{ ch }}" data-gloss-letter>
+      <h2>{{ ch }}</h2>
+      <dl>
+        {% for t in terms %}
+        <div class="gloss-item" id="{{ t.id }}" data-gloss-item data-text="{{ (t.term ~ ' ' ~ (t.aka or '') ~ ' ' ~ t.def)|lower }}">
+          <dt>{{ t.term }}{% if t.aka %} <span class="aka">({{ t.aka }})</span>{% endif %}</dt>
+          <dd>{{ t.def | md }}{% if t.see %} <a href="{{ t.see }}">Learn more</a>{% endif %}</dd>
+        </div>
+        {% endfor %}
+      </dl>
+    </section>
+    {% endfor %}
+  </div>
+  <p class="empty" data-gloss-empty hidden>No terms match. Try a shorter word.</p>
+</div>
+{% endblock %}

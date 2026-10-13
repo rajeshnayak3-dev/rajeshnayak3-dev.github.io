@@ -1,0 +1,505 @@
+- name: Laboratory and pathology
+  slug: laboratory-pathology
+  level: Intermediate
+  minutes: 8
+  summary: Lab tests and pathology billed with CLIA numbers, ordering providers, panels, medical necessity diagnosis lists and frequency limits.
+  definition: |
+    Clinical laboratories test blood, urine and other specimens. Pathologists examine tissue (anatomic pathology) and oversee lab testing (clinical pathology).
+
+    Lab claims are high-volume and low-dollar, so tiny error rates add up. Every lab must have a **CLIA certificate**, and every test must be ordered by a provider with a supporting diagnosis.
+  providers: Independent labs, hospital labs, physician office labs, pathologists.
+  settings: Independent laboratory (POS 81), hospital outpatient, office labs.
+  services:
+    - Blood chemistry and panels
+    - Blood counts
+    - Urinalysis and cultures
+    - Molecular and genetic testing
+    - Surgical pathology of biopsies and specimens
+  codes:
+    - code: "80053"
+      desc: Comprehensive metabolic panel
+    - code: "80061"
+      desc: Lipid panel
+    - code: "85025"
+      desc: Complete blood count with automated differential
+    - code: "83036"
+      desc: Haemoglobin A1c
+    - code: "84443"
+      desc: TSH (thyroid stimulating hormone)
+    - code: "81001"
+      desc: Urinalysis, automated, with microscopy
+    - code: "87086"
+      desc: Urine culture, quantitative colony count
+    - code: "88305"
+      desc: Surgical pathology, level IV (for example, skin biopsy, colon polyp)
+    - code: "36415"
+      desc: Venipuncture
+  icd:
+    - code: Z13.220
+      desc: Screening for lipoid disorders
+    - code: E11.9
+      desc: Type 2 diabetes without complications
+    - code: R73.03
+      desc: Prediabetes
+  modifiers:
+    - mod: QW
+      use: CLIA-waived test performed in a lab with a waiver certificate
+    - mod: "90"
+      use: Reference (outside) lab performed the test
+    - mod: "91"
+      use: Repeat test on the same day for new results
+    - mod: "26 / TC"
+      use: Pathology professional / technical components
+  prerequisites:
+    - Include the CLIA number on claims (box 23 on the CMS-1500 for many payers).
+    - Include ordering provider name and NPI.
+    - Use diagnoses from the order; for Medicare, check NCD lab diagnosis lists (lipids, A1c, thyroid tests and more) and obtain ABNs when coverage is doubtful.
+    - Bill panels when all component tests are done; don't unbundle.
+    - Respect frequency limits (for example, Medicare lipid screening every 5 years).
+    - Molecular and genetic tests often need prior authorization and specific test identifiers.
+  denials:
+    - code: CO-50
+      issue: Diagnosis not on the NCD covered list
+      prevent: NCD diagnosis checks at ordering; ABNs
+    - code: CO-16
+      issue: Missing CLIA number or ordering provider
+      prevent: Required fields in lab billing set-up
+    - code: CO-97
+      issue: Panel components billed separately
+      prevent: Panel logic in the billing system
+    - code: CO-119
+      issue: Screening test repeated too soon
+      prevent: Check last test date
+  interview: >-
+    Lab billing needs a CLIA number, ordering provider and diagnoses that meet medical necessity,
+    especially Medicare NCD lists. Panels can't be unbundled, and modifiers QW, 90 and 91 have
+    specific uses.
+
+- name: Durable medical equipment (DME)
+  slug: dme
+  level: Advanced
+  minutes: 9
+  summary: Equipment and supplies billed with HCPCS codes, rental versus purchase rules, written orders, proof of delivery and DME MAC policies.
+  definition: |
+    Durable medical equipment is reusable equipment ordered for use in the home, such as wheelchairs, hospital beds, oxygen and CPAP devices. DMEPOS also covers prosthetics, orthotics and supplies.
+
+    For Medicare, DME is processed by **DME MACs**, not the regular A/B MACs, and suppliers need their own enrollment and accreditation.
+  providers: DME suppliers, pharmacies, orthotic and prosthetic suppliers.
+  settings: Patient's home (POS 12) and other settings for delivery.
+  services:
+    - Mobility equipment (walkers, wheelchairs, power mobility)
+    - Hospital beds and support surfaces
+    - Oxygen equipment
+    - CPAP and supplies
+    - Diabetic supplies and CGMs
+    - Orthotics and prosthetics
+  codes:
+    - code: E0601
+      desc: CPAP device
+    - code: A7030 / A7034 / A7037
+      desc: CPAP full face mask / nasal interface / tubing
+    - code: E1390
+      desc: Oxygen concentrator
+    - code: E0143
+      desc: Folding walker with wheels
+    - code: K0001
+      desc: Standard wheelchair
+    - code: E0260
+      desc: Semi-electric hospital bed with mattress
+    - code: L1833
+      desc: Knee orthosis, prefabricated, off-the-shelf
+  icd:
+    - code: G47.33
+      desc: Obstructive sleep apnoea
+    - code: J96.11
+      desc: Chronic respiratory failure with hypoxia
+  modifiers:
+    - mod: NU / RR / UE
+      use: New purchase / rental / used purchase
+    - mod: KH / KI / KJ
+      use: Capped rental month 1 / months 2–3 / months 4–13
+    - mod: KX
+      use: Policy coverage criteria met
+    - mod: RT / LT
+      use: Side for orthotics and prosthetics
+    - mod: GA / GY / GZ
+      use: Liability notice modifiers
+  prerequisites:
+    - A valid written order with required elements before delivery (and for some items before claim submission, a face-to-face encounter).
+    - Medical record documentation meeting the DME MAC's LCD criteria.
+    - Proof of delivery signed by the patient.
+    - Some items need prior authorization (for example certain power mobility devices).
+    - Know rental versus purchase rules; many items are capped rentals that convert to ownership after 13 months.
+    - Supplier must be enrolled, accredited and, where required, contracted for competitive bidding.
+  denials:
+    - code: CO-50
+      issue: LCD criteria not met or not documented in the physician's records
+      prevent: Collect qualifying documentation before delivery
+    - code: CO-16
+      issue: Missing order details or rental/purchase modifiers
+      prevent: Order checklist and modifier rules
+    - code: CO-119
+      issue: Supplies billed too often (for example, CPAP masks)
+      prevent: Replacement schedule tracking
+    - code: CO-109
+      issue: DME billed to the A/B MAC instead of the DME MAC
+      prevent: Correct payer set-up for DME claims
+  interview: >-
+    DME uses HCPCS codes with rental and purchase modifiers like RR, NU and KH/KI/KJ. Claims need a
+    valid order, documentation that meets the LCD, and proof of delivery, and Medicare DME goes to
+    the DME MAC.
+
+- name: Ambulance services
+  slug: ambulance
+  level: Advanced
+  minutes: 7
+  summary: Emergency and non-emergency transport billed by level of service plus mileage, with origin and destination modifiers.
+  definition: |
+    Ambulance services transport patients when other transport would endanger their health. Payment depends on the **level of service** (basic or advanced life support), whether it's an emergency, and the **loaded mileage**.
+  providers: Ambulance companies, fire departments, hospital-based ambulance services, air ambulance providers.
+  settings: Ground and air transport.
+  services:
+    - Emergency transport to the hospital
+    - Non-emergency transport (for example, to dialysis) when medically necessary
+    - Interfacility transfers
+    - Air ambulance
+  codes:
+    - code: A0429
+      desc: Basic life support (BLS), emergency
+    - code: A0428
+      desc: BLS, non-emergency
+    - code: A0427
+      desc: Advanced life support level 1 (ALS1), emergency
+    - code: A0426
+      desc: ALS1, non-emergency
+    - code: A0433
+      desc: Advanced life support level 2 (ALS2)
+    - code: A0425
+      desc: Ground mileage, per statute mile
+    - code: A0431 / A0430
+      desc: Rotary / fixed wing air transport
+  icd:
+    - code: R07.9
+      desc: Chest pain, unspecified
+    - code: S72.001A
+      desc: Fracture of unspecified part of neck of right femur, initial encounter
+  modifiers:
+    - mod: Origin + destination
+      use: Two letters for origin and destination, such as RH (residence to hospital) or HN (hospital to SNF)
+    - mod: QM / QN
+      use: Provider arranged / furnished directly under arrangement with a hospital (Medicare)
+    - mod: GM
+      use: Multiple patients on one ambulance trip
+  prerequisites:
+    - Document why other transport was unsafe (medical necessity) in the patient care report.
+    - Repetitive, scheduled non-emergency transports for Medicare need a physician certification statement and, in some states, prior authorization.
+    - Bill loaded miles only (with the patient on board).
+    - Bill to the destination's rules for transports to facilities that may bundle the trip (for example, during a SNF Part A stay).
+  denials:
+    - code: CO-50
+      issue: Transport not medically necessary (patient could travel by other means)
+      prevent: Detailed condition documentation in the run report
+    - code: CO-4
+      issue: Missing or invalid origin and destination modifier
+      prevent: Modifier mapped from trip data
+    - code: CO-97
+      issue: Transport during an inpatient or SNF stay billed to Medicare
+      prevent: Check patient's facility status; bill the facility
+  interview: >-
+    Ambulance claims bill a level of service code such as A0427 or A0429 plus mileage A0425, with
+    origin and destination modifiers. Medical necessity, meaning other transport was unsafe, must be
+    documented, and non-emergency transports need certification.
+
+- name: Home health and hospice
+  slug: home-health-hospice
+  level: Advanced
+  minutes: 8
+  summary: Institutional billing for care in the home, with 30-day home health periods, hospice benefit periods and certification rules.
+  definition: |
+    **Home health agencies** provide skilled nursing, therapy and aide services to homebound patients. **Hospices** provide comfort-focused care for patients with a terminal prognosis of six months or less who choose palliative care instead of curative treatment.
+
+    Both bill on the UB-04 (837I) using revenue codes and their own payment systems, and both carry strict certification requirements.
+  providers: Home health agencies, hospices, certifying physicians.
+  settings: Patient's home, assisted living, nursing facilities (hospice).
+  services:
+    - Skilled nursing visits
+    - Physical, occupational and speech therapy at home
+    - Home health aide services
+    - Hospice routine and continuous home care, respite and inpatient care
+  codes:
+    - code: TOB 032x
+      desc: Home health claim (Medicare 30-day period)
+    - code: TOB 081x / 082x
+      desc: Hospice claims (non-hospital / hospital-based)
+    - code: Revenue 0551 / 042x / 0571
+      desc: Skilled nursing / physical therapy / home health aide visits
+    - code: Revenue 0651 / 0652 / 0655 / 0656
+      desc: Hospice routine home care / continuous home care / inpatient respite / general inpatient care
+    - code: G0180 / G0179
+      desc: Physician certification / recertification for Medicare home health (professional claim)
+    - code: G0299 / G0151
+      desc: Skilled nursing visit by RN / physical therapy visit in home health
+  icd:
+    - code: Z74.09
+      desc: Other reduced mobility (supporting homebound status)
+    - code: C34.90
+      desc: Lung cancer, unspecified (example terminal diagnosis)
+  modifiers:
+    - mod: GW
+      use: Service by a non-hospice provider not related to the hospice terminal condition
+    - mod: GV
+      use: Attending physician not employed by the hospice
+  prerequisites:
+    - Home health requires the patient to be homebound, need skilled care, have a face-to-face encounter related to the reason for care, and a physician or allowed practitioner's certification and plan of care.
+    - Medicare home health pays per 30-day period (PDGM); a Notice of Admission must be submitted within 5 days of the start of care.
+    - Hospice requires certification of terminal illness by the hospice physician (and attending physician for the first period) and the patient's election statement.
+    - Hospice benefit periods are 90, 90, then unlimited 60-day periods; a face-to-face encounter is required before the third period.
+    - The hospice Notice of Election must be filed within 5 calendar days of the election.
+  denials:
+    - code: CO-50
+      issue: Homebound status or skilled need not documented
+      prevent: Documentation of taxing effort to leave home and skilled interventions
+    - code: CO-16
+      issue: Missing face-to-face or certification elements
+      prevent: Certification checklist before billing
+    - code: CO-B9
+      issue: Other providers billing Medicare for hospice-related care
+      prevent: Hospice coordinates related services; others use GW when unrelated
+    - code: CO-18
+      issue: Overlapping home health periods with another agency
+      prevent: Check eligibility for existing home health episodes before admission
+  interview: >-
+    Home health and hospice bill on the UB-04. Home health needs homebound status, skilled need, a
+    face-to-face encounter and certification, paid in 30-day periods. Hospice needs a terminal
+    prognosis certification and election, with 90, 90 and 60-day benefit periods, and related care is
+    paid through the hospice.
+
+- name: Hospital medicine (hospitalists)
+  slug: hospital-medicine
+  level: Intermediate
+  minutes: 7
+  summary: Inpatient and observation visits, admissions, discharges and split-shared services, with daily one-visit rules.
+  definition: |
+    Hospitalists are physicians who care for patients during a hospital stay: admitting them, managing daily care, coordinating specialists and discharging them.
+
+    Their professional claims use inpatient and observation E/M codes, and the patient's status (inpatient or observation) and dates drive code choice.
+  providers: Hospitalists (often internal medicine), NPs and PAs.
+  settings: Hospital inpatient (POS 21) and observation (POS 22).
+  services:
+    - Admissions (initial hospital care)
+    - Daily subsequent visits
+    - Discharge management
+    - Critical care
+  codes:
+    - code: 99221–99223
+      desc: Initial hospital inpatient or observation care, by MDM or time
+    - code: 99231–99233
+      desc: Subsequent hospital inpatient or observation care
+    - code: 99234–99236
+      desc: Admission and discharge on the same date
+    - code: 99238 / 99239
+      desc: Discharge day management, 30 minutes or less / more than 30 minutes
+    - code: 99291 / 99292
+      desc: Critical care
+  icd:
+    - code: A41.9
+      desc: Sepsis, unspecified organism
+    - code: J18.9
+      desc: Pneumonia, unspecified organism
+    - code: I50.23
+      desc: Acute on chronic systolic heart failure
+  modifiers:
+    - mod: AI
+      use: Principal physician of record (Medicare admitting physician)
+    - mod: FS
+      use: Split or shared visit (physician and NPP)
+  prerequisites:
+    - Since 2023, inpatient and observation visits share the same codes (99221–99239); select by MDM or time.
+    - Only one subsequent visit per day per specialty per patient is usually payable (others combine into one).
+    - Document discharge time to choose 99238 or 99239.
+    - Split-shared billing goes under the provider who performed the substantive portion, with FS.
+  denials:
+    - code: CO-18
+      issue: Two hospitalists from the same group billed visits on the same day
+      prevent: Combine into one visit per day per group specialty
+    - code: CO-B7 / CO-185
+      issue: Locum or new hospitalist not credentialed
+      prevent: Credentialing tracker for locums
+    - code: CO-151
+      issue: Discharge code time not documented
+      prevent: Discharge time in note
+  interview: >-
+    Hospitalists bill initial (99221–99223), subsequent (99231–99233) and discharge (99238/99239)
+    codes, now shared between inpatient and observation. One visit per day per specialty is the usual
+    rule, and split-shared visits use modifier FS.
+
+- name: Plastic and reconstructive surgery
+  slug: plastic-surgery
+  level: Advanced
+  minutes: 7
+  summary: Where the line between cosmetic and reconstructive decides everything, from blepharoplasty to breast reconstruction.
+  definition: |
+    Plastic surgery includes **reconstructive** surgery (restoring function or normal appearance after injury, disease or birth defects) and **cosmetic** surgery (improving appearance). Insurance generally covers reconstructive surgery and excludes cosmetic.
+
+    Federal law (the Women's Health and Cancer Rights Act) requires most plans that cover mastectomy to cover breast reconstruction.
+  providers: Plastic surgeons, oculoplastic surgeons.
+  settings: Office, ASCs, hospital.
+  services:
+    - Breast reconstruction after mastectomy
+    - Eyelid surgery for visual field obstruction
+    - Skin grafts and flaps
+    - Breast reduction for symptoms
+    - Scar revision and wound reconstruction
+  codes:
+    - code: "15823"
+      desc: Upper eyelid blepharoplasty with excessive skin weighting down the lid
+      note: Covered only when functional criteria are met
+    - code: "19318"
+      desc: Breast reduction
+    - code: "19357"
+      desc: Breast reconstruction with tissue expander
+    - code: "19342"
+      desc: Insertion or replacement of breast implant on separate day from mastectomy
+    - code: 15100
+      desc: Split-thickness skin graft, trunk, arms or legs, first 100 sq cm
+    - code: "15734"
+      desc: Muscle, myocutaneous or fasciocutaneous flap, trunk
+  icd:
+    - code: H02.831 / H02.834
+      desc: Dermatochalasis of right upper / left upper eyelid
+    - code: N62
+      desc: Hypertrophy of breast
+    - code: Z90.11
+      desc: Acquired absence of right breast and nipple
+  modifiers:
+    - mod: E1–E4
+      use: Eyelid location
+    - mod: RT / LT / 50
+      use: Side or bilateral
+    - mod: "58"
+      use: Staged reconstruction procedures in the global period
+  prerequisites:
+    - Prior authorization is almost always required, with photos and objective evidence (for example, visual field tests for blepharoplasty, symptoms and tissue weight criteria for breast reduction).
+    - Cosmetic procedures need a signed financial agreement; they're self-pay.
+    - Reconstruction after mastectomy, including the opposite side for symmetry, is covered under federal law for plans covering mastectomy.
+  denials:
+    - code: CO-50
+      issue: Procedure considered cosmetic
+      prevent: Objective functional documentation and photos
+    - code: CO-197
+      issue: No authorization
+      prevent: Auth with complete clinical packet
+    - code: CO-204
+      issue: Cosmetic procedure excluded by the plan
+      prevent: Self-pay agreement in advance
+  interview: >-
+    Plastic surgery billing hinges on reconstructive versus cosmetic. Reconstructive procedures need
+    prior authorization with objective evidence like visual field tests or photos; cosmetic procedures
+    are excluded and billed as self-pay. Breast reconstruction after mastectomy is protected by federal law.
+
+- name: Allergy and immunology
+  slug: allergy-immunology
+  level: Intermediate
+  minutes: 6
+  summary: Allergy testing counted by number of tests, and immunotherapy split into antigen preparation and injection codes.
+  definition: |
+    Allergists diagnose and treat allergies, asthma and immune disorders. A large share of their billing is **allergy testing** (billed per test) and **allergen immunotherapy** (allergy shots), which is split into preparing the extract and giving the injection.
+  providers: Allergists and immunologists, allergy nurses.
+  settings: Office.
+  services:
+    - Skin prick and intradermal allergy testing
+    - Allergy shots (immunotherapy)
+    - Asthma management
+    - Food and drug challenge testing
+  codes:
+    - code: "95004"
+      desc: Percutaneous (prick) allergy tests, per test
+      note: Units equal number of tests
+    - code: "95024"
+      desc: Intradermal allergy tests, immediate reaction, per test
+    - code: "95165"
+      desc: Preparation of antigen for immunotherapy, single or multiple antigens, per dose
+    - code: "95115 / 95117"
+      desc: Allergen injection, single / two or more injections
+    - code: "94010"
+      desc: Spirometry
+  icd:
+    - code: J30.9
+      desc: Allergic rhinitis, unspecified
+    - code: J45.909
+      desc: Unspecified asthma, uncomplicated
+  modifiers:
+    - mod: "25"
+      use: E/M with testing or injections on the same day when separately documented
+  prerequisites:
+    - Bill test units equal to the number of tests performed, within payer limits per year.
+    - Define a “dose” for 95165 consistently (Medicare defines a dose as 1 cc aliquot).
+    - Track annual allergy testing and antigen limits.
+  denials:
+    - code: CO-151
+      issue: Number of tests or antigen doses exceeds policy limit
+      prevent: Know payer annual limits
+    - code: CO-97
+      issue: E/M with injection without separate problem
+      prevent: Modifier 25 only with separate documentation
+  interview: >-
+    Allergy testing is billed per test (95004, 95024), and immunotherapy is split into antigen
+    preparation by dose (95165) and injections (95115/95117). Unit limits are the main denial risk.
+
+- name: Infusion therapy and rheumatology
+  slug: infusion-rheumatology
+  level: Advanced
+  minutes: 7
+  summary: Biologic drug infusions for autoimmune disease, with the infusion hierarchy, drug units, site-of-care rules and step therapy.
+  definition: |
+    Rheumatology treats autoimmune and inflammatory diseases such as rheumatoid arthritis, lupus and gout. Many patients receive **biologic drugs** by infusion or injection in the office.
+
+    Biologics are expensive, so payers manage them tightly through prior authorization, step therapy (trying cheaper drugs first) and site-of-care policies that move infusions from hospitals to offices or homes.
+  providers: Rheumatologists, infusion nurses, NPs and PAs.
+  settings: Office infusion suites, hospital outpatient, home infusion.
+  services:
+    - Biologic infusions and injections
+    - Joint injections
+    - Disease monitoring
+  codes:
+    - code: "96365 / 96366"
+      desc: IV infusion for therapy, first hour / each additional hour
+    - code: "96413"
+      desc: Chemotherapy or complex biologic infusion, first hour (for some biologics per payer)
+    - code: "96372"
+      desc: Therapeutic injection, subcutaneous or intramuscular
+    - code: J1745
+      desc: Infliximab (not biosimilar), 10 mg
+    - code: J0129
+      desc: Abatacept, 10 mg
+    - code: J3262
+      desc: Tocilizumab, 1 mg
+  icd:
+    - code: M05.79
+      desc: Rheumatoid arthritis with rheumatoid factor of multiple sites without organ involvement
+    - code: M32.9
+      desc: Systemic lupus erythematosus, unspecified
+  modifiers:
+    - mod: JW / JZ
+      use: Drug wasted / no waste
+    - mod: "25"
+      use: Separate E/M on infusion day
+  prerequisites:
+    - Prior authorization by drug, dose, frequency and site of care; reauthorize before expiry.
+    - Step therapy documentation (failed conventional drugs such as methotrexate).
+    - Biosimilars have their own HCPCS codes with modifiers; bill the exact product given.
+    - Convert dose to HCPCS units; report NDC and wastage.
+  denials:
+    - code: CO-197
+      issue: Infusion without current authorization, or at a non-approved site
+      prevent: Auth tracking with expiry alerts
+    - code: CO-151
+      issue: Units don't match dose
+      prevent: Unit conversion checks
+    - code: CO-16
+      issue: Wrong product code for the biosimilar given
+      prevent: Product-level charge entry from the infusion record
+  interview: >-
+    Infusion billing combines administration codes with drug HCPCS codes in units, NDCs and wastage
+    modifiers. Biologics need prior authorization, step therapy and approved site of care, and the
+    product code must match the exact drug or biosimilar given.

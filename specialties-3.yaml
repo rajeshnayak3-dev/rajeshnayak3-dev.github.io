@@ -1,0 +1,546 @@
+- name: Behavioral health (psychiatry and psychotherapy)
+  slug: behavioral-health
+  level: Intermediate
+  minutes: 9
+  summary: Psychiatric evaluations, time-based psychotherapy, medication management and telehealth, often carved out to a separate behavioral health payer.
+  definition: |
+    Behavioral health covers mental health and substance use care. Psychiatrists (physicians) diagnose and prescribe; psychologists, licensed clinical social workers (LCSWs), professional counsellors and marriage and family therapists provide assessment and therapy.
+
+    Many health plans **carve out** behavioral health to a separate company, so the claim may need to go to a different payer than the medical claim.
+  providers: Psychiatrists, psychiatric NPs, psychologists, LCSWs, LPCs/LMHCs, LMFTs.
+  settings: Office, telehealth (very common), intensive outpatient and partial hospitalisation programmes, inpatient psychiatric units.
+  services:
+    - Psychiatric diagnostic evaluations
+    - Individual, family and group psychotherapy
+    - Medication management
+    - Psychological testing
+    - Crisis psychotherapy
+    - Collaborative care with primary care
+  codes:
+    - code: "90791"
+      desc: Psychiatric diagnostic evaluation without medical services
+    - code: "90792"
+      desc: Psychiatric diagnostic evaluation with medical services (prescribers)
+    - code: "90832"
+      desc: Psychotherapy, 30 minutes (16–37 minutes)
+    - code: "90834"
+      desc: Psychotherapy, 45 minutes (38–52 minutes)
+    - code: "90837"
+      desc: Psychotherapy, 60 minutes (53 minutes or more)
+    - code: 90833 / 90836 / 90838
+      desc: Psychotherapy add-on with an E/M visit, by time
+    - code: "90846 / 90847"
+      desc: Family psychotherapy without / with the patient present
+    - code: "90853"
+      desc: Group psychotherapy
+    - code: 90839 / 90840
+      desc: Psychotherapy for crisis, first 60 minutes / each additional 30
+    - code: 96130 / 96131
+      desc: Psychological testing evaluation, first hour / each additional hour
+  icd:
+    - code: F32.1
+      desc: Major depressive disorder, single episode, moderate
+    - code: F41.1
+      desc: Generalised anxiety disorder
+    - code: F43.10
+      desc: Post-traumatic stress disorder, unspecified
+    - code: F90.0
+      desc: ADHD, predominantly inattentive type
+  modifiers:
+    - mod: "95"
+      use: Synchronous audio-video telehealth
+    - mod: "93 / FQ"
+      use: Audio-only service, where the payer allows
+    - mod: HO / HN / AJ
+      use: Provider credential modifiers some Medicaid and commercial payers require (master's level, bachelor's level, clinical social worker)
+  prerequisites:
+    - Check for a behavioral health carve-out and bill that payer.
+    - Psychotherapy codes are time-based; document start and stop times or total time.
+    - Many payers limit sessions or require authorization after a number of visits.
+    - Check whether the provider's license type is credentialed with the plan (LCSW, LPC, LMFT recognition varies; Medicare added LMFTs and MHCs from 2024).
+    - Telehealth rules (POS, modifiers, audio-only) differ by payer and change often.
+  denials:
+    - code: CO-109
+      issue: Billed to the medical plan when behavioral health is carved out
+      prevent: Check the card and eligibility for a behavioral health vendor
+    - code: CO-185 / CO-B7
+      issue: Therapist's license type not credentialed with the plan
+      prevent: Verify provider type acceptance before scheduling
+    - code: CO-151
+      issue: Time billed doesn't match the code's minimum
+      prevent: Document session time; pick the code by actual time
+    - code: CO-197
+      issue: Sessions beyond authorized visits
+      prevent: Track authorized sessions per episode
+  interview: >-
+    Behavioral health uses 90791/90792 for evaluations and time-based psychotherapy codes 90832,
+    90834 and 90837. Watch for behavioral health carve-outs, license-type credentialing, session
+    limits and telehealth modifiers.
+
+- name: Neurology
+  slug: neurology
+  level: Intermediate
+  minutes: 8
+  summary: Nervous system care with diagnostic testing such as EEG, EMG and nerve conduction studies, Botox for migraine and infusion therapies.
+  definition: |
+    Neurology diagnoses and treats disorders of the brain, spinal cord, nerves and muscles: epilepsy, stroke, migraine, multiple sclerosis, Parkinson's disease, neuropathy and dementia.
+
+    Neurologists rely on diagnostic tests and expensive drug therapies, so component billing, units and prior authorization are central.
+  providers: Neurologists, neurophysiologists, NPs and PAs.
+  settings: Office, hospital (inpatient consults and EEG monitoring), infusion centres.
+  services:
+    - Consultations and follow-ups
+    - EEG and long-term video EEG monitoring
+    - Nerve conduction studies and EMG
+    - Botulinum toxin injections for chronic migraine and spasticity
+    - Infusions for multiple sclerosis and other conditions
+  codes:
+    - code: "95816"
+      desc: EEG, awake and drowsy, 20–40 minutes
+    - code: "95819"
+      desc: EEG, awake and asleep
+    - code: 95907–95913
+      desc: Nerve conduction studies, by number of studies
+    - code: "95886"
+      desc: Needle EMG, each extremity, complete, with nerve conduction studies (add-on)
+    - code: "64615"
+      desc: Chemodenervation for chronic migraine (Botox)
+    - code: J0585
+      desc: Injection, onabotulinumtoxinA, 1 unit
+      note: Bill units given and units wasted (JW) on separate lines
+    - code: "96365"
+      desc: IV infusion for therapy, first hour
+  icd:
+    - code: G43.709
+      desc: Chronic migraine without aura, not intractable, without status migrainosus
+    - code: G40.909
+      desc: Epilepsy, unspecified, not intractable, without status epilepticus
+    - code: G35
+      desc: Multiple sclerosis
+    - code: G56.01
+      desc: Carpal tunnel syndrome, right upper limb
+  modifiers:
+    - mod: "26 / TC"
+      use: Interpretation only / technical only for EEG and NCS
+    - mod: JW / JZ
+      use: Drug wasted / no drug wasted from a single-dose vial
+  prerequisites:
+    - Botox for migraine needs prior authorization, documentation of chronic migraine (15 or more headache days a month) and failed preventive drugs.
+    - NCS units are counted by the number of nerve studies; match the CPT code to the count.
+    - MS and other specialty drugs require authorization and often specialty pharmacy (buy-and-bill vs white-bagging).
+    - Document drug units given and wasted.
+  denials:
+    - code: CO-197
+      issue: Botox or infusion drug without authorization
+      prevent: Drug authorization tracked by dose and dates
+    - code: CO-16
+      issue: Missing NDC or JW/JZ on drug lines
+      prevent: Drug line checklist
+    - code: CO-151
+      issue: NCS code doesn't match number of studies
+      prevent: Count studies from the report
+    - code: CO-50
+      issue: EMG or EEG not supported by diagnosis under LCD
+      prevent: LCD diagnosis checks
+  interview: >-
+    Neurology involves diagnostic tests like EEG and nerve conduction studies with 26/TC components,
+    plus drug therapies like Botox for chronic migraine, which need prior authorization, correct units,
+    NDCs and wastage modifiers.
+
+- name: Pulmonology and sleep medicine
+  slug: pulmonology
+  level: Intermediate
+  minutes: 8
+  summary: Lung care with pulmonary function tests, bronchoscopy, sleep studies and CPAP, plus Medicare's CPAP compliance rule.
+  definition: |
+    Pulmonology treats diseases of the lungs and airways: asthma, COPD, interstitial lung disease, lung nodules and pulmonary hypertension. Many pulmonologists also practise critical care and sleep medicine.
+
+    Sleep studies and CPAP equipment have strict coverage rules, especially for Medicare.
+  providers: Pulmonologists, sleep medicine physicians, respiratory therapists, sleep technologists.
+  settings: Office, hospital (ICU and bronchoscopy suites), sleep labs, patients' homes for home sleep tests.
+  services:
+    - Pulmonary function tests (spirometry, lung volumes, diffusion)
+    - Bronchoscopy with biopsy
+    - In-lab and home sleep studies
+    - CPAP set-up and follow-up
+    - Critical care in the ICU
+  codes:
+    - code: "94010"
+      desc: Spirometry
+    - code: "94060"
+      desc: Spirometry before and after bronchodilator
+    - code: "94726"
+      desc: Plethysmography for lung volumes
+    - code: "94729"
+      desc: Diffusing capacity (add-on)
+    - code: "31622"
+      desc: Bronchoscopy, diagnostic
+    - code: "31628"
+      desc: Bronchoscopy with transbronchial lung biopsy, single lobe
+    - code: "95810"
+      desc: In-lab polysomnography, 4 or more parameters
+    - code: "95811"
+      desc: In-lab polysomnography with CPAP titration
+    - code: G0399 / 95800 / 95806
+      desc: Home sleep testing (various types)
+    - code: E0601
+      desc: CPAP device (DME)
+  icd:
+    - code: J44.9
+      desc: COPD, unspecified
+    - code: J45.40
+      desc: Moderate persistent asthma, uncomplicated
+    - code: G47.33
+      desc: Obstructive sleep apnoea
+  modifiers:
+    - mod: "26 / TC"
+      use: Interpretation / technical for PFTs and sleep studies
+    - mod: KX
+      use: Medicare CPAP coverage criteria met (including adherence)
+  prerequisites:
+    - Sleep studies often need prior authorization, and many payers require a home test before an in-lab study.
+    - Medicare covers CPAP for an initial 12 weeks; continued coverage requires documented adherence (use 4 or more hours per night on 70% of nights in a 30-day period) and a face-to-face re-evaluation.
+    - Don't bill 94010 with 94060 on the same day (bundled).
+  denials:
+    - code: CO-197
+      issue: In-lab sleep study without authorization or without trying a home test
+      prevent: Check payer sleep testing pathway
+    - code: CO-50
+      issue: CPAP continued without adherence documentation
+      prevent: Download compliance data and document re-evaluation
+    - code: CO-97
+      issue: Spirometry codes bundled
+      prevent: Bill the most comprehensive PFT code
+  interview: >-
+    Pulmonology billing includes PFTs, bronchoscopy and sleep studies with professional and technical
+    components. Sleep studies and CPAP have strict rules; Medicare requires documented CPAP adherence
+    for continued coverage.
+
+- name: Nephrology and dialysis
+  slug: nephrology
+  level: Advanced
+  minutes: 8
+  summary: Kidney care and monthly ESRD capitation-style billing, dialysis facility claims, and the ESRD Medicare coordination period.
+  definition: |
+    Nephrology treats kidney disease, from chronic kidney disease (CKD) to end-stage renal disease (ESRD) requiring dialysis or transplant.
+
+    Nephrologists who manage dialysis patients bill a **monthly ESRD service** code, based on the patient's age and the number of face-to-face visits in the month, rather than per visit. The dialysis facility bills its own claims.
+  providers: Nephrologists, NPs and PAs; dialysis facilities.
+  settings: Office, dialysis centres, hospitals, patients' homes (home dialysis).
+  services:
+    - CKD management
+    - Monthly ESRD management for dialysis patients
+    - Hospital dialysis visits
+    - Home dialysis training and support
+  codes:
+    - code: 90960 / 90961 / 90962
+      desc: Monthly ESRD services, age 20 or older, with 4 or more / 2–3 / 1 face-to-face visits
+    - code: 90966
+      desc: Monthly ESRD services for home dialysis, age 20 or older
+    - code: "90935 / 90937"
+      desc: Hemodialysis with single / repeated physician evaluation (e.g. inpatient)
+    - code: 90945 / 90947
+      desc: Dialysis other than hemodialysis (e.g. peritoneal), single / repeated evaluation
+  icd:
+    - code: N18.6
+      desc: End-stage renal disease
+    - code: N18.4
+      desc: Chronic kidney disease, stage 4
+    - code: Z99.2
+      desc: Dependence on renal dialysis
+  prerequisites:
+    - Count face-to-face visits per month to choose the monthly code; document each visit.
+    - Bill the monthly code once per month; partial months use per-day codes in specific situations.
+    - ESRD patients with employer coverage have a **30-month coordination period** where the group plan is primary.
+    - Dialysis facility claims (TOB 072x) are separate from the nephrologist's claim.
+  denials:
+    - code: CO-18
+      issue: Two monthly ESRD codes in the same month
+      prevent: One monthly code per patient per month
+    - code: CO-22
+      issue: Medicare billed first during the ESRD coordination period
+      prevent: Track Medicare entitlement date and 30-month window
+    - code: CO-151
+      issue: Visit count doesn't support the monthly code level
+      prevent: Visit log reconciled monthly
+  interview: >-
+    Nephrologists bill dialysis management with monthly ESRD codes like 90960–90962, based on age
+    and the number of face-to-face visits that month. For ESRD patients with group coverage, the
+    group plan is primary for a 30-month coordination period before Medicare.
+
+- name: Oncology and hematology
+  slug: oncology
+  level: Advanced
+  minutes: 10
+  summary: Chemotherapy and infusion administration hierarchies, high-cost drugs with units and wastage, and strict prior authorization.
+  definition: |
+    Oncology treats cancer; hematology treats blood disorders. Medical oncologists give chemotherapy, immunotherapy and targeted drugs; radiation oncologists deliver radiation therapy.
+
+    Oncology claims are among the highest-value professional claims because of the drugs. Drug units, NDCs, wastage and administration code hierarchy must all be right.
+  providers: Medical oncologists, hematologists, radiation oncologists, oncology nurses and pharmacists.
+  settings: Office infusion suites, hospital outpatient infusion, radiation oncology centres.
+  services:
+    - Consultations and treatment planning
+    - Chemotherapy and immunotherapy infusions
+    - Hydration and supportive drug infusions
+    - Blood transfusions
+    - Radiation therapy planning and delivery
+  codes:
+    - code: "96413"
+      desc: Chemotherapy IV infusion, first hour
+    - code: "96415"
+      desc: Chemotherapy IV infusion, each additional hour
+    - code: "96417"
+      desc: Chemotherapy, each additional sequential infusion, up to 1 hour
+    - code: "96409"
+      desc: Chemotherapy IV push, single or initial drug
+    - code: "96365 / 96366"
+      desc: Non-chemo therapeutic IV infusion, first hour / each additional hour
+    - code: "96360"
+      desc: IV hydration, first hour
+    - code: J9271
+      desc: Injection, pembrolizumab, 1 mg
+    - code: J9045
+      desc: Injection, carboplatin, 50 mg
+    - code: "77385 / 77386"
+      desc: IMRT radiation treatment delivery, simple / complex
+  icd:
+    - code: C50.911
+      desc: Malignant neoplasm of unspecified site of right female breast
+    - code: C34.90
+      desc: Malignant neoplasm of unspecified part of bronchus or lung
+    - code: Z51.11
+      desc: Encounter for antineoplastic chemotherapy
+    - code: Z51.12
+      desc: Encounter for antineoplastic immunotherapy
+  modifiers:
+    - mod: JW / JZ
+      use: Discarded drug amount / no discarded amount from single-dose containers (Medicare)
+    - mod: "25"
+      use: Separate E/M visit on infusion day
+    - mod: "59 / XE"
+      use: Separate infusion sessions or access sites where rules allow
+  prerequisites:
+    - Prior authorization for nearly every chemotherapy and immunotherapy regimen, by drug, dose and cycles.
+    - Convert dose given into HCPCS billing units (for example 200 mg pembrolizumab = 200 units of J9271).
+    - Report NDC, NDC units and JW/JZ on every drug from a single-dose vial for Medicare.
+    - Follow the infusion hierarchy - chemotherapy is primary over therapeutic, which is primary over hydration; only one initial service per encounter.
+    - Document start and stop times for infusions.
+  denials:
+    - code: CO-197
+      issue: Drug or cycle not authorized, or dose changed
+      prevent: Authorization per regimen; update when dose changes
+    - code: CO-151
+      issue: Drug units exceed MUE or don't match dose
+      prevent: Unit conversion tables and dose documentation
+    - code: CO-16
+      issue: Missing NDC or JW/JZ
+      prevent: Drug line edits
+    - code: CO-97
+      issue: Two initial infusion codes in one encounter
+      prevent: Apply hierarchy, one initial code per encounter
+  tips:
+    - A single unit error on a high-cost immunotherapy drug can be thousands of dollars. Many oncology clients audit 100% of drug lines.
+  interview: >-
+    Oncology billing combines administration codes like 96413 with drug HCPCS codes like J9271. The
+    infusion hierarchy allows one initial service per encounter, drug units must match the HCPCS
+    descriptor, and NDCs and JW/JZ are required. Nearly everything needs prior authorization.
+
+- name: Urology
+  slug: urology
+  level: Intermediate
+  minutes: 7
+  summary: Urinary tract and male reproductive care with cystoscopy, prostate biopsy, lithotripsy and drug injections for prostate cancer.
+  definition: |
+    Urology treats the urinary tract in all patients and the male reproductive system: kidney stones, urinary incontinence, enlarged prostate, prostate and bladder cancers and infertility.
+  providers: Urologists, NPs and PAs.
+  settings: Office (many cystoscopies), ASCs, hospital.
+  services:
+    - Cystoscopy
+    - Prostate biopsy
+    - Kidney stone treatment (lithotripsy, ureteroscopy)
+    - Bladder ultrasound and urodynamics
+    - Hormone injections for prostate cancer
+    - Vasectomy
+  codes:
+    - code: "52000"
+      desc: Cystoscopy (cystourethroscopy)
+    - code: 52356
+      desc: Ureteroscopy with laser lithotripsy and stent insertion
+    - code: "50590"
+      desc: Shock wave lithotripsy
+    - code: "55700"
+      desc: Prostate biopsy, any approach
+    - code: "51798"
+      desc: Post-void residual measurement by ultrasound
+    - code: 51728
+      desc: Cystometrogram with voiding pressure studies
+    - code: J9217
+      desc: Leuprolide acetate (for depot suspension), 7.5 mg
+    - code: "55250"
+      desc: Vasectomy
+      note: Often excluded or limited by plans
+  icd:
+    - code: N40.1
+      desc: Benign prostatic hyperplasia with lower urinary tract symptoms
+    - code: N20.0
+      desc: Calculus of kidney
+    - code: R31.9
+      desc: Haematuria, unspecified
+    - code: C61
+      desc: Malignant neoplasm of prostate
+  modifiers:
+    - mod: RT / LT / 50
+      use: Side for kidney and ureter procedures
+    - mod: "26 / TC"
+      use: Urodynamics components when split
+  prerequisites:
+    - Check frequency rules for post-void residual and drug injections.
+    - Lithotripsy and some cystoscopies need prior authorization.
+    - Hormone drugs need units, NDC and sometimes authorization.
+    - Vasectomy is a non-covered benefit for some plans; get a waiver.
+  denials:
+    - code: CO-97
+      issue: Post-void residual or cystoscopy bundled with other procedures
+      prevent: Check NCCI pairs
+    - code: CO-4
+      issue: Missing laterality on kidney or ureter procedure
+      prevent: RT/LT required
+    - code: CO-204
+      issue: Vasectomy not a covered benefit
+      prevent: Verify benefits and obtain waiver
+  interview: >-
+    Urology bills cystoscopy, prostate biopsy, stone procedures and drug injections. Laterality,
+    NCCI bundling and drug units are the main billing issues, with benefit checks for elective
+    procedures like vasectomy.
+
+- name: ENT (otolaryngology) and audiology
+  slug: ent
+  level: Intermediate
+  minutes: 7
+  summary: Ear, nose and throat procedures in the office and OR, hearing tests, and the hearing aid exclusions most plans apply.
+  definition: |
+    Otolaryngology (ENT) treats the ear, nose, throat, sinuses, head and neck. Audiologists test hearing and fit hearing aids.
+  providers: ENT surgeons, audiologists, NPs and PAs.
+  settings: Office, ASCs, hospital outpatient.
+  services:
+    - Nasal endoscopy and laryngoscopy
+    - Ear wax removal
+    - Sinus surgery
+    - Tonsillectomy and adenoidectomy
+    - Ear tubes
+    - Hearing evaluations and hearing aids
+  codes:
+    - code: "31231"
+      desc: Nasal endoscopy, diagnostic
+    - code: "31575"
+      desc: Flexible laryngoscopy, diagnostic
+    - code: "69210"
+      desc: Removal of impacted cerumen with instruments, unilateral
+    - code: "69436"
+      desc: Ear tube insertion (tympanostomy) under general anaesthesia
+    - code: "42820"
+      desc: Tonsillectomy and adenoidectomy, younger than age 12
+    - code: "31255"
+      desc: Endoscopic sinus surgery, total ethmoidectomy
+    - code: "92557"
+      desc: Comprehensive audiometry (threshold and speech recognition)
+    - code: V5261
+      desc: Hearing aid, digital, binaural, behind the ear
+      note: Often excluded; check hearing aid benefits
+  icd:
+    - code: J32.9
+      desc: Chronic sinusitis, unspecified
+    - code: H61.21
+      desc: Impacted cerumen, right ear
+    - code: H90.3
+      desc: Sensorineural hearing loss, bilateral
+  modifiers:
+    - mod: RT / LT / 50
+      use: Side for ear and sinus procedures
+    - mod: "25"
+      use: E/M with an in-office endoscopy when separately identifiable
+  prerequisites:
+    - Cerumen removal is billable only when impacted and removed with instruments by a provider; irrigation uses a different code (69209).
+    - Sinus surgery and balloon procedures often need authorization and CT evidence.
+    - Hearing aids are excluded by Original Medicare and many plans; check benefits and use GY for Medicare.
+    - Audiology services for Medicare need an order in many situations.
+  denials:
+    - code: CO-97
+      issue: Nasal endoscopy bundled with sinus surgery or E/M
+      prevent: Modifier 25 only with separate documentation
+    - code: CO-96
+      issue: Hearing aids or routine hearing exams not covered
+      prevent: Benefit verification and waivers
+    - code: CO-4
+      issue: Bilateral cerumen removal billed incorrectly
+      prevent: Use 50 or units as the payer requires
+  interview: >-
+    ENT bills endoscopies, cerumen removal, sinus and ear procedures with laterality modifiers, and
+    audiology tests. Hearing aids are a common exclusion that needs benefit checks and patient waivers.
+
+- name: Endocrinology
+  slug: endocrinology
+  level: Intermediate
+  minutes: 7
+  summary: Diabetes, thyroid and hormone care with continuous glucose monitors, insulin pumps and thyroid biopsies.
+  definition: |
+    Endocrinology treats hormone and metabolic disorders: diabetes, thyroid disease, osteoporosis, pituitary and adrenal disorders.
+
+    Diabetes technology (continuous glucose monitors, insulin pumps) creates both professional billing (data interpretation) and DME billing.
+  providers: Endocrinologists, diabetes educators, NPs and PAs.
+  settings: Office, telehealth.
+  services:
+    - Diabetes management and education
+    - Continuous glucose monitor (CGM) placement and data review
+    - Thyroid ultrasound and fine needle aspiration
+    - Bone density testing
+    - Hormone therapy
+  codes:
+    - code: "95250"
+      desc: CGM sensor placement, hook-up, calibration and training (professional-owned equipment)
+    - code: "95251"
+      desc: CGM data analysis and interpretation, at least 72 hours
+    - code: "60100"
+      desc: Biopsy of thyroid, percutaneous core needle
+    - code: "10005"
+      desc: Fine needle aspiration with ultrasound guidance, first lesion
+    - code: "77080"
+      desc: Bone density (DXA) study, axial skeleton
+    - code: G0108
+      desc: Diabetes self-management training, individual, per 30 minutes
+    - code: "97802"
+      desc: Medical nutrition therapy, initial, each 15 minutes
+  icd:
+    - code: E11.65
+      desc: Type 2 diabetes with hyperglycaemia
+    - code: E10.9
+      desc: Type 1 diabetes without complications
+    - code: E03.9
+      desc: Hypothyroidism, unspecified
+    - code: M81.0
+      desc: Age-related osteoporosis without current pathological fracture
+  modifiers:
+    - mod: "25"
+      use: E/M visit with a procedure such as a biopsy
+    - mod: "26 / TC"
+      use: DXA components when split
+  prerequisites:
+    - CGM interpretation (95251) is limited to once per 30 days.
+    - CGM and pump supplies are billed by DME suppliers or pharmacies with specific coverage criteria.
+    - DXA frequency is limited (Medicare generally every 24 months unless criteria met).
+    - Diabetes self-management training needs an order and an accredited programme.
+  denials:
+    - code: CO-119
+      issue: CGM interpretation billed more often than every 30 days
+      prevent: Track dates of last interpretation
+    - code: CO-151
+      issue: DXA repeated too soon
+      prevent: Check last DXA date
+    - code: CO-50
+      issue: CGM coverage criteria not documented
+      prevent: Document insulin use or hypoglycaemia per policy
+  interview: >-
+    Endocrinology billing includes diabetes care, CGM placement and interpretation (95250, 95251),
+    thyroid biopsies and DXA scans. Frequency limits on CGM interpretation and DXA are common denial
+    causes.

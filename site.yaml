@@ -1,0 +1,78 @@
+# ------------------------------------------------------------------
+# REVEX site settings. Edit the values below in GitHub's web editor.
+# ------------------------------------------------------------------
+name: REVEX
+tagline: Learn US healthcare revenue cycle, one claim at a time
+description: >-
+  REVEX is a free US healthcare revenue cycle management (RCM) academy.
+  Learn the claim cycle, insurance, billing forms, denials, specialties
+  and real AR scenarios, from first principles to interview-ready.
+
+# Full public address of the site, without a trailing slash.
+# GitHub Pages example: https://YOUR-USERNAME.github.io/revex
+# Custom domain example: https://revex.in
+site_url: https://rajeshnayak3-dev.github.io/revex
+
+# Optional: Google Search Console verification code (HTML tag method).
+google_verification: ""
+
+# Optional: your own domain, for example revex.in (see README, part 3).
+custom_domain: ""
+
+author:
+  name: Rajesh Nayak
+  title: RCM Quality Specialist
+  experience: over 6 years in US healthcare
+  # The line shown under your name in the footer.
+  role: RCM Quality Specialist making US healthcare RCM training free for anyone who wants in
+  linkedin: https://www.linkedin.com/in/rajesh-nayak-317198249/
+
+# "Why REVEX exists" statement on the home page.
+mission: >-
+  Good RCM training usually sits behind paid courses or a company's induction
+  programme. REVEX makes it free, so anyone willing to learn can understand how
+  US healthcare gets paid and walk into an RCM interview ready.
+
+# Menu cards on the home page, in this order.
+sections:
+  - id: start-here
+    title: Start here
+    blurb: What RCM is, who the provider, payer and patient are, and the jobs inside an RCM team.
+    icon: compass
+  - id: rcm-cycle
+    title: The RCM cycle
+    blurb: Follow one claim from appointment to final payment, stage by stage.
+    icon: cycle
+    sequence: true
+  - id: insurance
+    title: Insurance and payers
+    blurb: Plan types, payer types, Medicare, Medicaid, QMB, COBRA, TRICARE, VA CCN, WC, auto and PIP.
+    icon: shield
+  - id: forms-billing
+    title: Forms and billing
+    blurb: CMS-1500, UB-04, EDI transactions, modifiers, and hospital versus professional billing.
+    icon: form
+  - id: denials
+    title: Denials
+    blurb: Read an ERA, decode CARC and RARC codes, and work every denial category to payment.
+    icon: alert
+  - id: non-denials
+    title: Non-denials
+    blurb: Rejections, no-response claims, underpayments, credits, refunds and recoupments.
+    icon: inbox
+  - id: specialties
+    title: Specialties
+    blurb: What each specialty does, its key CPT codes, prerequisites and denial traps.
+    icon: stethoscope
+  - id: scenarios
+    title: RCM scenarios
+    blurb: Practise real AR calls and claim decisions, and see why each choice is right or wrong.
+    icon: route
+  - id: glossary
+    title: RCM terminology
+    blurb: Plain-language definitions of the terms you'll hear on the floor and in interviews.
+    icon: book
+  - id: interview-prep
+    title: Interview prep
+    blurb: Questions interviewers ask freshers and experienced analysts, with model answers.
+    icon: chat

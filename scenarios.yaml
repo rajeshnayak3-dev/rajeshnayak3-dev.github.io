@@ -1,0 +1,802 @@
+# Interactive scenarios. Each stage has a question (q), optional context and
+# choices with a verdict v: best | ok | wrong, and why (the feedback).
+# All patients, IDs and amounts are fictional.
+
+- title: The Medicare patient who wasn't on Medicare
+  slug: medicare-advantage-wrong-payer
+  level: Beginner
+  tag: Wrong payer
+  minutes: 5
+  summary: A January claim bounces from Original Medicare. Find the real payer and save the claim before its timely filing runs out.
+  keywords: Medicare Advantage CO-109 wrong payer eligibility HETS
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | Patient | Helen Brooks, 71 (fictional) |
+    | Date of service | 01/14/2026 |
+    | Billed to | Original Medicare (Part B) |
+    | Service | 99214, office visit, $185.00 |
+    | ERA result | Denied, **CO-109**, remark N418 |
+    | Today | 03/02/2026 |
+  stages:
+    - q: What is the payer telling you?
+      choices:
+        - text: The service isn't medically necessary.
+          v: wrong
+          why: That would be CO-50. CO-109 means the claim isn't covered by **this** payer and must go to a different payer or contractor.
+        - text: The claim should be sent to a different payer.
+          v: best
+          why: Right. CO-109 says this payer isn't responsible. With a January date of service and a Medicare patient, a switch to Medicare Advantage during open enrollment is the first thing to suspect.
+        - text: The patient owes the full amount.
+          v: wrong
+          why: The group code is CO, not PR. Nothing here says the patient owes it.
+    - q: What's your first step?
+      choices:
+        - text: Resubmit the same claim to Medicare, it may have been a glitch.
+          v: wrong
+          why: Resending a correctly denied claim wastes time and creates a duplicate. Find out who the right payer is first.
+        - text: Check Medicare eligibility (HETS or the MAC portal) for Medicare Advantage enrollment on the date of service.
+          v: best
+          why: The Medicare eligibility response shows the Medicare Advantage plan name and enrollment dates. That tells you exactly where to bill.
+        - text: Call the patient and ask for payment.
+          v: wrong
+          why: The patient likely has coverage; billing her would be premature and could generate a complaint.
+    - q: Eligibility shows a Humana Medicare Advantage PPO effective 01/01/2026. Humana's timely filing for this provider is 1 year. What now?
+      choices:
+        - text: Update the insurance in registration, attach the new coverage to the visit and submit a new claim to Humana.
+          v: best
+          why: The claim never went to Humana, so it's a new original claim to Humana. Updating registration also fixes future visits.
+        - text: Send a corrected claim (frequency 7) to Medicare with Humana's name in box 11.
+          v: wrong
+          why: Medicare isn't the payer at all. A corrected claim to the wrong payer is still wrong.
+        - text: Wait for Medicare to forward the claim to Humana.
+          v: wrong
+          why: Medicare doesn't forward claims to Medicare Advantage plans. Waiting just burns timely filing days.
+    - q: Where did this go wrong, for root cause tracking?
+      choices:
+        - text: Payer error
+          v: wrong
+          why: Medicare denied correctly.
+        - text: Registration and eligibility, the new card wasn't collected and coverage wasn't verified in January.
+          v: best
+          why: January is when Medicare Advantage changes take effect. Scanning the card and running eligibility at check-in would have caught it.
+        - text: Coding
+          v: wrong
+          why: The code was fine. The payer was wrong.
+  takeaways:
+    - CO-109 means bill a different payer; find the right one before doing anything else.
+    - Check Medicare Advantage enrollment at every visit, especially in January.
+    - A claim never sent to the correct payer is a new original claim to that payer.
+
+- title: Two parents, two plans
+  slug: birthday-rule-cob
+  level: Beginner
+  tag: COB
+  minutes: 5
+  summary: A child's claim denies for coordination of benefits. Apply the birthday rule and bill in the right order.
+  keywords: birthday rule CO-22 coordination of benefits dependent child
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | Patient | Leo Martin, 8 (fictional) |
+    | Billed to | Dad's Cigna PPO as primary |
+    | Dad's DOB | 09/30/1986 |
+    | Mom's plan | Aetna HMO, Mom's DOB 04/12/1988 |
+    | Parents | Married, living together |
+    | ERA result | Cigna denied, **CO-22** |
+  stages:
+    - q: Which plan is primary under the birthday rule?
+      choices:
+        - text: Dad's plan, because he is older.
+          v: wrong
+          why: The birthday rule ignores the year. Only month and day count.
+        - text: Mom's plan, because April 12 comes before September 30 in the calendar year.
+          v: best
+          why: Correct. The parent whose birthday falls first in the year has the primary plan.
+        - text: Whichever plan the parents prefer.
+          v: wrong
+          why: COB rules decide this, not preference.
+    - q: Mom's plan is an HMO. What should you check before billing it?
+      choices:
+        - text: Nothing, just send the claim.
+          v: ok
+          why: You might get paid, but HMOs often require the PCP to be the treating provider or a referral to be on file. Checking first avoids a second denial.
+        - text: Eligibility on the date of service, the assigned PCP, and whether a referral was required for this visit.
+          v: best
+          why: HMO rules apply to the primary plan, so a missing referral would trigger a new denial.
+        - text: Dad's deductible.
+          v: wrong
+          why: Dad's plan is secondary now; its deductible doesn't change who's primary.
+    - q: Aetna pays $72 and assigns $25 copay (PR-3). What happens to the $25?
+      choices:
+        - text: Bill the patient's parents right away.
+          v: wrong
+          why: There is a secondary plan. Bill Cigna first with Aetna's payment information.
+        - text: Send a secondary claim to Cigna with Aetna's adjudication details.
+          v: best
+          why: Cigna, as secondary, may cover the copay under its COB rules. Only what Cigna doesn't pay goes to the family.
+        - text: Write it off.
+          v: wrong
+          why: There's no reason to write off a valid patient-responsibility amount that a secondary may pay.
+  takeaways:
+    - The birthday rule uses month and day only.
+    - Apply the primary plan's rules (HMO referrals, networks) before billing it.
+    - Patient responsibility from the primary goes to the secondary before the patient.
+
+- title: The MRI with an authorization nobody could find
+  slug: missing-auth-mri
+  level: Beginner
+  tag: Authorization
+  minutes: 5
+  summary: An MRI denies CO-197, but the scheduling notes mention an approval. Find it, fix the claim and stop it happening again.
+  keywords: CO-197 authorization box 23 corrected claim MRI
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | Patient | Ravi Shah (fictional) |
+    | Payer | UnitedHealthcare commercial PPO |
+    | Service | 72148, MRI lumbar spine without contrast, DOS 08/19 |
+    | ERA result | Denied, **CO-197**, remark N54 |
+    | Scheduling note | “Auth approved 08/12, ref UHC-48812” |
+  stages:
+    - q: What do you do first?
+      choices:
+        - text: Write an appeal letter with medical records.
+          v: ok
+          why: It might work eventually, but you haven't checked the simplest explanation yet, that the auth exists and just wasn't on the claim.
+        - text: Check the payer portal for the authorization and compare its code, dates and provider with the claim.
+          v: best
+          why: Confirm the authorization exists and matches before choosing an action.
+        - text: Bill the patient.
+          v: wrong
+          why: CO-197 is the provider's liability under most contracts, and an auth may exist.
+    - q: The portal shows auth UHC-48812 for 72148, 08/12–09/11, for this rendering provider. The claim's box 23 is blank. Next step?
+      choices:
+        - text: Send a corrected claim (frequency 7, original claim number) with the auth number in box 23.
+          v: best
+          why: The data was missing from the claim, so a corrected claim is the right tool.
+        - text: Resubmit the claim as a new original with the auth number.
+          v: wrong
+          why: A new original for an adjudicated claim will deny as a duplicate (CO-18).
+        - text: Call UHC and ask them to reprocess using the auth on file.
+          v: ok
+          why: Some payers will reprocess on the call when the auth is in their system, which is quicker. If they won't, send the corrected claim.
+    - q: What's the root cause, and who should hear about it?
+      choices:
+        - text: Payer error; tell UHC.
+          v: wrong
+          why: UHC can't apply an auth number that wasn't on the claim when its system needs it.
+        - text: Charge entry or auth workflow, the approved auth number wasn't attached to the visit. Report it to the charge entry lead.
+          v: best
+          why: The approval existed. The process that carries it onto the claim failed, so that's where to fix it.
+  takeaways:
+    - Always look for an existing authorization before appealing CO-197.
+    - Missing data on an adjudicated claim means a corrected claim, not a new one.
+    - Fix the hand-off that dropped the auth number, so the next MRI pays first time.
+
+- title: A rejection nobody worked
+  slug: timely-filing-rejection
+  level: Intermediate
+  tag: Timely filing
+  minutes: 6
+  summary: A claim denies CO-29. Decide whether you have valid proof of timely filing, or whether it's a write-off.
+  keywords: CO-29 timely filing proof 277CA rejection clearinghouse
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | Payer | Aetna commercial, timely filing 90 days from DOS |
+    | DOS | 02/03 |
+    | First submission | 02/07, **rejected** on the 277CA (invalid member ID) |
+    | Second submission | 06/10, accepted |
+    | ERA result | Denied **CO-29** on 06/24 |
+  stages:
+    - q: Is the 02/07 submission proof of timely filing?
+      choices:
+        - text: Yes, it shows we sent the claim on time.
+          v: wrong
+          why: A rejected claim never entered Aetna's system. Most payers only accept proof that the claim was **received and accepted** within the limit.
+        - text: No, a rejection report shows the claim wasn't accepted; it isn't proof of receipt.
+          v: best
+          why: Right. Proof of timely filing is usually an acceptance report or 277CA showing the payer accepted the claim, or a payer acknowledgment.
+    - q: Is there anything else worth checking before writing it off?
+      choices:
+        - text: Whether any version of the claim was accepted by Aetna, or billed to another payer within 90 days whose denial could serve as proof.
+          v: best
+          why: Some payers accept another payer's timely denial as proof. Exhaust real evidence before writing off.
+        - text: Ask the patient to pay since we were late.
+          v: wrong
+          why: Timely filing denials are the provider's liability. The patient can't be billed.
+        - text: Appeal anyway, saying the payer lost the claim.
+          v: wrong
+          why: That isn't true and the record shows a rejection. Appeals must be honest and evidence-based.
+    - q: Nothing else exists. What now?
+      choices:
+        - text: Adjust off with the client's timely filing write-off code, document why, and report the root cause.
+          v: best
+          why: It's a valid provider write-off. The real value is fixing the process so rejections are worked daily.
+        - text: Leave it open in AR in case something changes.
+          v: wrong
+          why: Uncollectible balances inflate AR and hide the problem.
+    - q: Which process change prevents this?
+      choices:
+        - text: Working rejection reports daily and checking no-response claims at 30 days.
+          v: best
+          why: The rejection sat for four months. A daily rejection routine would have fixed the member ID in February.
+        - text: Submitting every claim twice.
+          v: wrong
+          why: That creates duplicate denials and doesn't solve rejections.
+  takeaways:
+    - Rejections don't count as receipt for timely filing.
+    - Timely filing write-offs are provider liability, never patient responsibility.
+    - Work rejection queues daily and follow up no-response claims early.
+
+- title: The injection that didn't pay
+  slug: modifier-25-bundling
+  level: Intermediate
+  tag: Bundling
+  minutes: 6
+  summary: An office visit and a knee injection on the same day. One line pays, one denies. Decide whether modifier 25 is supported.
+  keywords: modifier 25 CO-97 E/M bundling injection 20610
+  setup: |
+    | Line | Code | Result |
+    |---|---|---|
+    | 1 | 99213 | Denied **CO-97**, remark M80 |
+    | 2 | 20610-RT | Paid |
+
+    Note summary: Established patient. Scheduled for a right knee injection for osteoarthritis. Also reports two weeks of uncontrolled blood pressure readings; doctor reviews home log, increases lisinopril, orders labs.
+  stages:
+    - q: Why did 99213 deny?
+      choices:
+        - text: The E/M was billed without modifier 25 on the same day as a procedure, so the payer bundled it.
+          v: best
+          why: Minor procedures include a basic pre-procedure evaluation. Without 25, the E/M is treated as part of the injection.
+        - text: The patient has no coverage for office visits.
+          v: wrong
+          why: The injection paid, so coverage is active.
+        - text: 99213 is an invalid code.
+          v: wrong
+          why: It's valid. The issue is bundling.
+    - q: Does the documentation support modifier 25?
+      choices:
+        - text: Yes. Managing hypertension, with a medication change and labs, is a significant, separately identifiable problem beyond the injection.
+          v: best
+          why: The visit addressed a separate problem with its own work. Linking 99213 to I10 and the injection to M17.11 makes it clear.
+        - text: No, an E/M on an injection day can never be billed.
+          v: wrong
+          why: It can, when there's a separately identifiable service documented.
+        - text: Yes, because the patient was in the office.
+          v: wrong
+          why: Being in the office isn't enough. The documentation must show separate work.
+    - q: What do you send?
+      choices:
+        - text: A corrected claim with 99213-25 pointed to I10 and 20610-RT pointed to M17.11, after coding confirms.
+          v: best
+          why: Coding review plus correct pointers makes the separate service obvious to the payer.
+        - text: An appeal without changing the claim.
+          v: ok
+          why: Some payers accept appeals, but the claim itself was missing the modifier. Fix the data first.
+        - text: Add 59 to the E/M.
+          v: wrong
+          why: Modifier 59 isn't used on E/M codes. Modifier 25 is the E/M modifier.
+  takeaways:
+    - An E/M with a procedure needs modifier 25 and separate documentation.
+    - Point each line to the diagnosis that supports it.
+    - Modifier 25 goes on E/M codes; 59 and X modifiers go on procedures.
+
+- title: The QMB balance
+  slug: qmb-balance
+  level: Intermediate
+  tag: Medicare and Medicaid
+  minutes: 5
+  summary: Medicare paid and left coinsurance. The secondary paid nothing. Can the patient be billed?
+  keywords: QMB balance billing prohibition dual eligible coinsurance Medicaid crossover
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | Patient | Walter Green, 74 (fictional) |
+    | Coverage | Original Medicare + state Medicaid, **QMB** |
+    | Medicare ERA | Allowed $120.00, paid $96.00, **PR-2 $24.00**, remark MA18 (crossed over), QMB remark present |
+    | Medicaid result | Paid $0.00, the Medicaid rate is lower than Medicare's payment |
+    | Statement queue | $24.00 set to bill the patient |
+  stages:
+    - q: What should happen to the $24.00 statement?
+      choices:
+        - text: Send it; coinsurance is patient responsibility.
+          v: wrong
+          why: Federal law prohibits billing QMB individuals for Medicare cost-sharing, even when Medicaid pays nothing.
+        - text: Stop the statement. The $24.00 can't be billed to a QMB patient.
+          v: best
+          why: Correct. The remaining cost-sharing is written off according to the client's policy.
+        - text: Bill Medicaid again with an appeal.
+          v: ok
+          why: Worth checking that Medicaid processed correctly, but if it paid $0 because its rate is lower, that's expected. The patient still can't be billed.
+    - q: How do you handle the balance in the system?
+      choices:
+        - text: Adjust off with the client's QMB or Medicaid adjustment code and document the QMB status.
+          v: best
+          why: That closes the account correctly and leaves an audit trail.
+        - text: Leave it in patient AR.
+          v: wrong
+          why: It will keep generating statements to a protected patient.
+    - q: How do you stop this in future?
+      choices:
+        - text: Flag QMB status in registration so statements for Medicare cost-sharing are suppressed, and teach posters to look for QMB remark codes.
+          v: best
+          why: System flags plus posting awareness prevent repeat violations.
+        - text: Ask QMB patients to sign a waiver agreeing to pay.
+          v: wrong
+          why: A QMB patient can't waive the protection.
+  takeaways:
+    - Never bill QMB patients for Medicare deductible, coinsurance or copays.
+    - Medicaid paying $0 doesn't change the rule.
+    - Flag QMB status so statements are suppressed automatically.
+
+- title: Laid off, then covered again
+  slug: cobra-retro-coverage
+  level: Intermediate
+  tag: Eligibility
+  minutes: 5
+  summary: A CO-27 denial during the COBRA election window. Know when to wait, when to call, and when to bill the patient.
+  keywords: COBRA CO-27 coverage terminated retroactive reinstatement
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | Patient | Nina Lopez (fictional) |
+    | Job ended | 05/31 |
+    | DOS | 06/18, physical therapy evaluation |
+    | ERA result | Denied **CO-27** on 07/01 |
+    | Patient said at check-in | “I'm going to sign up for COBRA.” |
+  stages:
+    - q: Before doing anything else, what do you want to know?
+      choices:
+        - text: Whether Nina has elected COBRA and paid the first premium yet.
+          v: best
+          why: If she elects within 60 days and pays, coverage goes back to 06/01 and the claim becomes payable.
+        - text: Her new employer's name.
+          v: ok
+          why: Useful if she has new coverage, but the note specifically mentions COBRA.
+        - text: Nothing, bill her the full amount.
+          v: wrong
+          why: She may be covered retroactively. Billing her now is premature.
+    - q: You call the payer on 07/20. Coverage now shows active from 06/01, COBRA elected 07/12. What do you ask for?
+      choices:
+        - text: Reprocessing of the claim under the reinstated coverage, with a reference number.
+          v: best
+          why: The original claim can usually be reprocessed once eligibility is updated.
+        - text: A new claim submission.
+          v: ok
+          why: Some payers want a resubmission, but ask first. Reprocessing avoids a duplicate denial.
+        - text: An appeal form.
+          v: wrong
+          why: There's nothing to dispute. The denial was correct at the time; eligibility has changed.
+    - q: If Nina had never elected COBRA, what would be right?
+      choices:
+        - text: Look for other coverage, then move the balance to the patient per policy with any self-pay discount.
+          v: best
+          why: With no coverage, the balance is hers, but check for other insurance first.
+        - text: Write it off.
+          v: wrong
+          why: There's no reason to write off a valid self-pay balance.
+  takeaways:
+    - COBRA coverage is retroactive once elected and paid.
+    - Track claims during the 60-day election window rather than writing them off or billing too soon.
+    - Ask for reprocessing once eligibility is updated.
+
+- title: Hurt on the job
+  slug: work-injury-co19
+  level: Intermediate
+  tag: Workers' comp
+  minutes: 5
+  summary: The health plan denies a wrist fracture as work-related. Get the claim to the right carrier and protect the patient.
+  keywords: CO-19 workers compensation work injury claim number adjuster
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | Patient | Sam Okafor, warehouse worker (fictional) |
+    | Service | Urgent care visit and wrist splint, DOS 10/02 |
+    | Billed to | Patient's BCBS plan |
+    | ERA result | Denied **CO-19** |
+    | Registration note | “Fell off ladder at work” |
+  stages:
+    - q: What do you need to bill the right payer?
+      choices:
+        - text: The employer's workers' compensation carrier, claim number, adjuster and date of injury.
+          v: best
+          why: WC carriers match bills to an injury claim by these details.
+        - text: Sam's BCBS group number.
+          v: wrong
+          why: BCBS isn't responsible for a work injury.
+        - text: Nothing; bill Sam.
+          v: wrong
+          why: In most states, a patient can't be billed for an accepted work injury.
+    - q: The employer says the WC claim is “under investigation”. What do you do?
+      choices:
+        - text: Bill the WC carrier now, note the pending status and follow up regularly.
+          v: best
+          why: The carrier needs the bill on file. Once the claim is accepted, it pays; if denied, you'll have a denial letter for BCBS.
+        - text: Bill BCBS again and ask them to pay.
+          v: wrong
+          why: BCBS will keep denying unless WC denies the claim.
+    - q: WC denies the claim as not work-related. What next?
+      choices:
+        - text: Send the claim to BCBS with the WC denial letter and ask for reprocessing.
+          v: best
+          why: The health plan pays once it has proof WC isn't responsible.
+        - text: Bill Sam immediately.
+          v: wrong
+          why: Only after BCBS processes. Sam's health plan is now responsible for covered care.
+  takeaways:
+    - CO-19 means bill workers' comp first.
+    - Capture employer, carrier, claim number and adjuster at registration for any injury.
+    - If WC denies, the WC denial letter unlocks the health plan.
+
+- title: The new doctor's first month
+  slug: credentialing-gap
+  level: Intermediate
+  tag: Credentialing
+  minutes: 5
+  summary: Thirty claims for a new physician deny CO-B7. Work with credentialing and decide which claims can be saved.
+  keywords: CO-B7 credentialing enrollment effective date new provider retro
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | Provider | Dr Amara Cole, joined the group 09/01 (fictional) |
+    | Payer | Aetna commercial |
+    | Claims | 30 visits, DOS 09/03 to 10/10 |
+    | ERA result | All denied **CO-B7** |
+    | Credentialing | Application submitted 08/20, approved 10/15 |
+  stages:
+    - q: What's the key question for credentialing?
+      choices:
+        - text: What effective date did Aetna assign to Dr Cole under this group?
+          v: best
+          why: The effective date decides which claims are payable. Some payers backdate to the application date; others don't.
+        - text: Whether Dr Cole has a medical license.
+          v: wrong
+          why: Licensing is checked during credentialing; the effective date is what matters now.
+    - q: Aetna's letter says effective date 09/01. What do you do with the 30 claims?
+      choices:
+        - text: Ask Aetna to reprocess the claims in bulk, sending a list, or resubmit per their instructions.
+          v: best
+          why: All 30 dates fall after the effective date, so they're payable. Bulk reprocessing saves 30 calls.
+        - text: Appeal each claim with a letter.
+          v: ok
+          why: Works, but much slower than a reprocessing request.
+        - text: Write them off.
+          v: wrong
+          why: They're payable now.
+    - q: What should change for the next new provider?
+      choices:
+        - text: Hold claims (or don't schedule the payer's members) until enrollment is effective, and track effective dates by payer.
+          v: best
+          why: Holding claims avoids denials and rework; credentialing trackers prevent surprises.
+        - text: Bill new providers under another doctor's NPI.
+          v: wrong
+          why: Billing services under a provider who didn't perform them is improper unless a specific payer rule allows it.
+  takeaways:
+    - CO-B7 is solved with credentialing data, especially effective dates.
+    - Ask for bulk reprocessing when many claims share one cause.
+    - Never bill a service under a different provider to get around credentialing.
+
+- title: Sixty days, no response
+  slug: claim-not-on-file
+  level: Beginner
+  tag: No response
+  minutes: 5
+  summary: A claim has sat for 60 days with nothing back. Find out why without creating a duplicate.
+  keywords: claim not on file no response resubmit payer ID clearinghouse
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | Payer | Anthem Blue Cross (BCBS) |
+    | DOS | 07/08, submitted 07/12 |
+    | Days in AR | 60 |
+    | ERA | Nothing received |
+  stages:
+    - q: What's your first move?
+      choices:
+        - text: Resubmit the claim right away.
+          v: wrong
+          why: If it's in process, a resubmission creates a duplicate denial. Check status first.
+        - text: Check status on the portal or by call.
+          v: best
+          why: Status tells you whether the claim is on file, in process, paid or denied.
+    - q: Anthem says the claim is not on file. What do you check?
+      choices:
+        - text: The clearinghouse history, accepted or rejected, and the payer ID and prefix routing used.
+          v: best
+          why: Blue claims depend on the member prefix and the correct local plan. A rejection or misroute explains “not on file”.
+        - text: The patient's copay.
+          v: wrong
+          why: Copays don't affect whether a claim is on file.
+    - q: The clearinghouse shows the claim was accepted by Anthem on 07/13 with a claim acknowledgement. What now?
+      choices:
+        - text: Give the representative the acknowledgement details, ask them to search again (by subscriber, DOB, amount), and if still missing, resubmit with the acceptance report as proof of timely filing.
+          v: best
+          why: The acknowledgement proves receipt. It helps the payer find the claim and protects timely filing if you must resubmit.
+        - text: Write off the claim.
+          v: wrong
+          why: The claim is well within timely filing and you have proof of receipt.
+  takeaways:
+    - Check status before resubmitting.
+    - Not on file usually means rejected or misrouted. Clearinghouse history tells you which.
+    - Keep acceptance reports; they prove timely filing.
+
+- title: Paid, but not enough
+  slug: underpayment-fee-schedule
+  level: Advanced
+  tag: Underpayment
+  minutes: 6
+  summary: An injection pays below contract. Calculate the variance and decide how to recover it across many claims.
+  keywords: underpayment contract variance fee schedule bulk reprocessing
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | Contract | 120% of the current Medicare fee schedule for the locality |
+    | Code | 20610 |
+    | Medicare rate (this locality) | $70.00 |
+    | ERA | Allowed **$66.50**, paid $53.20, CO-45, PR-2 $13.30 |
+  stages:
+    - q: What should the allowed amount be?
+      choices:
+        - text: $70.00
+          v: wrong
+          why: That's 100% of Medicare. The contract is 120%.
+        - text: $84.00
+          v: best
+          why: 120% × $70.00 = $84.00.
+        - text: $66.50
+          v: wrong
+          why: That's what was paid, which is below contract.
+    - q: What's the allowed-amount variance per line?
+      choices:
+        - text: $17.50
+          v: best
+          why: $84.00 − $66.50 = $17.50 per line.
+        - text: $13.30
+          v: wrong
+          why: That's the coinsurance.
+    - q: A report shows 180 lines of 20610 with the same allowed amount since January. Best next step?
+      choices:
+        - text: Send the list and calculation to the payer's provider representative and request bulk reprocessing.
+          v: best
+          why: A systemic pricing error is fixed fastest as a project with the payer.
+        - text: Call on each claim.
+          v: ok
+          why: It works but takes 180 calls.
+        - text: Do nothing; CO-45 means the adjustment is contractual.
+          v: wrong
+          why: CO-45 should only reflect the gap to the contracted rate. Below-contract allowed amounts are underpayments.
+  takeaways:
+    - Compare allowed amounts with the contract, not just paid amounts.
+    - Patterns are best fixed in bulk with the payer.
+    - Underpayments hide behind “paid” status and CO-45.
+
+- title: Sent twice, denied once
+  slug: duplicate-denial
+  level: Beginner
+  tag: Duplicate
+  minutes: 4
+  summary: A resubmitted claim denies CO-18. Work out what happened to the original.
+  keywords: CO-18 duplicate claim original claim status
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | First claim | Submitted 03/02 |
+    | Second claim | Same service, resubmitted 03/20 by another analyst “to be safe” |
+    | ERA | Second claim denied **CO-18** on 04/01 |
+  stages:
+    - q: What do you look up first?
+      choices:
+        - text: The status and outcome of the first claim.
+          v: best
+          why: The duplicate denial is correct if the first claim is on file. The original's outcome tells you what to do.
+        - text: Whether you can appeal the duplicate denial.
+          v: wrong
+          why: There's nothing to appeal if the first claim exists.
+    - q: The original paid $142 on 03/28, but nothing is posted. What now?
+      choices:
+        - text: Find the payment by trace number in ERA files or unapplied cash and post it.
+          v: best
+          why: The claim is paid. The task is getting the money onto the account.
+        - text: Resubmit again.
+          v: wrong
+          why: That causes another duplicate denial.
+    - q: How do you prevent this?
+      choices:
+        - text: Always check claim status before resubmitting, and use frequency 7 for real corrections.
+          v: best
+          why: Resubmitting without checking is the most common cause of CO-18.
+        - text: Submit claims to two clearinghouses.
+          v: wrong
+          why: That doubles duplicates.
+  takeaways:
+    - CO-18 means find the original claim and its outcome.
+    - Check status before resubmitting anything.
+
+- title: The vitamin D test
+  slug: lab-medical-necessity-abn
+  level: Intermediate
+  tag: Medical necessity
+  minutes: 5
+  summary: A Medicare lab test denies as not medically necessary. Whether the patient can be billed depends on one piece of paper.
+  keywords: CO-50 PR-50 ABN GA modifier LCD lab medical necessity
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | Patient | Original Medicare (fictional) |
+    | Test | 82306, vitamin D, 25-hydroxy |
+    | Diagnosis billed | Z00.00, routine exam |
+    | ERA | Denied **CO-50**, remark N115 |
+  stages:
+    - q: What does N115 tell you?
+      choices:
+        - text: The decision was based on a Local Coverage Determination.
+          v: best
+          why: The MAC's LCD lists covered diagnoses for vitamin D testing, and a routine exam isn't one.
+        - text: The claim is a duplicate.
+          v: wrong
+          why: That would be CO-18.
+    - q: The ordering note mentions documented osteoporosis that wasn't coded. What now?
+      choices:
+        - text: Have coding review; if the record supports it, correct the diagnosis (Medicare Part B through a reopening or as the MAC instructs).
+          v: best
+          why: If a covered diagnosis is documented, the claim was coded incompletely and can be fixed.
+        - text: Add any covered diagnosis from the LCD list.
+          v: wrong
+          why: Diagnoses must come from documentation. Adding unsupported diagnoses is fraud.
+    - q: Suppose no covered diagnosis was documented. Can the patient be billed?
+      choices:
+        - text: Yes, if a valid ABN was signed before the test and the claim was billed with GA; then the denial is PR-50.
+          v: best
+          why: The ABN shifts liability to the patient for Medicare medical necessity denials.
+        - text: Yes, always. It's a non-covered test.
+          v: wrong
+          why: Without a valid ABN, CO-50 is the provider's liability.
+        - text: No, never.
+          v: wrong
+          why: With a valid ABN, the patient can be billed.
+  takeaways:
+    - Check the LCD or NCD the remark code points to.
+    - Correct only diagnoses supported by documentation.
+    - ABN plus GA turns CO-50 into patient responsibility; without it, it's a provider write-off.
+
+- title: Meeting the spend-down
+  slug: medicaid-spend-down
+  level: Advanced
+  tag: Medicaid
+  minutes: 6
+  summary: A medically needy patient has a monthly spend-down. Work out which bills the patient owes and which Medicaid covers.
+  keywords: Medicaid spend down medically needy patient liability
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | Patient | Medicaid medically needy, **$400 monthly spend-down** (fictional) |
+    | 04/02 | Office visit, $150 |
+    | 04/09 | Lab tests, $120 |
+    | 04/21 | Imaging, $380 |
+    | 04/28 | Follow-up visit, $150 |
+  stages:
+    - q: After the 04/09 bills, has the spend-down been met?
+      choices:
+        - text: Yes
+          v: wrong
+          why: $150 + $120 = $270, which is less than $400.
+        - text: No, $130 is still needed.
+          v: best
+          why: $400 − $270 = $130 remaining.
+    - q: How is the 04/21 imaging bill of $380 split?
+      choices:
+        - text: Patient owes $130; the remaining $250 can be billed to Medicaid.
+          v: best
+          why: The first $130 meets the spend-down. Medicaid covers eligible charges from that point in the month (paid at the Medicaid rate).
+        - text: Patient owes all $380.
+          v: wrong
+          why: Only the part needed to meet the spend-down is the patient's.
+        - text: Medicaid pays all $380.
+          v: wrong
+          why: The spend-down wasn't met until $130 of this bill was applied.
+    - q: What about the 04/28 visit?
+      choices:
+        - text: Bill Medicaid; the spend-down is met for April.
+          v: best
+          why: Eligible services for the rest of the budget period are covered.
+        - text: Bill the patient; the spend-down resets weekly.
+          v: wrong
+          why: This spend-down is monthly. It resets on 05/01.
+  takeaways:
+    - The spend-down works like a deductible that resets each budget period.
+    - Check the state portal for the met date and which claims were applied.
+    - Bill Medicaid only for services after the spend-down is met.
+
+- title: The double payment
+  slug: credit-balance-double-payment
+  level: Intermediate
+  tag: Credit balance
+  minutes: 5
+  summary: An account shows a credit after two payments from the same payer. Decide what's owed and how to return it.
+  keywords: credit balance overpayment refund offset 60 day rule
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | Payer | Medicare Part B |
+    | DOS | 05/06, billed $200 |
+    | Payment 1 | 06/01, $112.40 (claim A) |
+    | Payment 2 | 06/22, $112.40 (claim B, a second claim number for the same service) |
+    | Account | **−$112.40** credit after patient coinsurance billed to Medigap |
+  stages:
+    - q: Is this a posting error or an overpayment?
+      choices:
+        - text: An overpayment. Medicare paid the same service twice under two claim numbers.
+          v: best
+          why: Two separate payments for one service is a true overpayment.
+        - text: A posting error.
+          v: wrong
+          why: Both payments really arrived for the same service.
+    - q: How quickly must it be returned?
+      choices:
+        - text: Within 60 days of identifying it.
+          v: best
+          why: The 60-day rule applies to Medicare and Medicaid overpayments.
+        - text: Only if Medicare asks.
+          v: wrong
+          why: Keeping a known overpayment creates compliance and False Claims Act risk.
+    - q: Which return method fits?
+      choices:
+        - text: A voluntary refund or an offset request to the MAC, or a claim adjustment that lets Medicare recoup, per the MAC's process.
+          v: best
+          why: These are the standard methods. Document the method and the reference.
+        - text: Apply the credit to another patient's Medicare balance.
+          v: wrong
+          why: Insurance overpayments can't be moved to other patients.
+  takeaways:
+    - Separate posting errors from real overpayments first.
+    - Medicare and Medicaid overpayments must be returned within 60 days of identification.
+    - Never move a payer's overpayment to another account.
+
+- title: Inpatient or observation?
+  slug: level-of-care-denial
+  level: Advanced
+  tag: Hospital
+  minutes: 6
+  summary: A three-day hospital stay is denied as inpatient. Work the level-of-care denial with clinical and physician support.
+  keywords: level of care observation inpatient two midnight peer to peer hospital denial
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | Patient | Medicare Advantage member, 79 (fictional) |
+    | Stay | Admitted 02/10 for chest pain and new heart failure, discharged 02/13 |
+    | Claim | UB-04, TOB 0111, DRG for heart failure |
+    | Payer decision | Inpatient denied; “meets observation level of care only” |
+  stages:
+    - q: Who should be involved first?
+      choices:
+        - text: The physician advisor or utilisation review team, to request a peer-to-peer with the payer's medical director quickly.
+          v: best
+          why: Level-of-care denials are clinical. A timely peer-to-peer often overturns them before a written appeal is needed.
+        - text: The patient, to ask if they felt very ill.
+          v: wrong
+          why: The decision depends on the clinical record and criteria, not the patient's opinion.
+        - text: Coding, to change the DRG.
+          v: wrong
+          why: The dispute is the status of the stay, not the DRG.
+    - q: What evidence strengthens the appeal?
+      choices:
+        - text: The admission order, the physician's documented expectation of a stay over two midnights, severity of illness (e.g. IV diuretics, oxygen needs, troponin trend) and the criteria the stay met.
+          v: best
+          why: Clinical facts tied to the payer's criteria (and, for Medicare Advantage, Medicare's coverage rules) win level-of-care disputes.
+        - text: The total charges.
+          v: wrong
+          why: Charges don't show medical necessity.
+    - q: The appeal fails. What option may remain?
+      choices:
+        - text: Check the contract; some allow rebilling as outpatient observation, so part of the payment is recovered.
+          v: best
+          why: Where allowed, rebilling at the observation level recovers some payment rather than none.
+        - text: Bill the patient for the full inpatient stay.
+          v: wrong
+          why: In-network contracts usually hold the patient harmless for level-of-care denials.
+  takeaways:
+    - Level-of-care denials need clinical people, and speed matters for peer-to-peer.
+    - Tie the record to the payer's criteria and Medicare's two-midnight expectation where it applies.
+    - Know the contract's rebilling option if the appeal fails.

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% from "_parts.html" import crumbs %}
+{% block main %}
+<div class="wrap">
+  {{ crumbs([(section.title, None)]) }}
+  <header class="section-head">
+    <span class="sh-ico">{{ icon(section.icon, 28) }}</span>
+    <div>
+      <h1>{{ intro.meta.title or section.title }}</h1>
+      <p class="lede">{{ intro.meta.description or section.blurb }}</p>
+      <p class="sh-progress" data-section-progress="{{ section.id }}" data-verbose></p>
+    </div>
+  </header>
+
+  {% if intro.html %}<div class="prose section-intro">{{ intro.html | safe }}</div>{% endif %}
+
+  {% if items %}
+  <{{ "ol" if section.sequence else "ul" }} class="topic-list{% if section.sequence %} is-seq{% endif %}">
+    {% for it in items %}
+    <li>
+      <a class="topic" href="/{{ it.url }}" data-topic="{{ it.url }}">
+        {% if section.sequence %}<span class="topic-n">{{ loop.index }}</span>{% endif %}
+        <span class="topic-body">
+          <span class="topic-title">{{ it.title }}</span>
+          {% if it.description %}<span class="topic-desc">{{ it.description }}</span>{% endif %}
+          <span class="topic-meta">
+            {% if it.minutes %}<span>{{ it.minutes }} min</span>{% endif %}
+            <span class="lvl lvl-{{ it.level | slug }}">{{ it.level }}</span>
+            {% if it.tag %}<span class="tag">{{ it.tag }}</span>{% endif %}
+          </span>
+        </span>
+        <span class="topic-check" aria-hidden="true">{{ icon("check", 18) }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </{{ "ol" if section.sequence else "ul" }}>
+  {% endif %}
+
+  {% if categories %}
+  <section class="cat-block" aria-labelledby="cats-h">
+    <h2 id="cats-h">Denial codes by category</h2>
+    <div class="cat-grid">
+      {% for g in categories if g.codes %}
+      <div class="fbox cat-card">
+        <h3><a href="/denials/codes/#{{ g.cat.id }}">{{ g.cat.title }}</a></h3>
+        <p>{{ g.cat.blurb }}</p>
+        <ul class="mini-codes">{% for c in g.codes %}<li><a class="mono" href="/{{ c.url }}" title="{{ c.title }}">{{ c.code }}</a></li>{% endfor %}</ul>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

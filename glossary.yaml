@@ -1,0 +1,434 @@
+- term: ABN
+  aka: Advance Beneficiary Notice of Non-coverage
+  def: A Medicare form (CMS-R-131) given before a service Medicare may not pay for, letting the patient choose to receive it and accept financial responsibility. Billed with modifier GA.
+  see: /rcm-cycle/encounter-and-documentation/
+- term: Accept assignment
+  def: The provider agrees to accept the payer's allowed amount as full payment and to be paid directly by the payer.
+- term: Accounts receivable
+  aka: AR
+  def: Money owed to the provider for services already billed, from payers and patients. Also the name of the team that follows up unpaid claims.
+  see: /start-here/ar-and-ap/
+- term: Adjudication
+  def: The payer's process of reviewing a claim and deciding whether and how much to pay.
+  see: /rcm-cycle/adjudication/
+- term: Adjustment
+  def: An amount that reduces the balance without payment, such as a contractual write-off, a denial or a small-balance write-off.
+- term: Admit through discharge claim
+  def: A facility claim covering a whole inpatient stay, type of bill ending in 1 (for example 0111).
+- term: Aging
+  def: How long a claim or balance has been unpaid, usually grouped into 30-day buckets (0–30, 31–60, 61–90, 91–120, 120+).
+- term: Allowed amount
+  def: The maximum amount a payer recognises for a service under its contract or fee schedule. Payer payment plus patient responsibility equals the allowed amount.
+- term: Ambulatory surgical center
+  aka: ASC
+  def: A freestanding facility for same-day surgery. Place of service 24.
+- term: APC
+  aka: Ambulatory Payment Classification
+  def: Medicare's grouping used to pay hospital outpatient services under the Outpatient Prospective Payment System (OPPS).
+- term: Appeal
+  def: A formal request for the payer to review and change a claim decision, with supporting evidence.
+  see: /denials/appeals/
+- term: Assignment of benefits
+  def: The patient's authorisation for the payer to pay the provider directly.
+- term: Authorization
+  aka: Prior authorization, pre-auth, precertification
+  def: The payer's approval, before the service, that a specific service, drug or admission is covered and medically necessary.
+  see: /rcm-cycle/prior-authorization-and-referrals/
+- term: Bad debt
+  def: Patient balances the provider has stopped trying to collect internally, often placed with a collection agency.
+- term: Balance billing
+  def: Billing the patient for the difference between the provider's charge and the payer's allowed amount. Prohibited for in-network providers and limited by the No Surprises Act.
+- term: Benefit period
+  def: For Medicare Part A, a period that starts on admission and ends after 60 days in a row without inpatient hospital or SNF care. The Part A deductible applies per benefit period.
+- term: Billing provider
+  def: The provider or organisation that is paid for the claim, shown in box 33 of the CMS-1500.
+- term: Birthday rule
+  def: A coordination of benefits rule. For a child covered by both parents, the plan of the parent whose birthday (month and day) is earlier in the year is primary.
+  see: /insurance/coordination-of-benefits/
+- term: BlueCard
+  def: The Blue Cross Blue Shield program that lets providers bill their local Blue plan for members of other Blue plans, routed by the member ID prefix.
+- term: Bundling
+  def: Including one service in the payment for another, so it isn't paid separately.
+- term: CAQH ProView
+  def: An online database where providers keep credentialing information that many commercial payers use.
+- term: Capitation
+  def: Payment of a fixed amount per member per month for a set of services, whether or not services are used.
+- term: CARC
+  aka: Claim Adjustment Reason Code
+  def: A standard code on the ERA explaining why a claim or line was paid differently from billed, such as 45 or 197.
+  see: /denials/read-an-era/
+- term: Carve-out
+  def: A service removed from a plan's main coverage or contract and handled separately, such as behavioral health managed by another company.
+- term: Charge
+  aka: Billed amount
+  def: The provider's standard price for a service, from its fee schedule or chargemaster.
+- term: Charge entry
+  def: Entering services, codes and charges into the billing system to create claims.
+  see: /rcm-cycle/charge-entry/
+- term: Charge lag
+  def: Days between the date of service and the date the charge is entered.
+- term: Chargemaster
+  aka: CDM
+  def: A hospital's master list of every billable item and service, with codes, revenue codes and prices.
+- term: CHIP
+  aka: Children's Health Insurance Program
+  def: A joint federal-state program covering children in families with incomes too high for Medicaid.
+- term: Claim
+  def: A request for payment sent by a provider to a payer for services given to a patient.
+- term: Clean claim
+  def: A claim with no errors or missing information that can be processed without extra investigation.
+- term: Clearinghouse
+  def: A company that checks, formats and forwards electronic claims from providers to payers and returns reports.
+  see: /rcm-cycle/claim-submission/
+- term: CLIA
+  aka: Clinical Laboratory Improvement Amendments
+  def: Federal certification required for any lab testing human specimens. The CLIA number is required on many lab claims.
+- term: CMS
+  aka: Centers for Medicare & Medicaid Services
+  def: The federal agency that runs Medicare and oversees Medicaid and CHIP.
+- term: CMS-1500
+  def: The standard paper claim form for professional services. Electronic version 837P.
+  see: /forms-billing/cms-1500/
+- term: COB
+  aka: Coordination of benefits
+  def: Rules deciding which payer pays first when a patient has more than one plan.
+  see: /insurance/coordination-of-benefits/
+- term: COBRA
+  def: A federal law letting employees and families keep their employer group health plan for a limited time after events such as job loss, paying the full premium.
+  see: /insurance/cobra/
+- term: Coinsurance
+  def: The patient's percentage share of the allowed amount after the deductible, such as 20%. CARC 2.
+- term: Contractual adjustment
+  def: The write-off of the difference between the billed charge and the allowed amount, as agreed in the payer contract. Usually CO-45.
+- term: Copay
+  def: A fixed amount the patient pays for a service, such as $30 per visit. CARC 3.
+- term: Corrected claim
+  aka: Replacement claim
+  def: A claim that replaces a previously adjudicated claim to fix billing errors. Frequency code 7.
+  see: /forms-billing/corrected-claims/
+- term: CPT
+  aka: Current Procedural Terminology
+  def: The American Medical Association's code set for procedures and services, updated every January.
+- term: Credentialing
+  def: Verifying a provider's qualifications and enrolling them with payers so they can be paid.
+- term: Credit balance
+  def: An account where payments and adjustments exceed charges, often meaning a refund is owed.
+  see: /non-denials/credit-balances-and-refunds/
+- term: Crossover
+  def: Automatic forwarding of a claim from the primary payer (usually Medicare) to a secondary payer such as Medigap or Medicaid.
+  see: /non-denials/secondary-and-crossover/
+- term: Date of service
+  aka: DOS
+  def: The date a service was provided. For inpatient stays, the claim uses admission and discharge dates.
+- term: Days in AR
+  def: Average number of days it takes to collect payment. Total AR divided by average daily charges.
+  see: /rcm-cycle/reporting-and-kpis/
+- term: DCN
+  aka: Document control number, ICN
+  def: The payer's unique number for a claim, needed for corrected claims, voids and calls.
+- term: Deductible
+  def: The amount the patient pays each plan year (or benefit period) before the plan starts paying for most services. CARC 1.
+- term: Denial
+  def: The payer's decision, after adjudication, not to pay all or part of a claim.
+  see: /denials/what-is-a-denial/
+- term: Dependent
+  def: A person covered under someone else's policy, such as a spouse or child.
+- term: DME
+  aka: Durable medical equipment
+  def: Reusable medical equipment for home use, such as wheelchairs, oxygen and CPAP machines.
+  see: /specialties/dme/
+- term: DRG
+  aka: MS-DRG
+  def: Diagnosis-related group. Medicare's method of paying a hospital one amount per inpatient stay based on diagnoses, procedures and complications.
+- term: Dual eligible
+  def: A person with both Medicare and Medicaid. Medicare pays first.
+- term: E/M
+  aka: Evaluation and management
+  def: CPT codes for visits, such as office, hospital and emergency department visits.
+- term: EDI
+  aka: Electronic data interchange
+  def: Standard electronic exchange of healthcare data, such as 837 claims and 835 remittances.
+  see: /forms-billing/edi-transactions/
+- term: EFT
+  aka: Electronic funds transfer
+  def: Payment sent directly to the provider's bank account, matched to the ERA by the trace number.
+- term: Eligibility
+  def: Whether a patient is covered by a payer on the date of service.
+  see: /rcm-cycle/eligibility-and-benefits/
+- term: EOB
+  aka: Explanation of benefits
+  def: A statement explaining how a claim was processed. Patients receive EOBs; providers receive remittance advice, though many people call both EOBs.
+- term: EPO
+  aka: Exclusive provider organization
+  def: A plan with no out-of-network coverage except emergencies, usually without referral requirements.
+- term: ERA
+  aka: Electronic remittance advice, 835
+  def: The electronic file from the payer showing payments and adjustments by claim and line.
+- term: ERISA
+  def: The federal law governing most employer-sponsored, self-funded health plans, including their appeal rules.
+- term: Fee schedule
+  def: A list of amounts a payer allows (or a provider charges) for each code.
+- term: Financial class
+  def: A billing system category showing who is responsible for an account balance, such as Medicare, commercial or self-pay.
+- term: First-pass resolution rate
+  def: The share of claims paid on first submission without rework.
+- term: Frequency code
+  def: The code showing whether a claim is original (1), a replacement (7) or a void (8).
+- term: Global period
+  def: The days before and after a surgery during which related routine care is included in the surgery payment (0, 10 or 90 days).
+- term: Good faith estimate
+  def: A written cost estimate that providers must give uninsured or self-pay patients for scheduled care under the No Surprises Act.
+- term: Group code
+  def: The code that shows who is responsible for an ERA adjustment. CO, PR, OA or PI.
+  see: /denials/read-an-era/
+- term: Group number
+  def: The number identifying the employer or plan group on an insurance card.
+- term: Guarantor
+  def: The person financially responsible for a patient's bill.
+- term: HCPCS
+  aka: HCPCS Level II
+  def: Healthcare Common Procedure Coding System codes for supplies, drugs, DME, ambulance and services not in CPT, such as J1100 or E0601.
+- term: HDHP
+  aka: High-deductible health plan
+  def: A plan with a higher deductible and lower premium, often paired with a health savings account.
+- term: HIPAA
+  def: The Health Insurance Portability and Accountability Act, setting standards for electronic transactions, code sets and the privacy and security of health information.
+- term: HMO
+  aka: Health maintenance organization
+  def: A plan requiring members to use network providers and usually a PCP referral for specialists.
+- term: Hospice
+  def: Care focused on comfort for patients with a terminal illness and a life expectancy of six months or less.
+- term: ICD-10-CM
+  def: The US diagnosis code set, updated every October 1.
+- term: ICD-10-PCS
+  def: The code set for inpatient hospital procedures.
+- term: In-network
+  aka: Participating
+  def: A provider with a contract with the payer, agreeing to its rates and rules.
+- term: Itemized bill
+  def: A detailed list of every charge on a hospital account, often requested by payers for review.
+- term: KPI
+  def: Key performance indicator. A metric used to measure RCM performance, such as days in AR or denial rate.
+- term: LCD
+  aka: Local Coverage Determination
+  def: A Medicare contractor's policy setting coverage and medical necessity rules for a service in its region.
+- term: MAC
+  aka: Medicare Administrative Contractor
+  def: A private company that processes Medicare claims for a region.
+- term: MBI
+  aka: Medicare Beneficiary Identifier
+  def: The 11-character Medicare ID on the Medicare card.
+- term: Medicaid
+  def: A joint federal-state health program for people with limited income and resources, run by each state.
+  see: /insurance/medicaid-qmb-spend-down/
+- term: Medical necessity
+  def: The requirement that a service is reasonable and needed to diagnose or treat the patient's condition.
+- term: Medicare
+  def: The federal health insurance program for people 65 and older and certain younger people with disabilities, ESRD or ALS.
+  see: /insurance/medicare/
+- term: Medicare Advantage
+  aka: Part C
+  def: Private plans approved by Medicare that provide Part A and B benefits instead of Original Medicare.
+- term: Medigap
+  aka: Medicare Supplement
+  def: Private insurance that pays gaps in Original Medicare such as deductibles and coinsurance.
+- term: Modifier
+  def: A two-character code added to a CPT or HCPCS code to give more information, such as 25, 59, RT or 26.
+  see: /forms-billing/modifiers/
+- term: MSP
+  aka: Medicare Secondary Payer
+  def: Rules deciding when another payer must pay before Medicare.
+- term: MUE
+  aka: Medically Unlikely Edit
+  def: The maximum units of a code a provider would normally report for one patient on one day.
+- term: NCCI
+  aka: National Correct Coding Initiative
+  def: CMS's edits that prevent improper code combinations and unbundling.
+- term: NCD
+  aka: National Coverage Determination
+  def: A national Medicare policy on whether a service is covered.
+- term: NDC
+  aka: National Drug Code
+  def: An 11-digit code identifying a specific drug product and package, required on many drug claims.
+- term: Net collection rate
+  def: Payments divided by charges minus contractual adjustments. Shows how much collectible money was collected.
+- term: No Surprises Act
+  def: A 2022 federal law protecting patients from surprise out-of-network bills for emergency care and certain other services, and requiring good faith estimates.
+- term: NPI
+  aka: National Provider Identifier
+  def: A 10-digit identifier for every US healthcare provider. Type 1 for individuals, Type 2 for organisations.
+- term: Observation
+  def: Outpatient hospital care used to decide whether a patient needs to be admitted.
+- term: Out-of-network
+  aka: Non-participating
+  def: A provider without a contract with the patient's plan.
+- term: Out-of-pocket maximum
+  def: The most a patient pays in a plan year for covered services, after which the plan pays 100%.
+- term: Overpayment
+  def: A payment greater than what's owed, which must be refunded.
+- term: Payer
+  def: The organisation that pays claims, such as an insurance company or government program.
+- term: Payment posting
+  def: Recording payments and adjustments to patient accounts.
+  see: /rcm-cycle/payment-posting/
+- term: PCP
+  aka: Primary care provider
+  def: The provider who manages a patient's overall care and, in HMOs, issues referrals.
+- term: Pended claim
+  def: A claim the payer is holding while it waits for information or review.
+- term: PHI
+  aka: Protected health information
+  def: Health information that can identify a person, protected under HIPAA.
+- term: PIP
+  aka: Personal injury protection
+  def: Auto insurance coverage that pays medical bills after an accident regardless of fault, mainly in no-fault states.
+  see: /insurance/workers-comp-auto-pip/
+- term: Place of service
+  aka: POS
+  def: A two-digit code on professional claims showing where the service happened, such as 11 office or 21 inpatient.
+- term: POA indicator
+  aka: Present on admission
+  def: A flag on each inpatient diagnosis showing whether it existed at admission.
+- term: PPO
+  aka: Preferred provider organization
+  def: A plan with a network that also covers out-of-network care at higher cost, without referrals.
+- term: Pre-determination
+  def: An optional advance review where the payer indicates whether it would cover a service. Not a guarantee of payment.
+- term: Premium
+  def: The amount paid, usually monthly, to keep insurance coverage active.
+- term: Primary payer
+  def: The payer that pays first when a patient has more than one plan.
+- term: Prompt pay laws
+  def: State laws requiring insurers to pay clean claims within a set time, with interest if late.
+- term: Proof of timely filing
+  def: Evidence that a claim reached the payer within the deadline, such as a clearinghouse acceptance report or 277CA.
+- term: PTAN
+  def: The Medicare billing number assigned to an enrolled provider.
+- term: QMB
+  aka: Qualified Medicare Beneficiary
+  def: A Medicaid program paying Medicare premiums and cost-sharing for low-income beneficiaries. Providers can't bill QMB patients for Medicare cost-sharing.
+  see: /insurance/medicaid-qmb-spend-down/
+- term: RAC
+  aka: Recovery Audit Contractor
+  def: A Medicare contractor that reviews paid claims for improper payments.
+- term: RARC
+  aka: Remittance Advice Remark Code
+  def: A code on the ERA that adds detail to an adjustment reason, such as N290 or MA130.
+- term: Reconsideration
+  def: A request for a payer to review its decision, often the first appeal level. At Medicare, the second level, decided by a QIC.
+- term: Recoupment
+  aka: Offset, takeback
+  def: A payer recovering a previous payment by reducing future payments.
+  see: /non-denials/recoupments-and-offsets/
+- term: Redetermination
+  def: The first level of Medicare appeal, decided by the MAC. Filed within 120 days.
+- term: Referral
+  def: A PCP's approval for a patient to see a specialist, required by HMO and POS plans.
+- term: Rejection
+  def: A claim that failed checks before adjudication, at the clearinghouse or payer front end. It must be fixed and resubmitted as a new claim.
+  see: /non-denials/rejections/
+- term: Remittance advice
+  def: The payer's explanation of payments to the provider, electronic (ERA) or paper.
+- term: Rendering provider
+  def: The provider who actually performed the service, shown in box 24J.
+- term: Retro authorization
+  def: An authorization requested after the service, allowed only in limited cases.
+- term: Revenue code
+  def: A four-digit code on facility claims identifying the department or type of charge, such as 0450 emergency room.
+- term: RVU
+  aka: Relative value unit
+  def: A measure of the resources needed for a service, used to calculate Medicare physician fees.
+- term: Secondary payer
+  def: The payer that pays after the primary, usually toward the remaining patient responsibility.
+- term: Self-funded plan
+  def: An employer plan that pays claims from its own funds, often administered by an insurer or TPA and governed by ERISA.
+- term: Self-pay
+  def: A patient paying without insurance, or the balance owed by the patient.
+- term: Sequestration
+  def: A federally required 2% reduction to Medicare payments. CO-253.
+- term: SNF
+  aka: Skilled nursing facility
+  def: A facility providing skilled nursing or rehabilitation after a hospital stay.
+- term: Spend-down
+  def: A Medicaid medically needy rule where a person qualifies after incurring medical expenses equal to income above the limit for a budget period.
+  see: /insurance/medicaid-qmb-spend-down/
+- term: Subrogation
+  def: A payer's right to recover what it paid from a third party responsible for an injury.
+- term: Subscriber
+  aka: Insured, policyholder, member
+  def: The person who holds the insurance policy.
+- term: Superbill
+  aka: Encounter form
+  def: A form listing common codes that the provider marks to record services for billing.
+- term: Taxonomy code
+  def: A code describing a provider's type and specialty, used in enrollment and on some claims.
+- term: Timely filing
+  def: The payer's deadline for receiving a claim, counted from the date of service or discharge.
+- term: TPA
+  aka: Third-party administrator
+  def: A company that processes claims for self-funded plans on the employer's behalf.
+- term: TRICARE
+  def: The Department of Defense health program for service members, retirees and families.
+  see: /insurance/tricare-and-va-ccn/
+- term: Type of bill
+  aka: TOB
+  def: A four-digit code on the UB-04 showing facility type, bill classification and frequency.
+  see: /forms-billing/ub-04/
+- term: UB-04
+  aka: CMS-1450
+  def: The standard claim form for facility (institutional) billing. Electronic version 837I.
+  see: /forms-billing/ub-04/
+- term: Underpayment
+  def: A payment lower than the contracted or fee schedule amount.
+  see: /non-denials/underpayments/
+- term: Unbundling
+  def: Billing parts of a procedure separately when one code covers the whole service.
+- term: Upcoding
+  def: Billing a higher level of service than documented. A compliance violation.
+- term: VA CCN
+  aka: Community Care Network
+  def: The VA's network of community providers who treat veterans with VA authorization.
+  see: /insurance/tricare-and-va-ccn/
+- term: Void claim
+  def: A claim that cancels a previously processed claim. Frequency code 8.
+- term: Workers' compensation
+  aka: WC
+  def: Insurance that pays for work-related injuries and illnesses, regulated by each state.
+  see: /insurance/workers-comp-auto-pip/
+- term: Write-off
+  def: Removing a balance from AR without payment, using an adjustment code and, where required, approval.
+- term: 270/271
+  def: The EDI transactions for eligibility inquiry and response.
+- term: 276/277
+  def: The EDI transactions for claim status inquiry and response.
+- term: 277CA
+  def: The claim acknowledgment showing whether each claim was accepted or rejected.
+- term: 835
+  def: The electronic remittance advice (ERA).
+- term: 837
+  def: The electronic claim. 837P professional, 837I institutional, 837D dental.
+- term: 60-day rule
+  def: The requirement to report and return identified Medicare and Medicaid overpayments within 60 days.
+- term: 8-minute rule
+  def: Medicare's method for counting units of timed therapy codes based on total timed minutes.
+  see: /specialties/therapy/
+- term: Two-midnight rule
+  def: Medicare's guideline that inpatient admission is generally appropriate when the physician expects the patient to need hospital care across at least two midnights.
+- term: Three-day payment window
+  aka: 72-hour rule
+  def: Medicare rule bundling certain outpatient services provided by the admitting hospital in the 3 days before an inpatient admission into the inpatient claim.
+- term: Peer-to-peer
+  def: A discussion between the treating physician and the payer's medical director about a medical necessity decision.
+- term: Explanation of payment
+  def: Another name some payers use for remittance advice.
+- term: Interest payment
+  def: Extra payment a payer owes under prompt pay laws when it pays a clean claim late, shown on the ERA as a provider-level adjustment.
+- term: Locum tenens
+  def: A substitute physician covering for another. Medicare allows billing under the regular physician with modifier Q6 for a limited period.
+- term: Incident-to
+  def: Medicare billing of services by auxiliary staff or NPPs under a physician's NPI, allowed only when strict supervision and plan-of-care rules are met.
+- term: NPP
+  aka: Non-physician practitioner
+  def: Nurse practitioners, physician assistants, clinical nurse specialists and similar providers who bill independently.
+- term: Split-shared visit
+  def: A visit in a facility setting performed jointly by a physician and an NPP from the same group, billed by whoever performed the substantive portion, with modifier FS.

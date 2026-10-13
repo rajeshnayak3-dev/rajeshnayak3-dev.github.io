@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% block body_class %}page-home{% endblock %}
+{% block head %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"{{ site.name }}","url":"{{ site.site_url }}/","description":"{{ site.description | replace('"','') }}","potentialAction":{"@type":"SearchAction","target":"{{ site.site_url }}/?q={query}","query-input":"required name=query"}}
+</script>
+{% endblock %}
+{% block main %}
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1>Learn US healthcare revenue cycle, one claim at a time.</h1>
+      <p class="lede">REVEX takes you from zero to working RCM analyst: the claim cycle, insurance, billing forms, denials, specialties and real AR scenarios. Written by an RCM quality specialist. Free, with no sign-up.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/{{ first_lesson }}">Start learning</a>
+        <a class="btn btn-ghost" href="/denials/codes/">Look up a denial code</a>
+      </div>
+      <p class="hero-note">Already working in RCM? Jump to <a href="/interview-prep/">interview prep</a> or the <a href="/scenarios/">scenarios</a>.</p>
+    </div>
+
+    <figure class="claim-ticket" data-claim aria-label="Example: one claim moving through the revenue cycle">
+      <div class="ct-head">
+        <span class="ct-id">Claim RX-20418</span>
+        <span class="ct-status" data-ct-status>Charge entered</span>
+      </div>
+      <dl class="ct-fields">
+        <div class="fbox"><dt>Patient</dt><dd>Jordan Avery (fictional)</dd></div>
+        <div class="fbox"><dt>Payer</dt><dd>Medicare Part B</dd></div>
+        <div class="fbox"><dt>CPT</dt><dd class="mono">99214</dd></div>
+        <div class="fbox"><dt>ICD-10-CM</dt><dd class="mono">E11.9</dd></div>
+        <div class="fbox fbox-wide"><dt>Billed</dt><dd class="mono">$180.00</dd></div>
+        <div class="fbox fbox-result" data-ct-result><dt>Result</dt><dd class="mono" data-ct-result-text>Pending</dd></div>
+      </dl>
+      <ol class="ct-track" data-ct-track>
+        <li data-msg="Charge entered">Charge</li>
+        <li data-msg="Scrubbed, no edits">Scrub</li>
+        <li data-msg="Accepted, 277CA">Accepted</li>
+        <li data-msg="Adjudicated">Adjudicated</li>
+        <li data-msg="Paid, ERA posted">Paid</li>
+      </ol>
+      <figcaption>
+        <span data-ct-caption>Every claim follows this path. When it stops, someone in RCM finds out why.</span>
+        <button type="button" class="link-btn" data-ct-replay>Replay</button>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="band band-path" aria-labelledby="path-h">
+  <div class="wrap">
+    <h2 id="path-h">A learning path, if you're new</h2>
+    <p class="band-lede">Work through these in order. Each topic takes 5 to 10 minutes and ends with a short check.</p>
+    <ol class="path">
+      <li><a href="/start-here/"><span class="path-n">1</span><strong>Foundations</strong><small>What RCM is, the three parties, AR and AP, and the jobs in a team.</small></a></li>
+      <li><a href="/rcm-cycle/"><span class="path-n">2</span><strong>The cycle</strong><small>Twelve stages from scheduling to patient collections.</small></a></li>
+      <li><a href="/insurance/"><span class="path-n">3</span><strong>Insurance and forms</strong><small>Who pays, in what order, on which claim form.</small></a></li>
+      <li><a href="/denials/"><span class="path-n">4</span><strong>Denials and scenarios</strong><small>Fix what went wrong, then practise on realistic cases.</small></a></li>
+    </ol>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="menu-h">
+  <div class="wrap">
+    <h2 id="menu-h">Everything in REVEX</h2>
+    <ul class="menu-grid">
+      {% for s in sections %}
+      <li>
+        <a class="menu-card" href="/{{ s.id }}/">
+          <span class="mc-ico">{{ icon(s.icon, 24) }}</span>
+          <span class="mc-title">{{ s.title }}</span>
+          <span class="mc-blurb">{{ s.blurb }}</span>
+          <span class="mc-meta">
+            {% if s.id == "glossary" %}{{ s.count }} terms
+            {% elif s.id == "denials" %}{{ s.count }} lessons, {{ s.codes }} codes
+            {% elif s.id == "scenarios" %}{{ s.count }} cases
+            {% elif s.id == "specialties" %}{{ s.count }} specialties
+            {% else %}{{ s.count }} topics{% endif %}
+            <span class="mc-done" data-section-progress="{{ s.id }}"></span>
+          </span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+{% if featured %}
+<section class="band band-codes" aria-labelledby="codes-h">
+  <div class="wrap"><div class="codes-grid">
+    <div>
+      <h2 id="codes-h">Stuck on a denial?</h2>
+      <p class="band-lede">These are the codes analysts see most. Each page explains what the payer is saying, the usual causes and the exact steps to resolve it.</p>
+      <a class="btn btn-ghost" href="/denials/codes/">Open the code library</a>
+    </div>
+    <ul class="code-chips">
+      {% for c in featured %}
+      <li><a href="/{{ c.url }}"><span class="mono">{{ c.code }}</span><small>{{ c.title }}</small></a></li>
+      {% endfor %}
+    </ul>
+  </div></div>
+</section>
+{% endif %}
+
+<section class="band band-author" aria-labelledby="author-h">
+  <div class="wrap author-row">
+    <div>
+      <h2 id="author-h">Why REVEX exists</h2>
+      <p class="mission">{{ site.mission }}</p>
+      <p>It's written by {{ site.author.name }}, an {{ site.author.title }} with {{ site.author.experience }}. The lessons follow how claims are actually worked on an RCM floor: the questions you ask a payer, the notes an auditor expects, and the mistakes that send a claim back.</p>
+    </div>
+    <a class="btn btn-ghost" href="{{ site.author.linkedin }}" target="_blank" rel="noopener">{{ icon("linkedin", 18) }} Connect on LinkedIn</a>
+  </div>
+</section>
+{% endblock %}

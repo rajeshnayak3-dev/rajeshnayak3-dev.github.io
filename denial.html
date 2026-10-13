@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% from "_parts.html" import crumbs, complete_bar %}
+{% block og_type %}article{% endblock %}
+{% block main %}
+<div class="wrap">
+  {{ crumbs([("Denials", "/denials/"), ("Code library", "/denials/codes/"), (code.code, None)]) }}
+</div>
+<article class="wrap code-page">
+  <header class="code-head">
+    <div class="code-badge" aria-hidden="true">
+      <span class="cb-group">{{ code.group }}</span><span class="cb-num">{{ code.carc }}</span>
+    </div>
+    <div>
+      <p class="code-cat"><a href="/denials/codes/#{{ category.id }}">{{ category.title }}</a></p>
+      <h1><span class="mono">{{ code.code }}</span>: {{ code.title }}</h1>
+      {% if code.summary %}<p class="lede">{{ code.summary }}</p>{% endif %}
+    </div>
+  </header>
+
+  <div class="code-body">
+    <section class="fbox fbox-lg">
+      <h2 class="fbox-label">What the payer is saying</h2>
+      <div class="prose">{{ code.meaning | md | safe }}</div>
+      {% if code.group_note %}<p class="note">{{ code.group_note | md }}</p>{% endif %}
+    </section>
+
+    <div class="code-cols">
+      <section class="fbox fbox-lg">
+        <h2 class="fbox-label">Common causes</h2>
+        <ul class="ticks">{% for c in code.causes %}<li>{{ c | md }}</li>{% endfor %}</ul>
+      </section>
+      {% if code.ask %}
+      <section class="fbox fbox-lg">
+        <h2 class="fbox-label">Ask the payer on the call</h2>
+        <ul class="ticks ticks-q">{% for q in code.ask %}<li>{{ q | md }}</li>{% endfor %}</ul>
+      </section>
+      {% endif %}
+    </div>
+
+    <section class="fbox fbox-lg">
+      <h2 class="fbox-label">How to work it</h2>
+      <ol class="steps">{% for s in code.steps %}<li>{{ s | md }}</li>{% endfor %}</ol>
+    </section>
+
+    {% if code.hospital or code.professional %}
+    <div class="code-cols">
+      {% if code.professional %}<section class="fbox fbox-lg"><h2 class="fbox-label">Professional (CMS-1500)</h2><p>{{ code.professional | md }}</p></section>{% endif %}
+      {% if code.hospital %}<section class="fbox fbox-lg"><h2 class="fbox-label">Hospital (UB-04)</h2><p>{{ code.hospital | md }}</p></section>{% endif %}
+    </div>
+    {% endif %}
+
+    <div class="code-cols">
+      <section class="fbox fbox-lg fbox-good">
+        <h2 class="fbox-label">Prevent it next time</h2>
+        <ul class="ticks">{% for p in code.prevention %}<li>{{ p | md }}</li>{% endfor %}</ul>
+      </section>
+      {% if code.rarc %}
+      <section class="fbox fbox-lg">
+        <h2 class="fbox-label">RARC codes often paired with it</h2>
+        <dl class="rarc">{% for r in code.rarc %}<div><dt class="mono">{{ r.code }}</dt><dd>{{ r.text }}</dd></div>{% endfor %}</dl>
+      </section>
+      {% endif %}
+    </div>
+
+    {% if code.example %}
+    <section class="example">
+      <h2>Worked example</h2>
+      <div class="prose">{{ code.example | md | safe }}</div>
+    </section>
+    {% endif %}
+
+    {% if code.interview %}
+    <div class="admonition interview">
+      <p class="admonition-title">If an interviewer asks</p>
+      <p>{{ code.interview | md }}</p>
+    </div>
+    {% endif %}
+
+    {% if related %}
+    <section class="related">
+      <h2>Related codes in {{ category.title | lower }}</h2>
+      <ul class="code-chips code-chips-sm">
+        {% for r in related %}<li><a href="/{{ r.url }}"><span class="mono">{{ r.code }}</span><small>{{ r.title }}</small></a></li>{% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    {{ complete_bar(code.url, None, None) }}
+  </div>
+</article>
+{% endblock %}

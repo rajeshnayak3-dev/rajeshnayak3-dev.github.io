@@ -1,0 +1,689 @@
+# Specialty billing guides. Fields: name, summary, definition, providers, settings,
+# services, codes (code/desc/note), icd (code/desc), modifiers (mod/use),
+# prerequisites, denials (code/issue/prevent), tips, interview, level, minutes.
+
+- name: Primary care (family and internal medicine)
+  slug: primary-care
+  level: Beginner
+  minutes: 9
+  summary: Office visits, preventive exams, chronic disease management and care coordination, the highest-volume work in professional billing.
+  definition: |
+    Primary care is the patient's first point of contact with the health system. Family medicine treats patients of all ages; internal medicine focuses on adults. Primary care providers diagnose and manage common illnesses, run preventive care, manage chronic conditions such as diabetes and hypertension, and coordinate referrals to specialists.
+
+    In HMO and many Medicare Advantage plans, the primary care provider (PCP) is also the gatekeeper who issues referrals.
+  providers: Family physicians, internists, nurse practitioners and physician assistants.
+  settings: Office (POS 11), telehealth (POS 02/10), nursing facilities, patients' homes, and hospital rounding for some practices.
+  services:
+    - New and established patient office visits (E/M)
+    - Preventive exams and Medicare annual wellness visits
+    - Immunisations and injections
+    - Chronic care management and transitional care after discharge
+    - In-office tests such as ECGs, urinalysis and blood draws
+    - Advance care planning and counselling
+  codes:
+    - code: 99202–99205
+      desc: New patient office visit, levels by MDM or time
+    - code: 99211–99215
+      desc: Established patient office visit
+      note: 99211 may not need a physician present
+    - code: 99381–99387
+      desc: Preventive visit, new patient, by age
+      note: Age-specific; wrong age range denies CO-6
+    - code: 99391–99397
+      desc: Preventive visit, established patient, by age
+    - code: G0402
+      desc: Initial preventive physical exam (“Welcome to Medicare”)
+      note: Once, within the first 12 months of Part B
+    - code: G0438 / G0439
+      desc: Medicare annual wellness visit, initial / subsequent
+      note: Once every 12 months; not a physical exam
+    - code: G2211
+      desc: Medicare add-on for visit complexity in longitudinal care
+      note: Added to office E/M under Medicare rules; payer adoption varies
+    - code: 99495 / 99496
+      desc: Transitional care management after discharge
+      note: Contact within 2 business days; face-to-face within 14 or 7 days
+    - code: 99490
+      desc: Chronic care management, first 20 minutes per month
+      note: Needs patient consent and two or more chronic conditions
+    - code: 99497
+      desc: Advance care planning, first 30 minutes
+    - code: 93000
+      desc: Electrocardiogram with interpretation and report
+    - code: 36415
+      desc: Routine venipuncture
+    - code: 90471
+      desc: Immunisation administration, first vaccine
+      note: Billed with the vaccine product code
+  icd:
+    - code: Z00.00 / Z00.01
+      desc: General adult exam without / with abnormal findings
+    - code: I10
+      desc: Essential (primary) hypertension
+    - code: E11.9
+      desc: Type 2 diabetes without complications
+    - code: E78.5
+      desc: Hyperlipidaemia, unspecified
+    - code: J06.9
+      desc: Acute upper respiratory infection, unspecified
+  modifiers:
+    - mod: "25"
+      use: Problem-oriented E/M on the same day as a preventive visit or procedure
+    - mod: "33"
+      use: Preventive service, so cost-sharing is waived under the ACA where applicable
+    - mod: GY
+      use: Medicare statutorily excluded service, such as a routine physical (99381–99397)
+  prerequisites:
+    - Verify preventive frequency (once per year or every 12 months, depending on the plan's wording).
+    - For Medicare, use G0438/G0439 for wellness visits; routine physicals aren't covered.
+    - Document a problem-oriented visit separately and add modifier 25 when billing it with a preventive visit.
+    - Obtain and document patient consent before billing chronic care management.
+    - Check PCP assignment for HMO and Medicare Advantage patients.
+    - Bill vaccine product and administration codes together, with the right NDC where required.
+  denials:
+    - code: CO-49
+      issue: Routine physical billed to Medicare or to a plan without preventive benefits
+      prevent: Use AWV codes for Medicare; GY and an ABN-style notice for excluded routine exams
+    - code: CO-119
+      issue: Preventive or wellness visit repeated within the frequency limit
+      prevent: Check last preventive date in eligibility before scheduling
+    - code: CO-97
+      issue: Problem visit bundled into the preventive visit
+      prevent: Document the separate problem and append 25
+    - code: CO-B16
+      issue: New patient code for a patient seen in the group within 3 years
+      prevent: Registration history check
+    - code: CO-242
+      issue: Patient's assigned PCP is a different provider
+      prevent: Check PCP on the eligibility response for HMO plans
+  tips:
+    - Primary care volume makes small error rates expensive. Audit E/M levels against MDM regularly.
+    - Patients are often surprised by a copay on a preventive visit day; explain split billing at check-in.
+  interview: >-
+    Primary care bills mainly E/M and preventive codes. Key rules: preventive frequency limits,
+    Medicare covers the annual wellness visit but not routine physicals, and a problem visit on the
+    same day as a preventive visit needs separate documentation and modifier 25.
+
+- name: Pediatrics
+  slug: pediatrics
+  level: Beginner
+  minutes: 8
+  summary: Well-child visits, vaccines, newborn care and sick visits for patients up to age 18 or 21, heavily paid by Medicaid and CHIP.
+  definition: |
+    Pediatrics is medical care for infants, children and adolescents. Pediatricians track growth and development, give vaccines on a schedule, treat acute illnesses and manage chronic conditions such as asthma.
+
+    Many pediatric patients are covered by Medicaid or CHIP, where well-child care is part of **EPSDT** (Early and Periodic Screening, Diagnostic and Treatment), a Medicaid benefit for under-21s.
+  providers: Pediatricians, pediatric nurse practitioners and physician assistants.
+  settings: Office (POS 11), newborn nursery and hospital (POS 21), telehealth.
+  services:
+    - Well-child (preventive) visits by age
+    - Vaccines with counselling
+    - Newborn care in hospital and first office visits
+    - Developmental and behavioral screenings
+    - Sick visits and chronic disease follow-up
+  codes:
+    - code: 99381–99385 / 99391–99395
+      desc: Preventive visits for infants through age 17, new / established
+    - code: 99460
+      desc: Initial hospital or birthing centre care for a normal newborn, per day
+    - code: 99462
+      desc: Subsequent normal newborn hospital care, per day
+    - code: 99238
+      desc: Hospital discharge day management (30 minutes or less)
+    - code: 90460 / 90461
+      desc: Vaccine administration with counselling, under 19, first component / each additional
+      note: Requires physician or qualified provider counselling documented
+    - code: 96110
+      desc: Developmental screening with a standardised instrument
+    - code: 96127
+      desc: Brief emotional or behavioral assessment, per instrument
+    - code: 99173
+      desc: Screening visual acuity, quantitative, bilateral
+    - code: 92551
+      desc: Screening hearing test, pure tone, air only
+  icd:
+    - code: Z00.110 / Z00.111
+      desc: Health exam for newborn under 8 days / 8 to 28 days
+    - code: Z00.121 / Z00.129
+      desc: Routine child health exam with / without abnormal findings
+    - code: Z23
+      desc: Encounter for immunisation
+    - code: J45.909
+      desc: Unspecified asthma, uncomplicated
+  modifiers:
+    - mod: "25"
+      use: Sick visit on the same day as a well-child visit
+    - mod: EP
+      use: Medicaid EPSDT service (required by some states)
+  prerequisites:
+    - Bill well-child visits by the patient's exact age on the date of service.
+    - Use 90460/90461 only when counselling by the provider is documented; otherwise 90471–90474.
+    - For Vaccines for Children (VFC) supplies, bill only the administration (vaccine product at $0 or with the state's required modifier).
+    - Add newborns to the parent's policy quickly; most plans allow 30 to 60 days.
+    - Check Medicaid MCO assignment for each visit.
+  denials:
+    - code: CO-26 / CO-32
+      issue: Newborn not yet added to the parent's policy
+      prevent: Remind parents to add the baby; hold and rebill once added
+    - code: CO-6
+      issue: Preventive code for the wrong age group
+      prevent: Age edits in the scrubber
+    - code: CO-16
+      issue: Vaccine billed without product code or NDC
+      prevent: Pair administration with product code and NDC
+    - code: CO-119
+      issue: Well-child visit outside the periodicity schedule
+      prevent: Check visit history and the payer's schedule
+  tips:
+    - VFC vaccines are free to the practice; billing the vaccine product cost for them is a compliance error.
+  interview: >-
+    Pediatric billing centres on age-based well-child codes, vaccine administration with counselling
+    (90460/90461), newborn care codes, and Medicaid EPSDT rules. Newborn eligibility is a common denial
+    until the baby is added to the policy.
+
+- name: Obstetrics and gynecology
+  slug: obgyn
+  level: Intermediate
+  minutes: 10
+  summary: Pregnancy care billed as global packages, gynecologic exams and procedures, with complex global and split-billing rules.
+  definition: |
+    Obstetrics covers pregnancy, delivery and the postpartum period. Gynecology covers the female reproductive system: annual exams, contraception, infections, abnormal bleeding and gynecologic surgery.
+
+    Routine obstetric care is usually billed as a **global package**: one code covering antepartum visits, delivery and postpartum care.
+  providers: OB/GYN physicians, certified nurse midwives, nurse practitioners.
+  settings: Office, hospital labour and delivery (POS 21), ambulatory surgery centres.
+  services:
+    - Antepartum (prenatal) visits and ultrasounds
+    - Vaginal and cesarean deliveries
+    - Postpartum care
+    - Annual gynecologic exams, Pap smears and screening
+    - Contraception, including IUD and implant insertion
+    - Gynecologic procedures such as colposcopy, hysteroscopy and hysterectomy
+  codes:
+    - code: "59400"
+      desc: Routine obstetric care, vaginal delivery, with antepartum and postpartum care (global)
+    - code: "59510"
+      desc: Routine obstetric care, cesarean delivery, with antepartum and postpartum care (global)
+    - code: "59610"
+      desc: Global care for vaginal birth after previous cesarean (VBAC)
+    - code: "59409 / 59514"
+      desc: Vaginal delivery only / cesarean delivery only
+      note: When another provider did the prenatal care
+    - code: 59425 / 59426
+      desc: Antepartum care only, 4–6 visits / 7 or more visits
+    - code: "76801 / 76805"
+      desc: Obstetric ultrasound, first trimester / after first trimester
+    - code: "76815"
+      desc: Limited obstetric ultrasound
+    - code: G0101
+      desc: Medicare cervical or vaginal cancer screening, pelvic and breast exam
+    - code: Q0091
+      desc: Medicare screening Pap smear, obtaining and preparing specimen
+    - code: "58300"
+      desc: Insertion of intrauterine device (IUD)
+    - code: "57454"
+      desc: Colposcopy with biopsy and endocervical curettage
+    - code: "58558"
+      desc: Hysteroscopy with biopsy or polypectomy
+  icd:
+    - code: Z34.00–Z34.93
+      desc: Supervision of normal pregnancy, by trimester
+    - code: O09.xx
+      desc: Supervision of high-risk pregnancy
+    - code: Z01.419
+      desc: Routine gynecological exam without abnormal findings
+    - code: Z30.430
+      desc: Encounter for insertion of IUD
+  modifiers:
+    - mod: "22"
+      use: Substantially increased work, for example a complicated delivery (needs documentation)
+    - mod: "25"
+      use: Separate problem visit on the day of a procedure or annual exam
+    - mod: "52"
+      use: Reduced services
+  prerequisites:
+    - Check whether the payer requires global billing after delivery or allows split billing of antepartum visits.
+    - Track the number of prenatal visits in case the patient changes insurance or provider mid-pregnancy.
+    - Problem visits during pregnancy unrelated to routine care can be billed separately with the right diagnosis.
+    - Verify Medicaid pregnancy coverage and MCO, which may change after delivery.
+    - Ultrasounds may need prior authorization or have frequency limits.
+  denials:
+    - code: CO-97
+      issue: Routine prenatal visit billed separately while a global code was also billed
+      prevent: Bill only the global code; separate visits only for unrelated problems
+    - code: CO-27
+      issue: Coverage changed during the pregnancy
+      prevent: Re-verify each trimester; split-bill by payer if coverage changed
+    - code: CO-119 / CO-151
+      issue: Too many ultrasounds within the payer's limit
+      prevent: Document medical necessity and high-risk diagnoses
+    - code: CO-4
+      issue: Missing 25 on a problem visit with an annual exam
+      prevent: Separate documentation and modifier 25
+  tips:
+    - The global obstetric package is billed after delivery, so these claims are often near the end of a 9-month care period; check timely filing from the delivery date.
+  interview: >-
+    Routine obstetric care is billed as a global package after delivery, such as 59400 for vaginal and
+    59510 for cesarean, covering prenatal, delivery and postpartum care. If the patient changes
+    insurance or provider, we split-bill using antepartum-only, delivery-only or postpartum codes.
+
+- name: Cardiology
+  slug: cardiology
+  level: Intermediate
+  minutes: 10
+  summary: Heart and vascular care with heavy diagnostic testing, professional and technical component splits, and frequent prior authorization.
+  definition: |
+    Cardiology diagnoses and treats diseases of the heart and blood vessels: coronary artery disease, heart failure, arrhythmias, valve disease and hypertension.
+
+    Interventional cardiologists perform catheter-based procedures (such as stents), and electrophysiologists treat rhythm problems (such as pacemakers and ablations).
+  providers: Cardiologists, interventional cardiologists, electrophysiologists, NPs and PAs.
+  settings: Office, hospital outpatient and inpatient, cardiac cath lab, ASCs for some procedures.
+  services:
+    - Consultations and follow-up visits
+    - ECGs, echocardiograms, stress tests, Holter and event monitors
+    - Cardiac catheterisation and coronary stenting
+    - Pacemaker and defibrillator implantation and checks
+    - Cardiac rehabilitation
+  codes:
+    - code: "93000"
+      desc: ECG, 12-lead, with interpretation and report
+    - code: "93306"
+      desc: Transthoracic echocardiogram, complete, with Doppler and colour flow
+    - code: "93350"
+      desc: Stress echocardiogram
+    - code: 93015
+      desc: Cardiovascular stress test, global
+    - code: "78452"
+      desc: Myocardial perfusion imaging (SPECT), multiple studies
+    - code: 93224
+      desc: Holter monitor, up to 48 hours, global
+    - code: "93458"
+      desc: Left heart catheterisation with coronary angiography
+    - code: 92928
+      desc: Coronary stent placement, single major vessel
+    - code: "33208"
+      desc: Insertion of dual-chamber pacemaker system
+    - code: 93279–93299
+      desc: Device programming and interrogation (pacemakers, ICDs)
+  icd:
+    - code: I25.10
+      desc: Coronary artery disease without angina
+    - code: I48.91
+      desc: Atrial fibrillation, unspecified
+    - code: I50.9
+      desc: Heart failure, unspecified
+    - code: R07.9
+      desc: Chest pain, unspecified
+  modifiers:
+    - mod: "26"
+      use: Interpretation only, when the hospital owns the equipment
+    - mod: TC
+      use: Technical component only
+    - mod: LC / LD / RC
+      use: Coronary artery branches for interventional procedures
+    - mod: "59 / XS"
+      use: Distinct procedure, such as separate vessel work where allowed
+  prerequisites:
+    - Prior authorization is common for nuclear stress tests, echocardiograms and cardiac imaging (often managed by vendors).
+    - Medical necessity follows LCDs for echo, Holter monitoring and stress testing; frequency limits apply.
+    - Bill 26 when interpreting tests done on hospital equipment; global when the practice owns it.
+    - Devices and implants need documentation of indications and, for some devices, registry participation.
+  denials:
+    - code: CO-197
+      issue: Imaging or stress test done without the plan's authorization
+      prevent: Auth check at scheduling; update auth if test type changes
+    - code: CO-50
+      issue: Echo or monitor not supported by covered diagnoses or frequency
+      prevent: LCD diagnosis checks and documentation of symptoms
+    - code: CO-4
+      issue: Global billed for a test done in the hospital (needs 26)
+      prevent: Set POS-based component rules in charge entry
+    - code: CO-97
+      issue: Interpretation billed with a code that already includes it
+      prevent: Know which codes include interpretation
+  tips:
+    - One echo has three possible claims (global, 26, TC). Mismatched component billing is a frequent audit finding.
+  interview: >-
+    Cardiology billing involves a lot of diagnostic testing with professional and technical
+    components, so modifiers 26 and TC matter. Prior authorization and LCD medical necessity are the
+    main denial drivers, especially for echo, nuclear stress tests and monitors.
+
+- name: Dermatology
+  slug: dermatology
+  level: Intermediate
+  minutes: 9
+  summary: "Skin exams and many small procedures: biopsies, destructions, excisions and Mohs surgery, where size, count and site drive the code."
+  definition: |
+    Dermatology diagnoses and treats conditions of the skin, hair and nails: acne, eczema, psoriasis, skin infections, benign and precancerous growths, and skin cancers.
+
+    Many visits combine an E/M service with one or more minor procedures on the same day, which makes modifiers and documentation of lesion size and location essential.
+  providers: Dermatologists, Mohs surgeons, dermatopathologists, NPs and PAs.
+  settings: Office (most procedures), ASCs for larger excisions.
+  services:
+    - Full skin exams and problem visits
+    - Skin biopsies
+    - Destruction of precancerous lesions (actinic keratoses) and benign lesions
+    - Excision of benign and malignant lesions with repair
+    - Mohs micrographic surgery
+    - Injections and phototherapy
+  codes:
+    - code: 11102 / 11103
+      desc: Tangential (shave-type) biopsy, single lesion / each additional
+    - code: 11104 / 11105
+      desc: Punch biopsy, single / each additional
+    - code: 11106 / 11107
+      desc: Incisional biopsy, single / each additional
+    - code: 17000 / 17003 / 17004
+      desc: Destruction of premalignant lesions, first / 2–14 each / 15 or more
+    - code: "17110 / 17111"
+      desc: Destruction of benign lesions such as warts, up to 14 / 15 or more
+    - code: 11300–11313
+      desc: Shave removal of lesions, by site and size
+    - code: 11400–11446
+      desc: Excision of benign lesion, by site and excised diameter
+    - code: 11600–11646
+      desc: Excision of malignant lesion, by site and excised diameter
+    - code: 17311–17315
+      desc: Mohs surgery, by site and stages
+    - code: 12001–13160
+      desc: Wound repair (simple, intermediate, complex) after excision
+  icd:
+    - code: L57.0
+      desc: Actinic keratosis
+    - code: C44.xx
+      desc: Other malignant neoplasm of skin (basal and squamous cell)
+    - code: D22.x
+      desc: Melanocytic naevi
+    - code: L82.1
+      desc: Other seborrhoeic keratosis
+  modifiers:
+    - mod: "25"
+      use: Separate E/M on the same day as a biopsy or destruction
+    - mod: "59 / XS"
+      use: Procedures on separate lesions that would otherwise bundle
+    - mod: "79"
+      use: Unrelated procedure during a global period
+  prerequisites:
+    - Document each lesion's site, size (excised diameter including margins) and method.
+    - Use pathology results to choose benign versus malignant excision codes (bill after the path report).
+    - Seborrhoeic keratoses and other benign lesions are often cosmetic; document symptoms (bleeding, irritation) to support medical necessity.
+    - Mohs often needs prior authorization and appropriate-use documentation.
+    - Know the 10-day and 90-day global periods for excisions and repairs.
+  denials:
+    - code: CO-50
+      issue: Benign lesion removal considered cosmetic
+      prevent: Document symptoms; obtain waiver if cosmetic
+    - code: CO-97
+      issue: E/M bundled with a biopsy or destruction
+      prevent: Separate, significant problem documented and modifier 25
+    - code: CO-151
+      issue: Destruction units billed incorrectly (17003 units)
+      prevent: Count lesions correctly; 17004 alone for 15 or more
+    - code: CO-236
+      issue: Multiple procedures on different lesions bundled
+      prevent: Appropriate XS or 59 with lesion documentation
+  tips:
+    - Holding excision charges until the pathology report arrives prevents corrected claims later.
+  interview: >-
+    Dermatology codes depend on method, site, size and number of lesions, and whether the lesion is
+    benign or malignant, so documentation and pathology matter. Common denials are cosmetic medical
+    necessity, E/M bundling without 25, and unit errors on destructions.
+
+- name: Ophthalmology and optometry
+  slug: ophthalmology
+  level: Intermediate
+  minutes: 9
+  summary: Eye exams, diagnostic imaging and eye surgery, with a choice between eye exam codes and E/M codes, and routine vision versus medical coverage.
+  definition: |
+    Ophthalmology is the medical and surgical care of the eye. Ophthalmologists are physicians who treat cataracts, glaucoma, macular degeneration, diabetic eye disease and perform eye surgery. Optometrists provide eye exams, prescribe glasses and contact lenses, and manage some eye diseases.
+
+    A key billing distinction is **routine vision care** (refraction, glasses) versus **medical eye care** (disease), which are often covered by different plans.
+  providers: Ophthalmologists, retina and glaucoma subspecialists, optometrists.
+  settings: Office, ASCs and hospital outpatient for surgery.
+  services:
+    - Comprehensive and intermediate eye exams
+    - Refractions for glasses
+    - Imaging such as OCT and visual fields
+    - Cataract surgery
+    - Intravitreal injections for macular degeneration and diabetic macular oedema
+    - Glaucoma laser and surgical procedures
+  codes:
+    - code: 92002 / 92004
+      desc: Eye exam, new patient, intermediate / comprehensive
+    - code: 92012 / 92014
+      desc: Eye exam, established patient, intermediate / comprehensive
+    - code: "92015"
+      desc: Refraction (determining glasses prescription)
+      note: Not covered by Medicare; usually patient or vision plan
+    - code: "92083"
+      desc: Visual field exam, extended
+    - code: 92133 / 92134
+      desc: OCT imaging of optic nerve / retina
+    - code: "66984"
+      desc: Cataract removal with intraocular lens, standard
+    - code: "66982"
+      desc: Complex cataract removal with lens
+    - code: "67028"
+      desc: Intravitreal injection of a drug
+      note: Billed with the drug J-code and NDC
+    - code: "65855"
+      desc: Laser trabeculoplasty (glaucoma)
+  icd:
+    - code: H25.11–H25.13
+      desc: Age-related nuclear cataract, by eye
+    - code: H40.11xx
+      desc: Primary open-angle glaucoma, by eye and stage
+    - code: H35.32xx
+      desc: Exudative age-related macular degeneration
+    - code: E11.3xxx
+      desc: Type 2 diabetes with ophthalmic complications
+  modifiers:
+    - mod: RT / LT
+      use: Right or left eye (required for most eye procedures)
+    - mod: "50"
+      use: Bilateral procedure where allowed
+    - mod: "54 / 55"
+      use: Surgical care only / post-op care only when cataract care is shared
+    - mod: E1–E4
+      use: Eyelid location for eyelid procedures
+  prerequisites:
+    - Decide between eye exam codes (920xx) and office E/M codes based on documentation; don't bill both.
+    - Separate refraction (often non-covered) and collect from the patient or vision plan.
+    - Check whether the patient's medical plan or vision plan covers the visit based on the reason (disease vs routine).
+    - Imaging such as OCT has frequency limits and diagnosis lists.
+    - Drug injections need the J-code, units, NDC and often prior authorization or step therapy.
+  denials:
+    - code: CO-96
+      issue: Refraction billed to Medicare or a medical plan that excludes it
+      prevent: Bill to vision plan or patient with notice (GY for Medicare)
+    - code: CO-4
+      issue: Missing RT or LT on eye procedures
+      prevent: Laterality required in charge entry
+    - code: CO-151
+      issue: OCT repeated too often or billed bilaterally incorrectly
+      prevent: Track imaging frequency; check per-eye versus bilateral codes
+    - code: CO-197
+      issue: Anti-VEGF drug without authorization or step therapy
+      prevent: Drug authorization before treatment
+  tips:
+    - Many practices bill a medical plan and a vision plan for different parts of the same visit. Get both plans verified.
+  interview: >-
+    Ophthalmology uses either eye exam codes (92002–92014) or E/M codes, separates non-covered
+    refraction (92015), and needs RT/LT on procedures. Drug injections require J-codes with NDCs and
+    often prior authorization; routine vision versus medical coverage is a key eligibility question.
+
+- name: Orthopedics
+  slug: orthopedics
+  level: Intermediate
+  minutes: 10
+  summary: Bones, joints and muscles. Joint injections, fracture care, arthroscopy and joint replacement, with global surgery periods and laterality.
+  definition: |
+    Orthopedics treats the musculoskeletal system: bones, joints, ligaments, tendons and muscles. Orthopedic surgeons manage fractures, sports injuries, arthritis and spine problems, using both non-surgical treatment and surgery.
+
+    Many orthopedic procedures carry 10-day or 90-day **global periods**, so visits after surgery are often not billed separately.
+  providers: Orthopedic surgeons, sports medicine physicians, PAs, NPs, and in-house physical therapists.
+  settings: Office, ASCs, hospital outpatient and inpatient.
+  services:
+    - Evaluations and follow-ups
+    - X-rays in the office
+    - Joint injections and aspirations
+    - Fracture care (closed treatment and surgical repair)
+    - Arthroscopy (knee, shoulder)
+    - Joint replacement (hip, knee)
+    - Casting, splinting and DME such as braces
+  codes:
+    - code: "20610 / 20611"
+      desc: Injection or aspiration of a major joint, without / with ultrasound guidance
+    - code: "20605"
+      desc: Injection or aspiration of an intermediate joint (wrist, elbow, ankle)
+    - code: "29881"
+      desc: Knee arthroscopy with meniscectomy (medial or lateral)
+    - code: "29827"
+      desc: Shoulder arthroscopy with rotator cuff repair
+    - code: "27447"
+      desc: Total knee arthroplasty
+    - code: "27130"
+      desc: Total hip arthroplasty
+    - code: "25600"
+      desc: Closed treatment of distal radius fracture without manipulation
+    - code: "73721"
+      desc: MRI of a lower extremity joint without contrast
+    - code: 73562
+      desc: X-ray knee, 3 views
+    - code: J7318–J7333
+      desc: Hyaluronic acid (viscosupplement) injections
+      note: Product-specific; frequency and prior auth rules apply
+    - code: L1833
+      desc: Knee orthosis, adjustable, prefabricated, off-the-shelf
+  icd:
+    - code: M17.11 / M17.12
+      desc: Primary osteoarthritis, right / left knee
+    - code: S83.2xxA
+      desc: Tear of meniscus, current injury, initial encounter
+    - code: M75.1xx
+      desc: Rotator cuff tear or rupture, not specified as traumatic
+    - code: S52.5xxA
+      desc: Fracture of lower end of radius, initial encounter
+  modifiers:
+    - mod: RT / LT
+      use: Side of the body
+    - mod: "50"
+      use: Bilateral injections or procedures
+    - mod: "24 / 79"
+      use: Unrelated visit or procedure during a global period
+    - mod: "57"
+      use: Decision for major surgery made at the visit
+    - mod: "58 / 78"
+      use: Staged or planned procedure / unplanned return to OR during global
+  prerequisites:
+    - Check prior authorization for MRIs, arthroscopy, joint replacement and viscosupplementation.
+    - Track global periods by surgeon so post-op visits are coded 99024 (no charge) and not billed.
+    - Document conservative treatment (physical therapy, medications) for imaging and surgery approvals.
+    - Workers' comp and auto claims are common; capture the injury details.
+    - Bill DME braces with the right HCPCS, modifiers and supplier enrollment.
+  denials:
+    - code: CO-197
+      issue: MRI or surgery without prior authorization
+      prevent: Auth check at scheduling; update CPT changes during surgery
+    - code: CO-97
+      issue: Visit during the global period billed without 24
+      prevent: Global period tracker; 99024 for related post-op visits
+    - code: CO-4
+      issue: Missing RT/LT or 50
+      prevent: Laterality required at charge entry
+    - code: CO-19 / CO-21
+      issue: Injury claim billed to health plan when WC or auto is responsible
+      prevent: Capture accident details at registration
+    - code: CO-119
+      issue: Viscosupplement repeated before the allowed interval
+      prevent: Track injection dates per knee
+  tips:
+    - For joint replacements, the facility claim, surgeon, assistant and anaesthesia all need the same authorization; share it across teams.
+  interview: >-
+    Orthopedics involves laterality modifiers, global surgical periods and prior authorization for
+    imaging and surgery. Visits within the global period are part of the surgery unless unrelated
+    (modifier 24) or a decision for surgery (57). Injury claims often belong to workers' comp or auto.
+
+- name: Physical, occupational and speech therapy
+  slug: therapy
+  level: Intermediate
+  minutes: 10
+  summary: Timed therapy codes billed in 15-minute units under the 8-minute rule, with plans of care, visit limits and the KX threshold.
+  definition: |
+    Rehabilitation therapy helps patients regain function. **Physical therapy (PT)** focuses on movement, strength and pain; **occupational therapy (OT)** on daily activities; **speech-language pathology (SLP)** on speech, language and swallowing.
+
+    Most therapy codes are timed in 15-minute units, so documentation of minutes is the foundation of correct billing.
+  providers: Physical therapists, occupational therapists, speech-language pathologists, and assistants (PTA, COTA) under supervision.
+  settings: Outpatient clinics, hospital outpatient, home health, skilled nursing.
+  services:
+    - Evaluations and re-evaluations
+    - Therapeutic exercise and activities
+    - Manual therapy and neuromuscular re-education
+    - Gait training
+    - Modalities such as electrical stimulation
+    - Speech and swallowing treatment
+  codes:
+    - code: 97161 / 97162 / 97163
+      desc: PT evaluation, low / moderate / high complexity
+    - code: 97165–97167
+      desc: OT evaluation, by complexity
+    - code: "97110"
+      desc: Therapeutic exercise, each 15 minutes
+    - code: "97112"
+      desc: Neuromuscular re-education, each 15 minutes
+    - code: "97140"
+      desc: Manual therapy techniques, each 15 minutes
+    - code: "97530"
+      desc: Therapeutic activities, each 15 minutes
+    - code: "97116"
+      desc: Gait training, each 15 minutes
+    - code: 97014 / G0283
+      desc: Unattended electrical stimulation (commercial / Medicare)
+    - code: "92507"
+      desc: Speech, language or voice treatment, individual
+  icd:
+    - code: M54.50
+      desc: Low back pain, unspecified
+    - code: M25.561
+      desc: Pain in right knee
+    - code: Z96.651
+      desc: Presence of right artificial knee joint
+    - code: R26.89
+      desc: Other abnormalities of gait and mobility
+  modifiers:
+    - mod: GP / GO / GN
+      use: Services under a PT / OT / SLP plan of care (required by Medicare and many payers)
+    - mod: KX
+      use: Medicare spending threshold exceeded and services remain medically necessary
+    - mod: CQ / CO
+      use: Services furnished in whole or part by a PT assistant / OT assistant (Medicare pays reduced rate)
+    - mod: "59 / XU"
+      use: Distinct services that NCCI pairs (for example 97140 with 97530) when performed in separate intervals
+  prerequisites:
+    - Use the **8-minute rule** for Medicare timed codes; total timed minutes determine total units.
+    - Medicare requires a plan of care certified by the physician or NPP, and recertification at least every 90 days.
+    - Add GP, GO or GN to every therapy line.
+    - Track the Medicare KX threshold per year; above it, add KX with documentation of medical necessity.
+    - Commercial plans often limit visits and require authorization after an initial number.
+  denials:
+    - code: CO-151
+      issue: Units billed exceed documented minutes
+      prevent: Document start/stop or total timed minutes; apply 8-minute rule
+    - code: CO-119
+      issue: Visit limit reached
+      prevent: Track visits and request authorisation extensions
+    - code: CO-4
+      issue: Missing GP/GO/GN or KX
+      prevent: Scrubber edits for therapy modifiers
+    - code: CO-50
+      issue: Plan of care not certified or progress not shown
+      prevent: Timely physician signature on plan of care; progress notes every 10 visits for Medicare
+    - code: CO-236
+      issue: NCCI pair billed without distinct interval documentation
+      prevent: Document separate time intervals and use 59/XU correctly
+  tips:
+    - "8-minute rule example: 23 minutes 97110 + 9 minutes 97140 = 32 total timed minutes = 2 units (23–37 minutes). Bill 1 unit 97110 and 1 unit 97140."
+  interview: >-
+    Therapy is billed in 15-minute timed units under the 8-minute rule for Medicare, with GP, GO or GN
+    modifiers, a certified plan of care, visit limits and the KX threshold. Unit errors and missing
+    modifiers are the main denials.

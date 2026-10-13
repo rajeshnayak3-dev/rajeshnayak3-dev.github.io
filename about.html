@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% from "_parts.html" import crumbs %}
+{% block main %}
+<div class="wrap">
+  {{ crumbs([("About", None)]) }}
+  <article class="prose about">
+    <h1>About REVEX</h1>
+    <p class="lede">REVEX is a free training site for anyone who wants to work in US healthcare revenue cycle management, and for analysts preparing for their next interview.</p>
+
+    <h2>Why it exists</h2>
+    <p>{{ site.mission }}</p>
+
+    <h2>Who writes it</h2>
+    <p>REVEX is written and maintained by <a href="{{ site.author.linkedin }}" target="_blank" rel="noopener">{{ site.author.name }}</a>, an {{ site.author.title }} with {{ site.author.experience }}. The lessons are written the way work is actually done on an RCM floor: what you check, what you ask the payer, what you document and what an auditor looks for.</p>
+
+    <h2>How to use it</h2>
+    <ul>
+      <li>New to RCM: follow the learning path on the home page in order, and take every quiz.</li>
+      <li>Already working: use the denial code library and specialty guides as a reference, and test yourself with the scenarios.</li>
+      <li>Preparing for interviews: read the interview prep section, then explain each RCM stage out loud without notes.</li>
+    </ul>
+
+    <h2>Disclaimers</h2>
+    <ul>
+      <li>Content is educational. It isn't legal, compliance, coding-certification or payer-specific advice. Payer rules, timely filing limits and code sets change; always confirm against the payer's provider manual, the contract, CMS manuals and the current CPT, HCPCS and ICD-10-CM books.</li>
+      <li>CPT® is a registered trademark of the American Medical Association. Code descriptions here are short, simplified summaries written for learning, not official descriptors.</li>
+      <li>Every patient, member ID, claim number, provider and dollar amount on this site is fictional. No protected health information (PHI) is used.</li>
+      <li>REVEX isn't affiliated with CMS, any payer, clearinghouse or employer.</li>
+      <li>Progress and quiz scores are stored only in your browser. REVEX has no accounts and collects no personal data.</li>
+    </ul>
+
+    <h2>Found a mistake?</h2>
+    <p>Rules change and corrections are welcome. Message the author on <a href="{{ site.author.linkedin }}" target="_blank" rel="noopener">LinkedIn</a> with the page and what should change.</p>
+  </article>
+</div>
+{% endblock %}
