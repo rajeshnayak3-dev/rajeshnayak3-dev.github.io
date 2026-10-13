@@ -28,13 +28,13 @@ You need your free GitHub account. You don't need to install anything.
 2. Under **Build and deployment → Source**, choose **GitHub Actions**.
 3. Open the **Actions** tab. You'll see “Build and deploy REVEX” running. When it shows a green tick (1–2 minutes), your site is live at:
 
-   `https://rajeshnayak3-dev.github.io/revex/`
+   `https://rajeshnayak3-dev.github.io/`
 
 ### 4. Put your details in
 Open `site.yaml` in GitHub, click the pencil icon, and change:
 
 ```yaml
-site_url: https://rajeshnayak3-dev.github.io/revex
+site_url: https://rajeshnayak3-dev.github.io
 author:
   name: Rajesh Nayak
   title: RCM Quality Specialist

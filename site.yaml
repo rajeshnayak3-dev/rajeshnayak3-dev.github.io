@@ -11,7 +11,7 @@ description: >-
 # Full public address of the site, without a trailing slash.
 # GitHub Pages example: https://YOUR-USERNAME.github.io/revex
 # Custom domain example: https://revex.in
-site_url: https://rajeshnayak3-dev.github.io/revex
+site_url: https://rajeshnayak3-dev.github.io
 
 # Optional: Google Search Console verification code (HTML tag method).
 google_verification: ""
