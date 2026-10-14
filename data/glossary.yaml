@@ -18,7 +18,7 @@
 - term: Aging
   def: How long a claim or balance has been unpaid, usually grouped into 30-day buckets (0–30, 31–60, 61–90, 91–120, 120+).
 - term: Allowed amount
-  def: The maximum amount a payer recognises for a service under its contract or fee schedule. Payer payment plus patient responsibility equals the allowed amount.
+  def: The maximum amount a payer recognizes for a service under its contract or fee schedule. Payer payment plus patient responsibility equals the allowed amount.
 - term: Ambulatory surgical center
   aka: ASC
   def: A freestanding facility for same-day surgery. Place of service 24.
@@ -29,7 +29,7 @@
   def: A formal request for the payer to review and change a claim decision, with supporting evidence.
   see: /denials/appeals/
 - term: Assignment of benefits
-  def: The patient's authorisation for the payer to pay the provider directly.
+  def: The patient's authorization for the payer to pay the provider directly.
 - term: Authorization
   aka: Prior authorization, pre-auth, precertification
   def: The payer's approval, before the service, that a specific service, drug or admission is covered and medically necessary.
@@ -41,7 +41,7 @@
 - term: Benefit period
   def: For Medicare Part A, a period that starts on admission and ends after 60 days in a row without inpatient hospital or SNF care. The Part A deductible applies per benefit period.
 - term: Billing provider
-  def: The provider or organisation that is paid for the claim, shown in box 33 of the CMS-1500.
+  def: The provider or organization that is paid for the claim, shown in box 33 of the CMS-1500.
 - term: Birthday rule
   def: A coordination of benefits rule. For a child covered by both parents, the plan of the parent whose birthday (month and day) is earlier in the year is primary.
   see: /insurance/coordination-of-benefits/
@@ -256,7 +256,7 @@
   def: A 2022 federal law protecting patients from surprise out-of-network bills for emergency care and certain other services, and requiring good faith estimates.
 - term: NPI
   aka: National Provider Identifier
-  def: A 10-digit identifier for every US healthcare provider. Type 1 for individuals, Type 2 for organisations.
+  def: A 10-digit identifier for every US healthcare provider. Type 1 for individuals, Type 2 for organizations.
 - term: Observation
   def: Outpatient hospital care used to decide whether a patient needs to be admitted.
 - term: Out-of-network
@@ -267,7 +267,7 @@
 - term: Overpayment
   def: A payment greater than what's owed, which must be refunded.
 - term: Payer
-  def: The organisation that pays claims, such as an insurance company or government program.
+  def: The organization that pays claims, such as an insurance company or government program.
 - term: Payment posting
   def: Recording payments and adjustments to patient accounts.
   see: /rcm-cycle/payment-posting/

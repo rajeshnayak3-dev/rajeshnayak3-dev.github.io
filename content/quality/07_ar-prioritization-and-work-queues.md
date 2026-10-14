@@ -1,14 +1,14 @@
 ---
-title: AR prioritisation, work queues and inventory
-short: AR prioritisation
-description: How AR inventory is organised into work queues, how to prioritise accounts by deadline risk, balance and recovery potential, and why follow-up intervals should come from payer rules rather than one universal number.
+title: AR prioritization, work queues and inventory
+short: AR prioritization
+description: How AR inventory is organized into work queues, how to prioritize accounts by deadline risk, balance and recovery potential, and why follow-up intervals should come from payer rules rather than one universal number.
 order: 7
 level: Intermediate
 reviewed: 2026-10-14
 keywords: AR prioritization AR work queue aging buckets inventory backlog follow-up interval timely filing risk appeal deadline high dollar AR productivity touches per account
 objectives:
   - Describe how AR inventory is split into work queues
-  - Prioritise accounts using deadline risk, balance and recovery potential together
+  - Prioritize accounts using deadline risk, balance and recovery potential together
   - Set follow-up dates from payer processing times and deadlines, not a single rule
   - Read inventory, backlog and touches as signals of process health
 quiz:
@@ -38,7 +38,7 @@ quiz:
     why: More touches per resolution means accounts aren't being resolved on the first effective action. Look at audit errors, note quality and payer turnaround to find out why.
 ---
 
-## How AR inventory is organised
+## How AR inventory is organized
 
 AR inventory is every open claim or account with a balance. Teams split it into **work queues** so each person works the right accounts in the right order. Common splits:
 
@@ -50,13 +50,13 @@ AR inventory is every open claim or account with a balance. Teams split it into 
 
 The billing system or a work-queue tool usually assigns accounts by rules and a priority score. Understand the rules your tool uses, because a badly designed queue hides urgent accounts.
 
-## Prioritising: three factors together
+## Prioritizing: three factors together
 
 | Factor | Why it matters | How to judge it |
 |---|---|---|
 | **Deadline risk** | A missed timely filing or appeal deadline usually ends recovery | Days left to the payer's filing, correction or appeal deadline |
 | **Balance** | Larger balances matter more to cash | Expected payment (not just billed charge) |
-| **Recovery potential** | Some accounts are much more likely to pay | Denial type, payer behaviour, documentation available, prior outcomes |
+| **Recovery potential** | Some accounts are much more likely to pay | Denial type, payer behavior, documentation available, prior outcomes |
 
 A simple approach many teams use:
 
@@ -94,5 +94,5 @@ Productivity and quality pull against each other. A team that raises accounts pe
 !!! mistake "Auditor's red flag"
     Follow-up dates set to a default (for example, always +30 days) regardless of the payer's processing time or the deadline. Accounts get touched too early, then miss deadlines.
 
-!!! interview "If an interviewer asks “How do you prioritise your AR?”"
+!!! interview "If an interviewer asks “How do you prioritize your AR?”"
     “Deadline risk first: anything close to a timely filing or appeal deadline. Then expected value, oldest first, then the rest by age. I set follow-up dates from the payer's processing time and the deadlines, not a fixed interval, and I note the reason. As a lead I'd watch backlog, aging and touches per resolution next to productivity and quality.”

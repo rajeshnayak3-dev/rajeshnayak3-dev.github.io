@@ -1,10 +1,10 @@
 ---
 title: Denial management and AR follow-up
 short: Denials and AR follow-up
-description: How AR teams prioritise worklists, check claim status, work denials to payment, write notes an auditor will pass, and feed root causes back to prevent repeats.
+description: How AR teams prioritize worklists, check claim status, work denials to payment, write notes an auditor will pass, and feed root causes back to prevent repeats.
 order: 10
 level: Intermediate
-keywords: AR follow up denial management worklist prioritisation claim status call payer reference number root cause appeal reconsideration corrected claim
+keywords: AR follow up denial management worklist prioritization claim status call payer reference number root cause appeal reconsideration corrected claim
 quiz:
   - q: Which of these is the best AR note?
     options:
@@ -34,14 +34,14 @@ quiz:
 
 ## Two jobs, one goal
 
-- **AR follow-up** keeps every unpaid claim moving and stops claims from ageing past deadlines.
+- **AR follow-up** keeps every unpaid claim moving and stops claims from aging past deadlines.
 - **Denial management** turns denied claims into payment and stops the same denial from happening again.
 
 Both end in the same place: the claim is paid correctly, or closed with a valid reason.
 
 ## Building the worklist
 
-Nobody can work every claim every day. Teams prioritise by:
+Nobody can work every claim every day. Teams prioritize by:
 
 1. **Deadline risk:** claims approaching timely filing or appeal limits.
 2. **Dollar value:** high-balance claims first (sometimes called “high-dollar” or “top-down” worklists).

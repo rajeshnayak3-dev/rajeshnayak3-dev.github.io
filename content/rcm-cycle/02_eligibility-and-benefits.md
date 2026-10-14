@@ -55,7 +55,7 @@ A patient can be eligible and still have no benefit for a particular service, su
 1. **Electronic (270/271).** The practice management system or clearinghouse sends a **270** inquiry and receives a **271** response, often in seconds. Most practices run this automatically a few days before appointments.
 2. **Payer portals.** Availity, UHC Provider Portal, Aetna and other payer websites show coverage, benefits and accumulators (how much deductible is met).
 3. **Phone calls (IVR or a representative).** Needed when portal data is unclear, for specialty benefits, or for payers with weak online tools.
-4. **Medicare.** Checked through the MAC portal or HETS (HIPAA Eligibility Transaction System) using the patient's **MBI**. The response shows Part A and B entitlement, Medicare Advantage enrolment, MSP records, hospice and home health episodes.
+4. **Medicare.** Checked through the MAC portal or HETS (HIPAA Eligibility Transaction System) using the patient's **MBI**. The response shows Part A and B entitlement, Medicare Advantage enrollment, MSP records, hospice and home health episodes.
 5. **Medicaid.** Checked on the state's Medicaid portal, which also shows the managed care plan the member belongs to and any spend-down.
 
 ## What to record

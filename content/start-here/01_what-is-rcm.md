@@ -64,7 +64,7 @@ Follow a fictional patient, Maya, through a routine visit to a family doctor.
 
 | Step | What happens | Who does it |
 |---|---|---|
-| Scheduling | Maya books an appointment and gives her insurance details | Front desk or call centre |
+| Scheduling | Maya books an appointment and gives her insurance details | Front desk or call center |
 | Eligibility | Staff confirm her plan is active and check her copay and deductible | Eligibility team |
 | Visit | The doctor examines Maya and documents the visit | Provider |
 | Coding | The visit is translated into a diagnosis code and a procedure code | Medical coder |
@@ -92,7 +92,7 @@ RCM work is usually divided into three blocks. Interviewers love this split.
 
 **Billed amount (charge).** What the provider charges for the service, from its own fee schedule. Every payer sees the same charge.
 
-**Allowed amount.** The maximum the payer recognises for that service under the provider's contract or the payer's fee schedule.
+**Allowed amount.** The maximum the payer recognizes for that service under the provider's contract or the payer's fee schedule.
 
 **Contractual adjustment.** Billed minus allowed. The provider agreed to write this off by signing the contract. It isn't lost money in the usual sense; it was never collectible.
 
@@ -124,7 +124,7 @@ RCM leaders track a small set of numbers. You'll see these on every team dashboa
 
 A clean claim isn't the same as a paid claim. A claim can be complete, accepted and processed, and still be denied or pay $0 because of coverage, medical necessity or benefits (for example, the whole amount goes to the deductible). That's why clean claim rate and first-pass resolution rate are tracked separately.
 
-Targets vary by specialty and payer mix, and organisations define these metrics differently, so treat them as rough benchmarks and always check the definition behind a number. You'll learn each one in detail in [reporting and KPIs](/rcm-cycle/reporting-and-kpis/).
+Targets vary by specialty and payer mix, and organizations define these metrics differently, so treat them as rough benchmarks and always check the definition behind a number. You'll learn each one in detail in [reporting and KPIs](/rcm-cycle/reporting-and-kpis/).
 
 ## What RCM is not
 

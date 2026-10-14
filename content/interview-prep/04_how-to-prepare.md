@@ -1,7 +1,7 @@
 ---
 title: How to prepare for an RCM interview
 short: How to prepare
-description: A two-week preparation plan, a mock AR call script to practise out loud, and how to talk about your experience using real claim examples.
+description: A two-week preparation plan, a mock AR call script to practice out loud, and how to talk about your experience using real claim examples.
 order: 4
 level: Beginner
 keywords: RCM interview preparation AR calling mock call script STAR method resume tips voice process
@@ -20,9 +20,9 @@ keywords: RCM interview preparation AR calling mock call script STAR method resu
 | 13 | Questions | [Fresher](/interview-prep/fresher-questions/) or [experienced](/interview-prep/experienced-questions/) questions, out loud |
 | 14 | Revision | [Rapid-fire round](/interview-prep/rapid-fire/) and the mock call below |
 
-## Practise a mock AR call
+## Practice a mock AR call
 
-Most AR roles include a voice test where you play an AR caller. Practise this script with a friend until it sounds natural.
+Most AR roles include a voice test where you play an AR caller. Practice this script with a friend until it sounds natural.
 
 !!! example "Mock call (fictional)"
     **Representative:** Thank you for calling. How can I help you?

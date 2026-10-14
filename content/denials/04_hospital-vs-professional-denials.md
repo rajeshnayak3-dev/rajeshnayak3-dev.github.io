@@ -102,7 +102,7 @@ Some front-end failures deny every claim from one visit:
 When you work one, check the related claims from the same encounter. Fixing the authorization for the facility often fixes the professional claims too.
 
 !!! example "One authorization, four denials"
-    An outpatient spinal injection at a hospital was performed without authorization. The hospital's UB-04, the pain physician's CMS-1500 and the anaesthesia claim all denied CO-197. The hospital's authorization team obtained a retro-authorization (the plan allowed it within 14 days for the provider's documented scheduling error). The hospital AR analyst shared the auth number with the physician billing teams so all three claims were reprocessed.
+    An outpatient spinal injection at a hospital was performed without authorization. The hospital's UB-04, the pain physician's CMS-1500 and the anesthesia claim all denied CO-197. The hospital's authorization team obtained a retro-authorization (the plan allowed it within 14 days for the provider's documented scheduling error). The hospital AR analyst shared the auth number with the physician billing teams so all three claims were reprocessed.
 
 !!! interview "If an interviewer asks “How are hospital denials different from professional denials?”"
     “Hospital denials are fewer but higher value, and many are clinical: level of care, denied inpatient days, DRG downgrades from clinical validation, readmissions and itemized bill reviews, worked with coders, CDI and physician advisors. Professional denials are high-volume and more often about coding and modifiers, bundling, credentialing, frequency limits and eligibility. Front-end issues like missing authorization can deny both the facility and professional claims for the same visit.”

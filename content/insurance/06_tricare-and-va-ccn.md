@@ -48,7 +48,7 @@ Military retirees can have **both**: TRICARE as their health plan and VA care fo
 
 ### Main plans
 
-- **TRICARE Prime:** HMO-like. Enrolees have a primary care manager (PCM), often at a military hospital or clinic, and need **referrals** for specialty care. Active-duty members must use Prime.
+- **TRICARE Prime:** HMO-like. Enrollees have a primary care manager (PCM), often at a military hospital or clinic, and need **referrals** for specialty care. Active-duty members must use Prime.
 - **TRICARE Select:** PPO-like. No referrals for most care; higher cost-sharing; can see any TRICARE-authorized provider.
 - **TRICARE For Life (TFL):** for TRICARE-eligible people who have **Medicare Part A and B**. Medicare is primary, TFL secondary.
 - **TRICARE Reserve Select, Retired Reserve and Young Adult:** premium-based plans for specific groups.
@@ -86,7 +86,7 @@ Historically, TRICARE beneficiaries who weren't enrolled in Prime and lived near
 | Who's covered | Eligible veterans' dependents and survivors | Veterans themselves | Service members, retirees and their families |
 | Run by | VA | VA | Department of Defense |
 | Works like | Insurance: cost-sharing, deductible | VA buys care it has authorized | Insurance plans (Prime, Select, TFL) |
-| Claims go to | The VA's CHAMPVA claims processing centre | The CCN third-party administrator for the region | The TRICARE regional contractor |
+| Claims go to | The VA's CHAMPVA claims processing center | The CCN third-party administrator for the region | The TRICARE regional contractor |
 | Other insurance | CHAMPVA usually pays **after** other health insurance (except Medicaid and certain supplements) | VA pays for authorized care | TRICARE pays after other health insurance |
 | Timely filing | Generally 1 year from date of service | 180 days | 1 year |
 

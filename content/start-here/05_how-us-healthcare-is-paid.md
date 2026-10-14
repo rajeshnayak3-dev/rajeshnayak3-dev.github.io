@@ -104,7 +104,7 @@ Under **capitation**, a payer (usually an HMO or Medicare Advantage plan) pays t
 Payers increasingly reward **outcomes and quality** rather than volume:
 
 - **Pay-for-performance bonuses** for meeting quality measures.
-- **Shared savings** in accountable care organisations (ACOs).
+- **Shared savings** in accountable care organizations (ACOs).
 - **Bundled payments**, one payment for an episode such as a knee replacement and 90 days of follow-up.
 - **Medicare's Quality Payment Program (MIPS)**, which adjusts doctors' Medicare payments up or down based on reported quality, cost and other measures.
 

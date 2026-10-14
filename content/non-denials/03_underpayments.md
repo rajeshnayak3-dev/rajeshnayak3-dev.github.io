@@ -45,7 +45,7 @@ Many billing systems and contract management tools load payer fee schedules and 
 | Wrong fee schedule year | Payer still using last year's rates after a contract update |
 | Wrong provider or location rate | Claim priced at a non-par or out-of-area rate |
 | Multiple procedure reduction applied wrongly | Highest-value procedure reduced instead of the second |
-| Modifier not recognised | Bilateral (50) paid at 100% instead of 150% |
+| Modifier not recognized | Bilateral (50) paid at 100% instead of 150% |
 | Units underpaid | Drug units paid as 1 instead of the billed quantity |
 | Facility rate applied to an office service | POS 11 paid at facility rate |
 | Carve-outs missed (hospital) | Implant or high-cost drug carved out in the contract but paid inside the DRG |

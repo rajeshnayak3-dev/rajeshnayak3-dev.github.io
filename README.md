@@ -132,6 +132,7 @@ python -m http.server -d dist 8000
 
 # tests
 node tests/calc.test.js                 # calculator formulas and edge cases
+python tests/spellcheck.py dist         # US English spelling on every page
 python tests/linkcheck.py dist          # internal links and anchors
 pip install playwright && python tests/e2e.py http://localhost:8000 docs/e2e-results.md
 ```

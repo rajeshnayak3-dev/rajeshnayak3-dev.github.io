@@ -1,12 +1,12 @@
 {% extends "base.html" %}
+{% block layout %}layout-plain{% endblock %}
 {% from "_icons.html" import icon %}
-{% from "_illus.html" import spot %}
 {% from "_parts.html" import crumbs %}
 {% block main %}
 <div class="wrap">
   {{ crumbs([("Career and certification", None)]) }}
   <header class="section-head">
-    <span class="sh-spot">{{ spot("career") }}</span>
+    <span class="sh-ico">{{ icon("award", 26) }}</span>
     <div>
       <h1>Career and certification</h1>
       <p class="lede">The roles in an RCM operation, the competencies each one needs, and where REVEX teaches them. Use the checklists to judge your own readiness. REVEX can't promise a job or an interview result, but it can help you walk in prepared.</p>
@@ -51,7 +51,7 @@
       <li><a class="topic" href="/{{ it.url }}" data-topic="{{ it.url }}"><span class="topic-body"><span class="topic-title">{{ it.title }}</span><span class="topic-desc">{{ it.description }}</span></span><span class="topic-check" aria-hidden="true">{{ icon("check", 18) }}</span></a></li>
       {% endfor %}
     </ul>
-    <p>Interviewers increasingly ask scenario questions. Practise explaining your reasoning out loud with the <a href="/practice/#cases">practice cases</a>, not just the answers.</p>
+    <p>Interviewers increasingly ask scenario questions. Practice explaining your reasoning out loud with the <a href="/practice/#cases">practice cases</a>, not just the answers.</p>
   </section>
 
   <section id="exam" aria-labelledby="exam-h" class="panel">

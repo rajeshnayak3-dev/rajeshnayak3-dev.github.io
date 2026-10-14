@@ -66,11 +66,11 @@
 
 - id: working-in-rcm
   title: Working in RCM
-  audience: AR, denial, posting and eligibility associates who want to work accounts with sound judgement
+  audience: AR, denial, posting and eligibility associates who want to work accounts with sound judgment
   level: Intermediate
   prerequisites: The New to RCM path, or equivalent experience working claims.
   outcomes:
-    - Prioritise an AR worklist by deadline risk, balance and recovery potential
+    - Prioritize an AR worklist by deadline risk, balance and recovery potential
     - Work no-response, denied, underpaid and recouped claims to a correct next action
     - Choose between a corrected claim, reopening, reconsideration, appeal and escalation
     - Write AR notes that another analyst or an auditor can act on
@@ -137,7 +137,7 @@
     - Find root causes with data and run corrective and preventive action
     - Define KPIs with formula, denominator, period and exclusions
     - Lead improvements that hold, and prove they worked
-  completion: Mark every lesson as complete and finish the QA audit and prioritisation cases.
+  completion: Mark every lesson as complete and finish the QA audit and prioritization cases.
   modules:
     - title: Quality assurance
       summary: Audit design, scoring, calibration and corrective action.

@@ -133,7 +133,7 @@ Authorization absent. I check whether an authorization exists but wasn't on the 
 The care may be covered by another payer per coordination of benefits. I confirm the order of benefits, bill the primary, and if the payer's record is wrong, have the patient update COB and request reprocessing.
 </details>
 
-## Behaviour and fit
+## Behavior and fit
 
 <details class="qa" markdown="1">
 <summary>Why do you want to work in RCM?</summary>
@@ -162,5 +162,5 @@ HIPAA sets rules for the privacy and security of protected health information an
 <details class="qa" markdown="1">
 <summary>Take me through a claim from start to finish.</summary>
 
-Use the twelve stages: scheduling and registration, eligibility, authorization, the visit and documentation, coding, charge entry, claim scrubbing and submission, adjudication, payment posting, denial and AR follow-up, patient billing, and reporting. Give one sentence on each and one example of something that goes wrong. Practise this until you can do it in two minutes.
+Use the twelve stages: scheduling and registration, eligibility, authorization, the visit and documentation, coding, charge entry, claim scrubbing and submission, adjudication, payment posting, denial and AR follow-up, patient billing, and reporting. Give one sentence on each and one example of something that goes wrong. Practice this until you can do it in two minutes.
 </details>

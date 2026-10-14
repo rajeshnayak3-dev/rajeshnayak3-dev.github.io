@@ -74,7 +74,7 @@ Statements must be clear: date of service, provider, what insurance paid, what t
 ## Payment options
 
 - Online portal, card, bank transfer, phone
-- **Payment plans**: monthly instalments under the practice's policy
+- **Payment plans**: monthly installments under the practice's policy
 - **Prompt-pay discounts** for self-pay patients, when policy allows
 
 ## Financial assistance and charity care

@@ -66,7 +66,7 @@ Revenue codes are four digits with a leading zero. The first three digits are th
 | 033x | Radiology, therapeutic and chemotherapy administration | Yes |
 | 035x | CT scan | Yes |
 | 036x | Operating room services | Yes |
-| 037x | Anaesthesia | Yes |
+| 037x | Anesthesia | Yes |
 | 038x / 039x | Blood and blood components / blood storage and processing | Yes |
 | 040x | Other imaging (mammography, ultrasound) | Yes |
 | 042x / 043x / 044x | Physical / occupational / speech therapy | Yes, with GP/GO/GN |

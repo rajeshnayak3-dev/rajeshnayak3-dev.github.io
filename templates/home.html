@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% from "_icons.html" import icon %}
-{% from "_illus.html" import ecg_track, spot %}
-{% block layout %}layout-home{% endblock %}
+{% block layout %}layout-plain{% endblock %}
 {% block body_class %}page-home{% endblock %}
 {% block head %}
 <script type="application/ld+json">
@@ -9,142 +8,76 @@
 </script>
 {% endblock %}
 {% block main %}
-<section class="hx" aria-labelledby="hx-h">
-  <div class="hx-bg" aria-hidden="true">
-    <span class="hx-glow g1"></span><span class="hx-glow g2"></span><span class="hx-glow g3"></span>
-    <svg class="hx-waves" viewBox="0 0 1440 600" preserveAspectRatio="none">
-      <path d="M0 420C220 360 380 470 620 410S1040 300 1440 360"/>
-      <path d="M0 460C240 400 400 510 640 450S1060 340 1440 400"/>
-      <path d="M0 500C260 440 420 550 660 490S1080 380 1440 440"/>
-      <path d="M0 540C280 480 440 590 680 530S1100 420 1440 480"/>
-    </svg>
-  </div>
-  <div class="wrap hx-grid">
-    <div class="hx-copy">
-      <p class="hx-kicker"><span class="hx-pulse" aria-hidden="true"></span> Free US healthcare RCM training</p>
-      <h1 id="hx-h">From your first claim to confident RCM decisions.</h1>
-      <p class="hx-lede">Short, plain-English lessons, realistic practice cases and instant feedback. No sign-up, no cost.</p>
-      <div class="hx-actions">
-        <a class="btn btn-hx" href="/learn/new-to-rcm/">Start learning, it's free</a>
-        <a class="btn btn-hx-ghost" href="/practice/">Try a practice case</a>
-      </div>
-      <ul class="hx-facts">
-        <li><strong>{{ stats.lessons }}</strong> short lessons</li>
-        <li><strong>{{ stats.scenarios }}</strong> practice cases</li>
-        <li><strong>5–10</strong> minutes each</li>
-      </ul>
-    </div>
-
-    <div class="hx-visual" aria-label="Example: one claim from insurance card to payment" role="img">
-      <article class="fc fc-card" aria-hidden="true">
-        <header><span class="fc-logo">{{ icon("shield", 16) }}</span><span>Sample Health PPO</span></header>
-        <p class="fc-name">Jordan Avery</p>
-        <dl class="fc-grid">
-          <div><dt>Member ID</dt><dd class="mono">XJH 448190211</dd></div>
-          <div><dt>Group</dt><dd class="mono">10442</dd></div>
-          <div><dt>Copay</dt><dd>$25</dd></div>
-          <div><dt>Network</dt><dd>In-network</dd></div>
-        </dl>
-        <p class="fc-foot">Fictional example</p>
-      </article>
-
-      <article class="fc fc-claim" aria-hidden="true">
-        <header><span>Claim <span class="mono">RX-20418</span></span><span class="chip chip-paid">Paid</span></header>
-        <p class="fc-sub">Office visit · CPT <span class="mono">99214</span></p>
-        <ol class="fc-steps">
-          <li class="done">Submitted</li><li class="done">Accepted</li><li class="done">Adjudicated</li><li class="done paid">Paid</li>
-        </ol>
-      </article>
-
-      <article class="fc fc-era" aria-hidden="true">
-        <header><span>Remittance (ERA)</span><span class="fc-amt mono">$112.40</span></header>
-        <div class="fc-era-body">
-          <svg class="donut" viewBox="0 0 42 42">
-            <circle cx="21" cy="21" r="15.9" class="d-bg"/>
-            <circle cx="21" cy="21" r="15.9" class="d-paid" stroke-dasharray="62.4 37.6" stroke-dashoffset="25"/>
-            <circle cx="21" cy="21" r="15.9" class="d-co" stroke-dasharray="21.9 78.1" stroke-dashoffset="-37.4"/>
-            <circle cx="21" cy="21" r="15.9" class="d-pr" stroke-dasharray="15.7 84.3" stroke-dashoffset="-59.3"/>
-          </svg>
-          <ul class="fc-legend">
-            <li><i class="k-paid"></i>Payer paid <b class="mono">$112.40</b></li>
-            <li><i class="k-co"></i>CO-45 write-off <b class="mono">$39.50</b></li>
-            <li><i class="k-pr"></i>PR-2 patient <b class="mono">$28.10</b></li>
-          </ul>
-        </div>
-      </article>
-    </div>
-  </div>
-
-  <div class="wrap hx-ecg">
-    {{ ecg_track() }}
-    <p class="ecg-caption"><span>Every claim follows this rhythm. When it skips a beat, someone in RCM finds out why.</span> <button type="button" class="link-btn" data-ecg-replay>Replay</button></p>
+<section class="g-hero" aria-labelledby="hero-h">
+  <div class="g-hero-bg" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span><span class="b4"></span></div>
+  <div class="wrap g-hero-in">
+    <h1 id="hero-h">Learn US healthcare billing, <span class="nowrap">one step at a time.</span></h1>
+    <p class="g-sub">Free, short lessons on revenue cycle management, with practice cases and quizzes. No sign-up.</p>
+    <button type="button" class="g-search" data-search-open>
+      {{ icon("search", 22) }}
+      <span>Search lessons, denial codes like CO-197, or terms like QMB</span>
+    </button>
+    <ul class="g-chips" aria-label="Popular starting points">
+      <li><a href="/start-here/what-is-rcm/">What is RCM?</a></li>
+      <li><a href="/rcm-cycle/">The claim cycle</a></li>
+      <li><a href="/denials/read-an-era/">Read an ERA</a></li>
+      <li><a href="/denials/codes/">Denial codes</a></li>
+      <li><a href="/insurance/medicare/">Medicare</a></li>
+      <li><a href="/glossary/">Dictionary</a></li>
+    </ul>
   </div>
 </section>
 
 <section class="wrap resume" data-resume-strip hidden aria-label="Continue where you left off">
-  <div class="resume-card">
+  <a class="resume-card" href="/" data-continue-link>
     <span class="resume-ico">{{ icon("clock", 20) }}</span>
-    <div><p class="resume-k">Continue where you left off</p><p class="resume-t" data-continue-title></p></div>
-    <div class="resume-prog"><span class="mono" data-dash-pct>0%</span><span class="dash-bar"><i data-dash-bar></i></span></div>
-    <a class="btn btn-primary" href="/" data-continue-link>Continue</a>
-  </div>
-  <p class="small-note" data-dash-meta hidden></p>
+    <span class="resume-txt"><span class="resume-k">Continue where you left off</span><span class="resume-t" data-continue-title></span></span>
+    <span class="resume-prog"><span data-dash-pct>0%</span> done</span>
+    <span class="resume-go">{{ icon("right", 20) }}</span>
+  </a>
 </section>
 
-<section class="wrap how" aria-labelledby="how-h" data-reveal>
-  <h2 id="how-h" class="sec-h">How REVEX works</h2>
-  <ol class="how-steps">
-    <li><span class="how-ico">{{ icon("book", 22) }}</span><strong>Learn</strong><span>Read a short lesson in plain English. Hover over underlined terms to see what they mean.</span></li>
-    <li><span class="how-ico">{{ icon("check", 22) }}</span><strong>Practise</strong><span>Work a realistic, fictional account one decision at a time and see why each choice is right or wrong.</span></li>
-    <li><span class="how-ico">{{ icon("chart", 22) }}</span><strong>Check yourself</strong><span>Take the quiz at the end of each lesson and watch your progress grow. It's saved on this device.</span></li>
-  </ol>
-</section>
-
-<section class="wrap paths-home" aria-labelledby="ph-h" data-reveal>
-  <h2 id="ph-h" class="sec-h">Choose your path</h2>
-  <p class="sec-lede">Not sure? Start with New to RCM. You can switch any time.</p>
-  <ul class="aud-grid">
+<section class="wrap g-sec" aria-labelledby="paths-h">
+  <h2 id="paths-h">Where are you starting from?</h2>
+  <ul class="path-tiles">
     {% for p in paths %}
     <li>
-      <a class="aud-card aud-{{ loop.index }}" href="/learn/{{ p.id }}/" data-path-card="{{ p.id }}">
-        <span class="aud-art">{{ spot(p.id) }}</span>
-        <span class="aud-level lvl lvl-{{ p.level | slug }}">{{ p.level }}</span>
-        <strong>{{ p.title }}</strong>
-        <span class="aud-desc">{{ p.audience }}.</span>
-        <span class="aud-meta">{{ p.modules | length }} modules · about {{ p.hours }} h</span>
-        <span class="aud-progress" data-path-progress="{{ p.id }}" data-urls="{{ p.track_urls | join(' ') }}"></span>
-        <span class="aud-go">Open path {{ icon("right", 16) }}</span>
+      <a class="path-tile pt-{{ loop.index }}" href="/learn/{{ p.id }}/">
+        <span class="pt-ico">{{ icon(["compass","inbox","chart"][loop.index0], 26) }}</span>
+        <span class="pt-title">{{ p.title }}</span>
+        <span class="pt-desc">{{ ["I'm new to US healthcare billing", "I already work on claims or AR", "I audit, lead or analyze RCM work"][loop.index0] }}</span>
+        <span class="pt-meta">{{ p.modules | length }} modules · about {{ p.hours }} h</span>
+        <span class="pt-progress" data-path-progress="{{ p.id }}" data-urls="{{ p.track_urls | join(' ') }}"></span>
+        <span class="pt-go">Start {{ icon("right", 18) }}</span>
       </a>
     </li>
     {% endfor %}
   </ul>
 </section>
 
-<section class="wrap topics-home" aria-labelledby="th-h" data-reveal>
-  <h2 id="th-h" class="sec-h">Or start with a topic</h2>
-  <ul class="topic-tiles">
-    <li><a href="/start-here/what-is-rcm/" class="tt t-teal"><span class="tt-ico">{{ icon("compass", 22) }}</span><strong>What is RCM?</strong><span>The big picture in about 7 minutes</span></a></li>
-    <li><a href="/rcm-cycle/" class="tt t-blue"><span class="tt-ico">{{ icon("cycle", 22) }}</span><strong>The claim cycle</strong><span>12 stages, start to finish</span></a></li>
-    <li><a href="/insurance/medicare/" class="tt t-indigo"><span class="tt-ico">{{ icon("shield", 22) }}</span><strong>Medicare basics</strong><span>Parts A, B, C and D</span></a></li>
-    <li><a href="/forms-billing/cms-1500/" class="tt t-amber"><span class="tt-ico">{{ icon("form", 22) }}</span><strong>The CMS-1500 form</strong><span>Box by box</span></a></li>
-    <li><a href="/denials/read-an-era/" class="tt t-rose"><span class="tt-ico">{{ icon("alert", 22) }}</span><strong>Read a denial</strong><span>CO, PR, CARC and RARC</span></a></li>
-    <li><a href="/glossary/" class="tt t-slate"><span class="tt-ico">{{ icon("book", 22) }}</span><strong>RCM dictionary</strong><span>{{ stats.terms }} terms, plain English</span></a></li>
+<section class="wrap g-sec" aria-labelledby="how-h">
+  <h2 id="how-h">How it works</h2>
+  <ol class="how-row">
+    <li><span class="how-n">1</span><div><strong>Read a short lesson</strong><p>5 to 10 minutes, in plain English. Tap any underlined term to see what it means.</p></div></li>
+    <li><span class="how-n">2</span><div><strong>Practice a real-world case</strong><p>Make one decision at a time and see why each choice is right or wrong.</p></div></li>
+    <li><span class="how-n">3</span><div><strong>Check what you learned</strong><p>A quick quiz ends every lesson. Your progress is saved on this device.</p></div></li>
+  </ol>
+</section>
+
+<section class="wrap g-sec" aria-labelledby="explore-h">
+  <h2 id="explore-h">Explore</h2>
+  <ul class="explore">
+    <li><a class="ex ex-blue" href="/practice/"><span class="ex-ico">{{ icon("check", 22) }}</span><span><strong>Practice cases</strong><small>{{ stats.scenarios }} realistic claim scenarios</small></span></a></li>
+    <li><a class="ex ex-green" href="/denials/codes/"><span class="ex-ico">{{ icon("alert", 22) }}</span><span><strong>Denial code library</strong><small>{{ stats.codes }} codes explained</small></span></a></li>
+    <li><a class="ex ex-yellow" href="/tools/"><span class="ex-ico">{{ icon("calc", 22) }}</span><span><strong>AR calculators</strong><small>Deadlines, payments and KPIs</small></span></a></li>
+    <li><a class="ex ex-purple" href="/career/"><span class="ex-ico">{{ icon("award", 22) }}</span><span><strong>Career and interviews</strong><small>Roles, skills and questions</small></span></a></li>
   </ul>
 </section>
 
-<section class="wrap trust" aria-labelledby="trust-h" data-reveal>
-  <div class="trust-card">
-    <div class="trust-intro">
-      <h2 id="trust-h" class="sec-h">Built by someone who does this work</h2>
-      <p>{{ site.mission }}</p>
-      <p class="trust-by">Written by <a href="{{ site.author.linkedin }}" target="_blank" rel="noopener">{{ site.author.name }}</a>, {{ site.author.title }} with {{ site.author.experience }}.</p>
-    </div>
-    <ul class="trust-list">
-      <li><span class="tl-ico">{{ icon("check", 18) }}</span><span><strong>Free, no sign-up.</strong> Progress stays in your browser.</span></li>
-      <li><span class="tl-ico">{{ icon("shield", 18) }}</span><span><strong>Fictional data only.</strong> Never enter real patient details.</span></li>
-      <li><span class="tl-ico">{{ icon("book", 18) }}</span><span><strong>Sourced where it matters.</strong> CMS and X12 links, with review dates. <a href="/sources/">Sources</a></span></li>
-      <li><span class="tl-ico">{{ icon("alert", 18) }}</span><span><strong>Educational, not advice.</strong> Payer rules vary. <a href="/about/#disclaimer">Disclaimer</a></span></li>
-    </ul>
-  </div>
+<section class="wrap g-sec g-about" aria-labelledby="about-h">
+  <h2 id="about-h">Why REVEX is free</h2>
+  <p>{{ site.mission }}</p>
+  <p class="g-by">Written by <a href="{{ site.author.linkedin }}" target="_blank" rel="noopener">{{ site.author.name }}</a>, {{ site.author.title }} with {{ site.author.experience }}. All examples use made-up patients and claims. <a href="/about/#disclaimer">Read the disclaimer</a>.</p>
 </section>
+<script type="application/json" data-home-track>{{ track_json | safe }}</script>
 {% endblock %}

@@ -92,7 +92,7 @@ Original Medicare traditionally requires little prior authorization, though CMS 
     1. **Code mismatch:** approved for 72148 (MRI lumbar without contrast) but 72158 (without and with contrast) was performed.
     2. **Date mismatch:** service done after the authorization expired.
     3. **Units exceeded:** 12 therapy visits approved, 14 billed (CO-198).
-    4. **Provider or site mismatch:** approved for the hospital outpatient department, performed at a freestanding imaging centre.
+    4. **Provider or site mismatch:** approved for the hospital outpatient department, performed at a freestanding imaging center.
 
     When the procedure changes during the visit, the provider's office must ask the payer to update the authorization, ideally within the payer's allowed window.
 

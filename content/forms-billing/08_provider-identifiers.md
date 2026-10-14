@@ -6,14 +6,14 @@ order: 8
 level: Beginner
 keywords: NPI Type 1 Type 2 NPPES TIN EIN SSN W-9 PTAN taxonomy code CLIA number UPIN Medicaid provider number provider identifiers
 quiz:
-  - q: A group practice bills under its organisation NPI. What type is it?
+  - q: A group practice bills under its organization NPI. What type is it?
     options:
       - Type 1
       - Type 2
       - PTAN
       - Taxonomy
     answer: 1
-    why: Type 1 NPIs are for individuals; Type 2 NPIs are for organisations such as groups, hospitals and labs.
+    why: Type 1 NPIs are for individuals; Type 2 NPIs are for organizations such as groups, hospitals and labs.
   - q: Which identifier must match the billing NPI on a claim, or the payer rejects or pays the wrong entity?
     options:
       - The patient's member ID
@@ -37,7 +37,7 @@ quiz:
 | Identifier | Format | Issued by | Identifies | On the CMS-1500 | On the UB-04 |
 |---|---|---|---|---|---|
 | **NPI, Type 1** | 10 digits | CMS, through NPPES | An individual provider | 24J (rendering), 17b (referring), 33a if billing as an individual | FL 76–79 (attending, operating, other) |
-| **NPI, Type 2** | 10 digits | CMS, through NPPES | An organisation (group, hospital, lab, DME supplier) | 33a (billing), 32a (service facility) | FL 56 (billing provider) |
+| **NPI, Type 2** | 10 digits | CMS, through NPPES | An organization (group, hospital, lab, DME supplier) | 33a (billing), 32a (service facility) | FL 56 (billing provider) |
 | **TIN / EIN** | 9 digits (XX-XXXXXXX) | IRS | The business that gets paid | Box 25 | FL 5 |
 | **SSN** (as TIN) | 9 digits | Social Security | A solo provider billing as an individual | Box 25 (SSN checkbox) | Rare |
 | **PTAN** | Alphanumeric, varies by MAC | The Medicare contractor | A provider's Medicare enrollment | Not on claims; used on MAC portals and calls | Not on claims |
@@ -49,7 +49,7 @@ quiz:
 
 - Every HIPAA-covered provider must have an **NPI**. It never changes, even if the provider moves or changes specialty.
 - Anyone can look up an NPI on the public **NPPES NPI Registry**, which shows name, address, taxonomy and type. It's the quickest way to confirm a provider's details during a call.
-- **Type 1** for individuals (physicians, NPs, PAs, therapists). **Type 2** for organisations.
+- **Type 1** for individuals (physicians, NPs, PAs, therapists). **Type 2** for organizations.
 
 ## TIN: who gets paid
 
@@ -85,4 +85,4 @@ Every site that tests human specimens needs a **CLIA certificate**. Physician of
     Using the individual NPI in box 33 for a group, or the group NPI in box 24J. The billing provider (box 33) is usually the group's Type 2 NPI; the rendering provider (24J) is always the individual's Type 1 NPI.
 
 !!! interview "If an interviewer asks “What is the difference between Type 1 and Type 2 NPI?”"
-    “Both are 10-digit National Provider Identifiers from CMS. Type 1 identifies an individual provider, like a physician or nurse practitioner, and goes in the rendering field, box 24J. Type 2 identifies an organisation, like a group practice or hospital, and is usually the billing provider in box 33. The billing NPI must match the TIN the payer has on file.”
+    “Both are 10-digit National Provider Identifiers from CMS. Type 1 identifies an individual provider, like a physician or nurse practitioner, and goes in the rendering field, box 24J. Type 2 identifies an organization, like a group practice or hospital, and is usually the billing provider in box 33. The billing NPI must match the TIN the payer has on file.”

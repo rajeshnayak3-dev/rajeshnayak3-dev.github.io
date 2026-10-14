@@ -30,7 +30,7 @@ quiz:
       - Coordination of benefits
       - Accounts payable
     answer: 0
-    why: Revenue management (or yield management) sets prices to maximise income. Revenue cycle management is about billing and collecting what's earned.
+    why: Revenue management (or yield management) sets prices to maximize income. Revenue cycle management is about billing and collecting what's earned.
 ---
 
 ## The general idea
@@ -45,7 +45,7 @@ In most industries this is called **order-to-cash (O2C)**, and it's usually run 
 |---|---|---|
 | 1. Customer and credit check | Confirm who the customer is and whether they can pay | New corporate client approved for 30-day credit |
 | 2. Order | Customer orders at a known price | 200 chairs at $80 each |
-| 3. Fulfilment | Product delivered or service performed | Chairs delivered |
+| 3. Fulfillment | Product delivered or service performed | Chairs delivered |
 | 4. Invoice | A bill for the agreed amount is sent | Invoice for $16,000, due in 30 days |
 | 5. Accounts receivable | The unpaid invoice is tracked by age | Invoice sits in the 0–30 bucket |
 | 6. Collections | Reminders and calls for overdue invoices | Reminder on day 31 |
@@ -56,7 +56,7 @@ You'll notice familiar ideas from healthcare: accounts receivable, aging buckets
 
 ### How it varies by industry
 - **Retail and e-commerce:** payment usually happens at the time of sale (card, wallet), so the cycle is short. The main issues are refunds, chargebacks and fraud.
-- **SaaS and subscriptions:** recurring billing, renewals, failed card payments and revenue recognised over time.
+- **SaaS and subscriptions:** recurring billing, renewals, failed card payments and revenue recognized over time.
 - **Manufacturing and wholesale (B2B):** invoices on credit terms (30, 60 or 90 days), purchase order matching and disputes over quantity or price.
 - **Utilities and telecom:** metered usage billed monthly, large volumes of small balances, disconnection policies.
 
@@ -94,7 +94,7 @@ Healthcare follows the same basic shape, but almost every step is harder.
 ## Why this matters for your career
 
 - **Transferable skills:** AR follow-up, aging, cash posting and collections exist in every industry, so RCM experience can lead into finance and order-to-cash roles.
-- **Healthcare-specific skills** (coding, payer rules, denials, compliance) are what make RCM analysts valuable, and why healthcare RCM is a specialised industry with its own outsourcing market.
+- **Healthcare-specific skills** (coding, payer rules, denials, compliance) are what make RCM analysts valuable, and why healthcare RCM is a specialized industry with its own outsourcing market.
 - In interviews, being able to explain the difference shows you understand RCM as a business process, not just a set of tasks.
 
 !!! interview "If an interviewer asks “Is RCM only in healthcare?”"

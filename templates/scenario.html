@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block layout %}layout-plain{% endblock %}
 {% from "_icons.html" import icon %}
 {% from "_parts.html" import crumbs, complete_bar %}
 {% block main %}
@@ -20,7 +21,7 @@
 
   {% if sc.objectives %}
   <section class="objectives" aria-labelledby="obj-h">
-    <h2 id="obj-h">What this case practises</h2>
+    <h2 id="obj-h">What this case practices</h2>
     <ul>{% for o in sc.objectives %}<li>{{ o | md }}</li>{% endfor %}</ul>
   </section>
   {% endif %}

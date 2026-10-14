@@ -106,7 +106,7 @@ The 277 and 277CA use **claim status category codes** and **claim status codes**
 - **A1, A2:** acknowledgment, received or accepted into adjudication
 - **A3, A6, A7:** rejected, returned as unprocessable, or rejected for invalid information
 - **P1–P5:** pending (for example P1 in process, P2 pending review)
-- **F1–F4:** finalised (F1 paid, F2 denied, F3 revised, F4 adjudicated with no payment)
+- **F1–F4:** finalized (F1 paid, F2 denied, F3 revised, F4 adjudicated with no payment)
 - **R codes:** requests for more information
 
 A status of “A7 / 562” for example means the claim was rejected because an entity's NPI is invalid. The analyst fixes the NPI and resubmits.

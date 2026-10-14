@@ -23,7 +23,7 @@
     - code: "85025"
       desc: Complete blood count with automated differential
     - code: "83036"
-      desc: Haemoglobin A1c
+      desc: Hemoglobin A1c
     - code: "84443"
       desc: TSH (thyroid stimulating hormone)
     - code: "81001"
@@ -110,7 +110,7 @@
       desc: Knee orthosis, prefabricated, off-the-shelf
   icd:
     - code: G47.33
-      desc: Obstructive sleep apnoea
+      desc: Obstructive sleep apnea
     - code: J96.11
       desc: Chronic respiratory failure with hypoxia
   modifiers:

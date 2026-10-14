@@ -34,7 +34,7 @@ quiz:
 
 ## How RCM work is split
 
-Large RCM companies divide the cycle into specialised teams. In a small practice, one person may do several of these jobs. The names vary between employers, so learn what each job **does** rather than memorising titles.
+Large RCM companies divide the cycle into specialized teams. In a small practice, one person may do several of these jobs. The names vary between employers, so learn what each job **does** rather than memorizing titles.
 
 ## Front-end roles
 

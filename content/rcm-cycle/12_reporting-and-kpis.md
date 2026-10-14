@@ -96,7 +96,7 @@ A **clean claim** is one with no defect that stops the payer from processing it.
 
 > FPRR = Claims resolved on first submission (paid, or correctly adjudicated to patient responsibility) ÷ Total claims adjudicated × 100
 
-**Typical target:** 90% or higher. Some organisations call a closely related measure **first-pass payment rate** and count only claims with a payer payment, so a claim that adjudicates entirely to the deductible counts differently. Check the definition before comparing numbers.
+**Typical target:** 90% or higher. Some organizations call a closely related measure **first-pass payment rate** and count only claims with a payer payment, so a claim that adjudicates entirely to the deductible counts differently. Check the definition before comparing numbers.
 
 ## Keep these measures apart
 
@@ -111,7 +111,7 @@ A **clean claim** is one with no defect that stops the payer from processing it.
 
 A claim can be clean, accepted, and still denied. A rejected claim was never adjudicated, so it isn't a denial and shouldn't be counted in the denial rate.
 
-Source: [CGS Medicare, Payment timeframes for clean claims](https://www.cgsmedicare.com/parta/claims/paytimeframe.html) (Medicare FFS; reviewed October 2026). KPI definitions above are common industry usage, not a regulation; your organisation's definitions control.
+Source: [CGS Medicare, Payment timeframes for clean claims](https://www.cgsmedicare.com/parta/claims/paytimeframe.html) (Medicare FFS; reviewed October 2026). KPI definitions above are common industry usage, not a regulation; your organization's definitions control.
 
 ## Denial rate
 

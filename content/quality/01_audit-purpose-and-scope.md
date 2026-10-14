@@ -19,7 +19,7 @@ quiz:
       - Skip the account
       - Fail, and retrain the associate
     answer: 1
-    why: Process adherence measures whether the person did the work correctly against the standard. The outcome (a denial) had a cause outside their control. Mixing the two punishes people for payer behaviour and hides the real root cause.
+    why: Process adherence measures whether the person did the work correctly against the standard. The outcome (a denial) had a cause outside their control. Mixing the two punishes people for payer behavior and hides the real root cause.
   - q: Which is the best audit scope statement?
     options:
       - Audit some AR notes this month

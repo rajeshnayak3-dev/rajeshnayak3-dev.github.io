@@ -1,16 +1,16 @@
 ---
 title: Interview questions for experienced analysts and QA
 short: Experienced questions
-description: Questions for senior AR, denial management, team lead and QA auditor interviews, focused on judgement, root cause, KPIs and audit practice.
+description: Questions for senior AR, denial management, team lead and QA auditor interviews, focused on judgment, root cause, KPIs and audit practice.
 order: 2
 level: Advanced
 keywords: senior AR analyst interview denial management interview QA auditor interview team lead RCM interview questions
 ---
 
-## Denials and AR judgement
+## Denials and AR judgment
 
 <details class="qa" markdown="1">
-<summary>How do you prioritise an AR inventory of 5,000 claims?</summary>
+<summary>How do you prioritize an AR inventory of 5,000 claims?</summary>
 
 By risk and value. First, claims near timely filing or appeal deadlines; then high-dollar claims; then older aging buckets. I group by payer and denial type so one call or fix covers many claims, and I look for patterns (one payer, one code) that can be fixed in bulk with the payer rather than claim by claim.
 </details>

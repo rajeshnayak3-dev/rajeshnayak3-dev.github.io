@@ -21,7 +21,7 @@ quiz:
       - The payer must pay again
       - Nothing
     answer: 1
-    why: Without an assignment of benefits honoured by the payer, the patient receives the check and owes the provider that amount.
+    why: Without an assignment of benefits honored by the payer, the patient receives the check and owes the provider that amount.
 ---
 
 ## The situation
@@ -55,7 +55,7 @@ Most “paid not received” cases end here: the money arrived but wasn't posted
 | Check sent to an old address | Ask the payer to stop payment and reissue to the correct address; update the address with the payer |
 | EFT sent to an old bank account | Confirm EFT enrollment details; ask the payer for a trace or reissue; update enrollment |
 | Check never cashed and older than the payer's void period | Ask for a reissue (payers often void uncashed checks after 90–180 days) |
-| Paid to another provider or tax ID in the group | Get details; if within the same organisation, move the payment internally; otherwise ask the payer to recoup and repay |
+| Paid to another provider or tax ID in the group | Get details; if within the same organization, move the payment internally; otherwise ask the payer to recoup and repay |
 | Paid to the **patient** | See below |
 
 Payers often require a **check tracer** request and a waiting period before reissuing a check.

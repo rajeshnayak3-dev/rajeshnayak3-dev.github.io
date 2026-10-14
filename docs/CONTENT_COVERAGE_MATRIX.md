@@ -57,18 +57,18 @@ Status key: **Verified** = present and its policy-sensitive statements reviewed 
 ## Module 6 — AR follow-up
 | Topic | Where | Status |
 |---|---|---|
-| Work queues and prioritisation | `quality/ar-prioritization-and-work-queues`, SC-20 | Verified (new) |
+| Work queues and prioritization | `quality/ar-prioritization-and-work-queues`, SC-20 | Verified (new) |
 | Aging buckets and days in AR | `start-here/ar-and-ap`, KPIs | Present / Verified |
 | No-response and pending | `non-denials/no-response-claims`, SC-10 | Present |
 | Portal and phone research; call reference; notes | `payer-call-workflows`, `mock-payer-calls`, AR note tool | Present / Verified (tool) |
-| Next action, follow-up date, owner, escalation | AR note tool, AR prioritisation lesson | Verified |
-| No arbitrary universal follow-up intervals | AR prioritisation lesson | Verified |
+| Next action, follow-up date, owner, escalation | AR note tool, AR prioritization lesson | Verified |
+| No arbitrary universal follow-up intervals | AR prioritization lesson | Verified |
 
 ## Module 7 — Denial management
 | Topic | Where | Status |
 |---|---|---|
 | Root cause vs symptom | `denials/preventing-denials`, `quality/root-cause-and-pareto` | Present / Verified |
-| Category coverage (eligibility, auth, necessity, coding, duplicate, TF, COB, bundling, demographics, enrollment, documentation) | `denials/denial-categories`, code library (71) | Present (library summaries labelled) |
+| Category coverage (eligibility, auth, necessity, coding, duplicate, TF, COB, bundling, demographics, enrollment, documentation) | `denials/denial-categories`, code library (71) | Present (library summaries labeled) |
 | Corrected claim vs appeal vs reconsideration vs reprocessing vs escalation | `corrected-claims`, `appeals`, SC-17 | Verified / Present |
 | Appeal letter and evidence | `denials/appeals` | Present |
 | Deadlines | timely filing tool, filing limits reference | Verified (Medicare) / Needs verification (other programs) |
@@ -98,7 +98,7 @@ Status key: **Verified** = present and its policy-sensitive statements reviewed 
 | RCA and Pareto | `quality/root-cause-and-pareto` | Verified (new) |
 | CAPA, feedback, coaching, re-audit | `quality/capa-feedback-and-coaching` | Verified (new) |
 | Standards and version control | `audit-purpose-and-scope` | Verified (new) |
-| Process vs outcome vs productivity | `audit-purpose-and-scope`, AR prioritisation | Verified (new) |
+| Process vs outcome vs productivity | `audit-purpose-and-scope`, AR prioritization | Verified (new) |
 
 ## Module 10 — Analytics and operations
 | Topic | Where | Status |
@@ -106,7 +106,7 @@ Status key: **Verified** = present and its policy-sensitive statements reviewed 
 | Denial rate definition choices; FPR/FPP | `reporting-and-kpis` | Verified |
 | Days in AR, aging distribution | KPIs, KPI tool | Verified |
 | NCR, GCR, clean claim rate, overturn rate | KPIs, KPI tool | Verified |
-| Productivity, backlog, inventory, rework | AR prioritisation lesson | Verified (new) |
+| Productivity, backlog, inventory, rework | AR prioritization lesson | Verified (new) |
 | Cohort/payer/provider/specialty breakdowns | RCA lesson, preventing denials | Partial |
 | Excel/SQL/BI exercises with fictional data | — | **Missing** |
 | KPI formula, denominator, period, exclusions, source shown | KPI tool definitions table | Verified |
@@ -117,7 +117,7 @@ Status key: **Verified** = present and its policy-sensitive statements reviewed 
 | Claim types, services, auth considerations, denial patterns, code caveats | 32 specialty pages | Present |
 | Documentation considerations | specialty "prerequisites"/"tips" fields | Partial |
 | Practical case per specialty | — | **Missing** |
-| Sources and review date | Scope box says not yet re-reviewed | **Missing** (labelled) |
+| Sources and review date | Scope box says not yet re-reviewed | **Missing** (labeled) |
 | "Varies by payer…" statement | Scope box on every specialty page | Verified |
 
 ## Module 12 — Career readiness
@@ -128,7 +128,7 @@ Status key: **Verified** = present and its policy-sensitive statements reviewed 
 | Interview scenarios with rationale | `interview-prep/*`, practice cases | Present |
 | Audit and root-cause exercises | SC-21, QA lessons | Present (new) |
 | Communication and escalation notes | AR note tool, cases' debriefs | Present |
-| Capstone and rubric | Practice lab "Planned" | **Missing** (labelled planned) |
+| Capstone and rubric | Practice lab "Planned" | **Missing** (labeled planned) |
 | CV/interview guidance without guarantees | `interview-prep/how-to-prepare`, career hub wording | Present |
 
 ## Practice case checklist (brief section 6)

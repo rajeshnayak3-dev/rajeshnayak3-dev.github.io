@@ -771,7 +771,7 @@
   stages:
     - q: Who should be involved first?
       choices:
-        - text: The physician advisor or utilisation review team, to request a peer-to-peer with the payer's medical director quickly.
+        - text: The physician advisor or utilization review team, to request a peer-to-peer with the payer's medical director quickly.
           v: best
           why: Level-of-care denials are clinical. A timely peer-to-peer often overturns them before a written appeal is needed.
         - text: The patient, to ask if they felt very ill.

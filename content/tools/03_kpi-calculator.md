@@ -46,6 +46,6 @@ keywords: KPI calculator days in AR calculator net collection rate calculator cl
 | Clean claim rate | Claims accepted first time with no edits or rejections ÷ claims submitted × 100 | Measured at the scrubber, clearinghouse or payer (277CA); say which | 95% or higher |
 | Denial rate (count) | Claims denied ÷ claims adjudicated × 100 | Rejections aren't denials, so they're excluded. Many teams also report a dollar version | Under 5–10% |
 
-**Data sources:** practice management or billing system AR aging, transaction (payment and adjustment) reports, clearinghouse acceptance reports, and 835 ERAs. **Exclusions** vary by organisation (for example capitation, self-pay, or small balances), so write the definition next to the number whenever you report it.
+**Data sources:** practice management or billing system AR aging, transaction (payment and adjustment) reports, clearinghouse acceptance reports, and 835 ERAs. **Exclusions** vary by organization (for example capitation, self-pay, or small balances), so write the definition next to the number whenever you report it.
 
 The ranges are commonly quoted industry figures, not standards; specialty, payer mix and definitions change what "good" looks like. More detail in [reporting and KPIs](/rcm-cycle/reporting-and-kpis/).

@@ -18,7 +18,7 @@ quiz:
     options:
       - The customer service phone number only
       - The three-character alpha prefix at the start of the member ID
-      - The card's colour
+      - The card's color
       - The pharmacy BIN
     answer: 1
     why: The prefix identifies the member's home plan, which is how the BlueCard program routes out-of-area claims.

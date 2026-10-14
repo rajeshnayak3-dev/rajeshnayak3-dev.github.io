@@ -13,7 +13,7 @@ quiz:
       - Breach Notification Rule
       - Enforcement Rule
     answer: 1
-    why: The Transactions and Code Sets Rule standardises electronic transactions (837, 835, 270/271 and others) and the code sets used in them.
+    why: The Transactions and Code Sets Rule standardizes electronic transactions (837, 835, 270/271 and others) and the code sets used in them.
   - q: An offshore RCM company works on a US provider's claims. What makes it legally responsible for protecting PHI?
     options:
       - Nothing; HIPAA only applies in the US
@@ -29,7 +29,7 @@ quiz:
       - Allowed under minimum necessary
       - Only a problem if the patient complains
     answer: 1
-    why: PHI sent outside approved, secured systems is a potential breach. It must be reported so the organisation can assess it and notify if required.
+    why: PHI sent outside approved, secured systems is a potential breach. It must be reported so the organization can assess it and notify if required.
 ---
 
 ## Who HIPAA applies to
@@ -47,7 +47,7 @@ If you work in an RCM company in India or the Philippines, your employer is a bu
 |---|---|---|
 | **Privacy Rule** | Who may use and disclose PHI, and patients' rights to their records | Use PHI only for the job (treatment, payment, operations); follow **minimum necessary** |
 | **Security Rule** | Administrative, physical and technical safeguards for electronic PHI | Strong passwords, locked screens, no USB drives or personal devices, secure systems only |
-| **Breach Notification Rule** | What to do when unsecured PHI is exposed | Report anything suspicious at once; the organisation decides whether patients and HHS must be notified |
+| **Breach Notification Rule** | What to do when unsecured PHI is exposed | Report anything suspicious at once; the organization decides whether patients and HHS must be notified |
 | **Transactions and Code Sets Rule** | Standard electronic formats and code sets | Why every payer uses the 837, 835, 270/271, 276/277 and 278, and ICD-10-CM, CPT and HCPCS |
 | **Unique Identifiers Rule** | Standard identifiers | Why every provider has an **NPI** and employers have an EIN |
 | **Enforcement Rule** | Investigations and penalties | Civil fines that scale with negligence; criminal penalties for knowingly misusing PHI |
@@ -78,7 +78,7 @@ Offshore RCM companies usually pass these obligations to employees through confi
 ## Daily habits that keep you compliant
 
 1. **Minimum necessary:** on a payer call, share only what's needed to identify the claim.
-2. **Verify before you disclose:** confirm you're speaking to the payer or the patient (or their authorised representative) before discussing a claim.
+2. **Verify before you disclose:** confirm you're speaking to the payer or the patient (or their authorized representative) before discussing a claim.
 3. **Approved systems only:** no PHI in personal email, WhatsApp, personal cloud storage or phone photos.
 4. **Lock your screen** whenever you step away.
 5. **No printing** unless the process requires it, and shred afterwards.
@@ -90,8 +90,8 @@ Offshore RCM companies usually pass these obligations to employees through confi
 ## Other laws you'll hear about
 
 - **False Claims Act:** penalties for knowingly submitting false claims to government programs, including keeping known overpayments (the 60-day rule).
-- **Anti-Kickback Statute and Stark Law:** prohibit payments for referrals in federal programs. Mostly handled by compliance and legal teams, but you should recognise the names.
+- **Anti-Kickback Statute and Stark Law:** prohibit payments for referrals in federal programs. Mostly handled by compliance and legal teams, but you should recognize the names.
 - **No Surprises Act:** protects patients from surprise out-of-network bills and requires good faith estimates for self-pay patients.
 
 !!! interview "If an interviewer asks “What is HIPAA?”"
-    “HIPAA is the US law that protects patients' health information and standardises healthcare transactions. Its Privacy Rule controls how PHI is used and shared, the Security Rule requires safeguards for electronic PHI, the Breach Notification Rule covers reporting exposures, and the Transactions and Code Sets Rule standardises formats like the 837 and 835 and code sets like ICD-10 and CPT. As an offshore team we're business associates under a BAA, so we follow minimum necessary and use only approved systems.”
+    “HIPAA is the US law that protects patients' health information and standardizes healthcare transactions. Its Privacy Rule controls how PHI is used and shared, the Security Rule requires safeguards for electronic PHI, the Breach Notification Rule covers reporting exposures, and the Transactions and Code Sets Rule standardizes formats like the 837 and 835 and code sets like ICD-10 and CPT. As an offshore team we're business associates under a BAA, so we follow minimum necessary and use only approved systems.”

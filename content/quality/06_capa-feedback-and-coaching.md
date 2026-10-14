@@ -1,7 +1,7 @@
 ---
 title: Corrective and preventive action, feedback and re-audit
 short: CAPA and coaching
-description: The difference between correction, corrective action and preventive action, what a CAPA record contains, how to give audit feedback that changes behaviour, and how to check the fix worked.
+description: The difference between correction, corrective action and preventive action, what a CAPA record contains, how to give audit feedback that changes behavior, and how to check the fix worked.
 order: 6
 level: Advanced
 reviewed: 2026-10-14
@@ -63,7 +63,7 @@ Together these are often called **CAPA** (corrective and preventive action). Eve
 | Effectiveness check | Audit 100% of patient statements for Medicare primary + Medicaid patients for 60 days; target zero QMB statements |
 | Status and closure | Open / closed with evidence |
 
-## Feedback that changes behaviour
+## Feedback that changes behavior
 
 Audit feedback works when it's:
 

@@ -62,7 +62,7 @@ quiz:
 2. **Use the payer's claim number**, not your own account number. It's on the ERA (the CLP07 element in the 835).
 3. **Some changes need void and rebill, not replacement.** Changing the patient, subscriber, payer, or (for many payers) the billing provider or tax ID usually requires a void and a new claim.
 4. **Payer-specific timely filing applies to corrections.** Many commercial payers allow corrected claims within a set time from the original payment (for example 90–180 days), separate from the original timely filing limit.
-5. **Don't correct a claim that's still pending.** Wait until it's finalised, or ask the payer how to update it.
+5. **Don't correct a claim that's still pending.** Wait until it's finalized, or ask the payer how to update it.
 6. **Never resend an adjudicated claim as a new original.** It will deny as a duplicate (**CO-18**).
 
 ## Medicare's approach

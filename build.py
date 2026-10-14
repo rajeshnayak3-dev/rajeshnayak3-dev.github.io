@@ -142,11 +142,10 @@ def register(url, title, description, section=None, keywords="", kind="page",
 
 # ------------------------------------------------------------------ navigation
 PRIMARY = [
-    {"id": "dashboard", "title": "Dashboard", "url": "/", "icon": "compass"},
-    {"id": "learn", "title": "Learning paths", "url": "/learn/", "icon": "route"},
-    {"id": "reference", "title": "RCM reference", "url": "/reference/", "icon": "book"},
-    {"id": "practice", "title": "Practice lab", "url": "/practice/", "icon": "check"},
-    {"id": "career", "title": "Career & certification", "url": "/career/", "icon": "award"},
+    {"id": "learn", "title": "Learn", "url": "/learn/", "icon": "book"},
+    {"id": "practice", "title": "Practice", "url": "/practice/", "icon": "check"},
+    {"id": "reference", "title": "Reference", "url": "/reference/", "icon": "search"},
+    {"id": "career", "title": "Career", "url": "/career/", "icon": "award"},
 ]
 
 
@@ -564,7 +563,7 @@ def build():
              "terms": len(terms)}
     featured_cases = [s for s in scenarios if s["slug"] in (
         "ar-worklist-prioritization", "corrected-claim-or-appeal", "qmb-balance", "ambiguous-remit-escalate")]
-    render("home.html", "", featured=featured_codes, stats=stats, cases=featured_cases,
+    render("home.html", "", featured=featured_codes, stats=stats, cases=featured_cases, track_json=json.dumps(track),
            title=f'{SITE["name"]}: free US healthcare RCM training',
            description=SITE["description"],
            first_lesson=(section_items.get("start-here") or [{"url": "start-here/"}])[0]["url"])

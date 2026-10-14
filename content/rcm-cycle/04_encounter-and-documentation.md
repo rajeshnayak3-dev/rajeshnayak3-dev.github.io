@@ -77,7 +77,7 @@ For office and outpatient visits (**99202–99205** new, **99211–99215** estab
 MDM has three elements; two of three must meet the level:
 
 1. **Number and complexity of problems addressed** (for example, one stable chronic illness versus a chronic illness with severe progression).
-2. **Amount and complexity of data** reviewed and analysed (tests ordered or reviewed, external notes, independent historian, discussion with another provider).
+2. **Amount and complexity of data** reviewed and analyzed (tests ordered or reviewed, external notes, independent historian, discussion with another provider).
 3. **Risk of complications** of patient management (for example, prescription drug management is moderate risk; decision about emergency major surgery is high risk).
 
 | Level | MDM | New patient | Established patient |
@@ -124,7 +124,7 @@ Sources: [CMS FFS ABN](https://www.cms.gov/medicare/forms-notices/beneficiary-no
 - Cloned (copied-forward) notes that don't reflect today's visit
 - E/M level higher than MDM or time supports
 - Procedure performed but no procedure note
-- Time-based codes without documented time (therapy, psychotherapy, anaesthesia, critical care)
+- Time-based codes without documented time (therapy, psychotherapy, anesthesia, critical care)
 - Orders for tests without a documented reason
 - Laterality (right or left) missing
 

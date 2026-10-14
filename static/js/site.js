@@ -1,4 +1,4 @@
-/* REVEX site behaviour: theme, menu, search, progress, quizzes,
+/* REVEX site behavior: theme, menu, search, progress, quizzes,
    scenarios, filters, hero claim animation, certificate. No libraries. */
 (function () {
   "use strict";
@@ -199,80 +199,23 @@
 
   /* ------------------------------------------------ small celebrations and motion */
   var REDUCE = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-  function celebrate(btn) {
-    if (REDUCE) return;
-    btn.classList.remove("is-burst"); void btn.offsetWidth; btn.classList.add("is-burst");
-    var burst = document.createElement("span"); burst.className = "burst"; burst.setAttribute("aria-hidden", "true");
-    var colours = ["var(--green)", "var(--teal)", "var(--red)", "var(--amber)"];
-    for (var k = 0; k < 10; k++) {
-      var dot = document.createElement("i"), ang = (k / 10) * Math.PI * 2, dist = 26 + (k % 3) * 8;
-      dot.style.setProperty("--x", Math.round(Math.cos(ang) * dist) + "px");
-      dot.style.setProperty("--y", Math.round(Math.sin(ang) * dist) + "px");
-      dot.style.setProperty("--c", colours[k % 4]);
-      burst.appendChild(dot);
-    }
-    btn.appendChild(burst);
-    setTimeout(function () { burst.remove(); }, 800);
-  }
+  function celebrate(btn) { if (REDUCE) return; btn.classList.remove("is-pop"); void btn.offsetWidth; btn.classList.add("is-pop"); }
 
   // Header shadow once the page scrolls.
   var onScroll = function () { document.documentElement.classList.toggle("is-scrolled", scrollY > 8); };
   addEventListener("scroll", onScroll, { passive: true }); onScroll();
 
-  // Home: heartbeat claim track plays once, then the PAID stamp lands.
-  var ecg = $("[data-ecg]"), heroArt = $(".hero-art") || $(".hx");
-  if (ecg && heroArt) {
-    var playEcg = function () {
-      ecg.classList.remove("is-on"); heroArt.classList.remove("is-played"); void ecg.offsetWidth;
-      ecg.classList.add("is-on");
-      setTimeout(function () { heroArt.classList.add("is-played"); }, REDUCE ? 0 : 2700);
-    };
-    playEcg();
-    var replay = $("[data-ecg-replay]"); if (replay) replay.addEventListener("click", playEcg);
-  }
-
-  // Home: sections fade in once as they come into view.
-  var reveals = $$("[data-reveal]");
-  if (reveals.length && !REDUCE) {
-    document.documentElement.classList.add("js-reveal");
-    var checkReveal = function () {
-      var limit = innerHeight * 0.92;
-      reveals = reveals.filter(function (el) {
-        if (el.getBoundingClientRect().top < limit) { el.classList.add("is-in"); return false; }
-        return true;
-      });
-      if (!reveals.length) removeEventListener("scroll", checkReveal);
-    };
-    addEventListener("scroll", checkReveal, { passive: true });
-    requestAnimationFrame(checkReveal);
-  }
-
-  /* ------------------------------------------------ home dashboard */
-  if ($("[data-dash-pct]")) {
-    var all = 0, doneN = 0, secTotals = {};
-    $$("[data-sb-sec]").forEach(function (sec) {
-      var id = sec.getAttribute("data-sb-sec"), links = $$("a[data-topic]", sec);
-      var d = links.filter(function (a) { return state.done[a.getAttribute("data-topic")]; }).length;
-      secTotals[id] = [d, links.length]; all += links.length; doneN += d;
-    });
-    var p = all ? Math.round(doneN / all * 100) : 0;
-    $("[data-dash-pct]").textContent = p + "%";
-    $("[data-dash-bar]").style.width = p + "%";
-    $("[data-dash-meta]").textContent = doneN + " of " + all + " lessons, guides and scenarios completed.";
-    $$("[data-mc-bar]").forEach(function (b) { var t = secTotals[b.getAttribute("data-mc-bar")]; if (t && t[1]) b.style.width = Math.round(t[0] / t[1] * 100) + "%"; });
+  /* ------------------------------------------------ home: continue strip */
+  if ($("[data-resume-strip]")) {
     try {
+      var trk = JSON.parse(($("[data-home-track]") || {}).textContent || "[]");
+      var dn = trk.filter(function (t) { return state.done[t.u]; }).length;
+      $("[data-dash-pct]").textContent = (trk.length ? Math.round(dn / trk.length * 100) : 0) + "%";
       var last = JSON.parse(localStorage.getItem("revex-last"));
       if (last && last.u) {
         $("[data-continue-title]").textContent = last.t;
-        if ($("[data-continue-meta]")) $("[data-continue-meta]").textContent = "Pick up where you left off.";
-        var cl = $("[data-continue-link]"); cl.href = href(last.u); cl.textContent = "Continue";
-        if ($("[data-resume-strip]")) $("[data-resume-strip]").hidden = false;
-      }
-      var cert = JSON.parse(localStorage.getItem("revex-cert"));
-      if (cert && cert.id && $("[data-dash-cert]")) {
-        $("[data-dash-cert]").textContent = "Certified";
-        $("[data-dash-cert-meta]").textContent = "Certificate " + cert.id + ", score " + cert.percent + "%.";
-        var dl = $("[data-dash-cert-link]"); dl.textContent = "View certificate"; dl.href = href("verify/") + "?id=" + encodeURIComponent(cert.id);
+        $("[data-continue-link]").href = href(last.u);
+        $("[data-resume-strip]").hidden = false;
       }
     } catch (e) {}
   }

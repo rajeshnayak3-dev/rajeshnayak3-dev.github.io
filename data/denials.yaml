@@ -34,7 +34,7 @@ categories:
     blurb: The claim reached the payer after its filing deadline.
   - id: provider
     title: Provider and credentialing
-    blurb: The payer doesn't recognise the provider as eligible to bill this service on this date.
+    blurb: The payer doesn't recognize the provider as eligible to bill this service on this date.
   - id: injury
     title: Injury and liability
     blurb: Workers' compensation, auto (no-fault) or a liability insurer should pay.

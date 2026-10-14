@@ -85,7 +85,7 @@ A credit balance is either:
 - **Unclaimed refunds** (patients who can't be found, uncashed checks) may need to be reported to the state under **unclaimed property (escheat)** laws.
 
 !!! warning "Never sit on credits"
-    Leaving credit balances unresolved is a compliance risk, inflates AR reports (credits offset debits), and can turn into regulatory findings. Many organisations review credits weekly.
+    Leaving credit balances unresolved is a compliance risk, inflates AR reports (credits offset debits), and can turn into regulatory findings. Many organizations review credits weekly.
 
 !!! example "Scenario"
     Account shows −$84.20. History: Aetna paid $84.20 on 04/03 and again on 04/17 (two different claim numbers for the same DOS; the second was a resubmission processed as a new claim). Overpayment to Aetna: $84.20. The analyst calls Aetna, which agrees to recoup through an offset; the call reference and expected offset date are documented, and the account is flagged until the takeback posts.

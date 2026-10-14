@@ -48,7 +48,7 @@ Billing in the wrong order is one of the most common causes of denials and later
 
 ## General COB rules (commercial plans)
 
-Most commercial plans follow rules modelled on the NAIC (National Association of Insurance Commissioners) guidelines. Apply them **in order**; stop at the first rule that decides.
+Most commercial plans follow rules modeled on the NAIC (National Association of Insurance Commissioners) guidelines. Apply them **in order**; stop at the first rule that decides.
 
 1. **A plan with no COB provision** is primary over one that has it.
 2. **Subscriber before dependent.** The plan covering the person as an **employee/subscriber** pays before the plan covering them as a **dependent**.

@@ -136,7 +136,7 @@ At the end of each day or batch, posting teams **reconcile**:
 - Copay collected at the desk not applied, creating a false credit or balance
 
 !!! tip "Posting as early warning"
-    Posters see every payer's behaviour first. Patterns like a payer suddenly paying lower than contract on a code, or a spike in one denial code, should be escalated the same week, not discovered in month-end reports.
+    Posters see every payer's behavior first. Patterns like a payer suddenly paying lower than contract on a code, or a spike in one denial code, should be escalated the same week, not discovered in month-end reports.
 
 !!! mistake "Auditor's red flag"
     Denied lines written off with a contractual adjustment code at posting. It makes the claim look resolved and hides the lost revenue from AR and denial reports.

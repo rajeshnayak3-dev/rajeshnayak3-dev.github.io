@@ -72,7 +72,7 @@ When you bill directly, include the primary's adjudication: paid amount and each
 
 ## Moving balances correctly
 
-After each payer finalises:
+After each payer finalizes:
 
 1. Post its payment and adjustments.
 2. Transfer the remaining **patient responsibility** to the next payer in order.

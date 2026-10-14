@@ -139,7 +139,7 @@ Payment applies only when the code's indicators in the Medicare fee schedule all
 |---|---|
 | Physician owns the equipment, employs the technician and reads the test in their own office | The physician bills the **global** code with **no modifier** |
 | Physician only reads a test done on someone else's equipment (for example, a hospital CT) | Physician bills the code with **26**; the hospital bills the technical part on its UB-04 |
-| An independent imaging centre performs the test but an outside radiologist reads it | Centre bills with **TC**; radiologist bills with **26** |
+| An independent imaging center performs the test but an outside radiologist reads it | Center bills with **TC**; radiologist bills with **26** |
 
 ## Lab and repeat-test modifiers
 
@@ -172,16 +172,16 @@ Payment applies only when the code's indicators in the Medicare fee schedule all
 
 Telehealth rules, especially Medicare's, have changed many times since 2020, so check the current payer policy for which modifier and place of service (02 or 10) to use.
 
-## Anaesthesia modifiers
+## Anesthesia modifiers
 
 | Modifier | Meaning |
 |---|---|
-| **AA** | Anaesthesia personally performed by an anesthesiologist |
+| **AA** | Anesthesia personally performed by an anesthesiologist |
 | **QK** | Medical direction of 2–4 concurrent procedures by an anesthesiologist |
 | **QX** | CRNA service with medical direction |
 | **QY** | Medical direction of one CRNA |
 | **QZ** | CRNA service without medical direction |
-| **QS** | Monitored anaesthesia care (MAC) |
+| **QS** | Monitored anesthesia care (MAC) |
 | **G8 / G9** | MAC for deep complex procedures / for a patient with a history of severe cardiopulmonary condition |
 | **P1–P6** | Physical status of the patient |
 

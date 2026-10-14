@@ -1,12 +1,12 @@
 {% extends "base.html" %}
+{% block layout %}layout-plain{% endblock %}
 {% from "_icons.html" import icon %}
-{% from "_illus.html" import spot %}
 {% from "_parts.html" import crumbs %}
 {% block main %}
 <div class="wrap">
   {{ crumbs([("RCM reference", None)]) }}
   <header class="section-head">
-    <span class="sh-spot">{{ spot("reference") }}</span>
+    <span class="sh-ico">{{ icon("book", 26) }}</span>
     <div>
       <h1>RCM reference</h1>
       <p class="lede">Look things up while you work. Every entry is a summary for learning; the official source and the payer's own policy decide what applies to a claim.</p>

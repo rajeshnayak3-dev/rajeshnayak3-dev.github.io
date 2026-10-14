@@ -139,7 +139,7 @@
   summary: An in-network claim paid $0 with a contractual adjustment for the full charge and no explanation. Guessing is the wrong answer.
   keywords: ambiguous remittance CO-45 full charge zero pay research escalate underpayment contract rate payment dispute
   objectives:
-    - Recognise a remittance that doesn't make sense under the contract
+    - Recognize a remittance that doesn't make sense under the contract
     - Research before posting a final adjustment
     - Escalate with evidence when the payer can't explain its own result
   setup: |
@@ -196,7 +196,7 @@
   slug: ar-worklist-prioritization
   id: SC-20
   level: Intermediate
-  tag: AR prioritisation
+  tag: AR prioritization
   minutes: 6
   summary: You have time for a few accounts before lunch. Which ones first, and why?
   keywords: AR prioritization worklist deadline risk expected value timely filing Medicare unprocessable MA130 follow-up interval

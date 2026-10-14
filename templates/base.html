@@ -1,6 +1,6 @@
 {% from "_icons.html" import icon %}
 <!doctype html>
-<html lang="en-US">
+<html lang="en-US" data-layout="{% block layout %}layout-shell{% endblock %}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,38 +14,27 @@
 <meta property="og:url" content="{{ site.site_url }}/{{ url }}">
 <meta property="og:image" content="{{ site.site_url }}/static/img/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#16213A">
+<meta name="theme-color" content="#FFFFFF">
 {% if site.google_verification and url == "" %}<meta name="google-site-verification" content="{{ site.google_verification }}">{% endif %}
 <link rel="icon" href="{{ rel('/static/img/favicon.svg') }}" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ rel('/static/css/site.css') }}">
-<script>
-  (function () {
-    try {
-      // Light is the default. Dark only when the visitor chose it.
-      if (localStorage.getItem("revex-theme") === "dark") document.documentElement.setAttribute("data-mode", "dark");
-    } catch (e) {}
-  })();
-</script>
 {% block head %}{% endblock %}
 </head>
 {% set cur_area = area_for(url) %}
-<body class="{% block layout %}layout-shell{% endblock %} area-{{ cur_area or 'none' }} {% block body_class %}{% endblock %}" data-root="{{ rel('/') }}" data-page="{{ url }}" data-preview="{{ 1 if preview else 0 }}" data-title="{{ title }}">
+{% set lay = self.layout() | trim %}
+<body class="{{ lay }} area-{{ cur_area or 'none' }} {% block body_class %}{% endblock %}" data-root="{{ rel('/') }}" data-page="{{ url }}" data-preview="{{ 1 if preview else 0 }}" data-title="{{ title }}">
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="site-head">
   <div class="head-row">
-    <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="sidebar" aria-label="Open menu" data-topics>{{ icon("menu", 20) }}</button>
+    {% if lay == "layout-shell" %}<button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="sidebar" aria-label="Open lesson list" data-topics>{{ icon("menu", 22) }}</button>{% endif %}
     <a class="brand" href="/" aria-label="{{ site.name }} home">
-      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><rect x="2.5" y="2.5" width="19" height="19" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m7 12.5 3.3 3.3L17.5 8.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#0B57D0"/><path d="m7.2 12.4 3.2 3.2 6.4-6.8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       <span class="brand-word">{{ site.name }}</span>
     </a>
-
-    <button class="search-trigger" type="button" data-search-open aria-label="Search REVEX">
-      {{ icon("search", 18) }}<span class="hide-sm">Search</span><kbd class="hide-sm">/</kbd>
-    </button>
 
     <nav class="primary-nav" aria-label="Main">
       <ul>
@@ -56,28 +45,24 @@
     </nav>
 
     <div class="head-tools">
-      <a class="icon-btn" href="/progress/" aria-label="Your progress" title="Your progress">{{ icon("chart", 20) }}</a>
-      <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch colour theme" title="Switch colour theme">
-        <span class="when-light">{{ icon("moon", 20) }}</span><span class="when-dark">{{ icon("sun", 20) }}</span>
+      <button class="search-trigger" type="button" data-search-open aria-label="Search REVEX">
+        {{ icon("search", 20) }}<span class="hide-sm">Search lessons and codes</span><kbd class="hide-sm">/</kbd>
       </button>
+      <a class="head-progress{% if url.startswith('progress') %} is-current{% endif %}" href="/progress/">{{ icon("chart", 20) }}<span class="hide-sm">My progress</span></a>
     </div>
   </div>
 </header>
 
 <div class="app">
+  {% if lay == "layout-shell" %}
   <aside class="sidebar" id="sidebar" aria-label="Site and course navigation" data-sidebar>
     <div class="sb-mobile-head">
-      <strong>Menu</strong>
-      <button class="icon-btn" type="button" data-topics-close aria-label="Close menu">{{ icon("close", 20) }}</button>
+      <strong>Lessons</strong>
+      <button class="icon-btn" type="button" data-topics-close aria-label="Close lesson list">{{ icon("close", 20) }}</button>
     </div>
     <nav class="sb-nav">
-      <div class="sb-primary">
-        {% for d in primary %}
-        <a class="sb-top{% if cur_area == d.id %} is-current{% endif %}" href="{{ d.url }}"><span class="sb-ico">{{ icon(d.icon, 18) }}</span><span>{{ d.title }}</span></a>
-        {% endfor %}
-      </div>
       <a class="sb-top{% if url.startswith('progress') %} is-current{% endif %}" href="/progress/"><span class="sb-ico">{{ icon("chart", 18) }}</span><span>Your learning</span><span class="sb-overall" data-sb-overall></span></a>
-      <p class="sb-label">Course topics</p>
+      <p class="sb-label">Topics</p>
       {% for n in nav %}
         {% if n['items'] %}
         <details class="sb-sec{% if url.startswith(n.id ~ '/') %} is-active{% endif %}"{% if url.startswith(n.id ~ '/') %} open{% endif %} data-sb-sec="{{ n.id }}">
@@ -93,32 +78,33 @@
         <a class="sb-top{% if url.startswith(n.id ~ '/') %} is-current{% endif %}" href="/{{ n.id }}/"><span class="sb-ico">{{ icon(n.icon, 18) }}</span><span>{{ n.title }}</span></a>
         {% endif %}
       {% endfor %}
-      <a class="sb-cert-card" href="/certification/">
-        {{ icon("award", 22) }}
-        {% if site.certification.api_url %}
-        <span><strong>REVEX exam</strong><small>{{ site.certification.questions }}-question open-book exam, free</small></span>
-        {% else %}
-        <span><strong>REVEX exam</strong><small>Coming soon: not open yet</small></span>
-        {% endif %}
-      </a>
     </nav>
   </aside>
   <div class="sb-scrim" data-topics-close hidden></div>
+  {% endif %}
 
   <main id="main" tabindex="-1">
   {% block main %}{% endblock %}
   </main>
 </div>
 
+<nav class="bottom-nav" aria-label="Main (mobile)">
+  <a href="/"{% if url == "" %} class="is-current"{% endif %}>{{ icon("compass", 22) }}<span>Home</span></a>
+  <a href="/learn/"{% if cur_area == "learn" %} class="is-current"{% endif %}>{{ icon("book", 22) }}<span>Learn</span></a>
+  <a href="/practice/"{% if cur_area == "practice" %} class="is-current"{% endif %}>{{ icon("check", 22) }}<span>Practice</span></a>
+  <a href="/reference/"{% if cur_area == "reference" %} class="is-current"{% endif %}>{{ icon("search", 22) }}<span>Reference</span></a>
+  <a href="/progress/"{% if url.startswith("progress") %} class="is-current"{% endif %}>{{ icon("chart", 22) }}<span>Progress</span></a>
+</nav>
+
 <footer class="site-foot">
   <div class="wrap foot-grid">
     <div class="foot-brand">
-      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><rect x="2.5" y="2.5" width="19" height="19" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m7 12.5 3.3 3.3L17.5 8.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="brand-word">{{ site.name }}</span></a>
+      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><rect x="2" y="2" width="20" height="20" rx="6" fill="#0B57D0"/><path d="m7.2 12.4 3.2 3.2 6.4-6.8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="brand-word">{{ site.name }}</span></a>
       <p>{{ site.tagline }}. Free to use, no sign-up, no accounts.</p>
       <p class="foot-author">Written by <a href="{{ site.author.linkedin }}" rel="author noopener" target="_blank">{{ site.author.name }}</a>, {{ site.author.role }}.</p>
     </div>
-    <nav aria-label="Footer: learn and practise">
-      <p class="foot-h">Learn and practise</p>
+    <nav aria-label="Footer: learn and practice">
+      <p class="foot-h">Learn and practice</p>
       <ul>
         {% for p in paths %}<li><a href="/learn/{{ p.id }}/">{{ p.title }}</a></li>{% endfor %}
         <li><a href="/practice/">Practice lab</a></li>

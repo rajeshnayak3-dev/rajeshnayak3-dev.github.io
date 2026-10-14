@@ -44,13 +44,13 @@ Always close a call with: **“May I have your name and a call reference number?
 - “What's the specific reason it's still pending?”
 - “Has anything been requested from the provider, such as medical records or a W-9? Where should we send it?”
 - “Has a letter been sent to the patient? On what date, and how many?”
-- “When should it finalise?”
+- “When should it finalize?”
 
-## 2. Claim approved to pay (finalised, payment not issued yet)
+## 2. Claim approved to pay (finalized, payment not issued yet)
 
 **Goal:** confirm when and how the payment will be issued, so you don't follow up too early or miss it.
 
-1. Confirm the claim is finalised and approved, with the allowed and approved payment amounts.
+1. Confirm the claim is finalized and approved, with the allowed and approved payment amounts.
 2. Ask for the expected payment date. Many payers issue payments in weekly or twice-weekly cycles, so an approved claim can wait several days.
 3. Ask whether it will be paid by check or EFT, and whether it will be part of a bulk payment.
 4. Set a follow-up for a few days after the expected date, then confirm the payment details (see the next workflow).
@@ -69,7 +69,7 @@ Always close a call with: **“May I have your name and a call reference number?
 3. For **EFT**: give the trace number and amount to posting; confirm the bank account (last digits) and TIN match your enrollment.
 4. For a **paper check**: confirm the pay-to address. Allow your team's waiting period for mail and posting.
 5. If the check still isn't found after that period, ask whether it has been **cashed**:
-    - **Cashed:** request a copy of the cancelled check (front and back) to see who cashed it.
+    - **Cashed:** request a copy of the canceled check (front and back) to see who cashed it.
     - **Not cashed, correct address:** ask for a **stop payment and reissue**.
     - **Not cashed, wrong address:** send an updated **Form W-9** or address change, then ask for a reissue.
 
@@ -77,7 +77,7 @@ Always close a call with: **“May I have your name and a call reference number?
 - “Was this paid by check or EFT? What's the check number or EFT trace number, the date and the total amount?”
 - “Is that amount for this claim only, or a bulk payment covering several claims?”
 - “What pay-to address was it sent to?” or “What account (last four digits) was the EFT sent to?”
-- “Has the check been cashed? Can you send a copy of the cancelled check, or place a stop payment and reissue?”
+- “Has the check been cashed? Can you send a copy of the canceled check, or place a stop payment and reissue?”
 
 ## 4. Payment applied to an offset (recoupment)
 
@@ -158,4 +158,4 @@ Always close a call with: **“May I have your name and a call reference number?
     Calls closed without a reference number, or notes that record what the rep said without the action taken. Both fail audit because the next analyst can't continue the work or prove the call happened.
 
 !!! interview "If an interviewer asks “What do you ask when a claim is paid but not received?”"
-    “I ask for the payment method, check or EFT number, date and amount, whether it's a bulk payment, and the pay-to address or bank account. If the check hasn't arrived after our waiting period, I ask whether it's been cashed. If cashed, I request the cancelled check copy; if not, I ask for a stop payment and reissue, updating the address or W-9 if needed. Then I note the rep's name and reference number.”
+    “I ask for the payment method, check or EFT number, date and amount, whether it's a bulk payment, and the pay-to address or bank account. If the check hasn't arrived after our waiting period, I ask whether it's been cashed. If cashed, I request the canceled check copy; if not, I ask for a stop payment and reissue, updating the address or W-9 if needed. Then I note the rep's name and reference number.”

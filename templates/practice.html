@@ -1,15 +1,15 @@
 {% extends "base.html" %}
+{% block layout %}layout-plain{% endblock %}
 {% from "_icons.html" import icon %}
-{% from "_illus.html" import spot %}
 {% from "_parts.html" import crumbs %}
 {% block main %}
 <div class="wrap">
   {{ crumbs([("Practice lab", None)]) }}
   <header class="section-head">
-    <span class="sh-spot">{{ spot("practice") }}</span>
+    <span class="sh-ico">{{ icon("check", 26) }}</span>
     <div>
       <h1>Practice lab</h1>
-      <p class="lede">Make decisions on realistic, fictional accounts and get the reasoning behind every choice, including why the tempting wrong answers are wrong. Completed cases count towards <a href="/progress/">your learning</a> on this device.</p>
+      <p class="lede">Make decisions on realistic, fictional accounts and get the reasoning behind every choice, including why the tempting wrong answers are wrong. Completed cases count toward <a href="/progress/">your learning</a> on this device.</p>
     </div>
   </header>
 
@@ -73,7 +73,7 @@
     <h2 id="int-h">Interview practice</h2>
     <p>Model answers explain the reasoning so you can answer in your own words. See <a href="/career/">Career and certification</a> for role competencies.</p>
     <ul class="hub-grid">
-      <li><a class="hub-card" href="/interview-prep/mock-payer-calls/"><strong>Mock payer calls</strong><span>Practise the AR call flow with scripted payer responses.</span></a></li>
+      <li><a class="hub-card" href="/interview-prep/mock-payer-calls/"><strong>Mock payer calls</strong><span>Practice the AR call flow with scripted payer responses.</span></a></li>
       <li><a class="hub-card" href="/interview-prep/rapid-fire/"><strong>Rapid-fire round</strong><span>Quick definitions and codes interviewers ask.</span></a></li>
       <li><a class="hub-card" href="/interview-prep/experienced-questions/"><strong>Experienced questions</strong><span>Scenario questions for working analysts and leads.</span></a></li>
     </ul>

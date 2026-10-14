@@ -146,7 +146,7 @@ Each category below follows the same pattern: **what it is**, **typical codes**,
 
 ## 10. Provider and credentialing denials
 
-**What:** the payer doesn't recognise the provider as eligible to bill that service on that date.
+**What:** the payer doesn't recognize the provider as eligible to bill that service on that date.
 
 **Codes:** CO-B7 (provider not certified or eligible on this date), CO-185 (rendering provider not eligible), CO-170 (payment denied when performed by this type of provider), CO-183 (referring provider not eligible to refer), CO-206/207/208 (NPI missing, invalid or not matched).
 

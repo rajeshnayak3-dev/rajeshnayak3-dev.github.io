@@ -24,14 +24,14 @@
       link: rcm-cycle/payment-posting/
     - text: Post reversals, recoupments and provider-level (PLB) adjustments correctly
       link: non-denials/recoupments-and-offsets/
-    - text: Transfer balances to secondary payers and recognise QMB and Medicaid protections
+    - text: Transfer balances to secondary payers and recognize QMB and Medicaid protections
       link: non-denials/secondary-and-crossover/
 - id: ar-associate
   title: AR associate
   summary: Follows up unpaid claims with payers until they're paid or correctly closed.
   path: working-in-rcm
   competencies:
-    - text: Prioritise a worklist by deadline risk, expected value and recovery potential
+    - text: Prioritize a worklist by deadline risk, expected value and recovery potential
       link: quality/ar-prioritization-and-work-queues/
     - text: Check claim status by portal, IVR, 276/277 and phone, and find where a claim stopped
       link: rcm-cycle/denials-and-ar-follow-up/
@@ -61,7 +61,7 @@
       link: non-denials/underpayments/
     - text: Handle credit balances and refunds under payer and program rules
       link: non-denials/credit-balances-and-refunds/
-    - text: Recognise ambiguous remittances and escalate with evidence
+    - text: Recognize ambiguous remittances and escalate with evidence
       link: scenarios/ambiguous-remit-escalate/
     - text: Explain hospital versus professional billing differences
       link: forms-billing/hospital-vs-professional-billing/

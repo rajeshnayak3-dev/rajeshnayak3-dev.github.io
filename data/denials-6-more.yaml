@@ -119,10 +119,10 @@ codes:
     title: Procedure modifier was invalid on the date of service
     summary: A modifier on the claim didn't exist or wasn't valid on the date of service.
     meaning: >-
-      The modifier was retired, not yet effective, or isn't a recognised modifier for this payer on the date of service.
+      The modifier was retired, not yet effective, or isn't a recognized modifier for this payer on the date of service.
     causes:
       - Retired modifier still set up in the billing system (for example an old telehealth modifier).
-      - New modifier used before the payer recognised it.
+      - New modifier used before the payer recognized it.
       - Typo in the modifier.
     ask:
       - Which modifier is invalid, and what does the payer accept instead?

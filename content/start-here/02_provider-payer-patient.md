@@ -52,7 +52,7 @@ Around them sit helpers: clearinghouses, billing companies (where most RCM jobs 
 
 ## The provider
 
-A **provider** is any person or organisation that delivers healthcare services and bills for them.
+A **provider** is any person or organization that delivers healthcare services and bills for them.
 
 | Type | Examples | Usual claim form |
 |---|---|---|
@@ -63,10 +63,10 @@ A **provider** is any person or organisation that delivers healthcare services a
 
 ### Provider identifiers you'll see daily
 
-- **NPI (National Provider Identifier).** A 10-digit number from CMS. **Type 1** NPIs belong to individuals; **Type 2** NPIs belong to organisations such as a group or hospital.
+- **NPI (National Provider Identifier).** A 10-digit number from CMS. **Type 1** NPIs belong to individuals; **Type 2** NPIs belong to organizations such as a group or hospital.
 - **Tax ID (TIN or EIN).** The federal tax number the payer pays against. A mismatch between NPI and tax ID is a common reason claims fail.
 - **Taxonomy code.** A 10-character code describing specialty, such as 207R00000X for internal medicine.
-- **PTAN.** The Medicare billing number assigned by the Medicare Administrative Contractor (MAC) after enrolment.
+- **PTAN.** The Medicare billing number assigned by the Medicare Administrative Contractor (MAC) after enrollment.
 
 ### Rendering, billing, referring
 
@@ -82,7 +82,7 @@ One claim can name several providers:
 
 ## The payer
 
-A **payer** is the organisation that pays for covered care. Payers fall into a few families, covered in [types of payers](/insurance/types-of-payers/).
+A **payer** is the organization that pays for covered care. Payers fall into a few families, covered in [types of payers](/insurance/types-of-payers/).
 
 - **Government payers:** Medicare, Medicaid, TRICARE, VA.
 - **Commercial payers:** private insurers such as UnitedHealthcare, Aetna, Cigna, Elevance (Anthem) and Blue Cross Blue Shield plans.
@@ -95,7 +95,7 @@ A payer checks four things before paying:
 
 1. Is the patient covered on the date of service?
 2. Is this service a covered benefit under the plan?
-3. Was it medically necessary, and authorised if the plan requires it?
+3. Was it medically necessary, and authorized if the plan requires it?
 4. Was it billed correctly, on time, by an eligible provider?
 
 Almost every denial you'll ever work fails one of these four checks.

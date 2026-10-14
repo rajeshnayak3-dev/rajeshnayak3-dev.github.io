@@ -88,7 +88,7 @@ Many codes show the side: in most chapters **1** is right, **2** is left, **3** 
 | Z00–Z99 | **Factors influencing health status**: screenings, routine exams, history, aftercare |
 
 ### Z codes
-Used when the reason for the visit isn't a current illness: **Z00.00** routine adult exam, **Z12.11** colon cancer screening, **Z23** immunisation, **Z79.4** long-term insulin use. Some Z codes can only be first-listed and some never can, so check the guidelines.
+Used when the reason for the visit isn't a current illness: **Z00.00** routine adult exam, **Z12.11** colon cancer screening, **Z23** immunization, **Z79.4** long-term insulin use. Some Z codes can only be first-listed and some never can, so check the guidelines.
 
 ### External cause codes (V00–Y99)
 Describe the cause, activity and place of an injury. They're never the first-listed diagnosis, and payers don't require them unless a state or payer mandates it, but they matter for workers' comp, auto and liability claims because they show how the injury happened.

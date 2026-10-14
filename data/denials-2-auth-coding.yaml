@@ -197,7 +197,7 @@ codes:
       - Diagnostic test billed with 26 by a provider who should bill global, or without 26 in a facility.
       - Bilateral procedure billed in the wrong format for the payer (50 vs RT/LT lines).
       - Modifier that doesn't apply to that code (for example 50 on a code that's inherently bilateral).
-      - Anaesthesia claims missing AA, QK, QX, QY or QZ.
+      - Anesthesia claims missing AA, QK, QX, QY or QZ.
     ask:
       - Which modifier is missing or invalid on which line?
       - How does this payer want bilateral procedures billed?
@@ -364,7 +364,7 @@ codes:
     summary: On a facility claim, the revenue code doesn't fit the HCPCS code on the same line.
     meaning: >-
       The UB-04 line pairs a revenue code with a CPT or HCPCS code that doesn't belong to that
-      revenue centre, for example a lab code under a radiology revenue code.
+      revenue center, for example a lab code under a radiology revenue code.
     causes:
       - Charge master item mapped to the wrong revenue code.
       - Drug HCPCS billed under 0250 when the payer requires 0636.

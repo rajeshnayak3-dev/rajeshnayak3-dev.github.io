@@ -1,6 +1,6 @@
 {% extends "base.html" %}
+{% block layout %}layout-plain{% endblock %}
 {% from "_icons.html" import icon %}
-{% from "_illus.html" import spot %}
 {% from "_parts.html" import crumbs %}
 {% block main %}
 <div class="wrap">
@@ -17,7 +17,7 @@
     {% for p in paths %}
     <li>
       <a class="aud-card aud-{{ loop.index }}" href="/learn/{{ p.id }}/">
-        <span class="aud-art">{{ spot(p.id) }}</span>
+        <span class="aud-ico">{{ icon(["compass","inbox","chart"][loop.index0], 26) }}</span>
         <span class="aud-level lvl lvl-{{ p.level | slug }}">{{ p.level }}</span>
         <strong>{{ p.title }}</strong>
         <span class="aud-desc">{{ p.audience }}.</span>

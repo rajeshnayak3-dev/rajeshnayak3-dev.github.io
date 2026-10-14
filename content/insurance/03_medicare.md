@@ -94,7 +94,7 @@ Source: CMS annual premium and deductible fact sheets. Check CMS each November f
 ## Medigap (Medicare Supplement)
 
 - Private policies that pay some or all of the **gaps** in Original Medicare: deductibles and coinsurance.
-- Standardised plans labelled with letters (for example **Plan G** and **Plan N** are common).
+- Standardized plans labeled with letters (for example **Plan G** and **Plan N** are common).
 - Work only with **Original Medicare**, not with Medicare Advantage.
 - **Crossover:** after Medicare processes, it forwards the claim to the Medigap insurer automatically if set up. The Medicare ERA shows remark **MA18** (claim forwarded to supplemental insurer). Don't bill the Medigap plan separately unless the crossover fails, or you'll get duplicates.
 

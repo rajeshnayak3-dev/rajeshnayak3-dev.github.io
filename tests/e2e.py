@@ -94,10 +94,10 @@ async def main():
         labels = await pg.eval_on_selector_all(".primary-nav a", "els => els.map(e => e.textContent.trim())")
         visible = await pg.is_visible(".primary-nav")
         cur = await pg.eval_on_selector(".primary-nav a.is-current", "e => e.textContent.trim()")
-        rec("NAV-01", "Desktop navigation", "Open /learn/working-in-rcm/ at 1280px", "5 destinations visible; 'Learning paths' current",
+        rec("NAV-01", "Desktop navigation", "Open /learn/working-in-rcm/ at 1280px", "4 tabs visible (Learn, Practice, Reference, Career); 'Learn' current",
             f"visible={visible}, {labels}, current={cur}",
-            visible and labels == ["Dashboard", "Learning paths", "RCM reference", "Practice lab", "Career & certification"] and cur == "Learning paths")
-        areas = {"/denials/codes/co-45/": "RCM reference", "/scenarios/qmb-balance/": "Practice lab", "/interview-prep/rapid-fire/": "Career & certification", "/quality/sampling/": "Learning paths", "/": "Dashboard"}
+            visible and labels == ["Learn", "Practice", "Reference", "Career"] and cur == "Learn")
+        areas = {"/denials/codes/co-45/": "Reference", "/scenarios/qmb-balance/": "Practice", "/interview-prep/rapid-fire/": "Career", "/quality/sampling/": "Learn"}
         wrong = []
         for u, want in areas.items():
             await pg.goto(BASE + u)
@@ -107,19 +107,20 @@ async def main():
         rec("NAV-02", "Current-area highlight", "Visit a page in each area", "Matching destination highlighted", "all correct" if not wrong else "; ".join(wrong), not wrong)
         await ctx.close()
 
-        # ---------- NAV-03: mobile drawer opens, shows destinations, closes with Escape/close
+        # ---------- NAV-03: phones get a bottom tab bar; lessons get an outline drawer
         ctx, pg = await new_page(browser, 390)
         await pg.goto(BASE + "/rcm-cycle/claim-submission/")
         hidden_nav = not await pg.is_visible(".primary-nav")
+        tabs = await pg.eval_on_selector_all(".bottom-nav a", "els => els.map(e => e.textContent.trim())")
         await pg.click("[data-topics]")
         await pg.wait_for_timeout(300)
         opened = await pg.evaluate("document.body.classList.contains('sb-open')")
-        dest = await pg.is_visible(".sb-primary a[href$='practice/']")
+        dest = await pg.is_visible(".sb-sec.is-active") and tabs == ["Home", "Learn", "Practice", "Reference", "Progress"]
         exp = await pg.get_attribute("[data-topics]", "aria-expanded")
         await pg.click(".sb-mobile-head [data-topics-close]")
         await pg.wait_for_timeout(300)
         closed = not await pg.evaluate("document.body.classList.contains('sb-open')")
-        rec("NAV-03", "Mobile menu", "390px: tap menu, check destinations, tap close", "Header nav hidden; drawer opens with destinations; aria-expanded true; closes",
+        rec("NAV-03", "Mobile navigation", "390px lesson: check bottom tabs; open and close the lesson list", "Header tabs hidden; 5 bottom tabs; lesson drawer opens on the current topic and closes",
             f"hidden_nav={hidden_nav}, opened={opened}, destinations={dest}, aria-expanded={exp}, closed={closed}", hidden_nav and opened and dest and exp == "true" and closed)
         await ctx.close()
 
@@ -211,12 +212,13 @@ async def main():
         await pg.wait_for_timeout(200)
         vtxt = await pg.text_content("[data-verify-result]")
         rec("CERT-02", "Verification while closed", "Open /verify/?id=…", "Explains no certificates have been issued", (vtxt or "").strip()[:80], "No REVEX certificates have been issued" in (vtxt or ""))
-        sb = await pg.text_content(".sb-cert-card")
+        await pg.goto(BASE + "/career/")
+        sb = await pg.text_content("#exam")
         home_ok = True
         await pg.goto(BASE + "/")
         hb = await pg.text_content("main")
         home_ok = "verifiable" not in hb.lower()
-        rec("CERT-03", "No certificate claims elsewhere", "Read sidebar card and home page", "Sidebar says 'Coming soon'; home makes no 'verifiable' claim", f"sidebar='{' '.join(sb.split())}', home_ok={home_ok}", "Coming soon" in sb and home_ok)
+        rec("CERT-03", "No certificate claims elsewhere", "Read career page exam box and home page", "Career page says 'Coming soon'; home makes no 'verifiable' claim", f"career='{' '.join(sb.split())[:60]}', home_ok={home_ok}", "Coming soon" in sb and home_ok)
         await ctx.close()
 
         # ---------- TOOL UI checks (logic is covered by tests/calc.test.js)
@@ -299,14 +301,14 @@ async def main():
         rec("PRACT-01", "Practice lab filters and planned items", "Filter Advanced, clear; check planned items", "Filter narrows and clears; planned items have no links", f"all={allc}, advanced={adv}, cleared={back}, planned_links={planned_links}", 0 < adv < allc and back == allc and planned_links == 0)
         await ctx.close()
 
-        # ---------- THEME-01: light default, dark persists
+        # ---------- THEME-01: light theme, plain layout on hubs, sidebar only on lessons
         ctx, pg = await new_page(browser, 1280)
-        await pg.goto(BASE + "/")
-        m0 = await pg.evaluate("document.documentElement.getAttribute('data-mode')")
-        await pg.click("[data-theme-toggle]")
-        await pg.goto(BASE + "/learn/")
-        m1 = await pg.evaluate("document.documentElement.getAttribute('data-mode')")
-        rec("THEME-01", "Theme", "Load home; toggle; navigate", "Light by default; dark persists across pages", f"default={m0}, after={m1}", m0 is None and m1 == "dark")
+        await pg.goto(BASE + "/practice/")
+        bg = await pg.evaluate("getComputedStyle(document.body).backgroundColor")
+        hub_side = await pg.query_selector(".sidebar")
+        await pg.goto(BASE + "/start-here/what-is-rcm/")
+        lesson_side = await pg.is_visible(".sidebar")
+        rec("THEME-01", "Light theme and layout", "Open a hub page and a lesson at 1280px", "White background; no sidebar on hubs; lesson outline on lessons", f"bg={bg}, hub_sidebar={bool(hub_side)}, lesson_sidebar={lesson_side}", bg == "rgb(255, 255, 255)" and not hub_side and lesson_side)
         await ctx.close()
 
         await browser.close()

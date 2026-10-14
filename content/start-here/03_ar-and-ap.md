@@ -29,7 +29,7 @@ quiz:
       - Only claims under $50
       - Patient balances only
     answer: 1
-    why: Teams prioritise by risk and value. Old claims risk timely filing denials, and high-dollar claims have the biggest effect on cash.
+    why: Teams prioritize by risk and value. Old claims risk timely filing denials, and high-dollar claims have the biggest effect on cash.
   - q: What is the first thing an AR analyst should do with a no-response claim?
     options:
       - Write it off
@@ -119,4 +119,4 @@ Read more in [credit balances and refunds](/non-denials/credit-balances-and-refu
 | Key metric | Days in AR, AR over 90 days | Credit balance count and age |
 
 !!! interview "If an interviewer asks “What is AR?”"
-    “AR, or accounts receivable, is the money owed to the provider for services already billed. In RCM, the AR team follows up on unpaid and denied claims, checks status with the payer, finds the reason for non-payment and takes action, such as correcting the claim, sending records or appealing, so the claim gets paid before timely filing or appeal limits. AR is tracked by aging buckets, and we prioritise older and high-dollar claims.”
+    “AR, or accounts receivable, is the money owed to the provider for services already billed. In RCM, the AR team follows up on unpaid and denied claims, checks status with the payer, finds the reason for non-payment and takes action, such as correcting the claim, sending records or appealing, so the claim gets paid before timely filing or appeal limits. AR is tracked by aging buckets, and we prioritize older and high-dollar claims.”

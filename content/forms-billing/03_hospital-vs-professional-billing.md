@@ -62,7 +62,7 @@ Many diagnostic services have two parts:
 
 - **Professional component (PC):** the physician's interpretation and report. Billed with modifier **26**.
 - **Technical component (TC):** the equipment, supplies and technician. Billed with modifier **TC**.
-- **Global:** both parts, billed with no modifier, when one provider owns the equipment and does the interpretation (for example, an imaging centre that employs the radiologist).
+- **Global:** both parts, billed with no modifier, when one provider owns the equipment and does the interpretation (for example, an imaging center that employs the radiologist).
 
 In a hospital, the radiologist bills **-26** on a CMS-1500 and the hospital bills the technical part on a UB-04 (no TC modifier needed on the facility claim).
 
@@ -88,7 +88,7 @@ When a hospital owns a clinic as an outpatient department, the patient may recei
 !!! example "Outpatient knee arthroscopy at a hospital"
     | Who | Claim | Codes |
     |---|---|---|
-    | Hospital | UB-04, TOB 0131 | Revenue 0360 (OR) with 29881, 0370 (anaesthesia), 0710 (recovery), 0250 (pharmacy), 0272 (supplies) |
+    | Hospital | UB-04, TOB 0131 | Revenue 0360 (OR) with 29881, 0370 (anesthesia), 0710 (recovery), 0250 (pharmacy), 0272 (supplies) |
     | Orthopedic surgeon | CMS-1500, POS 22 | 29881-RT |
     | Anesthesiologist | CMS-1500, POS 22 | 01400-AA with time |
     | Pathologist (if tissue sent) | CMS-1500 | 88304 or 88305 with -26 if the hospital lab bills the technical part |

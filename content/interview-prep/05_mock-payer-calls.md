@@ -1,13 +1,13 @@
 ---
 title: Mock payer calls for AR voice rounds
 short: Mock payer calls
-description: Four complete AR calls to practise out loud, from opening to reference number, plus the note each one should produce and a voicemail script.
+description: Four complete AR calls to practice out loud, from opening to reference number, plus the note each one should produce and a voicemail script.
 order: 5
 level: Beginner
 keywords: AR calling mock call script payer call roleplay voice process interview claim status call denial call voicemail script
 ---
 
-## How to practise
+## How to practice
 
 Read each call with a friend playing the representative. Then close the page and do it again from memory, changing the details. Interviewers listen for four things: a clear opening with provider details, the right questions in a sensible order, polite control of the call, and a reference number at the end.
 

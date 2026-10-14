@@ -4,11 +4,11 @@
   minutes: 9
   summary: Psychiatric evaluations, time-based psychotherapy, medication management and telehealth, often carved out to a separate behavioral health payer.
   definition: |
-    Behavioral health covers mental health and substance use care. Psychiatrists (physicians) diagnose and prescribe; psychologists, licensed clinical social workers (LCSWs), professional counsellors and marriage and family therapists provide assessment and therapy.
+    Behavioral health covers mental health and substance use care. Psychiatrists (physicians) diagnose and prescribe; psychologists, licensed clinical social workers (LCSWs), professional counselors and marriage and family therapists provide assessment and therapy.
 
     Many health plans **carve out** behavioral health to a separate company, so the claim may need to go to a different payer than the medical claim.
   providers: Psychiatrists, psychiatric NPs, psychologists, LCSWs, LPCs/LMHCs, LMFTs.
-  settings: Office, telehealth (very common), intensive outpatient and partial hospitalisation programmes, inpatient psychiatric units.
+  settings: Office, telehealth (very common), intensive outpatient and partial hospitalization programs, inpatient psychiatric units.
   services:
     - Psychiatric diagnostic evaluations
     - Individual, family and group psychotherapy
@@ -41,7 +41,7 @@
     - code: F32.1
       desc: Major depressive disorder, single episode, moderate
     - code: F41.1
-      desc: Generalised anxiety disorder
+      desc: Generalized anxiety disorder
     - code: F43.10
       desc: Post-traumatic stress disorder, unspecified
     - code: F90.0
@@ -87,7 +87,7 @@
 
     Neurologists rely on diagnostic tests and expensive drug therapies, so component billing, units and prior authorization are central.
   providers: Neurologists, neurophysiologists, NPs and PAs.
-  settings: Office, hospital (inpatient consults and EEG monitoring), infusion centres.
+  settings: Office, hospital (inpatient consults and EEG monitoring), infusion centers.
   services:
     - Consultations and follow-ups
     - EEG and long-term video EEG monitoring
@@ -153,7 +153,7 @@
   minutes: 8
   summary: Lung care with pulmonary function tests, bronchoscopy, sleep studies and CPAP, plus Medicare's CPAP compliance rule.
   definition: |
-    Pulmonology treats diseases of the lungs and airways: asthma, COPD, interstitial lung disease, lung nodules and pulmonary hypertension. Many pulmonologists also practise critical care and sleep medicine.
+    Pulmonology treats diseases of the lungs and airways: asthma, COPD, interstitial lung disease, lung nodules and pulmonary hypertension. Many pulmonologists also practice critical care and sleep medicine.
 
     Sleep studies and CPAP equipment have strict coverage rules, especially for Medicare.
   providers: Pulmonologists, sleep medicine physicians, respiratory therapists, sleep technologists.
@@ -191,7 +191,7 @@
     - code: J45.40
       desc: Moderate persistent asthma, uncomplicated
     - code: G47.33
-      desc: Obstructive sleep apnoea
+      desc: Obstructive sleep apnea
   modifiers:
     - mod: "26 / TC"
       use: Interpretation / technical for PFTs and sleep studies
@@ -226,7 +226,7 @@
 
     Nephrologists who manage dialysis patients bill a **monthly ESRD service** code, based on the patient's age and the number of face-to-face visits in the month, rather than per visit. The dialysis facility bills its own claims.
   providers: Nephrologists, NPs and PAs; dialysis facilities.
-  settings: Office, dialysis centres, hospitals, patients' homes (home dialysis).
+  settings: Office, dialysis centers, hospitals, patients' homes (home dialysis).
   services:
     - CKD management
     - Monthly ESRD management for dialysis patients
@@ -278,7 +278,7 @@
 
     Oncology claims are among the highest-value professional claims because of the drugs. Drug units, NDCs, wastage and administration code hierarchy must all be right.
   providers: Medical oncologists, hematologists, radiation oncologists, oncology nurses and pharmacists.
-  settings: Office infusion suites, hospital outpatient infusion, radiation oncology centres.
+  settings: Office infusion suites, hospital outpatient infusion, radiation oncology centers.
   services:
     - Consultations and treatment planning
     - Chemotherapy and immunotherapy infusions
@@ -387,7 +387,7 @@
     - code: N20.0
       desc: Calculus of kidney
     - code: R31.9
-      desc: Haematuria, unspecified
+      desc: Hematuria, unspecified
     - code: C61
       desc: Malignant neoplasm of prostate
   modifiers:
@@ -439,7 +439,7 @@
     - code: "69210"
       desc: Removal of impacted cerumen with instruments, unilateral
     - code: "69436"
-      desc: Ear tube insertion (tympanostomy) under general anaesthesia
+      desc: Ear tube insertion (tympanostomy) under general anesthesia
     - code: "42820"
       desc: Tonsillectomy and adenoidectomy, younger than age 12
     - code: "31255"
@@ -514,7 +514,7 @@
       desc: Medical nutrition therapy, initial, each 15 minutes
   icd:
     - code: E11.65
-      desc: Type 2 diabetes with hyperglycaemia
+      desc: Type 2 diabetes with hyperglycemia
     - code: E10.9
       desc: Type 1 diabetes without complications
     - code: E03.9
@@ -530,7 +530,7 @@
     - CGM interpretation (95251) is limited to once per 30 days.
     - CGM and pump supplies are billed by DME suppliers or pharmacies with specific coverage criteria.
     - DXA frequency is limited (Medicare generally every 24 months unless criteria met).
-    - Diabetes self-management training needs an order and an accredited programme.
+    - Diabetes self-management training needs an order and an accredited program.
   denials:
     - code: CO-119
       issue: CGM interpretation billed more often than every 30 days
@@ -540,7 +540,7 @@
       prevent: Check last DXA date
     - code: CO-50
       issue: CGM coverage criteria not documented
-      prevent: Document insulin use or hypoglycaemia per policy
+      prevent: Document insulin use or hypoglycemia per policy
   interview: >-
     Endocrinology billing includes diabetes care, CGM placement and interpretation (95250, 95251),
     thyroid biopsies and DXA scans. Frequency limits on CGM interpretation and DXA are common denial

@@ -16,10 +16,10 @@
   services:
     - New and established patient office visits (E/M)
     - Preventive exams and Medicare annual wellness visits
-    - Immunisations and injections
+    - Immunizations and injections
     - Chronic care management and transitional care after discharge
     - In-office tests such as ECGs, urinalysis and blood draws
-    - Advance care planning and counselling
+    - Advance care planning and counseling
   codes:
     - code: 99202–99205
       desc: New patient office visit, levels by MDM or time
@@ -53,7 +53,7 @@
     - code: 36415
       desc: Routine venipuncture
     - code: 90471
-      desc: Immunisation administration, first vaccine
+      desc: Immunization administration, first vaccine
       note: Billed with the vaccine product code
   icd:
     - code: Z00.00 / Z00.01
@@ -63,7 +63,7 @@
     - code: E11.9
       desc: Type 2 diabetes without complications
     - code: E78.5
-      desc: Hyperlipidaemia, unspecified
+      desc: Hyperlipidemia, unspecified
     - code: J06.9
       desc: Acute upper respiratory infection, unspecified
   modifiers:
@@ -121,7 +121,7 @@
   settings: Office (POS 11), newborn nursery and hospital (POS 21), telehealth.
   services:
     - Well-child (preventive) visits by age
-    - Vaccines with counselling
+    - Vaccines with counseling
     - Newborn care in hospital and first office visits
     - Developmental and behavioral screenings
     - Sick visits and chronic disease follow-up
@@ -129,16 +129,16 @@
     - code: 99381–99385 / 99391–99395
       desc: Preventive visits for infants through age 17, new / established
     - code: 99460
-      desc: Initial hospital or birthing centre care for a normal newborn, per day
+      desc: Initial hospital or birthing center care for a normal newborn, per day
     - code: 99462
       desc: Subsequent normal newborn hospital care, per day
     - code: 99238
       desc: Hospital discharge day management (30 minutes or less)
     - code: 90460 / 90461
-      desc: Vaccine administration with counselling, under 19, first component / each additional
-      note: Requires physician or qualified provider counselling documented
+      desc: Vaccine administration with counseling, under 19, first component / each additional
+      note: Requires physician or qualified provider counseling documented
     - code: 96110
-      desc: Developmental screening with a standardised instrument
+      desc: Developmental screening with a standardized instrument
     - code: 96127
       desc: Brief emotional or behavioral assessment, per instrument
     - code: 99173
@@ -151,7 +151,7 @@
     - code: Z00.121 / Z00.129
       desc: Routine child health exam with / without abnormal findings
     - code: Z23
-      desc: Encounter for immunisation
+      desc: Encounter for immunization
     - code: J45.909
       desc: Unspecified asthma, uncomplicated
   modifiers:
@@ -161,7 +161,7 @@
       use: Medicaid EPSDT service (required by some states)
   prerequisites:
     - Bill well-child visits by the patient's exact age on the date of service.
-    - Use 90460/90461 only when counselling by the provider is documented; otherwise 90471–90474.
+    - Use 90460/90461 only when counseling by the provider is documented; otherwise 90471–90474.
     - For Vaccines for Children (VFC) supplies, bill only the administration (vaccine product at $0 or with the state's required modifier).
     - Add newborns to the parent's policy quickly; most plans allow 30 to 60 days.
     - Check Medicaid MCO assignment for each visit.
@@ -181,7 +181,7 @@
   tips:
     - VFC vaccines are free to the practice; billing the vaccine product cost for them is a compliance error.
   interview: >-
-    Pediatric billing centres on age-based well-child codes, vaccine administration with counselling
+    Pediatric billing centers on age-based well-child codes, vaccine administration with counseling
     (90460/90461), newborn care codes, and Medicaid EPSDT rules. Newborn eligibility is a common denial
     until the baby is added to the policy.
 
@@ -195,7 +195,7 @@
 
     Routine obstetric care is usually billed as a **global package**: one code covering antepartum visits, delivery and postpartum care.
   providers: OB/GYN physicians, certified nurse midwives, nurse practitioners.
-  settings: Office, hospital labour and delivery (POS 21), ambulatory surgery centres.
+  settings: Office, hospital labor and delivery (POS 21), ambulatory surgery centers.
   services:
     - Antepartum (prenatal) visits and ultrasounds
     - Vaginal and cesarean deliveries
@@ -285,14 +285,14 @@
   services:
     - Consultations and follow-up visits
     - ECGs, echocardiograms, stress tests, Holter and event monitors
-    - Cardiac catheterisation and coronary stenting
+    - Cardiac catheterization and coronary stenting
     - Pacemaker and defibrillator implantation and checks
     - Cardiac rehabilitation
   codes:
     - code: "93000"
       desc: ECG, 12-lead, with interpretation and report
     - code: "93306"
-      desc: Transthoracic echocardiogram, complete, with Doppler and colour flow
+      desc: Transthoracic echocardiogram, complete, with Doppler and color flow
     - code: "93350"
       desc: Stress echocardiogram
     - code: 93015
@@ -302,7 +302,7 @@
     - code: 93224
       desc: Holter monitor, up to 48 hours, global
     - code: "93458"
-      desc: Left heart catheterisation with coronary angiography
+      desc: Left heart catheterization with coronary angiography
     - code: 92928
       desc: Coronary stent placement, single major vessel
     - code: "33208"
@@ -399,7 +399,7 @@
     - code: D22.x
       desc: Melanocytic naevi
     - code: L82.1
-      desc: Other seborrhoeic keratosis
+      desc: Other seborrheic keratosis
   modifiers:
     - mod: "25"
       use: Separate E/M on the same day as a biopsy or destruction
@@ -410,7 +410,7 @@
   prerequisites:
     - Document each lesion's site, size (excised diameter including margins) and method.
     - Use pathology results to choose benign versus malignant excision codes (bill after the path report).
-    - Seborrhoeic keratoses and other benign lesions are often cosmetic; document symptoms (bleeding, irritation) to support medical necessity.
+    - Seborrheic keratoses and other benign lesions are often cosmetic; document symptoms (bleeding, irritation) to support medical necessity.
     - Mohs often needs prior authorization and appropriate-use documentation.
     - Know the 10-day and 90-day global periods for excisions and repairs.
   denials:
@@ -449,7 +449,7 @@
     - Refractions for glasses
     - Imaging such as OCT and visual fields
     - Cataract surgery
-    - Intravitreal injections for macular degeneration and diabetic macular oedema
+    - Intravitreal injections for macular degeneration and diabetic macular edema
     - Glaucoma laser and surgical procedures
   codes:
     - code: 92002 / 92004
@@ -602,7 +602,7 @@
       issue: Viscosupplement repeated before the allowed interval
       prevent: Track injection dates per knee
   tips:
-    - For joint replacements, the facility claim, surgeon, assistant and anaesthesia all need the same authorization; share it across teams.
+    - For joint replacements, the facility claim, surgeon, assistant and anesthesia all need the same authorization; share it across teams.
   interview: >-
     Orthopedics involves laterality modifiers, global surgical periods and prior authorization for
     imaging and surgery. Visits within the global period are part of the surgery unless unrelated
@@ -675,7 +675,7 @@
       prevent: Document start/stop or total timed minutes; apply 8-minute rule
     - code: CO-119
       issue: Visit limit reached
-      prevent: Track visits and request authorisation extensions
+      prevent: Track visits and request authorization extensions
     - code: CO-4
       issue: Missing GP/GO/GN or KX
       prevent: Scrubber edits for therapy modifiers

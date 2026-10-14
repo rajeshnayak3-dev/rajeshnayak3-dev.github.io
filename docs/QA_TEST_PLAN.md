@@ -77,6 +77,12 @@ The exam flow test needs a build with `api_url: "http://localhost:8790"` (don't 
 | PRACT-01 | Practice lab filters and planned items | Filter Advanced, clear; check planned items | Filter narrows and clears; planned items have no links | all=21, advanced=5, cleared=21, planned_links=0 | PASS |  |
 | THEME-01 | Theme | Load home; toggle; navigate | Light by default; dark persists across pages | default=None, after=dark | PASS |  |
 
+## 2b. Spelling
+
+| Test ID | Feature | Steps/input | Expected result | Actual result | Pass/fail | Notes |
+|---|---|---|---|---|---|---|
+| SPELL-01 | US English spelling | `python tests/spellcheck.py dist` | 0 unknown words | 0 unknown words (2026-10-15) | PASS | hunspell en_US plus `tests/spelling-allow.txt` (255 reviewed medical, payer and RCM terms); verified it flags British spellings and typos |
+
 ## 3. Links
 
 | Test ID | Feature | Steps/input | Expected result | Actual result | Pass/fail | Notes |
@@ -94,7 +100,7 @@ The exam flow test needs a build with `api_url: "http://localhost:8790"` (don't 
 | AS-05 | Revoke | Set Status to Revoked, verify | "has been revoked" | As expected | PASS | |
 | AS-06 | Privacy | Verify response | No score fields | No `percent` or `score` | PASS | |
 | AS-07 | Bad submissions | 10 questions; duplicate; unknown question | Errors; stale flag on unknown | As expected | PASS | |
-| AS-08 | Name sanitising | `<script>x</script> Bob`; `José … O'Brien-Ünal` | Only letters, marks, spaces, . ' ’ - kept | `scriptxscript Bob`; `José scriptalertscript O'Brien-Ünal` | PASS | |
+| AS-08 | Name sanitizing | `<script>x</script> Bob`; `José … O'Brien-Ünal` | Only letters, marks, spaces, . ' ’ - kept | `scriptxscript Bob`; `José scriptalertscript O'Brien-Ünal` | PASS | |
 | EX-01 | Full pass flow (browser + mock of real Code.gs) | Start, answer all correctly, submit | Certificate, ID stored, verify page shows name/title/date only, progress page shows certificate | As expected, no JS errors | PASS | QR and PDF libraries couldn't load (CDN blocked in the test environment); PDF falls back to PNG |
 | EX-02 | Full fail flow | Every third answer wrong | "Not passed", 24 h retake message, breakdown | 66%, as expected | PASS | |
 | CERT-01…03 | Closed state on the real build | See section 2 | | | PASS | |
@@ -103,13 +109,13 @@ The exam flow test needs a build with `api_url: "http://localhost:8790"` (don't 
 
 | Test ID | Feature | Steps/input | Expected result | Actual result | Pass/fail | Notes |
 |---|---|---|---|---|---|---|
-| A11Y-01 | Text contrast | WCAG formula on palette | ≥ 4.5:1 for body text colours | ink-3 5.13:1 (was 4.33:1), ink-2 6.92:1, link 7.18:1, green 5.43:1, amber 5.85:1, red 6.07:1 on #F4F6F9 | PASS | Light theme; dark theme not measured |
+| A11Y-01 | Text contrast | WCAG formula on palette | ≥ 4.5:1 for body text colors | ink-3 5.13:1 (was 4.33:1), ink-2 6.92:1, link 7.18:1, green 5.43:1, amber 5.85:1, red 6.07:1 on #F4F6F9 | PASS | Light theme; dark theme not measured |
 | KB-01 | Keyboard | See section 2 | | | PASS | |
 
 ## Not tested / limits
 
 - External links (CMS, X12, eCFR, HHS, MACs) weren't fetched by an automated checker; several were confirmed through search results during the review.
-- Screen-reader behaviour wasn't tested with a real screen reader; only semantic markup, labels and `aria-live` regions were checked.
+- Screen-reader behavior wasn't tested with a real screen reader; only semantic markup, labels and `aria-live` regions were checked.
 - Dark-mode contrast wasn't measured.
 - The 8-minute rule calculator's formula has no unit tests (page load only).
 - The live Google Apps Script deployment doesn't exist yet, so Google quotas, CORS and real latency are untested.

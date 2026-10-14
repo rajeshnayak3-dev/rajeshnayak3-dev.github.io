@@ -35,7 +35,7 @@ A **no-response** claim has been billed, but there's no payment, no denial and n
 | **Not on file (NOF)** | The payer has no record of the claim | Find out why (below), then resubmit and protect timely filing |
 | **In process** | Received and being adjudicated | Get the received date and expected completion; follow up again |
 | **Pended / suspended** | Waiting on something (records, COB, review, pricing) | Find what's needed and supply it |
-| **Finalised** (paid or denied) | Processed, but the result didn't reach you | Get the details; find the payment or request a copy of the ERA/EOB |
+| **Finalized** (paid or denied) | Processed, but the result didn't reach you | Get the details; find the payment or request a copy of the ERA/EOB |
 
 ## Claim not on file
 
@@ -58,7 +58,7 @@ Ask:
 
 - What date was the claim received?
 - Why is it still in process? Is anything needed from us or the patient?
-- When should it finalise?
+- When should it finalize?
 
 Then set a follow-up date just after that. If a **clean claim** is past the state **prompt pay** limit (often 30–45 days for fully insured plans), mention it and ask about interest.
 
@@ -75,7 +75,7 @@ Common reasons and actions:
 | Clinical or prepayment review | Ask the expected timeline; send any requested documents |
 | Payer system issue | Get a reference number and escalate if widespread |
 
-## Finalised but not received
+## Finalized but not received
 
 If the payer says the claim **paid**, get:
 

@@ -141,7 +141,7 @@
   minutes: 9
   summary: Endoscopy-heavy specialty where screening versus diagnostic colonoscopy rules change what the patient owes.
   definition: |
-    Gastroenterology treats the digestive system: oesophagus, stomach, intestines, liver, pancreas and gallbladder.
+    Gastroenterology treats the digestive system: esophagus, stomach, intestines, liver, pancreas and gallbladder.
 
     Most procedures are endoscopies: upper endoscopy (EGD) and colonoscopy. Billing hinges on whether a colonoscopy is screening (no symptoms, often no cost-sharing) or diagnostic (symptoms or findings), and what was done during it (biopsy, polyp removal).
   providers: Gastroenterologists, hepatologists, NPs and PAs.
@@ -179,7 +179,7 @@
     - code: K63.5
       desc: Polyp of colon
     - code: K21.9
-      desc: Gastro-oesophageal reflux disease without oesophagitis
+      desc: Gastroesophageal reflux disease without esophagitis
   modifiers:
     - mod: PT
       use: Medicare screening colonoscopy that became diagnostic or therapeutic (cost-sharing rules apply)
@@ -195,8 +195,8 @@
     - Decide screening versus diagnostic from the reason for the procedure, not the findings.
     - Medicare screening intervals depend on risk (for example, every 10 years for average risk, more often for high risk); check last colonoscopy date.
     - Add PT (Medicare) or 33 (commercial) when screening turns into polyp removal or biopsy.
-    - Prior authorization may be required for diagnostic endoscopies on some plans and for anaesthesia.
-    - Anaesthesia for screening colonoscopy has its own coding and modifier rules.
+    - Prior authorization may be required for diagnostic endoscopies on some plans and for anesthesia.
+    - Anesthesia for screening colonoscopy has its own coding and modifier rules.
   denials:
     - code: CO-119
       issue: Screening colonoscopy before the allowed interval
@@ -247,7 +247,7 @@
     - code: 19301
       desc: Partial mastectomy (lumpectomy)
     - code: "19083"
-      desc: Breast biopsy with placement of localisation device, ultrasound guided
+      desc: Breast biopsy with placement of localization device, ultrasound guided
     - code: "10060"
       desc: Incision and drainage of abscess, simple
     - code: "99024"
@@ -302,8 +302,8 @@
     Radiology uses imaging to diagnose and sometimes treat disease. Diagnostic radiologists interpret images; interventional radiologists perform image-guided procedures.
 
     Every imaging study has a **technical component** (equipment, staff, supplies) and a **professional component** (interpretation and report). Who owns the equipment decides how it's billed.
-  providers: Radiologists, interventional radiologists, imaging centres, hospitals.
-  settings: Hospital outpatient and inpatient, independent diagnostic testing facilities (IDTFs), imaging centres, offices.
+  providers: Radiologists, interventional radiologists, imaging centers, hospitals.
+  settings: Hospital outpatient and inpatient, independent diagnostic testing facilities (IDTFs), imaging centers, offices.
   services:
     - X-rays
     - CT and MRI
@@ -378,28 +378,28 @@
   minutes: 10
   summary: Time-based billing using base units plus time units, physical status modifiers and medical direction rules.
   definition: |
-    Anesthesiology provides anaesthesia and pain control for surgery and procedures, and monitors patients' vital functions. Anaesthesia is billed very differently from other services: by **base units** for the procedure, plus **time units**, multiplied by a **conversion factor**.
+    Anesthesiology provides anesthesia and pain control for surgery and procedures, and monitors patients' vital functions. Anesthesia is billed very differently from other services: by **base units** for the procedure, plus **time units**, multiplied by a **conversion factor**.
 
     > Payment = (base units + time units + any modifying units) × conversion factor
-  providers: Anesthesiologists, certified registered nurse anaesthetists (CRNAs), anaesthesiologist assistants.
-  settings: Hospitals, ASCs, endoscopy suites, labour and delivery.
+  providers: Anesthesiologists, certified registered nurse anesthetists (CRNAs), anesthesiologist assistants.
+  settings: Hospitals, ASCs, endoscopy suites, labor and delivery.
   services:
-    - General anaesthesia
-    - Regional anaesthesia (spinal, epidural, nerve blocks)
-    - Monitored anaesthesia care (MAC)
-    - Labour epidurals
+    - General anesthesia
+    - Regional anesthesia (spinal, epidural, nerve blocks)
+    - Monitored anesthesia care (MAC)
+    - Labor epidurals
     - Post-operative pain blocks
   codes:
     - code: 00100–01999
-      desc: Anaesthesia codes by body area and procedure
+      desc: Anesthesia codes by body area and procedure
     - code: "00811"
-      desc: Anaesthesia for lower intestinal endoscopy, not otherwise specified
+      desc: Anesthesia for lower intestinal endoscopy, not otherwise specified
     - code: "00812"
-      desc: Anaesthesia for screening colonoscopy
+      desc: Anesthesia for screening colonoscopy
     - code: "01402"
-      desc: Anaesthesia for open or arthroscopic total knee arthroplasty
+      desc: Anesthesia for open or arthroscopic total knee arthroplasty
     - code: "01967"
-      desc: Neuraxial labour analgesia for planned vaginal delivery
+      desc: Neuraxial labor analgesia for planned vaginal delivery
     - code: 64447
       desc: Femoral nerve block injection (post-op pain, separate when documented)
     - code: 99100 / 99116 / 99135 / 99140
@@ -407,7 +407,7 @@
       note: Medicare doesn't pay these; some commercial payers do
   icd:
     - code: Same as the surgery
-      desc: Anaesthesia claims use the surgical diagnosis
+      desc: Anesthesia claims use the surgical diagnosis
   modifiers:
     - mod: AA
       use: Personally performed by an anesthesiologist
@@ -420,16 +420,16 @@
     - mod: QZ
       use: CRNA without medical direction
     - mod: QS
-      use: Monitored anaesthesia care
+      use: Monitored anesthesia care
     - mod: G8 / G9
       use: MAC for deep complex procedures / patient with severe cardiopulmonary history
     - mod: P1–P6
       use: Physical status, from healthy patient (P1) to brain-dead organ donor (P6)
     - mod: "47"
-      use: Anaesthesia by the surgeon (not paid by Medicare)
+      use: Anesthesia by the surgeon (not paid by Medicare)
   prerequisites:
     - Document start and stop times exactly; time units are usually 15 minutes each (Medicare uses actual minutes ÷ 15).
-    - Use the right anaesthesia code crosswalked from the surgical CPT.
+    - Use the right anesthesia code crosswalked from the surgical CPT.
     - Apply medical direction rules; when both the anesthesiologist (QK/QY) and CRNA (QX) bill, each is paid 50%.
     - Physical status modifiers can add units with some payers (P3 to P5).
     - Authorization usually follows the surgery's authorization.
@@ -438,17 +438,17 @@
       issue: Missing AA, QK, QX, QY or QZ
       prevent: Provider-type modifier rules in charge entry
     - code: CO-16
-      issue: Missing anaesthesia time or units
-      prevent: Time captured from the anaesthesia record
+      issue: Missing anesthesia time or units
+      prevent: Time captured from the anesthesia record
     - code: CO-197
-      issue: Surgery not authorized, so anaesthesia denies too
-      prevent: Share authorization details with anaesthesia billing
+      issue: Surgery not authorized, so anesthesia denies too
+      prevent: Share authorization details with anesthesia billing
     - code: CO-97
-      issue: Nerve block billed when it was the primary anaesthetic
+      issue: Nerve block billed when it was the primary anesthetic
       prevent: Bill blocks separately only for post-op pain when documented as separate
   interview: >-
-    Anaesthesia is paid as base units plus time units times a conversion factor. Claims need start
-    and stop time, the anaesthesia code that matches the surgery, provider modifiers like AA, QK, QX,
+    Anesthesia is paid as base units plus time units times a conversion factor. Claims need start
+    and stop time, the anesthesia code that matches the surgery, provider modifiers like AA, QK, QX,
     QY or QZ, and physical status modifiers.
 
 - name: Pain management
@@ -460,7 +460,7 @@
     Pain medicine treats chronic and acute pain, especially from the spine and joints, using medications, injections, nerve procedures and devices.
 
     Interventional pain procedures are closely watched by payers. Medicare LCDs set detailed criteria: duration of pain, failed conservative care, imaging, functional scores and how often procedures can be repeated.
-  providers: Pain medicine physicians (often anaesthesiology or physical medicine trained), NPs and PAs.
+  providers: Pain medicine physicians (often anesthesiology or physical medicine trained), NPs and PAs.
   settings: Office, ASCs, hospital outpatient.
   services:
     - Epidural steroid injections
@@ -526,11 +526,11 @@
   minutes: 9
   summary: ED visit levels, critical care time, procedures in the ED, the No Surprises Act and the prudent layperson standard.
   definition: |
-    Emergency physicians evaluate and stabilise patients with acute illness or injury in the hospital emergency department (ED). Urgent care centres handle non-life-threatening urgent problems outside the hospital.
+    Emergency physicians evaluate and stabilize patients with acute illness or injury in the hospital emergency department (ED). Urgent care centers handle non-life-threatening urgent problems outside the hospital.
 
     An ED visit produces a professional claim (physician, POS 23) and a facility claim (hospital, revenue code 0450).
   providers: Emergency physicians, PAs and NPs; urgent care physicians.
-  settings: Hospital ED (POS 23), freestanding EDs, urgent care centres (POS 20).
+  settings: Hospital ED (POS 23), freestanding EDs, urgent care centers (POS 20).
   services:
     - ED evaluation and management
     - Critical care

@@ -1,17 +1,24 @@
 # Changelog
 
+## 2026-10-15 — Light Google-style theme, simpler navigation, US spelling
+
+- **Spelling:** the whole site now uses US English (practice, prioritize, organization, program, anesthesia, center, behavior and others: 269 changes in 77 files). Related-code headings no longer lowercase acronyms ("NCCI", "RARCs"). New `tests/spellcheck.py` checks every page against a US English dictionary plus a reviewed allowlist of medical and payer terms.
+- **Look:** white, Google Material-style theme with soft pastel containers, pill buttons, rounded cards, Outfit headings and Roboto text. Removed the dark hero, drawings, heartbeat animation, patterns and confetti.
+- **Navigation:** four top tabs (Learn, Practice, Reference, Career) plus search and My progress; the lesson list appears only inside lessons; hub and reference pages are full width; phones get a bottom tab bar (Home, Learn, Practice, Reference, Progress). Theme switch removed.
+- **Home:** a centered search box with quick-start chips, "Where are you starting from?" (three paths), "How it works", "Explore" and a short "Why REVEX is free".
+
 ## 2026-10-14 — Professional look and simpler learning
 
 - New palette: midnight navy, clinical blue, healthcare teal and mint, with three levels of navy-tinted shadow for depth.
 - Home hero is now a midnight panel with abstract glows, flowing contour lines and a dot grid, plus three floating "product" cards that teach: a fictional member insurance card, a claim status tracker and an ERA payment breakdown with a chart. The heartbeat claim journey now glows inside the hero.
-- Home simplified to five blocks: hero, how REVEX works (learn, practise, check), choose your path, start with a topic, and why you can trust it. A "continue where you left off" bar appears only once you've started.
+- Home simplified to five blocks: hero, how REVEX works (learn, practice, check), choose your path, start with a topic, and why you can trust it. A "continue where you left off" bar appears only once you've started.
 - Learning paths page cut down to one clear card per path.
 - Lessons: hover or tap underlined RCM terms (ERA, CARC, COB, timely filing…) to see a plain-English definition from the glossary; a reading progress bar along the top; the "On this page" list starts collapsed on laptops; sources and review details fold into one line you can open.
-- Inner page headers get a soft abstract background in each area's accent colour.
+- Inner page headers get a soft abstract background in each area's accent color.
 
 ## 2026-10-14 — Friendlier visual layer
 
-- Clinical teal added to the palette, with one accent colour per main area (Learning paths teal, Reference blue, Practice amber, Career red).
+- Clinical teal added to the palette, with one accent color per main area (Learning paths teal, Reference blue, Practice amber, Career red).
 - Home hero: line illustration of a claim form on a clipboard with a stethoscope, and a heartbeat line that draws once to show a claim's journey (Charge → Scrub → Accepted → Adjudicated → Paid) before a PAID stamp lands. Replay button included.
 - Small healthcare spot illustrations on path cards, hub pages and home previews; faint claim-form dot grid and medical-cross patterns on the hero, bands and page headers; heartbeat divider above the footer.
 - Motion that answers actions: button press, card lift, quiz check pop and gentle nudge on a wrong answer, a small burst when you mark a lesson complete, filling progress bars, header shadow on scroll, smooth fades between pages in supporting browsers, and a one-time fade-in for home sections. Everything is turned off when the device asks for reduced motion.
@@ -23,7 +30,7 @@ Audit documents: `docs/AUDIT_INVENTORY.md`, `docs/RCM_CONTENT_AUDIT.md`, `docs/C
 
 ### Accuracy (with sources)
 - Clean claim no longer described as "paid on first submission"; clean claim rate, first-pass acceptance, first-pass resolution/payment, rejection, denial rate and final adjudication are now distinguished (lessons, quiz, glossary, interview answer).
-- Eligibility lesson: no universal order for applying benefits; worked example labelled illustrative; "eligibility is not a guarantee of payment"; per-service verification checklist.
+- Eligibility lesson: no universal order for applying benefits; worked example labeled illustrative; "eligibility is not a guarantee of payment"; per-service verification checklist.
 - ERA, documentation, Medicare and denial-category lessons: ABN validity conditions, Original Medicare scope, CO never to the patient, PR still needs checks, stop-and-escalate list. CMS and Noridian sources.
 - CARC/RARC maintenance reworded with links to the official X12 lists.
 - Corrected claims: "check the payer's rules first" box, MAC reopening limits, sources.
@@ -45,8 +52,8 @@ Audit documents: `docs/AUDIT_INVENTORY.md`, `docs/RCM_CONTENT_AUDIT.md`, `docs/C
 - Accessibility: AA contrast for secondary text, visible focus on form fields, text status labels, reduced-motion support, live regions.
 
 ### New content
-- Quality and analytics section (7 lessons): audit scope, sampling, error definitions and scoring, calibration and kappa, root cause and Pareto, CAPA and coaching, AR prioritisation and work queues.
-- Practice cases SC-17 to SC-21: corrected claim or appeal, recoupment after retro termination, ambiguous remittance, AR worklist prioritisation, auditing an AR note. Cases now support objectives and a debrief (documentation, escalation, root cause, sources), and every case shows an ID.
+- Quality and analytics section (7 lessons): audit scope, sampling, error definitions and scoring, calibration and kappa, root cause and Pareto, CAPA and coaching, AR prioritization and work queues.
+- Practice cases SC-17 to SC-21: corrected claim or appeal, recoupment after retro termination, ambiguous remittance, AR worklist prioritization, auditing an AR note. Cases now support objectives and a debrief (documentation, escalation, root cause, sources), and every case shows an ID.
 - Career hub with 8 roles, competencies linked to lessons, and a local self-check.
 
 ### Tools
