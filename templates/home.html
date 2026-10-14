@@ -8,23 +8,44 @@
 </script>
 {% endblock %}
 {% block main %}
-<section class="g-hero" aria-labelledby="hero-h">
-  <div class="g-hero-bg" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span><span class="b4"></span></div>
-  <div class="wrap g-hero-in">
-    <h1 id="hero-h">Learn US healthcare billing, <span class="nowrap">one step at a time.</span></h1>
-    <p class="g-sub">Free, short lessons on revenue cycle management, with practice cases and quizzes. No sign-up.</p>
-    <button type="button" class="g-search" data-search-open>
-      {{ icon("search", 22) }}
-      <span>Search lessons, denial codes like CO-197, or terms like QMB</span>
-    </button>
-    <ul class="g-chips" aria-label="Popular starting points">
-      <li><a href="/start-here/what-is-rcm/">What is RCM?</a></li>
-      <li><a href="/rcm-cycle/">The claim cycle</a></li>
-      <li><a href="/denials/read-an-era/">Read an ERA</a></li>
-      <li><a href="/denials/codes/">Denial codes</a></li>
-      <li><a href="/insurance/medicare/">Medicare</a></li>
-      <li><a href="/glossary/">Dictionary</a></li>
-    </ul>
+<section class="hero" aria-labelledby="hero-h">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1 id="hero-h">Learn US healthcare revenue cycle, one claim at a time.</h1>
+      <p class="lede">Free, short lessons that take you from zero to working RCM analyst: the claim cycle, insurance, billing forms, denials and real AR cases. Written by an RCM quality specialist. No sign-up.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/{{ first_lesson }}">Start learning</a>
+        <a class="btn btn-ghost" href="/denials/codes/">Look up a denial code</a>
+      </div>
+      <button type="button" class="hero-search" data-search-open>{{ icon("search", 20) }}<span>Search lessons, codes like CO-197, or terms like QMB</span><kbd>/</kbd></button>
+      <p class="hero-stats"><span><b>{{ stats.lessons }}</b>lessons</span><span><b>{{ stats.codes }}</b>denial and remark codes</span><span><b>{{ stats.scenarios }}</b>practice cases</span><span><b>{{ stats.specialties }}</b>specialties</span></p>
+    </div>
+
+    <figure class="claim-ticket" data-claim aria-label="Example: one claim moving through the revenue cycle">
+      <div class="ct-head">
+        <span class="ct-id">Claim RX-20418</span>
+        <span class="ct-status" data-ct-status>Charge entered</span>
+      </div>
+      <dl class="ct-fields">
+        <div class="fbox"><dt>Patient</dt><dd>Jordan Avery (fictional)</dd></div>
+        <div class="fbox"><dt>Payer</dt><dd>Medicare Part B</dd></div>
+        <div class="fbox"><dt>CPT</dt><dd class="mono">99214</dd></div>
+        <div class="fbox"><dt>ICD-10-CM</dt><dd class="mono">E11.9</dd></div>
+        <div class="fbox fbox-wide"><dt>Billed</dt><dd class="mono">$180.00</dd></div>
+        <div class="fbox fbox-result" data-ct-result><dt>Result</dt><dd class="mono" data-ct-result-text>Pending</dd></div>
+      </dl>
+      <ol class="ct-track" data-ct-track>
+        <li data-msg="Charge entered">Charge</li>
+        <li data-msg="Scrubbed, no edits">Scrub</li>
+        <li data-msg="Accepted, 277CA">Accepted</li>
+        <li data-msg="Adjudicated">Adjudicated</li>
+        <li data-msg="Paid, ERA posted">Paid</li>
+      </ol>
+      <figcaption>
+        <span data-ct-caption>Every claim follows this path. When it stops, someone in RCM finds out why.</span>
+        <button type="button" class="link-btn" data-ct-replay>Replay</button>
+      </figcaption>
+    </figure>
   </div>
 </section>
 

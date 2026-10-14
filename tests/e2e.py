@@ -317,28 +317,36 @@ async def main():
             total_flows >= 20 and leftovers == 0 and "Module 2 of 5" in ribbon and nxt.endswith("rcm-cycle/eligibility-and-benefits/") and recap)
         await ctx.close()
 
-        # ---------- THEME-01: light theme, plain layout on hubs, sidebar only on lessons
-        ctx, pg = await new_page(browser, 1280)
+        # ---------- THEME-01: canvas, plain hubs, course sidebar on laptops, drawer below 1280px
+        ctx, pg = await new_page(browser, 1440)
         await pg.goto(BASE + "/practice/")
         bg = await pg.evaluate("getComputedStyle(document.body).backgroundColor")
         hub_side = await pg.query_selector(".sidebar")
         await pg.goto(BASE + "/start-here/what-is-rcm/")
-        local_nav = await pg.is_visible(".local-nav [data-topics]")
+        side_fixed = await pg.evaluate("(() => { const r = document.querySelector('.sidebar').getBoundingClientRect(); return r.left >= 0 && r.width > 200; })()")
+        btn_hidden = not await pg.is_visible(".lesson-bar [data-topics]")
+        await ctx.close()
+        ctx, pg = await new_page(browser, 1180)
+        await pg.goto(BASE + "/start-here/what-is-rcm/")
         drawer_closed = not await pg.evaluate("document.body.classList.contains('sb-open') || document.querySelector('.sidebar').getBoundingClientRect().right > 0")
-        await pg.click(".local-nav [data-topics]")
-        await pg.wait_for_timeout(300)
+        await pg.click(".lesson-bar [data-topics]")
+        await pg.wait_for_timeout(350)
         drawer_open = await pg.evaluate("document.body.classList.contains('sb-open') && document.querySelector('.sidebar').getBoundingClientRect().right > 0")
-        rec("THEME-01", "Light theme and layout", "Open a hub page and a lesson at 1280px; open All lessons", "Light dotted canvas (#F5F7FA); no sidebar on hubs; lessons have a sticky local nav whose All lessons button opens the lesson drawer", f"bg={bg}, hub_sidebar={bool(hub_side)}, local_nav={local_nav}, drawer_closed_first={drawer_closed}, drawer_opens={drawer_open}", bg == "rgb(245, 247, 250)" and not hub_side and local_nav and drawer_closed and drawer_open)
+        ok = bg == "rgb(244, 246, 249)" and not hub_side and side_fixed and btn_hidden and drawer_closed and drawer_open
+        rec("THEME-01", "Theme and course navigation", "Hub and lesson at 1440px; lesson at 1180px, open All lessons", "Paper canvas (#F4F6F9); no sidebar on hubs; course sidebar always visible at 1440px; below 1280px the lesson bar's All lessons button opens it as a drawer", f"bg={bg}, hub_sidebar={bool(hub_side)}, sidebar_1440={side_fixed}, button_hidden_1440={btn_hidden}, drawer_closed_first={drawer_closed}, drawer_opens={drawer_open}", ok)
         await ctx.close()
 
-        # ---------- LAYOUT-01: lesson uses the width (content centered, right rail) at 1440px
+        # ---------- LAYOUT-01: lesson fills the space next to the sidebar; one sticky bar with Next
         ctx, pg = await new_page(browser, 1440)
         await pg.goto(BASE + "/rcm-cycle/claim-submission/")
-        box = await pg.evaluate("""() => { const a = document.querySelector('.lesson-grid').getBoundingClientRect();
-          const r = document.querySelector('.lesson-side'); const rb = r ? r.getBoundingClientRect() : null;
-          return {left: Math.round(a.left), right: Math.round(innerWidth - a.right), rail: rb ? Math.round(rb.width) : 0, railVisible: !!(r && r.offsetParent)}; }""")
-        balanced = abs(box["left"] - box["right"]) <= 24 and box["railVisible"] and box["rail"] >= 220
-        rec("LAYOUT-01", "Lesson width", "Open a lesson at 1440px", "Content centered (left and right margins within 24px) with a visible right rail of at least 220px", str(box), balanced)
+        box = await pg.evaluate("""() => { const m = document.querySelector('main').getBoundingClientRect(); const a = document.querySelector('.lesson-grid').getBoundingClientRect();
+          const r = document.querySelector('.lesson-side .side-card'); const rb = r ? r.getBoundingClientRect() : null;
+          return {left: Math.round(a.left - m.left), right: Math.round(m.right - a.right), rail: rb ? Math.round(rb.width) : 0, railVisible: !!(r && r.offsetParent), bars: document.querySelectorAll('.lesson-bar').length, next: !!document.querySelector('.lesson-bar .lb-next')}; }""")
+        await pg.mouse.wheel(0, 2500)
+        await pg.wait_for_timeout(300)
+        stuck = await pg.evaluate("Math.round(document.querySelector('.lesson-bar').getBoundingClientRect().top)")
+        ok = abs(box["left"] - box["right"]) <= 24 and box["railVisible"] and box["rail"] >= 220 and box["bars"] == 1 and box["next"] and 60 <= stuck <= 90
+        rec("LAYOUT-01", "Lesson width and bar", "Open a lesson at 1440px and scroll", "Lesson centered in the space beside the sidebar (margins within 24px); right rail at least 220px; a single bar with Next that stays under the header", f"{box}, bar_top_after_scroll={stuck}", ok)
         await ctx.close()
 
         await browser.close()

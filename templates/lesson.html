@@ -7,31 +7,26 @@
 {"@context":"https://schema.org","@type":"LearningResource","name":{{ page.title | tojson }},"description":{{ page.description | tojson }},"educationalLevel":{{ page.level | tojson }},"timeRequired":"PT{{ page.minutes }}M","inLanguage":"en-US","isAccessibleForFree":true,"dateModified":"{{ page.updated }}","author":{"@type":"Person","name":{{ site.author.name | tojson }},"url":{{ site.author.linkedin | tojson }}},"publisher":{"@type":"Organization","name":"{{ site.name }}"}}
 </script>
 {% endblock %}
-{% block localnav %}
-<div class="local-nav">
-  <div class="wrap ln-row">
-    <a class="ln-title" href="/{{ section.id }}/">{{ section.title }}</a>
-    <div class="ln-actions">
-      <button class="ln-btn" type="button" aria-expanded="false" aria-controls="sidebar" data-topics>{{ icon("menu", 18) }}<span>All lessons</span></button>
-      {% if next %}<a class="ln-next" href="/{{ next.url }}"><span class="hide-sm">Next: </span>{{ next.short or next.title }}{{ icon("right", 16) }}</a>{% endif %}
+{% block main %}
+<div class="wrap lesson-bar-wrap">
+  <div class="lesson-bar">
+    {% if pctx %}
+    <nav class="path-ribbon" aria-label="Your place in the learning path">
+      <a class="pr-path" href="/learn/{{ pctx.path.id }}/">{{ icon("route", 16) }} {{ pctx.path.title }}</a>
+      <span class="pr-sep" aria-hidden="true">›</span>
+      <span class="pr-mod">Module {{ pctx.module_n }} of {{ pctx.module_total }}: {{ pctx.module.title }}</span>
+      <span class="pr-sep" aria-hidden="true">›</span>
+      <span class="pr-les">Lesson {{ pctx.lesson_n }} of {{ pctx.lesson_total }}</span>
+      <span class="pr-dots" aria-hidden="true">{% for u in pctx.dots %}<i data-dot="{{ u }}"{% if u == page.url %} class="is-here"{% endif %}></i>{% endfor %}</span>
+    </nav>
+    {% else %}
+    {{ crumbs([(section.title, "/" ~ section.id ~ "/"), (page.short, None)]) }}
+    {% endif %}
+    <div class="lb-actions">
+      <button class="lb-btn" type="button" aria-expanded="false" aria-controls="sidebar" data-topics>{{ icon("menu", 18) }}<span>All lessons</span></button>
+      {% if next %}<a class="lb-next" href="/{{ next.url }}"><span class="hide-sm">Next</span>{{ icon("right", 16) }}</a>{% endif %}
     </div>
   </div>
-</div>
-{% endblock %}
-{% block main %}
-<div class="wrap">
-  {% if pctx %}
-  <nav class="path-ribbon" aria-label="Your place in the learning path">
-    <a class="pr-path" href="/learn/{{ pctx.path.id }}/">{{ icon("route", 16) }} {{ pctx.path.title }}</a>
-    <span class="pr-sep" aria-hidden="true">›</span>
-    <span class="pr-mod">Module {{ pctx.module_n }} of {{ pctx.module_total }}: {{ pctx.module.title }}</span>
-    <span class="pr-sep" aria-hidden="true">›</span>
-    <span class="pr-les">Lesson {{ pctx.lesson_n }} of {{ pctx.lesson_total }}</span>
-    <span class="pr-dots" aria-hidden="true">{% for u in pctx.dots %}<i data-dot="{{ u }}"{% if u == page.url %} class="is-here"{% endif %}></i>{% endfor %}</span>
-  </nav>
-  {% else %}
-  {{ crumbs([(section.title, "/" ~ section.id ~ "/"), (page.short, None)]) }}
-  {% endif %}
 </div>
 <article class="wrap lesson-grid">
   <header class="lesson-head">

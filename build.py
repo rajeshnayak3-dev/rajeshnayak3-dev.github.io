@@ -113,7 +113,7 @@ def render_flow(src):
                 arrow = f'<span class="fa" aria-hidden="{"false" if lab else "true"}"><span class="fa-l">{lab}</span></span>'
             num = f'<span class="fn-n">{i + 1}</span>' if spec.get("numbered") else ""
             items.append(f'<li>{_node(st).replace("<span class=\"fn-t\">", num + "<span class=\"fn-t\">", 1)}{arrow}</li>')
-        return (f'<figure class="flow flow-steps flow-{mode}" role="group" aria-label="{title}">{head}'
+        return (f'<figure class="flow flow-steps flow-{mode} n-{len(steps)}" role="group" aria-label="{title}">{head}'
                 f'<ol class="flow-track">{"".join(items)}</ol>{note}</figure>')
     if kind == "branch":
         start = _node(spec["start"], "fn fn-start") + '<span class="fa fa-down" aria-hidden="true"><span class="fa-l"></span></span>' if spec.get("start") else ""

@@ -235,7 +235,7 @@
       });
     }, { rootMargin: "-20% 0px -70% 0px" });
     heads.forEach(function (h) { io.observe(h); });
-    if (innerWidth < 1360) $$("[data-toc]").forEach(function (d) { d.open = false; });
+    var railCard = $(".side-card"); if (!railCard || getComputedStyle(railCard).display === "none") $$("[data-toc]").forEach(function (d) { d.open = false; });
   }
 
   /* ------------------------------------------------ quizzes */
@@ -587,7 +587,7 @@
       "The visit is coded and the charge is entered.",
       "The scrubber checks the claim before it leaves.",
       "The clearinghouse and payer accept the claim (277CA).",
-      "Medicare allows $140.50. $39.50 is a CO-45 contractual write-off, and 20% coinsurance ($28.10) is the patient's share (PR-2).",
+      "Medicare allows $140.50. $39.50 is a CO-45 contractual write-off, and with the deductible already met, 20% coinsurance ($28.10) is the patient's share (PR-2).",
       "Payment posts from the ERA. The claim is closed."
     ];
     function setStep(i) {
