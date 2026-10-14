@@ -32,7 +32,7 @@
 {% block head %}{% endblock %}
 </head>
 {% set cur_area = area_for(url) %}
-<body class="{% block layout %}layout-shell{% endblock %} {% block body_class %}{% endblock %}" data-root="{{ rel('/') }}" data-page="{{ url }}" data-preview="{{ 1 if preview else 0 }}" data-title="{{ title }}">
+<body class="{% block layout %}layout-shell{% endblock %} area-{{ cur_area or 'none' }} {% block body_class %}{% endblock %}" data-root="{{ rel('/') }}" data-page="{{ url }}" data-preview="{{ 1 if preview else 0 }}" data-title="{{ title }}">
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="site-head">

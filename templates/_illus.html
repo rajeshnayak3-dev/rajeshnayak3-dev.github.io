@@ -1,0 +1,120 @@
+{# Line illustrations, drawn inline so they're crisp, fast and follow the theme colours.
+   Colours come from CSS custom properties: --ink, --red, --teal, --green, --surface. #}
+
+{% macro hero_scene() -%}
+<svg class="illus hero-illus" viewBox="0 0 520 420" role="img" aria-labelledby="hero-illus-t">
+  <title id="hero-illus-t">A claim form on a clipboard with a stethoscope, stamped paid</title>
+  <!-- soft backdrop -->
+  <circle cx="300" cy="210" r="180" class="i-tint"/>
+  <circle cx="455" cy="70" r="26" class="i-tint-2"/>
+  <circle cx="70" cy="330" r="16" class="i-tint-2"/>
+  <!-- clipboard -->
+  <g class="i-float">
+    <rect x="150" y="48" width="250" height="320" rx="16" class="i-board"/>
+    <rect x="232" y="34" width="86" height="34" rx="9" class="i-clip"/>
+    <circle cx="275" cy="46" r="5" class="i-clip-hole"/>
+    <rect x="172" y="84" width="206" height="264" rx="6" class="i-paper"/>
+    <!-- form header -->
+    <rect x="188" y="100" width="92" height="9" rx="2" class="i-ink"/>
+    <rect x="188" y="115" width="60" height="6" rx="2" class="i-ink-soft"/>
+    <rect x="320" y="98" width="42" height="22" rx="3" class="i-red-box"/>
+    <!-- form boxes (CMS-1500 style) -->
+    <g class="i-fields">
+      <rect x="188" y="136" width="84" height="26" rx="2"/><rect x="278" y="136" width="84" height="26" rx="2"/>
+      <rect x="188" y="168" width="174" height="26" rx="2"/>
+      <rect x="188" y="200" width="54" height="26" rx="2"/><rect x="248" y="200" width="54" height="26" rx="2"/><rect x="308" y="200" width="54" height="26" rx="2"/>
+    </g>
+    <g class="i-lines">
+      <rect x="194" y="144" width="40" height="5" rx="2"/><rect x="284" y="144" width="52" height="5" rx="2"/>
+      <rect x="194" y="176" width="110" height="5" rx="2"/>
+      <rect x="194" y="208" width="30" height="5" rx="2"/><rect x="254" y="208" width="34" height="5" rx="2"/><rect x="314" y="208" width="28" height="5" rx="2"/>
+      <rect x="188" y="240" width="150" height="5" rx="2"/><rect x="188" y="252" width="120" height="5" rx="2"/>
+    </g>
+    <!-- medical cross badge -->
+    <g transform="translate(188 272)">
+      <rect width="34" height="34" rx="8" class="i-teal-fill"/>
+      <path d="M13 8h8v5h5v8h-5v5h-8v-5H8v-8h5z" class="i-white"/>
+    </g>
+    <rect x="232" y="280" width="90" height="6" rx="2" class="i-ink-soft"/>
+    <rect x="232" y="292" width="64" height="6" rx="2" class="i-ink-soft"/>
+  </g>
+  <!-- stethoscope -->
+  <g class="i-steth">
+    <path d="M118 120c-10 40-8 90 18 122 22 27 62 30 86 8" fill="none"/>
+    <path d="M150 112c6 40 2 80-14 130" fill="none"/>
+    <path d="M222 250c26-22 54-12 66 14 14 30 4 64-22 80" fill="none"/>
+    <circle cx="266" cy="350" r="20" class="i-steth-bell"/>
+    <circle cx="266" cy="350" r="9" class="i-steth-in"/>
+    <circle cx="118" cy="114" r="6" class="i-steth-tip"/><circle cx="150" cy="106" r="6" class="i-steth-tip"/>
+  </g>
+  <!-- pill -->
+  <g transform="rotate(-30 448 300)" class="i-pill">
+    <rect x="420" y="288" width="56" height="24" rx="12" class="i-pill-a"/>
+    <path d="M448 288h16a12 12 0 0 1 0 24h-16z" class="i-pill-b"/>
+  </g>
+  <!-- paid stamp -->
+  <g transform="translate(338 300) rotate(-12)">
+    <g class="i-stamp">
+      <rect x="-56" y="-24" width="112" height="48" rx="8"/>
+      <text x="0" y="11" text-anchor="middle">PAID</text>
+    </g>
+  </g>
+</svg>
+{%- endmacro %}
+
+{% macro ecg_track() -%}
+<div class="ecg" data-ecg aria-label="A claim's journey: charge, scrub, accepted, adjudicated, paid" role="img">
+  <svg viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true">
+    <path class="ecg-base" vector-effect="non-scaling-stroke" d="M0 70H1000"/>
+    <path class="ecg-line" pathLength="1000" vector-effect="non-scaling-stroke" d="M0 70H73l14-22 12 52 14-80 14 50H273l14-22 12 52 14-80 14 50H473l14-22 12 52 14-80 14 50H673l14-22 12 52 14-80 14 50H873l14-22 12 52 14-80 14 50H1000"/>
+  </svg>
+  <ol class="ecg-steps">
+    <li style="--i:0"><span class="ecg-dot"></span>Charge</li>
+    <li style="--i:1"><span class="ecg-dot"></span>Scrub</li>
+    <li style="--i:2"><span class="ecg-dot"></span>Accepted</li>
+    <li style="--i:3"><span class="ecg-dot"></span>Adjudicated</li>
+    <li style="--i:4"><span class="ecg-dot"></span>Paid</li>
+  </ol>
+</div>
+{%- endmacro %}
+
+{# Small spot illustrations (96 x 72) #}
+{% macro spot(name) -%}
+<svg class="illus spot" viewBox="0 0 96 72" aria-hidden="true">
+{%- if name == "new-to-rcm" -%}
+  <circle cx="60" cy="36" r="30" class="i-tint"/>
+  <rect x="14" y="16" width="56" height="38" rx="6" class="i-paper-stroke"/>
+  <rect x="14" y="16" width="56" height="10" rx="5" class="i-teal-fill"/>
+  <circle cx="28" cy="38" r="7" class="i-tint-2"/>
+  <rect x="40" y="33" width="22" height="4" rx="2" class="i-ink-soft"/><rect x="40" y="41" width="16" height="4" rx="2" class="i-ink-soft"/>
+  <g transform="translate(64 40)"><rect width="22" height="22" rx="6" class="i-red-fill"/><path d="M8.5 5h5v3.5H17v5h-3.5V17h-5v-3.5H5v-5h3.5z" class="i-white"/></g>
+{%- elif name == "working-in-rcm" -%}
+  <circle cx="48" cy="38" r="30" class="i-tint"/>
+  <path d="M26 40v-6a22 22 0 0 1 44 0v6" class="i-stroke"/>
+  <rect x="20" y="38" width="12" height="18" rx="5" class="i-teal-fill"/><rect x="64" y="38" width="12" height="18" rx="5" class="i-teal-fill"/>
+  <path d="M70 56c0 6-6 9-14 9h-6" class="i-stroke"/><circle cx="48" cy="65" r="4" class="i-red-fill"/>
+  <path d="M38 30h20M38 22h12" class="i-stroke-soft"/>
+{%- elif name == "qa-lead-analyst" -%}
+  <circle cx="44" cy="36" r="30" class="i-tint"/>
+  <rect x="16" y="10" width="40" height="52" rx="5" class="i-paper-stroke"/>
+  <path d="M23 24l3 3 6-6M23 37l3 3 6-6M23 50l3 3 6-6" class="i-green-stroke"/>
+  <path d="M37 24h12M37 37h12M37 50h8" class="i-stroke-soft"/>
+  <circle cx="64" cy="44" r="13" class="i-lens"/><path d="M73 53l10 10" class="i-stroke-thick"/>
+{%- elif name == "reference" -%}
+  <circle cx="48" cy="36" r="30" class="i-tint"/>
+  <path d="M20 16h22a6 6 0 0 1 6 6v36a5 5 0 0 0-5-5H20z" class="i-paper-stroke"/><path d="M76 16H54a6 6 0 0 0-6 6v36a5 5 0 0 1 5-5h23z" class="i-paper-stroke"/>
+  <path d="M26 26h14M26 34h14M26 42h10M56 26h14M56 34h14" class="i-stroke-soft"/>
+  <rect x="56" y="40" width="16" height="8" rx="2" class="i-red-box"/>
+{%- elif name == "practice" -%}
+  <circle cx="48" cy="36" r="30" class="i-tint"/>
+  <rect x="22" y="12" width="44" height="52" rx="6" class="i-paper-stroke"/>
+  <rect x="34" y="7" width="20" height="10" rx="3" class="i-teal-fill"/>
+  <path d="M30 30h28M30 38h22M30 46h26" class="i-stroke-soft"/>
+  <circle cx="68" cy="52" r="12" class="i-green-fill"/><path d="M62 52l4 4 8-8" class="i-white-stroke"/>
+{%- elif name == "career" -%}
+  <circle cx="48" cy="36" r="30" class="i-tint"/>
+  <circle cx="48" cy="30" r="16" class="i-paper-stroke"/><circle cx="48" cy="30" r="9" class="i-red-fill"/>
+  <path d="M38 44l-6 20 9-5 5 8 4-18M58 44l6 20-9-5-5 8" class="i-teal-fill"/>
+{%- endif -%}
+</svg>
+{%- endmacro %}

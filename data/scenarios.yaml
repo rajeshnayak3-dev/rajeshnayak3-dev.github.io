@@ -647,7 +647,7 @@
           why: Diagnoses must come from documentation. Adding unsupported diagnoses is fraud.
     - q: Suppose no covered diagnosis was documented. Can the patient be billed?
       choices:
-        - text: Yes, if a valid ABN was signed before the test and the claim was billed with GA; then the denial is PR-50.
+        - text: Yes, if a valid ABN was signed before the test and the claim was billed with GA. The denial then usually comes back PR-50, and you still check the patient isn't QMB.
           v: best
           why: The ABN shifts liability to the patient for Medicare medical necessity denials.
         - text: Yes, always. It's a non-covered test.
@@ -679,7 +679,7 @@
   stages:
     - q: After the 04/09 bills, has the spend-down been met?
       choices:
-        - text: Yes
+        - text: "Yes"
           v: wrong
           why: $150 + $120 = $270, which is less than $400.
         - text: No, $130 is still needed.

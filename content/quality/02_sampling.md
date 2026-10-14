@@ -22,7 +22,7 @@ quiz:
     why: "Margin ≈ 1.96 × √(0.9 × 0.1 ÷ 50) ≈ 1.96 × 0.042 ≈ 0.083, so roughly 82% to 98%. With 50 accounts, a single score can't separate a 90% performer from an 85% one."
   - q: You pulled every corrected claim one associate sent last week because you suspected a problem. Can you report the error rate as the associate's overall accuracy?
     options:
-      - Yes
+      - "Yes"
       - No; a targeted sample shows what happened in that group, not overall accuracy
       - Only if the error rate is low
       - Only if the client agrees

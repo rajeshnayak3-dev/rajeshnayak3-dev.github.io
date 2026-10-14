@@ -31,7 +31,7 @@ quiz:
   - q: Average touches per resolved account rose from 1.8 to 2.9. What does it most likely signal?
     options:
       - The team got more productive
-      - More rework: unclear notes, wrong first actions, or payer delays
+      - "More rework: unclear notes, wrong first actions, or payer delays"
       - Fewer claims were billed
       - Nothing
     answer: 1

@@ -191,11 +191,61 @@
   $$("[data-complete]").forEach(function (b) {
     b.addEventListener("click", function () {
       var u = b.getAttribute("data-complete");
-      if (state.done[u]) delete state.done[u]; else state.done[u] = Date.now();
+      if (state.done[u]) delete state.done[u]; else { state.done[u] = Date.now(); celebrate(b); }
       save(state); markUI();
     });
   });
   markUI();
+
+  /* ------------------------------------------------ small celebrations and motion */
+  var REDUCE = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function celebrate(btn) {
+    if (REDUCE) return;
+    btn.classList.remove("is-burst"); void btn.offsetWidth; btn.classList.add("is-burst");
+    var burst = document.createElement("span"); burst.className = "burst"; burst.setAttribute("aria-hidden", "true");
+    var colours = ["var(--green)", "var(--teal)", "var(--red)", "var(--amber)"];
+    for (var k = 0; k < 10; k++) {
+      var dot = document.createElement("i"), ang = (k / 10) * Math.PI * 2, dist = 26 + (k % 3) * 8;
+      dot.style.setProperty("--x", Math.round(Math.cos(ang) * dist) + "px");
+      dot.style.setProperty("--y", Math.round(Math.sin(ang) * dist) + "px");
+      dot.style.setProperty("--c", colours[k % 4]);
+      burst.appendChild(dot);
+    }
+    btn.appendChild(burst);
+    setTimeout(function () { burst.remove(); }, 800);
+  }
+
+  // Header shadow once the page scrolls.
+  var onScroll = function () { document.documentElement.classList.toggle("is-scrolled", scrollY > 8); };
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  // Home: heartbeat claim track plays once, then the PAID stamp lands.
+  var ecg = $("[data-ecg]"), heroArt = $(".hero-art");
+  if (ecg && heroArt) {
+    var playEcg = function () {
+      ecg.classList.remove("is-on"); heroArt.classList.remove("is-played"); void ecg.offsetWidth;
+      ecg.classList.add("is-on");
+      setTimeout(function () { heroArt.classList.add("is-played"); }, REDUCE ? 0 : 2700);
+    };
+    playEcg();
+    var replay = $("[data-ecg-replay]"); if (replay) replay.addEventListener("click", playEcg);
+  }
+
+  // Home: sections fade in once as they come into view.
+  var reveals = $$("[data-reveal]");
+  if (reveals.length && !REDUCE) {
+    document.documentElement.classList.add("js-reveal");
+    var checkReveal = function () {
+      var limit = innerHeight * 0.92;
+      reveals = reveals.filter(function (el) {
+        if (el.getBoundingClientRect().top < limit) { el.classList.add("is-in"); return false; }
+        return true;
+      });
+      if (!reveals.length) removeEventListener("scroll", checkReveal);
+    };
+    addEventListener("scroll", checkReveal, { passive: true });
+    requestAnimationFrame(checkReveal);
+  }
 
   /* ------------------------------------------------ home dashboard */
   if ($("[data-dash-pct]")) {

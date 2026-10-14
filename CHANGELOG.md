@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-14 — Friendlier visual layer
+
+- Clinical teal added to the palette, with one accent colour per main area (Learning paths teal, Reference blue, Practice amber, Career red).
+- Home hero: line illustration of a claim form on a clipboard with a stethoscope, and a heartbeat line that draws once to show a claim's journey (Charge → Scrub → Accepted → Adjudicated → Paid) before a PAID stamp lands. Replay button included.
+- Small healthcare spot illustrations on path cards, hub pages and home previews; faint claim-form dot grid and medical-cross patterns on the hero, bands and page headers; heartbeat divider above the footer.
+- Motion that answers actions: button press, card lift, quiz check pop and gentle nudge on a wrong answer, a small burst when you mark a lesson complete, filling progress bars, header shadow on scroll, smooth fades between pages in supporting browsers, and a one-time fade-in for home sections. Everything is turned off when the device asks for reduced motion.
+- Fixed quiz and case options that YAML read as true/false or as a mapping (one sampling quiz option showed "True"; one AR quiz option was garbled; one spend-down case choice showed "True"). The build now stops if this happens again.
+
 ## 2026-10-14 — Accuracy, trust and learning-platform audit
 
 Audit documents: `docs/AUDIT_INVENTORY.md`, `docs/RCM_CONTENT_AUDIT.md`, `docs/CONTENT_COVERAGE_MATRIX.md`, `docs/UX_REDESIGN_PLAN.md`, `docs/QA_TEST_PLAN.md`.

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% from "_icons.html" import icon %}
+{% from "_illus.html" import spot %}
 {% from "_parts.html" import crumbs %}
 {% block main %}
 <div class="wrap">
@@ -14,7 +15,8 @@
 
   <ul class="path-cards">
     {% for p in paths %}
-    <li class="path-card panel">
+    <li class="path-card panel pc-{{ loop.index }}">
+      <span class="path-card-art">{{ spot(p.id) }}</span>
       <p class="path-card-top"><span class="lvl lvl-{{ p.level | slug }}">{{ p.level }}</span> <span class="small-note">{{ p.modules | length }} modules · about {{ p.hours }} hours (estimate)</span></p>
       <h2><a href="/learn/{{ p.id }}/">{{ p.title }}</a></h2>
       <p>{{ p.audience }}.</p>

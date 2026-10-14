@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 {% from "_icons.html" import icon %}
+{% from "_illus.html" import spot %}
 {% from "_parts.html" import crumbs %}
 {% block main %}
 <div class="wrap">
   {{ crumbs([("Practice lab", None)]) }}
   <header class="section-head">
-    <span class="sh-ico">{{ icon("check", 28) }}</span>
+    <span class="sh-spot">{{ spot("practice") }}</span>
     <div>
       <h1>Practice lab</h1>
       <p class="lede">Make decisions on realistic, fictional accounts and get the reasoning behind every choice, including why the tempting wrong answers are wrong. Completed cases count towards <a href="/progress/">your learning</a> on this device.</p>

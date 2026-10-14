@@ -233,6 +233,9 @@ def build_exam_bank(lessons_by_section, denial_codes, specialties):
         _, lessons = lessons_by_section.get(sec["id"], (None, []))
         for l in lessons:
             for i, q in enumerate(l.get("quiz") or []):
+                for o in q["options"]:
+                    if isinstance(o, (bool, dict, list)) or o is None:
+                        raise SystemExit(f'{l["url"]} quiz {i + 1}: option {o!r} was read as {type(o).__name__}; wrap it in double quotes')
                 add(f'{l["url"]}#{i + 1}', sec["id"], str(q["q"]), [str(o) for o in q["options"]],
                     q["answer"], q.get("why", ""))
 
@@ -297,6 +300,10 @@ def build():
         scenarios += yaml.safe_load(f.read_text(encoding="utf-8")) or []
     for n, sc in enumerate(scenarios, 1):
         sc.setdefault("id", f"SC-{n:02d}")
+        for st in sc["stages"]:
+            for c in st["choices"]:
+                if not isinstance(c["text"], str):
+                    raise SystemExit(f'scenario {sc.get("slug")}: choice {c["text"]!r} must be text; wrap it in double quotes')
     glossary = load_yaml("glossary.yaml") or []
 
     # ---- markdown lesson sections

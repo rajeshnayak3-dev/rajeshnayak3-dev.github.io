@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 {% from "_icons.html" import icon %}
+{% from "_illus.html" import spot %}
 {% from "_parts.html" import crumbs %}
 {% block main %}
 <div class="wrap path-page" data-path="{{ path.id }}">
   {{ crumbs([("Learning paths", "/learn/"), (path.title, None)]) }}
   <header class="section-head">
-    <span class="sh-ico">{{ icon("route", 28) }}</span>
+    <span class="sh-spot">{{ spot(path.id) }}</span>
     <div>
       <h1>{{ path.title }}</h1>
       <p class="lede">{{ path.audience }}.</p>

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% from "_icons.html" import icon %}
+{% from "_illus.html" import hero_scene, ecg_track, spot %}
 {% block layout %}layout-home{% endblock %}
 {% block body_class %}page-home{% endblock %}
 {% block head %}
@@ -8,24 +9,31 @@
 </script>
 {% endblock %}
 {% block main %}
-<section class="hero hero-compact">
-  <div class="wrap">
-    <h1>From your first claim to confident RCM decisions.</h1>
-    <p class="lede">Learn the US healthcare revenue cycle, practise realistic cases, and build the judgement to make sound calls on real accounts. Free, no sign-up, written by an RCM quality specialist.</p>
-    <div class="hero-actions">
-      <a class="btn btn-primary btn-lg" href="/learn/">Start learning</a>
-      <a class="btn btn-ghost btn-lg" href="/practice/">Practise a case</a>
+<section class="hero hero-compact hero-art">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1>From your first claim to confident RCM decisions.</h1>
+      <p class="lede">Learn the US healthcare revenue cycle, practise realistic cases, and build the judgement to make sound calls on real accounts. Free, no sign-up, written by an RCM quality specialist.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="/learn/">Start learning</a>
+        <a class="btn btn-ghost btn-lg" href="/practice/">Practise a case</a>
+      </div>
     </div>
+    <div class="hero-visual">{{ hero_scene() }}</div>
+  </div>
+  <div class="wrap ecg-wrap">
+    {{ ecg_track() }}
+    <p class="ecg-caption"><span>Every claim follows this rhythm. When it skips a beat, someone in RCM finds out why.</span> <button type="button" class="link-btn" data-ecg-replay>Replay</button></p>
   </div>
 </section>
 
-<section class="wrap audience" aria-labelledby="aud-h">
+<section class="wrap audience" data-reveal aria-labelledby="aud-h">
   <h2 id="aud-h" class="visually-hidden">Choose where to start</h2>
   <ul class="aud-grid">
     {% for p in paths %}
     <li>
-      <a class="aud-card" href="/learn/{{ p.id }}/" data-path-card="{{ p.id }}">
-        <span class="aud-level lvl lvl-{{ p.level | slug }}">{{ p.level }}</span>
+      <a class="aud-card aud-{{ loop.index }}" href="/learn/{{ p.id }}/" data-path-card="{{ p.id }}">
+        <span class="aud-top">{{ spot(p.id) }}<span class="aud-level lvl lvl-{{ p.level | slug }}">{{ p.level }}</span></span>
         <strong>{{ p.title }}</strong>
         <span>{{ p.audience }}.</span>
         <span class="aud-meta">{{ p.modules | length }} modules · about {{ p.hours }} h (estimate)</span>
@@ -63,7 +71,7 @@
 </section>
 
 {% set featured_path = paths[0] %}
-<section class="band" aria-labelledby="fp-h">
+<section class="band band-pattern" aria-labelledby="fp-h" data-reveal>
   <div class="wrap">
     <h2 id="fp-h" class="band-h">Featured path: {{ featured_path.title }}</h2>
     <p class="band-lede">{{ featured_path.outcomes[0] }}, and more. Each lesson takes 5 to 10 minutes and ends with a short check.</p>
@@ -75,18 +83,20 @@
   </div>
 </section>
 
-<section class="band band-split" aria-label="Practice and reference">
+<section class="band band-split" aria-label="Practice and reference" data-reveal>
   <div class="wrap split-grid">
-    <div class="split-card">
-      <h2 class="band-h">{{ icon("check", 20) }} Practice lab</h2>
+    <div class="split-card split-practice">
+      {{ spot("practice") }}
+      <h2 class="band-h">Practice lab</h2>
       <p>Realistic, fictional cases where you make one decision at a time and see why each choice is right, risky or wrong.</p>
       <ul class="case-list">
         {% for c in cases %}<li><a href="/{{ c.url }}"><span class="mono case-id">{{ c.id }}</span> {{ c.title }}</a> <span class="tag">{{ c.tag }}</span></li>{% endfor %}
       </ul>
       <a class="btn btn-ghost" href="/practice/">All {{ stats.scenarios }} cases, quizzes and tools</a>
     </div>
-    <div class="split-card">
-      <h2 class="band-h">{{ icon("book", 20) }} RCM reference</h2>
+    <div class="split-card split-reference">
+      {{ spot("reference") }}
+      <h2 class="band-h">RCM reference</h2>
       <p>Look things up while you work: what a code means, what to check, and what not to assume.</p>
       <ul class="code-chips">
         {% for c in featured %}<li><a href="/{{ c.url }}"><span class="mono">{{ c.code }}</span><small>{{ c.title }}</small></a></li>{% endfor %}
@@ -96,7 +106,7 @@
   </div>
 </section>
 
-<section class="band band-trust" aria-labelledby="trust-h">
+<section class="band band-trust" aria-labelledby="trust-h" data-reveal>
   <div class="wrap">
     <h2 id="trust-h" class="band-h">What you can rely on</h2>
     <ul class="trust-grid">
