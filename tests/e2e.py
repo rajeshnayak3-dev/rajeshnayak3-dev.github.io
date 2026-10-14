@@ -88,40 +88,41 @@ async def main():
         rec("R-02", "Responsive layout", f"{len(sample)} key pages at 360, 390, 768, 1024, 1280, 1440px", "No horizontal page scroll",
             "none" if not bad else ", ".join(bad[:6]), not bad)
 
-        # ---------- NAV-01: desktop primary navigation shows five destinations and marks the current one
+        # ---------- NAV-01: desktop header shows Topics plus five links and marks the current one
         ctx, pg = await new_page(browser, 1280)
         await pg.goto(BASE + "/learn/working-in-rcm/")
         labels = await pg.eval_on_selector_all(".primary-nav a", "els => els.map(e => e.textContent.trim())")
-        visible = await pg.is_visible(".primary-nav")
+        visible = await pg.is_visible(".primary-nav") and await pg.is_visible(".nav-topics")
         cur = await pg.eval_on_selector(".primary-nav a.is-current", "e => e.textContent.trim()")
-        rec("NAV-01", "Desktop navigation", "Open /learn/working-in-rcm/ at 1280px", "4 tabs visible (Learn, Practice, Reference, Career); 'Learn' current",
-            f"visible={visible}, {labels}, current={cur}",
-            visible and labels == ["Learn", "Practice", "Reference", "Career"] and cur == "Learn")
-        areas = {"/denials/codes/co-45/": "Reference", "/scenarios/qmb-balance/": "Practice", "/interview-prep/rapid-fire/": "Career", "/quality/sampling/": "Learn"}
+        want = ["Learn", "RCM cycle", "Denial codes", "Practice", "Glossary"]
+        rec("NAV-01", "Desktop navigation", "Open /learn/working-in-rcm/ at 1280px", "Topics button plus Learn, RCM cycle, Denial codes, Practice, Glossary; 'Learn' current",
+            f"visible={visible}, {labels}, current={cur}", visible and labels == want and cur == "Learn")
+        areas = {"/denials/codes/co-45/": "Denial codes", "/scenarios/qmb-balance/": "Practice", "/rcm-cycle/claim-submission/": "RCM cycle", "/quality/sampling/": "Learn", "/glossary/": "Glossary"}
         wrong = []
         for u, want in areas.items():
             await pg.goto(BASE + u)
             got = await pg.eval_on_selector(".primary-nav a.is-current", "e => e.textContent.trim()")
             if got != want:
                 wrong.append(f"{u}: {got}")
-        rec("NAV-02", "Current-area highlight", "Visit a page in each area", "Matching destination highlighted", "all correct" if not wrong else "; ".join(wrong), not wrong)
+        rec("NAV-02", "Current-area highlight", "Visit a page in each area", "Matching header link highlighted", "all correct" if not wrong else "; ".join(wrong), not wrong)
         await ctx.close()
 
-        # ---------- NAV-03: phones get a bottom tab bar; lessons get an outline drawer
+        # ---------- NAV-03: phones use the Topics menu
         ctx, pg = await new_page(browser, 390)
         await pg.goto(BASE + "/rcm-cycle/claim-submission/")
-        hidden_nav = not await pg.is_visible(".primary-nav")
-        tabs = await pg.eval_on_selector_all(".bottom-nav a", "els => els.map(e => e.textContent.trim())")
+        hidden_links = not await pg.is_visible(".primary-nav a")
         await pg.click("[data-topics]")
-        await pg.wait_for_timeout(300)
-        opened = await pg.evaluate("document.body.classList.contains('sb-open')")
-        dest = await pg.is_visible(".sb-sec.is-active") and tabs == ["Home", "Learn", "Practice", "Reference", "Progress"]
+        await pg.wait_for_timeout(200)
+        opened = await pg.is_visible("#topics-panel")
+        hubs = await pg.eval_on_selector_all(".topics-hubs a", "els => els.map(e => e.textContent.trim())")
+        cur = await pg.eval_on_selector(".topics-grid a.is-current strong", "e => e.textContent.trim()")
         exp = await pg.get_attribute("[data-topics]", "aria-expanded")
-        await pg.click(".sb-mobile-head [data-topics-close]")
-        await pg.wait_for_timeout(300)
-        closed = not await pg.evaluate("document.body.classList.contains('sb-open')")
-        rec("NAV-03", "Mobile navigation", "390px lesson: check bottom tabs; open and close the lesson list", "Header tabs hidden; 5 bottom tabs; lesson drawer opens on the current topic and closes",
-            f"hidden_nav={hidden_nav}, opened={opened}, destinations={dest}, aria-expanded={exp}, closed={closed}", hidden_nav and opened and dest and exp == "true" and closed)
+        await pg.click(".topics-head [data-topics-close]")
+        await pg.wait_for_timeout(200)
+        closed = not await pg.is_visible("#topics-panel")
+        ok = hidden_links and opened and len(hubs) == 5 and "RCM cycle" in cur and exp == "true" and closed
+        rec("NAV-03", "Mobile navigation", "390px lesson: open and close Topics", "Header links hidden; Topics panel opens with 5 hub links and the current topic marked, then closes",
+            f"hidden_links={hidden_links}, opened={opened}, hubs={len(hubs)}, current='{cur}', aria-expanded={exp}, closed={closed}", ok)
         await ctx.close()
 
         # ---------- KB-01: keyboard: skip link first, focus visible
@@ -309,44 +310,38 @@ async def main():
             total_flows += html.count('<figure class="flow ')
             leftovers += html.count("FLOWBLOCK")
         await pg.goto(BASE + "/insurance/coordination-of-benefits/")
-        ribbon = await pg.text_content(".path-ribbon")
+        ribbon = await pg.text_content(".path-line")
         nxt = await pg.get_attribute(".pager-link.next", "href")
         recap = await pg.is_visible(".recap")
-        rec("FLOW-01", "Diagrams and lesson anatomy", "Count flow diagrams in the build; open the COB lesson", "Diagrams render (no leftover placeholders); ribbon shows path, module and lesson; Next follows the path; recap shown",
+        rec("FLOW-01", "Diagrams and lesson anatomy", "Count flow diagrams in the build; open the COB lesson", "Diagrams render (no leftover placeholders); path line shows path, module and lesson; Next follows the path; recap shown",
             f"flows={total_flows}, leftovers={leftovers}, ribbon='{' '.join(ribbon.split())[:70]}', next={nxt}, recap={recap}",
             total_flows >= 20 and leftovers == 0 and "Module 2 of 5" in ribbon and nxt.endswith("rcm-cycle/eligibility-and-benefits/") and recap)
         await ctx.close()
 
-        # ---------- THEME-01: canvas, plain hubs, course sidebar on laptops, drawer below 1280px
+        # ---------- THEME-01: original light theme, no sidebar, dark mode toggle persists
         ctx, pg = await new_page(browser, 1440)
-        await pg.goto(BASE + "/practice/")
+        await pg.goto(BASE + "/start-here/what-is-rcm/")
         bg = await pg.evaluate("getComputedStyle(document.body).backgroundColor")
-        hub_side = await pg.query_selector(".sidebar")
-        await pg.goto(BASE + "/start-here/what-is-rcm/")
-        side_fixed = await pg.evaluate("(() => { const r = document.querySelector('.sidebar').getBoundingClientRect(); return r.left >= 0 && r.width > 200; })()")
-        btn_hidden = not await pg.is_visible(".lesson-bar [data-topics]")
-        await ctx.close()
-        ctx, pg = await new_page(browser, 1180)
-        await pg.goto(BASE + "/start-here/what-is-rcm/")
-        drawer_closed = not await pg.evaluate("document.body.classList.contains('sb-open') || document.querySelector('.sidebar').getBoundingClientRect().right > 0")
-        await pg.click(".lesson-bar [data-topics]")
-        await pg.wait_for_timeout(350)
-        drawer_open = await pg.evaluate("document.body.classList.contains('sb-open') && document.querySelector('.sidebar').getBoundingClientRect().right > 0")
-        ok = bg == "rgb(244, 246, 249)" and not hub_side and side_fixed and btn_hidden and drawer_closed and drawer_open
-        rec("THEME-01", "Theme and course navigation", "Hub and lesson at 1440px; lesson at 1180px, open All lessons", "Paper canvas (#F4F6F9); no sidebar on hubs; course sidebar always visible at 1440px; below 1280px the lesson bar's All lessons button opens it as a drawer", f"bg={bg}, hub_sidebar={bool(hub_side)}, sidebar_1440={side_fixed}, button_hidden_1440={btn_hidden}, drawer_closed_first={drawer_closed}, drawer_opens={drawer_open}", ok)
+        side = await pg.query_selector(".sidebar")
+        await pg.click("[data-theme-toggle]")
+        dark = await pg.evaluate("document.documentElement.getAttribute('data-mode')")
+        await pg.goto(BASE + "/practice/")
+        kept = await pg.evaluate("document.documentElement.getAttribute('data-mode')")
+        await pg.click("[data-theme-toggle]")
+        light = await pg.evaluate("document.documentElement.getAttribute('data-mode')")
+        ok = bg == "rgb(244, 246, 249)" and not side and dark == "dark" and kept == "dark" and light is None
+        rec("THEME-01", "Theme", "Open a lesson at 1440px; switch to dark, change page, switch back", "Paper background (#F4F6F9); no sidebar; dark mode applies, persists across pages and switches back",
+            f"bg={bg}, sidebar={bool(side)}, dark={dark}, kept={kept}, back={light}", ok)
         await ctx.close()
 
-        # ---------- LAYOUT-01: lesson fills the space next to the sidebar; one sticky bar with Next
+        # ---------- LAYOUT-01: lesson column with "On this page" on the right at 1440px
         ctx, pg = await new_page(browser, 1440)
         await pg.goto(BASE + "/rcm-cycle/claim-submission/")
-        box = await pg.evaluate("""() => { const m = document.querySelector('main').getBoundingClientRect(); const a = document.querySelector('.lesson-grid').getBoundingClientRect();
-          const r = document.querySelector('.lesson-side .side-card'); const rb = r ? r.getBoundingClientRect() : null;
-          return {left: Math.round(a.left - m.left), right: Math.round(m.right - a.right), rail: rb ? Math.round(rb.width) : 0, railVisible: !!(r && r.offsetParent), bars: document.querySelectorAll('.lesson-bar').length, next: !!document.querySelector('.lesson-bar .lb-next')}; }""")
-        await pg.mouse.wheel(0, 2500)
-        await pg.wait_for_timeout(300)
-        stuck = await pg.evaluate("Math.round(document.querySelector('.lesson-bar').getBoundingClientRect().top)")
-        ok = abs(box["left"] - box["right"]) <= 24 and box["railVisible"] and box["rail"] >= 220 and box["bars"] == 1 and box["next"] and 60 <= stuck <= 90
-        rec("LAYOUT-01", "Lesson width and bar", "Open a lesson at 1440px and scroll", "Lesson centered in the space beside the sidebar (margins within 24px); right rail at least 220px; a single bar with Next that stays under the header", f"{box}, bar_top_after_scroll={stuck}", ok)
+        box = await pg.evaluate("""() => { const a = document.querySelector('.lesson-grid').getBoundingClientRect();
+          const t = document.querySelector('.toc'); const tb = t.getBoundingClientRect();
+          return {left: Math.round(a.left), right: Math.round(innerWidth - a.right), tocOpen: t.open, tocRight: tb.left > innerWidth / 2}; }""")
+        ok = abs(box["left"] - box["right"]) <= 24 and box["tocOpen"] and box["tocRight"]
+        rec("LAYOUT-01", "Lesson layout", "Open a lesson at 1440px", "Lesson centered; 'On this page' open on the right", str(box), ok)
         await ctx.close()
 
         await browser.close()

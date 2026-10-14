@@ -2,16 +2,8 @@
 {% from "_icons.html" import icon %}
 {% from "_parts.html" import crumbs %}
 {% block main %}
-<div class="wrap lesson-bar-wrap">
-  <div class="lesson-bar">
-    {{ crumbs([(section.title, None)]) }}
-    <div class="lb-actions">
-      <button class="lb-btn" type="button" aria-expanded="false" aria-controls="sidebar" data-topics>{{ icon("menu", 18) }}<span>All lessons</span></button>
-      {% if next %}<a class="lb-next" href="/{{ next.url }}"><span class="hide-sm">Start</span>{{ icon("right", 16) }}</a>{% endif %}
-    </div>
-  </div>
-</div>
 <div class="wrap">
+  {{ crumbs([(section.title, None)]) }}
   <header class="section-head">
     <span class="sh-ico">{{ icon(section.icon, 28) }}</span>
     <div>

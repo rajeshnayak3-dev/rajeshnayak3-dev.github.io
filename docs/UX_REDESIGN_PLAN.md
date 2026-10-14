@@ -1,5 +1,7 @@
 # UX redesign plan and decisions
 
+> **Update 2026-10-15 (later):** the visual design and header returned to the original REVEX layout at the owner's request (Topics menu plus Learn, RCM cycle, Denial codes, Practice, Glossary; no sidebar; light and dark themes). Destinations, URLs and content below are unchanged.
+
 > **Update 2026-10-15:** navigation simplified to four top tabs (Learn, Practice, Reference, Career) plus search and My progress, a phone bottom tab bar, and the lesson list only on lesson pages. Visual style is now a light Google Material-style theme. The sections below describe the October 14 structure; destinations and URLs are unchanged.
 
 Reviewed 14 October 2026. Status: implemented items are marked **Done**; the rest are proposals.

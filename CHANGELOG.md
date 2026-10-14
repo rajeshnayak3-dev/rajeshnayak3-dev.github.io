@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-15 — Original REVEX design restored, with all current content
+
+- **Look and layout:** back to the very first REVEX design: white header with the REVEX mark, a Topics menu and plain links (Learn, RCM cycle, Denial codes, Practice, Glossary), search, progress and the light/dark switch; the claim ticket home page; lessons with breadcrumbs, a bold title and "On this page" on the right. No sidebar, no bottom tab bar.
+- **Kept from later work:** all lessons, codes, practice cases, learning paths, Practice lab, Reference, Career, official sources and review boxes; the 24 flowcharts (now also styled for dark mode); "Remember this" recaps; objectives; US spelling; content validation.
+- **Lessons:** a quiet line above the title shows the path, module and lesson number ("New to RCM · Module 4 of 5 · Lesson 1 of 4").
+- **Topics menu:** now also links the Learning paths, Practice lab, RCM reference, Career and certification, and Your progress.
+
 ## 2026-10-15 — First-version look with the current learning structure
 
 - **Identity restored:** navy ink and form-red REVEX mark with "RCM Academy", Public Sans with bold headings, IBM Plex Mono for codes and amounts, squarer form-like buttons. The four tabs keep their shadowed segmented control, with a red underline on the current tab.

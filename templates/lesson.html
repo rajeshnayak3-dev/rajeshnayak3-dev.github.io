@@ -8,29 +8,14 @@
 </script>
 {% endblock %}
 {% block main %}
-<div class="wrap lesson-bar-wrap">
-  <div class="lesson-bar">
-    {% if pctx %}
-    <nav class="path-ribbon" aria-label="Your place in the learning path">
-      <a class="pr-path" href="/learn/{{ pctx.path.id }}/">{{ icon("route", 16) }} {{ pctx.path.title }}</a>
-      <span class="pr-sep" aria-hidden="true">›</span>
-      <span class="pr-mod">Module {{ pctx.module_n }} of {{ pctx.module_total }}: {{ pctx.module.title }}</span>
-      <span class="pr-sep" aria-hidden="true">›</span>
-      <span class="pr-les">Lesson {{ pctx.lesson_n }} of {{ pctx.lesson_total }}</span>
-      <span class="pr-dots" aria-hidden="true">{% for u in pctx.dots %}<i data-dot="{{ u }}"{% if u == page.url %} class="is-here"{% endif %}></i>{% endfor %}</span>
-    </nav>
-    {% else %}
-    {{ crumbs([(section.title, "/" ~ section.id ~ "/"), (page.short, None)]) }}
-    {% endif %}
-    <div class="lb-actions">
-      <button class="lb-btn" type="button" aria-expanded="false" aria-controls="sidebar" data-topics>{{ icon("menu", 18) }}<span>All lessons</span></button>
-      {% if next %}<a class="lb-next" href="/{{ next.url }}"><span class="hide-sm">Next</span>{{ icon("right", 16) }}</a>{% endif %}
-    </div>
-  </div>
+<div class="wrap">
+  {{ crumbs([(section.title, "/" ~ section.id ~ "/"), (page.short, None)]) }}
 </div>
 <article class="wrap lesson-grid">
   <header class="lesson-head">
-    {% if step and not pctx %}<p class="step-tag">Stage {{ step }} of {{ total }}</p>{% endif %}
+    {% if pctx %}
+    <p class="path-line"><a href="/learn/{{ pctx.path.id }}/">{{ pctx.path.title }}</a> · Module {{ pctx.module_n }} of {{ pctx.module_total }}: {{ pctx.module.title }} · <span class="mono">Lesson {{ pctx.lesson_n }} of {{ pctx.lesson_total }}</span></p>
+    {% elif step %}<p class="step-tag">Stage {{ step }} of {{ total }}</p>{% endif %}
     <h1>{{ page.title }}</h1>
     {% if page.description %}<p class="lede">{{ page.description }}</p>{% endif %}
     <p class="meta">
@@ -40,34 +25,8 @@
     </p>
   </header>
 
-  <aside class="lesson-side" aria-label="Lesson navigation">
-    <div class="side-stick">
-      {{ toc_box(page.toc) }}
-      {% set list_items = pctx.mod_items if pctx else siblings %}
-      {% if list_items | length > 1 %}
-      <nav class="side-card side-list" aria-label="{{ 'In this module' if pctx else 'In this topic' }}">
-        <p class="side-h">{{ ("In this module: " ~ pctx.module.title) if pctx else ("In " ~ section.title) }}</p>
-        <ol>
-          {% for it in list_items %}
-          <li><a href="/{{ it.url }}"{% if it.track %} data-topic="{{ it.url }}"{% endif %}{% if it.url == page.url %} class="is-here" aria-current="page"{% endif %}><span class="sl-dot" aria-hidden="true"></span><span>{{ it.short }}</span></a></li>
-          {% endfor %}
-        </ol>
-      </nav>
-      {% endif %}
-      {% if next %}
-      <a class="side-card side-next" href="/{{ next.url }}">
-        <span class="side-h">Up next</span>
-        <strong>{{ next.short or next.title }}</strong>
-        <span class="sn-go">Continue {{ icon("right", 16) }}</span>
-      </a>
-      {% elif pctx %}
-      <a class="side-card side-next" href="/learn/{{ pctx.path.id }}/#practice">
-        <span class="side-h">Path complete</span>
-        <strong>Practice the cases</strong>
-        <span class="sn-go">Open {{ icon("right", 16) }}</span>
-      </a>
-      {% endif %}
-    </div>
+  <aside class="lesson-side" aria-label="On this page">
+    {{ toc_box(page.toc) }}
   </aside>
 
   <div class="prose">

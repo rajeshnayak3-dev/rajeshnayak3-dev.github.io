@@ -8,17 +8,16 @@
 </script>
 {% endblock %}
 {% block main %}
-<section class="hero" aria-labelledby="hero-h">
+<section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <h1 id="hero-h">Learn US healthcare revenue cycle, one claim at a time.</h1>
-      <p class="lede">Free, short lessons that take you from zero to working RCM analyst: the claim cycle, insurance, billing forms, denials and real AR cases. Written by an RCM quality specialist. No sign-up.</p>
+      <h1>Learn US healthcare revenue cycle, one claim at a time.</h1>
+      <p class="lede">REVEX takes you from zero to working RCM analyst: the claim cycle, insurance, billing forms, denials, specialties and real AR scenarios. Written by an RCM quality specialist. Free, with no sign-up.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="/{{ first_lesson }}">Start learning</a>
         <a class="btn btn-ghost" href="/denials/codes/">Look up a denial code</a>
       </div>
-      <button type="button" class="hero-search" data-search-open>{{ icon("search", 20) }}<span>Search lessons, codes like CO-197, or terms like QMB</span><kbd>/</kbd></button>
-      <p class="hero-stats"><span><b>{{ stats.lessons }}</b>lessons</span><span><b>{{ stats.codes }}</b>denial and remark codes</span><span><b>{{ stats.scenarios }}</b>practice cases</span><span><b>{{ stats.specialties }}</b>specialties</span></p>
+      <p class="hero-note">Already working in RCM? Pick a <a href="/learn/">learning path</a> for your role, or test yourself in the <a href="/practice/">practice lab</a>.</p>
     </div>
 
     <figure class="claim-ticket" data-claim aria-label="Example: one claim moving through the revenue cycle">
@@ -49,56 +48,71 @@
   </div>
 </section>
 
-<section class="wrap resume" data-resume-strip hidden aria-label="Continue where you left off">
-  <a class="resume-card" href="/" data-continue-link>
-    <span class="resume-ico">{{ icon("clock", 20) }}</span>
-    <span class="resume-txt"><span class="resume-k">Continue where you left off</span><span class="resume-t" data-continue-title></span></span>
-    <span class="resume-prog"><span data-dash-pct>0%</span> done</span>
-    <span class="resume-go">{{ icon("right", 20) }}</span>
-  </a>
+<section class="band band-path" aria-labelledby="path-h">
+  <div class="wrap">
+    <h2 id="path-h">A learning path, if you're new</h2>
+    <p class="band-lede">Work through these in order. Each topic takes 5 to 10 minutes and ends with a short check.</p>
+    <ol class="path">
+      <li><a href="/start-here/"><span class="path-n">1</span><strong>Foundations</strong><small>What RCM is, the three parties, AR and AP, and the jobs in a team.</small></a></li>
+      <li><a href="/rcm-cycle/"><span class="path-n">2</span><strong>The cycle</strong><small>Twelve stages from scheduling to patient collections.</small></a></li>
+      <li><a href="/insurance/"><span class="path-n">3</span><strong>Insurance and forms</strong><small>Who pays, in what order, on which claim form.</small></a></li>
+      <li><a href="/denials/"><span class="path-n">4</span><strong>Denials and practice cases</strong><small>Fix what went wrong, then practice on realistic cases.</small></a></li>
+    </ol>
+    <p class="band-more">Already working in RCM, or auditing and leading a team? <a href="/learn/">See all three learning paths</a>.</p>
+  </div>
 </section>
 
-<section class="wrap g-sec" aria-labelledby="paths-h">
-  <h2 id="paths-h">Where are you starting from?</h2>
-  <ul class="path-tiles">
-    {% for p in paths %}
-    <li>
-      <a class="path-tile pt-{{ loop.index }}" href="/learn/{{ p.id }}/">
-        <span class="pt-ico">{{ icon(["compass","inbox","chart"][loop.index0], 26) }}</span>
-        <span class="pt-title">{{ p.title }}</span>
-        <span class="pt-desc">{{ ["I'm new to US healthcare billing", "I already work on claims or AR", "I audit, lead or analyze RCM work"][loop.index0] }}</span>
-        <span class="pt-meta">{{ p.modules | length }} modules · about {{ p.hours }} h</span>
-        <span class="pt-progress" data-path-progress="{{ p.id }}" data-urls="{{ p.track_urls | join(' ') }}"></span>
-        <span class="pt-go">Start {{ icon("right", 18) }}</span>
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
+<section class="band" aria-labelledby="menu-h">
+  <div class="wrap">
+    <h2 id="menu-h">Everything in REVEX</h2>
+    <ul class="menu-grid">
+      {% for s in sections %}
+      <li>
+        <a class="menu-card" href="/{{ s.id }}/">
+          <span class="mc-ico">{{ icon(s.icon, 24) }}</span>
+          <span class="mc-title">{{ s.title }}</span>
+          <span class="mc-blurb">{{ s.blurb }}</span>
+          <span class="mc-meta">
+            {% if s.id == "glossary" %}{{ s.count }} terms
+            {% elif s.id == "denials" %}{{ s.count }} lessons, {{ s.codes }} codes
+            {% elif s.id == "scenarios" %}{{ s.count }} practice cases
+            {% elif s.id == "specialties" %}{{ s.count }} specialties
+            {% elif s.id == "tools" %}{{ s.count }} tools
+            {% else %}{{ s.count }} topics{% endif %}
+            <span class="mc-done" data-section-progress="{{ s.id }}"></span>
+          </span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 </section>
 
-<section class="wrap g-sec" aria-labelledby="how-h">
-  <h2 id="how-h">How it works</h2>
-  <ol class="how-row">
-    <li><span class="how-n">1</span><div><strong>Read a short lesson</strong><p>5 to 10 minutes, in plain English. Tap any underlined term to see what it means.</p></div></li>
-    <li><span class="how-n">2</span><div><strong>Practice a real-world case</strong><p>Make one decision at a time and see why each choice is right or wrong.</p></div></li>
-    <li><span class="how-n">3</span><div><strong>Check what you learned</strong><p>A quick quiz ends every lesson. Your progress is saved on this device.</p></div></li>
-  </ol>
+{% if featured %}
+<section class="band band-codes" aria-labelledby="codes-h">
+  <div class="wrap"><div class="codes-grid">
+    <div>
+      <h2 id="codes-h">Stuck on a denial?</h2>
+      <p class="band-lede">These are the codes analysts see most. Each page explains what the payer is saying, the usual causes and the exact steps to resolve it.</p>
+      <a class="btn btn-ghost" href="/denials/codes/">Open the code library</a>
+    </div>
+    <ul class="code-chips">
+      {% for c in featured %}
+      <li><a href="/{{ c.url }}"><span class="mono">{{ c.code }}</span><small>{{ c.title }}</small></a></li>
+      {% endfor %}
+    </ul>
+  </div></div>
 </section>
+{% endif %}
 
-<section class="wrap g-sec" aria-labelledby="explore-h">
-  <h2 id="explore-h">Explore</h2>
-  <ul class="explore">
-    <li><a class="ex ex-blue" href="/practice/"><span class="ex-ico">{{ icon("check", 22) }}</span><span><strong>Practice cases</strong><small>{{ stats.scenarios }} realistic claim scenarios</small></span></a></li>
-    <li><a class="ex ex-green" href="/denials/codes/"><span class="ex-ico">{{ icon("alert", 22) }}</span><span><strong>Denial code library</strong><small>{{ stats.codes }} codes explained</small></span></a></li>
-    <li><a class="ex ex-yellow" href="/tools/"><span class="ex-ico">{{ icon("calc", 22) }}</span><span><strong>AR calculators</strong><small>Deadlines, payments and KPIs</small></span></a></li>
-    <li><a class="ex ex-purple" href="/career/"><span class="ex-ico">{{ icon("award", 22) }}</span><span><strong>Career and interviews</strong><small>Roles, skills and questions</small></span></a></li>
-  </ul>
+<section class="band band-author" aria-labelledby="author-h">
+  <div class="wrap author-row">
+    <div>
+      <h2 id="author-h">Why REVEX exists</h2>
+      <p class="mission">{{ site.mission }}</p>
+      <p>It's written by {{ site.author.name }}, an {{ site.author.title }} with {{ site.author.experience }}. The lessons follow how claims are actually worked on an RCM floor: the questions you ask a payer, the notes an auditor expects, and the mistakes that send a claim back.</p>
+    </div>
+    <a class="btn btn-ghost" href="{{ site.author.linkedin }}" target="_blank" rel="noopener">{{ icon("linkedin", 18) }} Connect on LinkedIn</a>
+  </div>
 </section>
-
-<section class="wrap g-sec g-about" aria-labelledby="about-h">
-  <h2 id="about-h">Why REVEX is free</h2>
-  <p>{{ site.mission }}</p>
-  <p class="g-by">Written by <a href="{{ site.author.linkedin }}" target="_blank" rel="noopener">{{ site.author.name }}</a>, {{ site.author.title }} with {{ site.author.experience }}. All examples use made-up patients and claims. <a href="/about/#disclaimer">Read the disclaimer</a>.</p>
-</section>
-<script type="application/json" data-home-track>{{ track_json | safe }}</script>
 {% endblock %}

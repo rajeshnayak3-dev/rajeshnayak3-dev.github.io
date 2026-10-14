@@ -14,88 +14,87 @@
 <meta property="og:url" content="{{ site.site_url }}/{{ url }}">
 <meta property="og:image" content="{{ site.site_url }}/static/img/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#16213A">
 {% if site.google_verification and url == "" %}<meta name="google-site-verification" content="{{ site.google_verification }}">{% endif %}
 <link rel="icon" href="{{ rel('/static/img/favicon.svg') }}" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ rel('/static/css/site.css') }}">
+<script>
+  (function () {
+    try {
+      // Light is the default. Dark only when the visitor chose it.
+      if (localStorage.getItem("revex-theme") === "dark") document.documentElement.setAttribute("data-mode", "dark");
+    } catch (e) {}
+  })();
+</script>
 {% block head %}{% endblock %}
 </head>
 {% set cur_area = area_for(url) %}
 {% set lay = self.layout() | trim %}
-<body class="{{ lay }} area-{{ cur_area or 'none' }} {% block body_class %}{% endblock %}" data-root="{{ rel('/') }}" data-page="{{ url }}" data-preview="{{ 1 if preview else 0 }}" data-title="{{ title }}">
+<body class="area-{{ cur_area or 'none' }} {% block body_class %}{% endblock %}" data-root="{{ rel('/') }}" data-page="{{ url }}" data-preview="{{ 1 if preview else 0 }}" data-title="{{ title }}">
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="site-head">
-  <div class="head-row">
+  <div class="wrap head-row">
     <a class="brand" href="/" aria-label="{{ site.name }} home">
       <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><rect x="2.5" y="2.5" width="19" height="19" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m7 12.5 3.3 3.3L17.5 8.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       <span class="brand-word">{{ site.name }}</span>
-      <span class="brand-tag hide-md">RCM Academy</span>
     </a>
 
-    <nav class="primary-nav" aria-label="Main">
+    <nav class="head-nav primary-nav" aria-label="Main">
+      <button class="nav-topics" type="button" aria-expanded="false" aria-controls="topics-panel" data-topics>
+        {{ icon("menu", 18) }}<span>Topics</span>
+      </button>
       <ul>
-        {% for d in primary %}
-        <li><a href="{{ d.url }}"{% if cur_area == d.id %} class="is-current" aria-current="{{ 'page' if url == d.url[1:] else 'true' }}"{% endif %}>{{ d.title }}</a></li>
-        {% endfor %}
+        <li><a href="/learn/" class="hide-sm{% if cur_area == 'learn' and not url.startswith('rcm-cycle') %} is-current{% endif %}">Learn</a></li>
+        <li><a href="/rcm-cycle/" class="hide-sm{% if url.startswith('rcm-cycle') %} is-current{% endif %}">RCM cycle</a></li>
+        <li><a href="/denials/codes/" class="hide-sm{% if url.startswith('denials/codes') %} is-current{% endif %}">Denial codes</a></li>
+        <li><a href="/practice/" class="hide-sm{% if cur_area == 'practice' %} is-current{% endif %}">Practice</a></li>
+        <li><a href="/glossary/" class="hide-sm hide-md{% if url.startswith('glossary') %} is-current{% endif %}">Glossary</a></li>
       </ul>
     </nav>
 
     <div class="head-tools">
       <button class="search-trigger" type="button" data-search-open aria-label="Search REVEX">
-        {{ icon("search", 20) }}<span class="hide-sm">Search lessons and codes</span><kbd class="hide-sm">/</kbd>
+        {{ icon("search", 18) }}<span class="hide-sm">Search</span><kbd class="hide-sm">/</kbd>
       </button>
-      <a class="head-progress{% if url.startswith('progress') %} is-current{% endif %}" href="/progress/">{{ icon("chart", 20) }}<span class="hide-sm">My progress</span></a>
+      <a class="icon-btn{% if url.startswith('progress') %} is-current{% endif %}" href="/progress/" aria-label="Your progress" title="Your progress">{{ icon("chart", 20) }}</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch color theme" title="Switch color theme">
+        <span class="when-light">{{ icon("moon", 20) }}</span><span class="when-dark">{{ icon("sun", 20) }}</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="topics-panel" id="topics-panel" hidden>
+    <div class="wrap">
+      <div class="topics-head">
+        <p>All topics</p>
+        <button class="icon-btn" type="button" data-topics-close aria-label="Close topics">{{ icon("close", 20) }}</button>
+      </div>
+      <ul class="topics-hubs">
+        <li><a href="/learn/"{% if cur_area == 'learn' %} class="is-current"{% endif %}>{{ icon("route", 18) }} Learning paths</a></li>
+        <li><a href="/practice/"{% if cur_area == 'practice' %} class="is-current"{% endif %}>{{ icon("check", 18) }} Practice lab</a></li>
+        <li><a href="/reference/"{% if cur_area == 'reference' %} class="is-current"{% endif %}>{{ icon("book", 18) }} RCM reference</a></li>
+        <li><a href="/career/"{% if cur_area == 'career' %} class="is-current"{% endif %}>{{ icon("award", 18) }} Career and certification</a></li>
+        <li><a href="/progress/"{% if url.startswith('progress') %} class="is-current"{% endif %}>{{ icon("chart", 18) }} Your progress</a></li>
+      </ul>
+      <ul class="topics-grid">
+        {% for s in sections %}
+        <li><a href="/{{ s.id }}/" class="{% if url.startswith(s.id ~ '/') %}is-current{% endif %}">
+          <span class="t-ico">{{ icon(s.icon, 20) }}</span>
+          <span><strong>{{ s.title }}</strong><small>{{ s.blurb }}</small></span>
+        </a></li>
+        {% endfor %}
+      </ul>
     </div>
   </div>
 </header>
-{% block localnav %}{% endblock %}
 
-<div class="app">
-  {% if lay == "layout-shell" %}
-  <aside class="sidebar" id="sidebar" aria-label="Site and course navigation" data-sidebar>
-    <div class="sb-mobile-head">
-      <strong>Lessons</strong>
-      <button class="icon-btn" type="button" data-topics-close aria-label="Close lesson list">{{ icon("close", 20) }}</button>
-    </div>
-    <nav class="sb-nav">
-      <a class="sb-top{% if url.startswith('progress') %} is-current{% endif %}" href="/progress/"><span class="sb-ico">{{ icon("chart", 18) }}</span><span>Your learning</span><span class="sb-overall" data-sb-overall></span></a>
-      <p class="sb-label">Topics</p>
-      {% for n in nav %}
-        {% if n['items'] %}
-        <details class="sb-sec{% if url.startswith(n.id ~ '/') %} is-active{% endif %}"{% if url.startswith(n.id ~ '/') %} open{% endif %} data-sb-sec="{{ n.id }}">
-          <summary><span class="sb-ico">{{ icon(n.icon, 18) }}</span><span class="sb-title">{{ n.title }}</span><span class="sb-count" data-sb-count="{{ n.id }}"></span></summary>
-          <ul>
-            <li><a class="sb-overview{% if url == n.id ~ '/' %} is-current{% endif %}" href="/{{ n.id }}/">Overview</a></li>
-            {% for it in n['items'] %}
-            <li><a href="/{{ it.url }}"{% if it.track %} data-topic="{{ it.url }}"{% endif %} class="{% if url == it.url %}is-current{% endif %}"{% if url == it.url %} aria-current="page"{% endif %}><span class="sb-dot" aria-hidden="true"></span><span>{{ it.title }}</span></a></li>
-            {% endfor %}
-          </ul>
-        </details>
-        {% else %}
-        <a class="sb-top{% if url.startswith(n.id ~ '/') %} is-current{% endif %}" href="/{{ n.id }}/"><span class="sb-ico">{{ icon(n.icon, 18) }}</span><span>{{ n.title }}</span></a>
-        {% endif %}
-      {% endfor %}
-    </nav>
-  </aside>
-  <div class="sb-scrim" data-topics-close hidden></div>
-  {% endif %}
-
-  <main id="main" tabindex="-1">
-  {% block main %}{% endblock %}
-  </main>
-</div>
-
-<nav class="bottom-nav" aria-label="Main (mobile)">
-  <a href="/"{% if url == "" %} class="is-current"{% endif %}>{{ icon("compass", 22) }}<span>Home</span></a>
-  <a href="/learn/"{% if cur_area == "learn" %} class="is-current"{% endif %}>{{ icon("book", 22) }}<span>Learn</span></a>
-  <a href="/practice/"{% if cur_area == "practice" %} class="is-current"{% endif %}>{{ icon("check", 22) }}<span>Practice</span></a>
-  <a href="/reference/"{% if cur_area == "reference" %} class="is-current"{% endif %}>{{ icon("search", 22) }}<span>Reference</span></a>
-  <a href="/progress/"{% if url.startswith("progress") %} class="is-current"{% endif %}>{{ icon("chart", 22) }}<span>Progress</span></a>
-</nav>
+<main id="main" tabindex="-1">
+{% block main %}{% endblock %}
+</main>
 
 <footer class="site-foot">
   <div class="wrap foot-grid">

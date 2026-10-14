@@ -42,26 +42,21 @@
     try { localStorage.setItem("revex-theme", next); } catch (e) {}
   });
 
-  /* ------------------------------------------------ course menu (sidebar drawer) */
-  var topicsBtn = $("[data-topics]"), sidebar = $("[data-sidebar]"), scrim = $(".sb-scrim");
+  /* ------------------------------------------------ topics menu */
+  var topicsBtn = $("[data-topics]"), topicsPanel = $("#topics-panel");
   function setTopics(open) {
-    if (!topicsBtn || !sidebar) return;
-    body.classList.toggle("sb-open", open);
+    if (!topicsBtn || !topicsPanel) return;
     topicsBtn.setAttribute("aria-expanded", open ? "true" : "false");
-    if (scrim) scrim.hidden = !open;
-    body.style.overflow = open ? "hidden" : "";
-    if (open) { var cur = $(".sb-nav .is-current", sidebar) || $("a", sidebar); if (cur) cur.focus({ preventScroll: true }); }
+    topicsPanel.hidden = !open;
+    if (open && innerWidth <= 860) body.style.overflow = "hidden"; else body.style.overflow = "";
   }
-  if (topicsBtn) {
-    topicsBtn.addEventListener("click", function () { setTopics(!body.classList.contains("sb-open")); });
+  if (topicsBtn && topicsPanel) {
+    topicsBtn.addEventListener("click", function () { setTopics(topicsPanel.hidden); });
     $$("[data-topics-close]").forEach(function (b) { b.addEventListener("click", function () { setTopics(false); topicsBtn.focus(); }); });
+    document.addEventListener("click", function (e) {
+      if (!topicsPanel.hidden && !topicsPanel.contains(e.target) && !topicsBtn.contains(e.target)) setTopics(false);
+    });
   }
-  var topicsPanel = { hidden: true };
-  // keep the current lesson visible in the sidebar
-  (function () {
-    var cur = sidebar && $(".sb-nav a.is-current", sidebar);
-    if (cur && cur.scrollIntoView && innerWidth > 1100) { var nav = $(".sb-nav", sidebar); if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - nav.clientHeight / 3); }
-  })();
   // remember the last lesson for "continue learning"
   try {
     if ($("[data-complete]") || $("[data-scenario]")) {
@@ -151,7 +146,7 @@
     if ((e.key === "/" && !typing) || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k")) {
       e.preventDefault(); openSearch();
     } else if (e.key === "Escape") {
-      closeSearch(); if (body.classList.contains("sb-open")) { setTopics(false); topicsBtn.focus(); }
+      closeSearch(); if (topicsPanel && !topicsPanel.hidden) { setTopics(false); topicsBtn.focus(); }
     }
   });
   // ?q= support so Google sitelinks search works
@@ -235,7 +230,7 @@
       });
     }, { rootMargin: "-20% 0px -70% 0px" });
     heads.forEach(function (h) { io.observe(h); });
-    var railCard = $(".side-card"); if (!railCard || getComputedStyle(railCard).display === "none") $$("[data-toc]").forEach(function (d) { d.open = false; });
+    if (innerWidth <= 1000) $$("[data-toc]").forEach(function (d) { d.open = false; });
   }
 
   /* ------------------------------------------------ quizzes */

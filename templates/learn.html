@@ -9,23 +9,21 @@
     <span class="sh-ico">{{ icon("route", 28) }}</span>
     <div>
       <h1>Learning paths</h1>
-      <p class="lede">Pick the one that sounds like you. New to all of this? Start with New to RCM.</p>
+      <p class="lede">Pick the path that matches where you are. Each one lists its outcomes, prerequisites, modules and practice cases. Times are estimates based on reading at study pace.</p>
     </div>
   </header>
 
-  <ul class="aud-grid learn-grid">
+  <ul class="path-cards">
     {% for p in paths %}
-    <li>
-      <a class="aud-card aud-{{ loop.index }}" href="/learn/{{ p.id }}/">
-        <span class="aud-ico">{{ icon(["compass","inbox","chart"][loop.index0], 26) }}</span>
-        <span class="aud-level lvl lvl-{{ p.level | slug }}">{{ p.level }}</span>
-        <strong>{{ p.title }}</strong>
-        <span class="aud-desc">{{ p.audience }}.</span>
-        <span class="aud-first">First you'll: {{ (p.outcomes[0][0] | lower) ~ p.outcomes[0][1:] }}.</span>
-        <span class="aud-meta">{{ p.modules | length }} modules · about {{ p.hours }} h (estimate)</span>
-        <span class="aud-progress" data-path-progress="{{ p.id }}" data-urls="{{ p.track_urls | join(' ') }}"></span>
-        <span class="aud-go">Open path {{ icon("right", 16) }}</span>
-      </a>
+    <li class="path-card panel">
+      <p class="path-card-top"><span class="lvl lvl-{{ p.level | slug }}">{{ p.level }}</span> <span class="small-note">{{ p.modules | length }} modules · about {{ p.hours }} hours (estimate)</span></p>
+      <h2><a href="/learn/{{ p.id }}/">{{ p.title }}</a></h2>
+      <p>{{ p.audience }}.</p>
+      <p class="small-note"><strong>Prerequisites:</strong> {{ p.prerequisites }}</p>
+      <h3>You'll be able to</h3>
+      <ul class="ticks">{% for o in p.outcomes[:3] %}<li>{{ o }}</li>{% endfor %}</ul>
+      <p class="path-progress" data-path-progress="{{ p.id }}" data-urls="{{ p.track_urls | join(' ') }}" data-verbose></p>
+      <a class="btn btn-primary" href="/learn/{{ p.id }}/">Open the path</a>
     </li>
     {% endfor %}
   </ul>
