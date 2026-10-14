@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% from "_icons.html" import icon %}
+{% block layout %}layout-home{% endblock %}
 {% block body_class %}page-home{% endblock %}
 {% block head %}
 <script type="application/ld+json">
@@ -16,7 +17,7 @@
         <a class="btn btn-primary" href="/{{ first_lesson }}">Start learning</a>
         <a class="btn btn-ghost" href="/denials/codes/">Look up a denial code</a>
       </div>
-      <p class="hero-note">Already working in RCM? Jump to <a href="/interview-prep/">interview prep</a> or the <a href="/scenarios/">scenarios</a>.</p>
+      <p class="hero-stats"><span><b>{{ stats.lessons }}</b>lessons</span><span><b>{{ stats.codes }}</b>denial and remark codes</span><span><b>{{ stats.specialties }}</b>specialties</span><span><b>{{ stats.scenarios }}</b>scenarios</span><span><b>{{ stats.tools }}</b>tools</span></p>
     </div>
 
     <figure class="claim-ticket" data-claim aria-label="Example: one claim moving through the revenue cycle">
@@ -45,6 +46,28 @@
       </figcaption>
     </figure>
   </div>
+</section>
+
+<section class="wrap dash" aria-label="Your dashboard">
+  <article class="dash-card">
+    <h2>Continue learning</h2>
+    <p class="dash-big" data-continue-title>Start with “What is RCM?”</p>
+    <p data-continue-meta>New here? The learning path below takes you from zero to interview-ready.</p>
+    <a class="btn btn-primary" href="/{{ first_lesson }}" data-continue-link>Start learning</a>
+  </article>
+  <article class="dash-card">
+    <h2>Your progress</h2>
+    <p class="dash-big mono" data-dash-pct>0%</p>
+    <div class="dash-bar" role="img" aria-label="Course progress" data-dash-bar-wrap><i data-dash-bar></i></div>
+    <p data-dash-meta>Progress is saved in this browser.</p>
+    <a class="btn btn-ghost" href="/progress/">View progress</a>
+  </article>
+  <article class="dash-card dash-cert">
+    <h2>{{ icon("award", 18) }} Certification</h2>
+    <p class="dash-big" data-dash-cert>{{ site.certification.name }}</p>
+    <p data-dash-cert-meta>{{ site.certification.questions }} questions, {{ site.certification.pass_percent }}% to pass, verifiable ID. Free.</p>
+    <a class="btn btn-ghost" href="/certification/" data-dash-cert-link>About the exam</a>
+  </article>
 </section>
 
 <section class="band band-path" aria-labelledby="path-h">
@@ -79,6 +102,7 @@
             {% else %}{{ s.count }} topics{% endif %}
             <span class="mc-done" data-section-progress="{{ s.id }}"></span>
           </span>
+          <span class="mc-bar" aria-hidden="true"><i data-mc-bar="{{ s.id }}"></i></span>
         </a>
       </li>
       {% endfor %}

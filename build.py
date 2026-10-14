@@ -180,6 +180,71 @@ def load_yaml(name):
     return yaml.safe_load(path.read_text(encoding="utf-8")) if path.exists() else None
 
 
+
+# ------------------------------------------------------------------ exam bank
+import hashlib
+import random as _random
+
+
+def _strip_p(html):
+    return html
+
+
+def build_exam_bank(lessons_by_section, denial_codes, specialties):
+    """Collect every lesson quiz plus generated code and specialty questions.
+    Returns (public_bank, answer_key)."""
+    bank, key = [], {}
+
+    def add(qid, section, q, options, answer, why):
+        bank.append({"id": qid, "s": section, "q": md_inline(q),
+                     "o": [md_inline(o) for o in options]})
+        key[qid] = {"a": int(answer), "w": re.sub(r"<[^>]+>", "", md_inline(why or ""))}
+
+    for sec in SITE["sections"]:
+        _, lessons = lessons_by_section.get(sec["id"], (None, []))
+        for l in lessons:
+            for i, q in enumerate(l.get("quiz") or []):
+                add(f'{l["url"]}#{i + 1}', sec["id"], str(q["q"]), [str(o) for o in q["options"]],
+                    q["answer"], q.get("why", ""))
+
+    # Denial and remark code meanings
+    titles = {c["code"]: c["title"] for c in denial_codes}
+    for c in denial_codes:
+        rnd = _random.Random(int(hashlib.md5(c["code"].encode()).hexdigest(), 16))
+        others = [t for k, t in titles.items() if k != c["code"] and t != c["title"]]
+        wrong = rnd.sample(others, 3)
+        pos = rnd.randrange(4)
+        opts = wrong[:pos] + [c["title"]] + wrong[pos:]
+        add(f'code/{c["slug"]}', "denials", f'What does **{c["code"]}** mean on an ERA?', opts, pos,
+            f'{c["code"]}: {c["title"]}. {c.get("summary", "")}')
+
+    # Specialty code ownership
+    names = [s["name"] for s in specialties]
+    for s in specialties:
+        codes = [c for c in s.get("codes", []) if c.get("desc")]
+        if not codes:
+            continue
+        c = codes[0]
+        rnd = _random.Random(int(hashlib.md5(s["name"].encode()).hexdigest(), 16))
+        wrong = rnd.sample([n for n in names if n != s["name"]], 3)
+        pos = rnd.randrange(4)
+        opts = wrong[:pos] + [s["name"]] + wrong[pos:]
+        add(f'spec/{s["slug"]}', "specialties",
+            f'Code **{c["code"]}** ({c["desc"]}) is most typical of which specialty?', opts, pos,
+            f'{c["code"]} belongs to {s["name"]}. {s.get("summary", "")}')
+    return bank, key
+
+
+def write_apps_script(key):
+    """Generate the Google Apps Script backend with the current answer key."""
+    tpl = (ROOT / "apps-script" / "Code.template.gs").read_text(encoding="utf-8")
+    code = tpl.replace("/*__ANSWER_KEY__*/{}", json.dumps(key, ensure_ascii=False, separators=(",", ":")))
+    code = code.replace("__KEY_VERSION__", hashlib.md5(json.dumps(key, sort_keys=True).encode()).hexdigest()[:10])
+    code = code.replace("__KEY_URL__", SITE["site_url"] + "/static/exam/key.json")
+    (ROOT / "apps-script" / "Code.gs").write_text(code, encoding="utf-8")
+    return hashlib.md5(json.dumps(key, sort_keys=True).encode()).hexdigest()[:10]
+
+
 # ------------------------------------------------------------------ build
 def build():
     if OUT.exists():
@@ -206,6 +271,22 @@ def build():
     for sec in SITE["sections"]:
         intro, lessons = load_lessons(sec["id"])
         lessons_by_section[sec["id"]] = (intro, lessons)
+
+    # ---- sidebar navigation (shared by every page)
+    nav = []
+    for sec in SITE["sections"]:
+        _, lessons = lessons_by_section[sec["id"]]
+        items = [{"url": l["url"], "title": l["short"], "track": l["track"]} for l in lessons]
+        if sec["id"] == "denials":
+            items.append({"url": "denials/codes/", "title": "Denial code library", "track": False})
+        if sec["id"] == "specialties":
+            items = [{"url": f'specialties/{sp.get("slug") or slugify(sp["name"])}/', "title": sp["name"], "track": True}
+                     for sp in sorted(specialties, key=lambda x: x["name"].lower())]
+        if sec["id"] == "scenarios":
+            items = [{"url": f'scenarios/{sc.get("slug") or slugify(sc["title"])}/', "title": sc["title"], "track": True}
+                     for sc in scenarios]
+        nav.append({"id": sec["id"], "title": sec["title"], "icon": sec["icon"], "items": items})
+    env.globals["nav"] = nav
 
     # ---- lesson pages
     for sec in SITE["sections"]:
@@ -345,12 +426,36 @@ def build():
             if it["track"]:
                 track.append({"u": it["url"], "t": it["title"], "s": sec["id"]})
 
-    featured_codes = [c for c in denials["codes"] if c.get("featured")][:9]
-    render("home.html", "", featured=featured_codes,
+    featured_codes = [c for c in denials["codes"] if c.get("featured")][:8]
+    stats = {"lessons": sum(1 for _, ls in lessons_by_section.values() for l in ls if l["track"]),
+             "codes": len(denials["codes"]), "specialties": len(specialties),
+             "scenarios": len(scenarios), "tools": len(section_items.get("tools", []))}
+    render("home.html", "", featured=featured_codes, stats=stats,
            title=f'{SITE["name"]}: free US healthcare RCM training',
            description=SITE["description"],
            first_lesson=(section_items.get("start-here") or [{"url": "start-here/"}])[0]["url"])
     register("", SITE["name"], SITE["description"], None, "", "home", search=False)
+
+    # ---- certification exam
+    bank, key = build_exam_bank(lessons_by_section, denials["codes"], specialties)
+    key_version = write_apps_script(key)
+    (OUT / "static" / "exam").mkdir(parents=True, exist_ok=True)
+    (OUT / "static" / "exam" / "key.json").write_text(
+        json.dumps(key, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    (OUT / "static" / "exam" / "bank.json").write_text(
+        json.dumps({"v": key_version, "questions": bank}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    exam_sections = {s["id"]: s["title"] for s in SITE["sections"]}
+    render("certification.html", "certification/", exam_sections=exam_sections,
+           bank_size=len(bank), cert=SITE.get("certification", {}),
+           title="REVEX RCM certification exam",
+           description="Pass a 50-question exam on US healthcare revenue cycle management and earn a free, verifiable REVEX certificate.")
+    register("certification/", "REVEX RCM certification", "Take the certification exam and earn a verifiable certificate.",
+             None, "certificate certification exam test", "page")
+    render("verify.html", "verify/", cert=SITE.get("certification", {}),
+           title="Verify a REVEX certificate",
+           description="Check that a REVEX certificate ID is genuine.")
+    register("verify/", "Verify a certificate", "Check a REVEX certificate ID.", None, "verify certificate", "page")
+    print(f"Exam bank: {len(bank)} questions (key {key_version})")
 
     render("progress.html", "progress/", track_json=json.dumps(track),
            title="Your progress", description="Track lessons, quiz scores and your REVEX certificate.")

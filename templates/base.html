@@ -31,60 +31,74 @@
 </script>
 {% block head %}{% endblock %}
 </head>
-<body class="{% block body_class %}{% endblock %}" data-root="{{ rel('/') }}" data-page="{{ url }}" data-preview="{{ 1 if preview else 0 }}">
+<body class="{% block layout %}layout-shell{% endblock %} {% block body_class %}{% endblock %}" data-root="{{ rel('/') }}" data-page="{{ url }}" data-preview="{{ 1 if preview else 0 }}" data-title="{{ title }}">
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="site-head">
-  <div class="wrap head-row">
+  <div class="head-row">
+    <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="sidebar" aria-label="Open course menu" data-topics>{{ icon("menu", 20) }}</button>
     <a class="brand" href="/" aria-label="{{ site.name }} home">
       <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><rect x="2.5" y="2.5" width="19" height="19" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m7 12.5 3.3 3.3L17.5 8.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       <span class="brand-word">{{ site.name }}</span>
+      <span class="brand-tag hide-md">RCM Academy</span>
     </a>
 
-    <nav class="head-nav" aria-label="Primary">
-      <button class="nav-topics" type="button" aria-expanded="false" aria-controls="topics-panel" data-topics>
-        {{ icon("menu", 18) }}<span>Topics</span>
-      </button>
-      <a href="/rcm-cycle/" class="hide-sm{% if url.startswith('rcm-cycle') %} is-current{% endif %}">RCM cycle</a>
-      <a href="/denials/codes/" class="hide-sm{% if url.startswith('denials') %} is-current{% endif %}">Denial codes</a>
-      <a href="/specialties/" class="hide-sm{% if url.startswith('specialties') %} is-current{% endif %}">Specialties</a>
-      <a href="/scenarios/" class="hide-sm{% if url.startswith('scenarios') %} is-current{% endif %}">Scenarios</a>
-      <a href="/glossary/" class="hide-sm hide-md{% if url.startswith('glossary') %} is-current{% endif %}">Glossary</a>
-      <a href="/tools/" class="hide-sm hide-md{% if url.startswith('tools') %} is-current{% endif %}">Tools</a>
+    <button class="search-trigger" type="button" data-search-open aria-label="Search REVEX">
+      {{ icon("search", 18) }}<span class="hide-sm">Search lessons, codes and terms</span><kbd class="hide-sm">/</kbd>
+    </button>
+
+    <nav class="head-links" aria-label="Quick links">
+      <a href="/denials/codes/" class="hide-md{% if url.startswith('denials/codes') %} is-current{% endif %}">Denial codes</a>
+      <a href="/tools/" class="hide-md{% if url.startswith('tools') %} is-current{% endif %}">Tools</a>
+      <a href="/certification/" class="head-cert hide-sm{% if url.startswith('certification') or url.startswith('verify') %} is-current{% endif %}">{{ icon("award", 17) }} Certification</a>
     </nav>
 
     <div class="head-tools">
-      <button class="search-trigger" type="button" data-search-open aria-label="Search REVEX">
-        {{ icon("search", 18) }}<span class="hide-sm">Search</span><kbd class="hide-sm">/</kbd>
-      </button>
       <a class="icon-btn" href="/progress/" aria-label="Your progress" title="Your progress">{{ icon("chart", 20) }}</a>
       <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch colour theme" title="Switch colour theme">
         <span class="when-light">{{ icon("moon", 20) }}</span><span class="when-dark">{{ icon("sun", 20) }}</span>
       </button>
     </div>
   </div>
-
-  <div class="topics-panel" id="topics-panel" hidden>
-    <div class="wrap">
-      <div class="topics-head">
-        <p>All topics</p>
-        <button class="icon-btn" type="button" data-topics-close aria-label="Close topics">{{ icon("close", 20) }}</button>
-      </div>
-      <ul class="topics-grid">
-        {% for s in sections %}
-        <li><a href="/{{ s.id }}/" class="{% if url.startswith(s.id) %}is-current{% endif %}">
-          <span class="t-ico">{{ icon(s.icon, 20) }}</span>
-          <span><strong>{{ s.title }}</strong><small>{{ s.blurb }}</small></span>
-        </a></li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
 </header>
 
-<main id="main" tabindex="-1">
-{% block main %}{% endblock %}
-</main>
+<div class="app">
+  <aside class="sidebar" id="sidebar" aria-label="Course navigation" data-sidebar>
+    <div class="sb-mobile-head">
+      <strong>Course menu</strong>
+      <button class="icon-btn" type="button" data-topics-close aria-label="Close course menu">{{ icon("close", 20) }}</button>
+    </div>
+    <nav class="sb-nav">
+      <a class="sb-top{% if url == '' %} is-current{% endif %}" href="/">{{ icon("compass", 18) }}<span>Dashboard</span></a>
+      <a class="sb-top{% if url.startswith('progress') %} is-current{% endif %}" href="/progress/">{{ icon("chart", 18) }}<span>My progress</span><span class="sb-overall" data-sb-overall></span></a>
+      <p class="sb-label">Course</p>
+      {% for n in nav %}
+        {% if n['items'] %}
+        <details class="sb-sec{% if url.startswith(n.id ~ '/') %} is-active{% endif %}"{% if url.startswith(n.id ~ '/') %} open{% endif %} data-sb-sec="{{ n.id }}">
+          <summary><span class="sb-ico">{{ icon(n.icon, 18) }}</span><span class="sb-title">{{ n.title }}</span><span class="sb-count" data-sb-count="{{ n.id }}"></span></summary>
+          <ul>
+            <li><a class="sb-overview{% if url == n.id ~ '/' %} is-current{% endif %}" href="/{{ n.id }}/">Overview</a></li>
+            {% for it in n['items'] %}
+            <li><a href="/{{ it.url }}"{% if it.track %} data-topic="{{ it.url }}"{% endif %} class="{% if url == it.url %}is-current{% endif %}"{% if url == it.url %} aria-current="page"{% endif %}><span class="sb-dot" aria-hidden="true"></span><span>{{ it.title }}</span></a></li>
+            {% endfor %}
+          </ul>
+        </details>
+        {% else %}
+        <a class="sb-top{% if url.startswith(n.id ~ '/') %} is-current{% endif %}" href="/{{ n.id }}/"><span class="sb-ico">{{ icon(n.icon, 18) }}</span><span>{{ n.title }}</span></a>
+        {% endif %}
+      {% endfor %}
+      <a class="sb-cert-card" href="/certification/">
+        {{ icon("award", 22) }}
+        <span><strong>Get certified</strong><small>{{ site.certification.questions }} questions, free, verifiable</small></span>
+      </a>
+    </nav>
+  </aside>
+  <div class="sb-scrim" data-topics-close hidden></div>
+
+  <main id="main" tabindex="-1">
+  {% block main %}{% endblock %}
+  </main>
+</div>
 
 <footer class="site-foot">
   <div class="wrap foot-grid">

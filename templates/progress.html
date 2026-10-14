@@ -17,33 +17,21 @@
   <div class="prog-sections" data-prog-sections></div>
 
   <section class="cert-block fbox fbox-lg" aria-labelledby="cert-h">
-    <h2 class="fbox-label" id="cert-h">Certificate of completion</h2>
-    <div data-cert-locked>
-      <p>Complete at least 80% of the lessons, specialties and scenarios to unlock a printable REVEX certificate.</p>
+    <h2 class="fbox-label" id="cert-h">Certification</h2>
+    <div data-cert-none>
+      <p>When you're ready, take the {{ site.certification.questions }}-question certification exam. Pass with {{ site.certification.pass_percent }}% or more to earn a verifiable <strong>{{ site.certification.name }}</strong> certificate.</p>
+      <a class="btn btn-primary" href="/certification/">{{ icon("award", 18) }} Go to the certification exam</a>
     </div>
-    <form class="cert-form" data-cert-form hidden>
-      <label for="cert-name">Your name as it should appear</label>
-      <div class="cert-row">
-        <input id="cert-name" type="text" maxlength="60" required autocomplete="name">
-        <button class="btn btn-primary" type="submit">{{ icon("print", 18) }} Create certificate</button>
-      </div>
-      <p class="small-note">Your browser's print window opens. Choose “Save as PDF” to keep a copy.</p>
-    </form>
+    <div data-cert-have hidden>
+      <p>You've earned the <strong>{{ site.certification.name }}</strong> certificate. ID <span class="mono" data-cert-have-id></span>.</p>
+      <a class="btn btn-ghost" data-cert-have-link>{{ icon("check", 18) }} View and download it</a>
+    </div>
   </section>
 
   <p class="prog-reset"><button type="button" class="link-btn" data-prog-reset>{{ icon("reset", 16) }} Clear my progress on this device</button></p>
 </div>
 
-<div class="certificate" data-certificate aria-hidden="true">
-  <div class="cert-inner">
-    <p class="cert-brand">{{ site.name }}</p>
-    <p class="cert-kicker">Certificate of completion</p>
-    <p class="cert-name" data-cert-name></p>
-    <p class="cert-text">has completed the REVEX US Healthcare Revenue Cycle Management programme, covering the RCM cycle, insurance and payers, claim forms, denial management, specialty billing and applied AR scenarios.</p>
-    <p class="cert-meta"><span data-cert-date></span><span data-cert-count></span></p>
-    <p class="cert-foot">Self-paced learning record issued by {{ site.name }}. Not an accredited certification.</p>
-  </div>
-</div>
+
 <script type="application/json" data-track>{{ track_json | safe }}</script>
 <script type="application/json" data-sections>{{ sections | map(attribute="title") | list | tojson }}</script>
 <script type="application/json" data-section-ids>{{ sections | map(attribute="id") | list | tojson }}</script>

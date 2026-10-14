@@ -33,6 +33,18 @@ mission: >-
   programme. REVEX makes it free, so anyone willing to learn can understand how
   US healthcare gets paid and walk into an RCM interview ready.
 
+# Certification exam. Paste your Apps Script web app URL into api_url
+# (see apps-script/SETUP.md). Until then the exam page shows "opening soon".
+certification:
+  api_url: ""
+  name: REVEX Certified RCM Associate
+  questions: 50
+  pass_percent: 75
+  minutes: 60
+  retake_hours: 24
+  signatory: Rajesh Nayak
+  signatory_title: Founder, REVEX
+
 # Menu cards on the home page, in this order.
 sections:
   - id: start-here

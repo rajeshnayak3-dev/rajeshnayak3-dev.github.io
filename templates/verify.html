@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% from "_parts.html" import crumbs %}
+{% block main %}
+<div class="wrap verify-wrap">
+  {{ crumbs([("Certification", "/certification/"), ("Verify", None)]) }}
+  <header class="section-head">
+    <span class="sh-ico">{{ icon("award", 28) }}</span>
+    <div>
+      <h1>Verify a REVEX certificate</h1>
+      <p class="lede">Enter the certificate ID printed on the certificate (for example RVX-202610-ABC234) to confirm it's genuine.</p>
+    </div>
+  </header>
+
+  <form class="verify-form panel" data-verify-form>
+    <label class="field" for="verify-id"><span>Certificate ID</span>
+      <input id="verify-id" type="text" autocomplete="off" spellcheck="false" placeholder="RVX-YYYYMM-XXXXXX" required>
+    </label>
+    <button class="btn btn-primary" type="submit">Verify</button>
+  </form>
+
+  <section class="verify-result" data-verify-result aria-live="polite" hidden></section>
+  <div class="cert-area" data-cert-area hidden>
+    <div class="cert-preview"><canvas data-cert-canvas width="2000" height="1414" aria-label="Certificate"></canvas></div>
+    <div class="cert-actions">
+      <button type="button" class="btn btn-ghost" data-dl-pdf>{{ icon("download", 18) }} Download PDF</button>
+      <button type="button" class="btn btn-ghost" data-dl-png>{{ icon("download", 18) }} Download image</button>
+    </div>
+  </div>
+  <p class="small-note verify-note">REVEX certificates confirm that the holder passed the REVEX certification exam in US healthcare revenue cycle management. REVEX is a free training programme; its certificates aren't accredited or licensing credentials.</p>
+</div>
+<div class="qr-host" data-qr hidden></div>
+<script type="application/json" data-verify-config>{{ {"api": cert.api_url or "", "siteUrl": site.site_url, "signatory": cert.signatory, "signatoryTitle": cert.signatory_title} | tojson }}</script>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script src="{{ rel('/static/js/cert.js') }}" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var cfg = JSON.parse(document.querySelector("[data-verify-config]").textContent);
+  var form = document.querySelector("[data-verify-form]"), input = document.getElementById("verify-id");
+  var out = document.querySelector("[data-verify-result]"), area = document.querySelector("[data-cert-area]");
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function render(cls, html) { out.hidden = false; out.className = "verify-result panel " + cls; out.innerHTML = html; }
+  function check(id) {
+    id = id.trim().toUpperCase(); area.hidden = true;
+    if (!cfg.api) { render("is-warn", "<p>Certificate verification is being set up. Please try again later.</p>"); return; }
+    render("", "<p>Checking…</p>");
+    fetch(cfg.api + "?action=verify&id=" + encodeURIComponent(id)).then(function (r) { return r.json(); }).then(function (d) {
+      if (!d.valid) { render("is-bad", "<h2>Not verified</h2><p>" + esc(d.reason || "No matching certificate was found.") + "</p>"); return; }
+      render("is-good", "<h2>Verified certificate</h2><dl class=\"verify-dl\"><div><dt>Name</dt><dd>" + esc(d.name) + "</dd></div><div><dt>Certificate</dt><dd>" + esc(d.certName) + "</dd></div><div><dt>Score</dt><dd>" + esc(d.percent) + "%</dd></div><div><dt>Issued</dt><dd>" + esc(window.REVEXCert.fmtDate(d.issued)) + "</dd></div><div><dt>ID</dt><dd class=\"mono\">" + esc(d.id) + "</dd></div></dl>");
+      var data = { name: d.name, certName: d.certName, percent: d.percent, id: d.id, issued: d.issued, verifyUrl: cfg.siteUrl.replace(/\/$/, "") + "/verify/?id=" + encodeURIComponent(d.id), signatory: cfg.signatory, signatoryTitle: cfg.signatoryTitle };
+      var canvas = document.querySelector("[data-cert-canvas]");
+      area.hidden = false; window.REVEXCert.draw(canvas, data);
+      document.querySelector("[data-dl-pdf]").onclick = function () { window.REVEXCert.downloadPDF(canvas, data); };
+      document.querySelector("[data-dl-png]").onclick = function () { window.REVEXCert.downloadPNG(canvas, data); };
+    }).catch(function () { render("is-warn", "<p>The verification service couldn't be reached. Check your connection and try again.</p>"); });
+  }
+  form.addEventListener("submit", function (e) { e.preventDefault(); check(input.value); history.replaceState(null, "", "?id=" + encodeURIComponent(input.value.trim().toUpperCase())); });
+  var q = new URLSearchParams(location.search).get("id");
+  if (q) { input.value = q; check(q); }
+});
+</script>
+{% endblock %}

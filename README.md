@@ -55,6 +55,10 @@ Google usually starts showing pages within days to a few weeks.
 
 ---
 
+## Certification exam
+
+The free certification exam needs a one-time setup of a Google Sheet and Apps Script in your Google account. Follow `apps-script/SETUP.md`, then paste the web app URL into `certification: api_url` in `site.yaml`.
+
 ## Part 2: Edit content later (no coding)
 
 All content lives in two folders. Edit any file in GitHub with the pencil icon; the site rebuilds itself when you commit.

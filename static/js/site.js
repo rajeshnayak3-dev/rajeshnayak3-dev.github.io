@@ -42,21 +42,32 @@
     try { localStorage.setItem("revex-theme", next); } catch (e) {}
   });
 
-  /* ------------------------------------------------ topics menu */
-  var topicsBtn = $("[data-topics]"), topicsPanel = $("#topics-panel");
+  /* ------------------------------------------------ course menu (sidebar drawer) */
+  var topicsBtn = $("[data-topics]"), sidebar = $("[data-sidebar]"), scrim = $(".sb-scrim");
   function setTopics(open) {
-    if (!topicsBtn) return;
+    if (!topicsBtn || !sidebar) return;
+    body.classList.toggle("sb-open", open);
     topicsBtn.setAttribute("aria-expanded", open ? "true" : "false");
-    topicsPanel.hidden = !open;
-    if (open && innerWidth <= 860) body.style.overflow = "hidden"; else body.style.overflow = "";
+    if (scrim) scrim.hidden = !open;
+    body.style.overflow = open ? "hidden" : "";
+    if (open) { var cur = $(".sb-nav .is-current", sidebar) || $("a", sidebar); if (cur) cur.focus({ preventScroll: true }); }
   }
   if (topicsBtn) {
-    topicsBtn.addEventListener("click", function () { setTopics(topicsPanel.hidden); });
+    topicsBtn.addEventListener("click", function () { setTopics(!body.classList.contains("sb-open")); });
     $$("[data-topics-close]").forEach(function (b) { b.addEventListener("click", function () { setTopics(false); topicsBtn.focus(); }); });
-    document.addEventListener("click", function (e) {
-      if (!topicsPanel.hidden && !topicsPanel.contains(e.target) && !topicsBtn.contains(e.target)) setTopics(false);
-    });
   }
+  var topicsPanel = { hidden: true };
+  // keep the current lesson visible in the sidebar
+  (function () {
+    var cur = sidebar && $(".sb-nav a.is-current", sidebar);
+    if (cur && cur.scrollIntoView && innerWidth > 1100) { var nav = $(".sb-nav", sidebar); if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - nav.clientHeight / 3); }
+  })();
+  // remember the last lesson for "continue learning"
+  try {
+    if ($("[data-complete]") || $("[data-scenario]")) {
+      localStorage.setItem("revex-last", JSON.stringify({ u: PAGE, t: (body.getAttribute("data-title") || document.title).replace(/ \| REVEX$/, ""), d: Date.now() }));
+    }
+  } catch (e) {}
 
   /* ------------------------------------------------ search */
   var modal = $("[data-search-modal]"), input = $("[data-search-input]"),
@@ -140,7 +151,7 @@
     if ((e.key === "/" && !typing) || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k")) {
       e.preventDefault(); openSearch();
     } else if (e.key === "Escape") {
-      closeSearch(); if (topicsPanel && !topicsPanel.hidden) { setTopics(false); topicsBtn.focus(); }
+      closeSearch(); if (body.classList.contains("sb-open")) { setTopics(false); topicsBtn.focus(); }
     }
   });
   // ?q= support so Google sitelinks search works
@@ -163,6 +174,13 @@
       if (lbl) lbl.textContent = done ? "Completed" : "Mark as complete";
       b.setAttribute("aria-pressed", done ? "true" : "false");
     });
+    var total = 0, doneAll = 0;
+    $$("[data-sb-sec]").forEach(function (sec) {
+      var links = $$("a[data-topic]", sec), d = links.filter(function (a) { return state.done[a.getAttribute("data-topic")]; }).length;
+      total += links.length; doneAll += d;
+      var c = $("[data-sb-count]", sec); if (c) { c.textContent = links.length ? d + "/" + links.length : ""; c.classList.toggle("is-full", links.length > 0 && d === links.length); }
+    });
+    var ov = $("[data-sb-overall]"); if (ov && total) ov.textContent = Math.round(doneAll / total * 100) + "%";
     $$("[data-section-progress]").forEach(function (el) {
       var id = el.getAttribute("data-section-progress");
       var n = Object.keys(state.done).filter(function (u) { return u.indexOf(id + "/") === 0 && u !== "denials/codes/"; }).length;
@@ -178,6 +196,35 @@
     });
   });
   markUI();
+
+  /* ------------------------------------------------ home dashboard */
+  if ($("[data-dash-pct]")) {
+    var all = 0, doneN = 0, secTotals = {};
+    $$("[data-sb-sec]").forEach(function (sec) {
+      var id = sec.getAttribute("data-sb-sec"), links = $$("a[data-topic]", sec);
+      var d = links.filter(function (a) { return state.done[a.getAttribute("data-topic")]; }).length;
+      secTotals[id] = [d, links.length]; all += links.length; doneN += d;
+    });
+    var p = all ? Math.round(doneN / all * 100) : 0;
+    $("[data-dash-pct]").textContent = p + "%";
+    $("[data-dash-bar]").style.width = p + "%";
+    $("[data-dash-meta]").textContent = doneN + " of " + all + " lessons, guides and scenarios completed.";
+    $$("[data-mc-bar]").forEach(function (b) { var t = secTotals[b.getAttribute("data-mc-bar")]; if (t && t[1]) b.style.width = Math.round(t[0] / t[1] * 100) + "%"; });
+    try {
+      var last = JSON.parse(localStorage.getItem("revex-last"));
+      if (last && last.u) {
+        $("[data-continue-title]").textContent = last.t;
+        $("[data-continue-meta]").textContent = "Pick up where you left off.";
+        var cl = $("[data-continue-link]"); cl.href = href(last.u); cl.textContent = "Continue";
+      }
+      var cert = JSON.parse(localStorage.getItem("revex-cert"));
+      if (cert && cert.id) {
+        $("[data-dash-cert]").textContent = "Certified";
+        $("[data-dash-cert-meta]").textContent = "Certificate " + cert.id + ", score " + cert.percent + "%.";
+        var dl = $("[data-dash-cert-link]"); dl.textContent = "View certificate"; dl.href = href("verify/") + "?id=" + encodeURIComponent(cert.id);
+      }
+    } catch (e) {}
+  }
 
   /* ------------------------------------------------ TOC highlight */
   var tocLinks = $$(".toc a");
@@ -327,24 +374,21 @@
         var p = Math.round(d / items.length * 100);
         return '<div class="prog-row"><a href="' + esc(href(id + "/")) + '">' + esc(titles[i]) + '</a><div class="prog-bar" role="img" aria-label="' + p + '% complete"><i style="width:' + p + '%"></i></div><span class="mono">' + d + "/" + items.length + "</span></div>";
       }).join("");
-      var unlocked = pct >= 80;
-      $("[data-cert-locked]").hidden = unlocked;
-      $("[data-cert-form]").hidden = !unlocked;
-      var cc = $("[data-cert-count]"); if (cc) cc.textContent = done + " modules completed";
+      try {
+        var cert = JSON.parse(localStorage.getItem("revex-cert"));
+        if (cert && cert.id) {
+          $("[data-cert-none]").hidden = true; $("[data-cert-have]").hidden = false;
+          $("[data-cert-have-id]").textContent = cert.id;
+          $("[data-cert-have-link]").href = href("verify/") + "?id=" + encodeURIComponent(cert.id);
+        }
+      } catch (e) {}
     }
     drawProgress();
-    $("[data-cert-form]").addEventListener("submit", function (e) {
-      e.preventDefault();
-      var name = $("#cert-name").value.trim(); if (!name) return;
-      $("[data-cert-name]").textContent = name;
-      $("[data-cert-date]").textContent = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
-      body.classList.add("printing-cert");
-      window.print();
-      setTimeout(function () { body.classList.remove("printing-cert"); }, 500);
-    });
     $("[data-prog-reset]").addEventListener("click", function () {
-      if (!confirm("Clear all completed lessons and quiz scores on this device?")) return;
+      var b = $("[data-prog-reset]");
+      if (!b.classList.contains("is-confirm")) { b.classList.add("is-confirm"); b.lastChild.textContent = " Click again to clear everything"; return; }
       state = { done: {}, quiz: {} }; save(state); drawProgress(); markUI();
+      b.classList.remove("is-confirm"); b.lastChild.textContent = " Progress cleared";
     });
   }
 
