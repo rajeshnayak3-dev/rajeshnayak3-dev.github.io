@@ -83,5 +83,8 @@ Billing systems use **financial class** or **responsible party** fields to show 
 !!! example "Scenario"
     Medicare paid $96.00 on 06/12, with $24.00 PR-2 and remark MA18. On 08/01 the balance is still $24.00 under Medicare. The Medigap plan (Plan G) has no claim on file: the crossover failed because the member ID on Medicare's crossover file was outdated. The analyst bills the Medigap plan directly with the Medicare adjudication. It pays $24.00 within 3 weeks.
 
+!!! mistake "Auditor's red flag"
+    Balances left under the primary payer's name after it paid. Move patient responsibility to the next payer the same day the primary is posted.
+
 !!! interview "If an interviewer asks “What is a crossover claim?”"
     “A crossover is when the primary payer, usually Medicare, automatically forwards the claim and its payment information to the secondary, such as a Medigap plan or Medicaid. The Medicare ERA shows remark MA18 or N89. We wait for the secondary to process, and if it has no claim on file after about 30 days, we bill the secondary directly with the primary's adjudication.”

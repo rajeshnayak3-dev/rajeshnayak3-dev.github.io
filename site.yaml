@@ -76,3 +76,7 @@ sections:
     title: Interview prep
     blurb: Questions interviewers ask freshers and experienced analysts, with model answers.
     icon: chat
+  - id: tools
+    title: AR tools
+    blurb: Timely filing dates, payment and secondary math, KPIs, therapy units and AR notes, calculated for you.
+    icon: calc

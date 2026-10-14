@@ -45,9 +45,9 @@ quiz:
 The terms come from basic accounting.
 
 - **Accounts receivable (AR):** money **owed to** the business. For a provider, that's every unpaid insurance claim and every unpaid patient balance.
-- **Accounts payable (AP):** money the business **owes to** others. For a provider's general accounting, that's suppliers, rent and salaries.
+- **Accounts payable (AP):** money the business **owes to** others for goods and services it has received. For a hospital or practice, that's its operating bills: medical and surgical supplies, drugs, DME vendors, rent, EHR and billing software, utilities and contracted services. Payroll is usually handled as its own liability. AP is run by the provider's finance or accounting department, not the RCM team.
 
-In RCM, nearly all the work is about AR, because RCM exists to turn services into collected cash. AP appears in a narrower form: money the provider has received but must give back.
+In RCM, nearly all the work is about AR, because RCM exists to turn services into collected cash. RCM teams don't pay vendor bills. The closest they get to AP is money the provider has received but must give back, which is tracked separately as **credit balances** (a refund liability), not in the vendor AP ledger.
 
 ## AR in RCM
 
@@ -95,7 +95,7 @@ The two overlap, but many companies separate them:
 
 ## Where AP shows up in RCM
 
-A provider sometimes receives money it isn't entitled to. That money becomes a liability, which accountants treat like accounts payable.
+A provider sometimes receives money it isn't entitled to. That money becomes a **refund liability**. Accountants record it in a credit balance (or refunds payable) sub-ledger rather than general AP, but it behaves the same way: the provider owes it to someone.
 
 - **Overpayments:** the payer paid more than the contract allows, paid twice, or paid for a patient who wasn't covered.
 - **Patient overpayments:** a patient paid a copay at the front desk, then the payer applied the full amount to the plan.
@@ -110,7 +110,7 @@ Read more in [credit balances and refunds](/non-denials/credit-balances-and-refu
 
 ## AR and AP side by side
 
-| | Accounts receivable | Accounts payable (in RCM) |
+| | Accounts receivable | Credit balances and refunds (the RCM side of “payables”) |
 |---|---|---|
 | Direction | Money owed to the provider | Money the provider owes back |
 | Typical items | Unpaid claims, patient balances | Overpayments, duplicate payments, patient refunds |

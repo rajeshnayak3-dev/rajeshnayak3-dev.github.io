@@ -136,5 +136,8 @@ Reports by root cause show leaders where to spend training and process fixes. Th
 - **Touches per claim:** how many times a claim is worked before it resolves. Fewer is better.
 - **Denial overturn rate:** share of appealed denials that are paid.
 
+!!! mistake "Auditor's red flag"
+    Notes without a call reference number or follow-up date. Without them, the work can't be verified or picked up by the next analyst, so the note fails audit even if the action was right.
+
 !!! interview "If an interviewer asks “How do you handle a denied claim?”"
     “I first read the denial reason and remark codes on the ERA and check the claim, notes and documents to confirm the cause. Then I decide the right action: a corrected claim for a billing error, reprocessing for a payer error, sending records if information is missing, an appeal if we disagree, or billing the right payer. I document the call or action with a reference number and set a follow-up date, and I tag the root cause so it can be prevented.”

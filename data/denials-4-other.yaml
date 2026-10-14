@@ -369,6 +369,9 @@ codes:
       - Normal on secondary claims.
     steps:
       - Post the secondary payment and the OA-23 adjustment per client mapping.
+      - Compare the primary's paid amount with the secondary's allowed amount for the service.
+      - If the primary paid as much as or more than the secondary allows, the secondary owes nothing; follow the plans' rules for any remaining patient responsibility.
+      - If the primary paid less than the secondary allows, ask the secondary to reprocess for the difference (up to the patient's remaining responsibility).
       - Bill the patient only for any remaining PR amount the secondary assigns.
     prevention:
       - Send complete primary adjudication data with secondary claims so the secondary calculates correctly.

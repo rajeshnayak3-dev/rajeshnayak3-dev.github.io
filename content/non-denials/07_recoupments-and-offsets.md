@@ -84,5 +84,8 @@ Medicare RAC and similar audit findings follow the normal **Medicare appeal leve
 !!! tip "Auditor's eye"
     Repeated recoupments for the same reason (for example, modifier 25 on the same E/M and procedure pairs) point to a documentation or coding pattern. Fixing the pattern prevents a larger audit later.
 
+!!! mistake "Auditor's red flag"
+    Recoupments posted to unapplied cash and never matched to the original claim. One account then looks paid when it isn't, and the deposit won't reconcile.
+
 !!! interview "If an interviewer asks “What is a recoupment?”"
     “A recoupment is when the payer takes back money it previously paid, usually by offsetting it from a future payment. On the ERA it appears as a reversal of the original claim or as a provider-level adjustment, like WO, referencing the original claim. We post it against the original claim, re-evaluate the balance, and if the recoupment is wrong we dispute or appeal within the deadline.”

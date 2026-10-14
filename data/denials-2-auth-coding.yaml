@@ -154,6 +154,8 @@ codes:
       - Read every RARC on the line to identify the missing or invalid item.
       - Find the correct information in the record, registration or provider set-up.
       - Send a corrected claim (or a new claim if the payer treated it as unprocessable, such as Medicare MA130).
+      - "For MA120 (CLIA): confirm the 10-character CLIA number is in box 23, matches the testing location and was active on the DOS, and that waived tests carry modifier QW."
+      - "For M119 (NDC): report N4 + the 11-digit NDC (5-4-2, leading zeros added) + unit qualifier (UN, ML, GR, F2 or ME) + quantity in the shaded line of box 24 or UB-04 FL 43."
       - Document the RARC, the fix and the submission date.
     prevention:
       - Add scrubber edits for the top CO-16 remark codes your payers use.

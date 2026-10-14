@@ -101,5 +101,8 @@ A denial rate that creeps from 5% to 10% can mean hundreds of thousands of dolla
 
 Each category is explained in [denial categories](/denials/denial-categories/), and every code has its own page in the [code library](/denials/codes/).
 
+!!! mistake "Auditor's red flag"
+    Rejections logged as denials, or denials logged as rejections. They need different actions, and mixing them up sends claims down the wrong path.
+
 !!! interview "If an interviewer asks “What is a denial and how is it different from a rejection?”"
     “A denial is when a payer processes a claim and refuses to pay all or part of it, with a reason shown by CARC and RARC codes on the ERA. A rejection happens before processing, when the claim fails format or data checks at the clearinghouse or payer front end, so it never enters the payer's system. Rejections are fixed and resubmitted as new claims; denials need correction, reconsideration or appeal.”

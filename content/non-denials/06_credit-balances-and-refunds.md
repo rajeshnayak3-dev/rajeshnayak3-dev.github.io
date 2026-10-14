@@ -90,5 +90,8 @@ A credit balance is either:
 !!! example "Scenario"
     Account shows −$84.20. History: Aetna paid $84.20 on 04/03 and again on 04/17 (two different claim numbers for the same DOS; the second was a resubmission processed as a new claim). Overpayment to Aetna: $84.20. The analyst calls Aetna, which agrees to recoup through an offset; the call reference and expected offset date are documented, and the account is flagged until the takeback posts.
 
+!!! mistake "Auditor's red flag"
+    Insurance overpayments applied to a different patient's balance. Payer money can't be moved between patients; it must be refunded or offset.
+
 !!! interview "If an interviewer asks “How do you handle a credit balance?”"
     “I review the account history to see whether it's a posting error or a real overpayment. Posting errors I correct, such as moving a misapplied payment. For true overpayments I identify who overpaid, then refund the payer by check, offset or corrected claim, or refund the patient after applying policy for other open patient balances. Medicare and Medicaid overpayments must be returned within 60 days of identification.”

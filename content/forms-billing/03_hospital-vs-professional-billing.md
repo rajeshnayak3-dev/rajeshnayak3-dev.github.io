@@ -105,5 +105,8 @@ When a hospital owns a clinic as an outpatient department, the patient may recei
 | Documents | Itemized bill, full medical record, discharge summary | Office note, procedure note |
 | Underpayment checks | Complex (DRG, outlier, carve-outs, per diems) | Fee schedule lookups per code |
 
+!!! mistake "Auditor's red flag"
+    Outpatient services within the 3-day payment window billed separately instead of on the inpatient claim. Medicare recovers them in post-payment reviews.
+
 !!! interview "If an interviewer asks “What's the difference between hospital and professional billing?”"
     “Hospital billing covers the facility's charges, such as room, nursing, supplies and equipment, on the UB-04 or 837I, using revenue codes, type of bill and, for inpatients, ICD-10-PCS, and Medicare pays inpatients by DRG and outpatients by APC. Professional billing covers the physician's or practitioner's services on the CMS-1500 or 837P using CPT and HCPCS with place of service and modifiers, paid under the physician fee schedule. One hospital visit usually produces both claims.”

@@ -52,6 +52,22 @@ Who may qualify, depending on the state:
 - People aged 65 and older, blind or disabled, with low income and assets
 - People in nursing homes who meet financial tests
 
+## Medicaid eligibility groups
+
+Federal law sorts Medicaid eligibility into groups. You'll see these names in state manuals and eligibility responses.
+
+| Group | Who | RCM note |
+|---|---|---|
+| **Mandatory categorically needy** | Groups every state must cover, such as low-income children and pregnant women, many people receiving SSI, and certain low-income families (historically linked to the old AFDC cash program) | Full Medicaid benefits |
+| **Optional categorically needy** | Groups a state may choose to cover, such as adults under the ACA expansion, or people needing nursing home care with higher incomes | Varies by state |
+| **Medically needy** | People with income above the limit but high medical bills, who qualify by **spending down** (see below) | Coverage only after the spend-down is met each budget period |
+
+Separate programs also matter for billing:
+
+- **CHIP** covers uninsured children in families above Medicaid limits. Some states run it as part of Medicaid, others as a separate program with its own IDs and cost-sharing.
+- **Medicare Savings Programs** (QMB, SLMB, QI, QDWI) help people on Medicare pay their Medicare costs. See below.
+- **Emergency Medicaid** pays for emergency care for people who would qualify for Medicaid except for immigration status. It covers the emergency only, so check the dates and services covered.
+
 ## Payer of last resort
 
 Medicaid pays **after** every other source: Medicare, commercial insurance, TRICARE, workers' compensation, auto and liability. If the patient has other coverage, bill it first. Medicaid will deny claims with other coverage on file until it sees the primary payment.
@@ -142,6 +158,9 @@ It works like a deductible that resets every budget period.
 - Timely filing ranges widely by state and MCO (from 90 days to a year), with extra time allowed after a primary payer's EOB in many states.
 - As secondary, Medicaid needs the **primary payer's adjudication** (ERA data or EOB). Missing primary information is a common denial (remark **MA04** or **N4**).
 - Medicaid often pays up to its own allowed amount minus what the primary paid, which can be $0.
+
+!!! mistake "Auditor's red flag"
+    Spend-down claims billed to Medicaid before the state shows the spend-down as met. They deny, and the patient-liability portion is often never billed to the patient.
 
 !!! interview "If an interviewer asks “What is QMB?”"
     “QMB is the Qualified Medicare Beneficiary program, a Medicare Savings Program run by state Medicaid. It pays the Medicare Part A and B premiums and the Medicare deductibles, coinsurance and copays for low-income beneficiaries. The key RCM rule is that providers can't bill QMB patients for Medicare cost-sharing, even if Medicaid pays less, so any unpaid cost-sharing is written off.”

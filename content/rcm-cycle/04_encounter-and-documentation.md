@@ -124,5 +124,8 @@ Commercial and Medicare Advantage plans use their own waiver rules; an ABN only 
 - Orders for tests without a documented reason
 - Laterality (right or left) missing
 
+!!! mistake "Auditor's red flag"
+    Claims released before the provider signed the note. An unsigned note can't support a claim, and payers recover payments for unsigned documentation in audits.
+
 !!! interview "If an interviewer asks “What is medical necessity?”"
     “Medical necessity means the service is reasonable and needed to diagnose or treat the patient's condition according to accepted standards of care. On a claim we show it by linking each procedure to a diagnosis that supports it, and the documentation must back it up. Medicare defines it through NCDs and LCDs; commercial payers through medical policies. If it isn't met, we see denials like CO-50.”

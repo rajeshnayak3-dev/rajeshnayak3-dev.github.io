@@ -75,6 +75,7 @@
             {% elif s.id == "denials" %}{{ s.count }} lessons, {{ s.codes }} codes
             {% elif s.id == "scenarios" %}{{ s.count }} cases
             {% elif s.id == "specialties" %}{{ s.count }} specialties
+            {% elif s.id == "tools" %}{{ s.count }} tools
             {% else %}{{ s.count }} topics{% endif %}
             <span class="mc-done" data-section-progress="{{ s.id }}"></span>
           </span>

@@ -98,5 +98,8 @@ For many claims with the same payer:
 !!! tip "Don't resubmit what's in process"
     Resubmitting a claim that's already on file creates a duplicate denial and can confuse the original's processing. Resubmit only when the payer confirms it's not on file.
 
+!!! mistake "Auditor's red flag"
+    Claims resubmitted while still in process at the payer. They deny as duplicates and confuse the original's processing.
+
 !!! interview "If an interviewer asks “What do you do with a no-response claim?”"
     “I check claim status on the portal, IVR or by call. If it's not on file, I check the clearinghouse history for rejections or a wrong payer ID, correct it and resubmit with proof of timely filing if needed. If it's in process or pended, I find out why and supply what's needed, like records or COB from the patient. If it's paid or denied, I get the details and find the payment or ERA.”

@@ -323,6 +323,7 @@
   prerequisites:
     - Prior authorization for nearly every chemotherapy and immunotherapy regimen, by drug, dose and cycles.
     - Convert dose given into HCPCS billing units (for example 200 mg pembrolizumab = 200 units of J9271).
+    - "Report the NDC in the shaded line of box 24 (or UB-04 FL 43) as N4 + 11-digit NDC + unit qualifier (UN, ML, GR, F2 or ME) + quantity, for example N412345678901 ML8. The NDC quantity is the amount of product given (8 mL), which is different from the HCPCS units (200)."
     - Report NDC, NDC units and JW/JZ on every drug from a single-dose vial for Medicare.
     - Follow the infusion hierarchy - chemotherapy is primary over therapeutic, which is primary over hydration; only one initial service per encounter.
     - Document start and stop times for infusions.

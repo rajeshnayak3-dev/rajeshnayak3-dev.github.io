@@ -109,5 +109,8 @@ Follow up when the payer's decision time passes. An appeal that's never followed
 - The cost to appeal is higher than the expected recovery (teams often set small-balance thresholds).
 - The service is a contract exclusion the provider agreed to.
 
+!!! mistake "Auditor's red flag"
+    Appeals sent without proof of submission or a follow-up date. If the payer says it never received the appeal, the deadline may already have passed.
+
 !!! interview "If an interviewer asks “What are the levels of Medicare appeals?”"
     “Five levels: redetermination by the MAC within 120 days; reconsideration by a Qualified Independent Contractor within 180 days; an Administrative Law Judge hearing within 60 days if the amount in controversy is met; Medicare Appeals Council review within 60 days; and federal district court review within 60 days, with a higher amount in controversy. Clerical errors can often be fixed faster with a reopening.”

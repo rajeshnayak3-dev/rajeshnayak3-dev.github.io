@@ -1,0 +1,114 @@
+codes:
+  - code: CO-288
+    carc: "288"
+    group: CO
+    category: auth
+    title: Referral absent
+    summary: The plan requires a referral from the primary care provider, and none is on file.
+    meaning: >-
+      The member's plan (usually an HMO or POS plan) requires a referral for this specialist visit or service, and the payer
+      has no valid referral for this provider and date.
+    causes:
+      - PCP never sent the referral.
+      - Referral sent to a different specialist or group.
+      - Referral expired, or its visit count was used up.
+      - Patient changed PCP and the new PCP's referral wasn't issued.
+    ask:
+      - Is any referral on file for this member and specialty? For which provider, dates and number of visits?
+      - Who is the member's assigned PCP?
+      - Does the plan accept retro referrals, and within what time?
+    steps:
+      - Check the payer portal and practice records for a referral.
+      - If one exists but wasn't on the claim, add the referral number (box 23 for many payers) and send a corrected claim.
+      - If none exists, contact the PCP's office to request a retro referral where the plan allows it.
+      - Once the referral is on file, ask for reprocessing.
+      - If no referral can be obtained, follow the contract and the patient's signed financial agreement.
+    prevention:
+      - Confirm the referral before every specialist visit for HMO and POS patients.
+      - Track referral expiry dates and visit counts.
+    rarc:
+      - code: N54
+        text: Claim information is inconsistent with pre-certified or authorized services.
+    interview: >-
+      CO-288 means referral absent. I check whether a referral exists but wasn't on the claim and add it, or ask the PCP's
+      office for a retro referral if the plan allows, then request reprocessing.
+
+  - code: CO-58
+    carc: "58"
+    group: CO
+    category: coding
+    title: Treatment rendered in an inappropriate or invalid place of service
+    summary: The payer says the service shouldn't have been provided, or billed, in the setting on the claim.
+    meaning: >-
+      The payer doesn't accept the place of service for this service, for example a procedure it only covers in an office or
+      ASC billed with a hospital place of service, or a POS that doesn't match the provider's enrollment.
+    causes:
+      - Wrong POS code entered at charge entry.
+      - Service billed as inpatient when the payer covers it only as outpatient.
+      - Telehealth POS not accepted under the payer's current policy.
+    ask:
+      - Which places of service does the payer accept for this code?
+      - If the POS was entered wrong, can a corrected claim be sent?
+    steps:
+      - Check the record for where the service actually took place.
+      - If the POS on the claim is wrong, send a corrected claim with the right POS.
+      - If the POS is correct, review the payer's policy and appeal with medical necessity for that setting if justified.
+    prevention:
+      - Default POS by location in the billing system; payer-specific telehealth POS rules in the scrubber.
+    interview: >-
+      CO-58 means the payer doesn't accept the place of service. I check where the service actually happened, correct the POS
+      if it was wrong, or appeal with documentation if the setting was necessary.
+
+  - code: CO-51
+    carc: "51"
+    group: CO
+    category: necessity
+    title: Non-covered because this is a pre-existing condition
+    summary: The plan excludes the condition as pre-existing. Rare today because the ACA bans this for most plans.
+    meaning: >-
+      The payer says the condition existed before coverage started and falls under a pre-existing condition exclusion.
+      Since 2014, the Affordable Care Act prohibits these exclusions in most health plans, so this denial mainly appears on
+      grandfathered individual plans, short-term plans and some non-ACA coverage.
+    causes:
+      - Patient has a short-term or other non-ACA-compliant plan.
+      - Payer error applying an exclusion to an ACA-compliant plan.
+    ask:
+      - What type of plan is this, and is it subject to ACA rules?
+      - What are the start and end dates of the exclusion or waiting period?
+    steps:
+      - Confirm the plan type and the exclusion period.
+      - If the plan is ACA-compliant, ask the payer to reprocess, because the exclusion shouldn't apply.
+      - If the exclusion is valid and the date of service falls inside it, bill any secondary coverage, or the patient per policy.
+      - If the date of service is outside the exclusion period, ask for reprocessing.
+    prevention:
+      - Identify short-term and non-ACA plans during eligibility verification and explain the patient's likely costs.
+    interview: >-
+      CO-51 is a pre-existing condition denial. It's rare now because the ACA bans these exclusions for most plans, so I first
+      check the plan type. If the plan is ACA-compliant, I ask for reprocessing; if the exclusion validly applies, I bill
+      secondary coverage or the patient.
+
+  - code: CO-B20
+    carc: B20
+    group: CO
+    category: duplicate
+    title: Procedure or service partially or fully furnished by another provider
+    summary: The payer already paid another provider for the same service on the same date.
+    meaning: >-
+      The payer believes another provider already billed and was paid for this service for this patient on this date, so it
+      won't pay twice.
+    causes:
+      - Two providers in the same group billed the same visit or reading.
+      - Both a hospitalist and a specialist billed overlapping services.
+      - An interpretation billed by two radiologists or cardiologists.
+    ask:
+      - Which provider was paid, with what specialty and TIN?
+      - What was paid, and on what date?
+    steps:
+      - Identify the other provider.
+      - If it's in your own group, confirm with the client which provider performed the service and adjust the duplicate.
+      - If it's a different group or specialty that performed a separate service, ask for reprocessing or appeal with records showing each provider's work.
+    prevention:
+      - Charge reconciliation that catches two providers billing the same patient and service on the same date.
+    interview: >-
+      B20 means another provider was already paid for the service. I find out which provider; if it's our own group, it's a
+      double bill to adjust, and if it's a different provider with a separate service, I appeal with records.

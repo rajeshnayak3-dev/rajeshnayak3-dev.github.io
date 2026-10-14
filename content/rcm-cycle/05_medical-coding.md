@@ -129,5 +129,8 @@ NCCI denials often appear as **CO-97** (included in another service), **CO-236**
 !!! tip "AR analysts don't change codes"
     If a denial needs a coding change, an AR analyst sends it to the coding team (or the provider) for review with the denial reason. Changing codes without documentation support is a compliance violation, even when it would get the claim paid.
 
+!!! mistake "Auditor's red flag"
+    Unspecified diagnosis codes (laterality 0 or 9, “unspecified type”) when the note clearly documents the detail. They invite medical necessity denials and show weak coding review.
+
 !!! interview "If an interviewer asks “What is the difference between CPT and ICD-10?”"
     “ICD-10-CM codes describe the diagnosis, the reason for the visit. CPT codes describe the procedure or service performed. Payers check that the CPT is supported by the ICD-10 code for medical necessity. HCPCS Level II covers items not in CPT, such as drugs, supplies and DME, and hospitals use ICD-10-PCS for inpatient procedures.”

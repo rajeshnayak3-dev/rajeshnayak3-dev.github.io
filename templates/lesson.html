@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% from "_icons.html" import icon %}
-{% from "_parts.html" import crumbs, quiz, complete_bar, toc_box %}
+{% from "_parts.html" import crumbs, quiz, complete_bar, complete_bar_nav, toc_box %}
 {% block og_type %}article{% endblock %}
 {% block head %}
 <script type="application/ld+json">
@@ -17,7 +17,7 @@
     <h1>{{ page.title }}</h1>
     {% if page.description %}<p class="lede">{{ page.description }}</p>{% endif %}
     <p class="meta">
-      <span>{{ icon("clock", 16) }} {{ page.minutes }} min read</span>
+      {% if page.kind != "tool" %}<span>{{ icon("clock", 16) }} {{ page.minutes }} min read</span>{% endif %}
       <span class="lvl lvl-{{ page.level | slug }}">{{ page.level }}</span>
       <span class="done-flag" data-done-flag="{{ page.url }}" hidden>{{ icon("check", 16) }} Completed</span>
     </p>
@@ -30,7 +30,8 @@
   <div class="prose">
     {{ page.html | safe }}
     {{ quiz(page.quiz, page.url) }}
-    {{ complete_bar(page.url, prev, next) }}
+    {% if page.track %}{{ complete_bar(page.url, prev, next) }}{% else %}{{ complete_bar_nav(prev, next) }}{% endif %}
   </div>
 </article>
 {% endblock %}
+{% block scripts %}{% if section.id == "tools" %}<script src="{{ rel('/static/js/tools.js') }}" defer></script>{% endif %}{% endblock %}

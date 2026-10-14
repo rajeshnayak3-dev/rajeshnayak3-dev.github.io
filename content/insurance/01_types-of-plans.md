@@ -122,5 +122,8 @@ These are government programs run by private companies, and they carry the priva
 !!! tip "Read the card for the plan type"
     The plan type is usually printed on the front (“HMO”, “PPO”, “Open Access”, “Choice Plus”). If it isn't, the eligibility response or portal will show it. Always record it during verification.
 
+!!! mistake "Auditor's red flag"
+    HMO claims billed to a specialist without checking the referral, because the card “looks like a PPO”. Read the plan type on the card or eligibility response every time.
+
 !!! interview "If an interviewer asks “What's the difference between an HMO and a PPO?”"
     “An HMO requires the member to choose a primary care provider and get referrals for specialists, and it doesn't cover out-of-network care except emergencies. A PPO doesn't require a PCP or referrals and covers out-of-network care at a higher cost to the patient. HMO premiums are usually lower; PPOs give more flexibility. For RCM, HMOs mean more referral denials, PPOs more out-of-network cost-sharing questions.”

@@ -108,5 +108,8 @@ Patient billing teams take calls like “Why do I owe this?” A good answer:
 !!! warning "Check before you bill"
     Before a balance goes to the patient, confirm all insurance has processed. Billing a patient for an amount their secondary should cover causes complaints, refunds and sometimes regulatory problems.
 
+!!! mistake "Auditor's red flag"
+    Statements sent to the patient while a secondary claim is still open, or to QMB patients for Medicare cost-sharing. Both cause complaints, refunds and, for QMB, regulatory risk.
+
 !!! interview "If an interviewer asks “When do you bill the patient?”"
     “After all insurance has processed. The patient is billed the patient responsibility shown on the remittance, such as deductible, coinsurance and copay, or non-covered services they agreed to pay. We don't bill contractual adjustments or provider-liability denials, and we don't bill QMB patients for Medicare cost-sharing.”

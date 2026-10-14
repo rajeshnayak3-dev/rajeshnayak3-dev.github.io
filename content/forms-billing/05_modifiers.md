@@ -76,6 +76,18 @@ A line can carry up to **four modifiers**. Put payment-affecting modifiers (such
 
 Medicare prefers the more specific **X modifiers** where they apply. Use these only when the documentation supports a truly distinct service; they bypass NCCI edits, so misuse is treated as unbundling.
 
+### NCCI modifier indicators
+
+Every NCCI procedure-to-procedure pair carries a **modifier indicator** that tells you whether a modifier can ever separate the two codes:
+
+| Indicator | Meaning |
+|---|---|
+| **0** | Never allowed. No modifier will make the column 2 code payable with the column 1 code. |
+| **1** | Allowed. A modifier such as 59, XE, XS, XP, XU, 25 or an anatomic modifier can bypass the edit when documentation supports it. |
+| **9** | Not applicable. The edit was deleted, so the indicator no longer matters. |
+
+Check the indicator before adding a modifier. Appending 59 to a pair with indicator 0 is a coding error, and the line will still deny.
+
 ## Surgical and global period modifiers
 
 | Modifier | Meaning |
@@ -96,6 +108,19 @@ Medicare prefers the more specific **X modifiers** where they apply. Use these o
 | **80 / 81 / 82** | Assistant surgeon / minimum assistant / assistant when a qualified resident isn't available |
 | **AS** | Non-physician assistant at surgery (PA, NP, CNS) |
 
+### How these modifiers change Medicare payment
+
+| Modifier | Typical Medicare payment effect |
+|---|---|
+| **50** | 150% of the fee schedule amount for the procedure, billed on one line with 1 unit |
+| **51** | Highest-valued procedure at 100%, each additional procedure at 50% |
+| **62** | Each co-surgeon receives 62.5% of the global surgical fee |
+| **80 / 82** | Assistant surgeon paid 16% of the surgeon's fee schedule amount |
+| **AS** | Non-physician assistant paid 85% of the 16% assistant amount (13.6%) |
+| **54** | Surgeon paid only the intra-operative portion of the global fee |
+
+Payment applies only when the code's indicators in the Medicare fee schedule allow it (for example, some procedures never pay an assistant surgeon). Commercial payers set their own percentages by contract.
+
 ## Component and anatomical modifiers
 
 | Modifier | Meaning |
@@ -107,6 +132,14 @@ Medicare prefers the more specific **X modifiers** where they apply. Use these o
 | **FA, F1–F9** | Fingers (left thumb, left 2nd digit… right 5th digit) |
 | **TA, T1–T9** | Toes (left great toe… right 5th digit) |
 | **LC, LD, RC, LM, RI** | Coronary arteries |
+
+### When to bill 26, TC or global
+
+| Situation | Who bills what |
+|---|---|
+| Physician owns the equipment, employs the technician and reads the test in their own office | The physician bills the **global** code with **no modifier** |
+| Physician only reads a test done on someone else's equipment (for example, a hospital CT) | Physician bills the code with **26**; the hospital bills the technical part on its UB-04 |
+| An independent imaging centre performs the test but an outside radiologist reads it | Centre bills with **TC**; radiologist bills with **26** |
 
 ## Lab and repeat-test modifiers
 
@@ -161,15 +194,15 @@ Telehealth rules, especially Medicare's, have changed many times since 2020, so 
 
 ## Common modifier mistakes
 
-| Mistake | Result |
-|---|---|
-| Missing RT/LT on a sided procedure | CO-4 or denial as duplicate of the other side |
-| 50 billed with 2 units, or RT + LT on separate lines when the payer wants 50 | Denial or payment of one side only |
-| 25 on an E/M with no separate documentation | Denial on audit, recoupment |
-| 59 added to every bundled pair | Unbundling finding |
-| 26 billed by a physician who owns the equipment (should bill global) | Underpayment |
-| GA billed without a signed ABN | Patient can't be billed after denial |
-| 76 used when another physician repeated the service | Denial; should be 77 |
+| What went wrong | Result | Correct approach |
+|---|---|---|
+| Missing RT/LT on a sided procedure | CO-4, or denial as a duplicate of the other side | Add the side modifier |
+| 50 billed with 2 units, or RT and LT on separate lines when the payer wants 50 | Denial, or only one side paid | Follow the payer's bilateral format |
+| 25 on an E/M with no separate documentation | Denial on audit, recoupment | Use 25 only for a separately documented problem |
+| 59 added to every bundled pair | Unbundling finding | Check the NCCI indicator and documentation first |
+| Physician who owns the equipment bills only 26 | Underpayment: the technical part is never billed | Bill the global code with no modifier |
+| GA billed without a signed ABN | Patient can't be billed after the denial | Get the ABN signed before the service |
+| A different physician repeats a test and 76 is used | Denial | 76 is for the **same** physician; another physician uses **77** |
 
 !!! interview "If an interviewer asks “What's the difference between modifier 25 and 59?”"
     “Modifier 25 goes on an E/M code to show a significant, separately identifiable visit on the same day as a procedure. Modifier 59 goes on a procedure code to show it was distinct from another procedure on the same day, such as a different site or session, so it can bypass an NCCI edit. Medicare prefers the X modifiers, XE, XS, XP and XU, where they fit. Both need documentation support.”

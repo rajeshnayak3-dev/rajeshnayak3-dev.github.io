@@ -127,5 +127,8 @@ The plan applies benefits in this order:
 - **CO-204 / CO-96:** service not covered under the plan
 - **CO-119:** benefit maximum reached
 
+!!! mistake "Auditor's red flag"
+    Eligibility checked weeks before the visit and never re-checked. A verification older than the plan's coverage change (often January 1 or the first of the month) proves nothing on the date of service.
+
 !!! interview "If an interviewer asks “What do you check in benefits verification?”"
     “Coverage status and dates, plan type and network status, deductible, coinsurance, copay and out-of-pocket amounts and how much is met, whether the specific service is covered and any visit or frequency limits, authorization or referral needs, other insurance and order of benefits, and the claims address and timely filing limit. I always note the date and reference number.”

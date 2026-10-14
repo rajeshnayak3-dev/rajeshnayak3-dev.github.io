@@ -117,5 +117,8 @@ Rules vary by state and contract. In-network providers usually **can't refuse to
 !!! example "Scenario"
     Ana, 34, injured her wrist falling from a ladder at the warehouse where she works. The urgent care billed her BCBS plan, which denied with **CO-19**. The AR analyst called the employer's HR, got the WC carrier and claim number (WC-55-2026-118), sent the bill with records to the carrier, and changed the account's financial class to workers' compensation. Ana is not billed.
 
+!!! mistake "Auditor's red flag"
+    Injury claims billed to health insurance with box 10a–10c left blank. The accident questions decide which payer is primary; leaving them blank only delays the claim.
+
 !!! interview "If an interviewer asks “What is PIP?”"
     “PIP is personal injury protection, part of an auto insurance policy that pays medical expenses after a car accident regardless of fault, mainly in no-fault states. It's usually primary for accident-related care up to its limit, so we bill the auto carrier with the claim number and accident details first, and bill health insurance once PIP is exhausted, with the exhaustion letter.”

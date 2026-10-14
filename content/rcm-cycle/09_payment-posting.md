@@ -138,5 +138,8 @@ At the end of each day or batch, posting teams **reconcile**:
 !!! tip "Posting as early warning"
     Posters see every payer's behaviour first. Patterns like a payer suddenly paying lower than contract on a code, or a spike in one denial code, should be escalated the same week, not discovered in month-end reports.
 
+!!! mistake "Auditor's red flag"
+    Denied lines written off with a contractual adjustment code at posting. It makes the claim look resolved and hides the lost revenue from AR and denial reports.
+
 !!! interview "If an interviewer asks “What do you do in payment posting?”"
     “I post insurance payments from ERAs and EOBs and patient payments to the correct account and service line, apply contractual adjustments, transfer patient responsibility to secondary payers or the patient, post denials with their codes and route them to AR, handle takebacks and offsets, and reconcile posted totals to bank deposits using the trace number. Every line must balance: billed equals paid plus adjustments.”

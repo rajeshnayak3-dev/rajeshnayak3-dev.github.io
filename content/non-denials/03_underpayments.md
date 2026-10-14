@@ -81,5 +81,8 @@ Know the contract before disputing.
 !!! tip "Why this is a career skill"
     Underpayment analysis requires knowing contracts, fee schedules and payment methodologies. Analysts who can find and recover underpayments, especially on hospital claims, are valued highly and move into contract management and revenue integrity roles.
 
+!!! mistake "Auditor's red flag"
+    Underpaid lines closed because the claim shows as “paid”. Spot-check allowed amounts against the contract for your top codes every month.
+
 !!! interview "If an interviewer asks “What is an underpayment and how do you find it?”"
     “An underpayment is when the payer pays less than the contracted or fee schedule amount. We find them by comparing the expected allowed amount from the contract with the actual allowed on the ERA, for example a wrong fee schedule year, a missed modifier like 50, or units underpaid. I'd confirm the contract terms, calculate the variance, ask the payer to reprocess or file a payment dispute, and if it's a pattern, send a list for bulk reprocessing.”

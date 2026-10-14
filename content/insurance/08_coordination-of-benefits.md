@@ -130,5 +130,8 @@ If Medicare shows another payer as primary but the patient's other coverage has 
 !!! example "Scenario"
     Ruth, 68, works full-time for a school district with 1,200 employees and has Medicare Part A and B. The clinic billed Medicare first; Medicare denied, showing an MSP record for her employer plan. The analyst billed the employer plan as primary, posted its payment, then sent the remaining balance to Medicare as secondary with the primary's adjudication. Medicare paid as secondary payer.
 
+!!! mistake "Auditor's red flag"
+    Medicare billed as primary for a patient over 65 who still works for a large employer. The MSP questionnaire must be completed at every Medicare visit, not just the first.
+
 !!! interview "If an interviewer asks “What is the birthday rule?”"
     “The birthday rule decides which parent's plan is primary for a dependent child covered by both parents' plans when the parents are married or living together. The plan of the parent whose birthday, month and day only, comes first in the calendar year is primary. If both share a birthday, the plan that has covered that parent longer is primary. For divorced parents, a court order or custody rules apply instead.”

@@ -135,5 +135,8 @@ Status 22 lines are **takebacks**; status 19 tells you a crossover happened.
 
 Paper EOBs show the same information but each payer uses its own layout and sometimes its **own reason codes**, with a legend at the bottom. Always read the legend; never assume a payer's internal code means the same as a CARC with the same number.
 
+!!! mistake "Auditor's red flag"
+    Working CO-16 without reading its remark code. The RARC names the missing item; without it, the same denial comes straight back.
+
 !!! interview "If an interviewer asks “What are group codes?”"
     “Group codes show who is responsible for an adjustment on the ERA. CO is contractual obligation, the provider's responsibility, so we can't bill the patient. PR is patient responsibility, such as deductible, coinsurance and copay. OA is other adjustments, like OA-23 for prior payer impact. PI is payer-initiated reductions, also not billable to the patient. The CARC gives the reason and the RARC adds detail.”

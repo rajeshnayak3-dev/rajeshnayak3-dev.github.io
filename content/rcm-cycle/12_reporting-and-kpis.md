@@ -147,5 +147,8 @@ When a client asks why cash dropped, check in this order:
 !!! tip "Auditor's habit"
     Always ask which dates a report uses: date of service, date billed, or date posted. Two reports that disagree are often just using different dates.
 
+!!! mistake "Auditor's red flag"
+    Reports that mix dates (date of service versus date posted) or include credit balances in AR. Always state the date basis and whether credits are included, or two teams will report different numbers for the same month.
+
 !!! interview "If an interviewer asks “What KPIs do you track?”"
     “Days in AR, AR over 90 days, net collection rate, clean claim rate, first-pass resolution rate and denial rate by payer and root cause, plus charge lag. At team level, productivity, quality score and touches per claim. For example, net collection rate is payments divided by charges minus contractual adjustments, and a healthy target is about 95% or more.”

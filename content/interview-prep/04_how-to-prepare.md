@@ -11,7 +11,7 @@ keywords: RCM interview preparation AR calling mock call script STAR method resu
 
 | Days | Focus | On REVEX |
 |---|---|---|
-| 1–2 | The big picture | [Start here](/start-here/), all five topics |
+| 1–2 | The big picture | [Start here](/start-here/), all six topics |
 | 3–5 | The cycle | [The RCM cycle](/rcm-cycle/), all twelve stages and quizzes |
 | 6–7 | Insurance | [Insurance and payers](/insurance/), especially Medicare, Medicaid and COB |
 | 8–9 | Forms and codes | [Forms and billing](/forms-billing/) and the [code library](/denials/codes/) |

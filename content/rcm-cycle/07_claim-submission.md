@@ -128,5 +128,8 @@ After the primary payer processes, the claim goes to the secondary payer with th
 - **Crossover:** Medicare automatically forwards many claims to Medigap and Medicaid plans (the ERA shows remark **MA18** or **N89**).
 - **On paper:** the primary EOB is attached.
 
+!!! mistake "Auditor's red flag"
+    Rejections left in the clearinghouse queue for more than a few days. They don't appear on any ERA, so they silently become timely filing write-offs.
+
 !!! interview "If an interviewer asks “What is a clearinghouse?”"
     “A clearinghouse is an intermediary between providers and payers. It receives claims from the billing system, runs edits, converts them to each payer's format and forwards them. It returns acknowledgment and rejection reports, and often handles eligibility, claim status and ERAs. Its acceptance report is also our proof of timely filing.”

@@ -80,7 +80,11 @@
     - Obtain and document patient consent before billing chronic care management.
     - Check PCP assignment for HMO and Medicare Advantage patients.
     - Bill vaccine product and administration codes together, with the right NDC where required.
+    - "In-office lab tests need the practice's CLIA number in box 23; CLIA-waived tests (rapid strep, urine dipstick, glucose) also need modifier QW for Medicare and many payers."
   denials:
+    - code: CO-16 / MA120
+      issue: In-office lab test billed without a valid CLIA number, or a waived test without QW
+      prevent: CLIA number set up per location; QW mapped to waived test codes
     - code: CO-49
       issue: Routine physical billed to Medicare or to a plan without preventive benefits
       prevent: Use AWV codes for Medicare; GY and an ABN-style notice for excluded routine exams

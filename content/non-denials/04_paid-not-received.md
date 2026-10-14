@@ -85,5 +85,8 @@ What to do:
 - Clear **unapplied cash** daily.
 - Reconcile ERAs against deposits by trace number.
 
+!!! mistake "Auditor's red flag"
+    Payments the payer confirms as sent, but no one searches unapplied cash before asking for a reissue. Most “missing” payments are already in the bank.
+
 !!! interview "If an interviewer asks “What do you do when the payer says paid but you don't see it?”"
     “I get the paid date, amount, check or EFT trace number and where it was sent. Then I search posting history, the ERA files, unapplied cash and bank deposits for that trace number. Usually it's unposted or misposted. If it really wasn't received, for example sent to an old address or account, I ask the payer to reissue and update our details. If it was paid to the patient, I bill the patient for that amount.”

@@ -122,5 +122,8 @@ Before releasing a batch, charge entry teams usually check:
 | Missing auth number | CO-197 even when an auth exists |
 | Duplicate entry | CO-18 |
 
+!!! mistake "Auditor's red flag"
+    Units keyed from habit rather than from documentation, especially for drugs and timed therapy codes. Unit errors are the most expensive charge entry mistake because they multiply the charge.
+
 !!! interview "If an interviewer asks “What is charge entry?”"
     “Charge entry is entering the services performed into the billing system with the correct patient, date of service, providers, place of service, CPT and modifiers, units, diagnosis pointers and charges, so a clean claim can be created. We monitor charge lag and reconcile appointments and procedures against charges so nothing is missed.”

@@ -114,5 +114,8 @@ A typical commercial card shows:
 !!! example "Scenario"
     Priya, 19, is registered as the subscriber on her mother's Aetna plan because the front desk copied her name into every field. The claim rejects because no subscriber with Priya's name and date of birth exists. The AR analyst calls Aetna, confirms the subscriber is her mother, corrects the subscriber details and relationship code (child), and resubmits. The fix takes five minutes, but the claim sat unpaid for 40 days.
 
+!!! mistake "Auditor's red flag"
+    Registration that copies the patient's name into every subscriber field. Child patients registered as their own subscriber are behind a large share of “subscriber not found” rejections.
+
 !!! interview "If an interviewer asks “Why is registration important in RCM?”"
     “Because the claim is built on registration data. If the patient's name, date of birth, member ID, subscriber or insurance order is wrong, the claim rejects or denies, even if the care and coding were perfect. Most eligibility and COB denials start at registration, so accurate registration is the cheapest way to prevent denials.”

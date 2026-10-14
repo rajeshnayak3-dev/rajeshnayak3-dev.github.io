@@ -108,5 +108,8 @@ When a clean claim passes the prompt pay window, AR analysts may request interes
 !!! tip "PR-1 is not a denial"
     A $0 payment where the entire allowed amount went to the deductible is a **correct payment**. The claim is resolved; the balance moves to the patient. Freshers often mistake it for a denial.
 
+!!! mistake "Auditor's red flag"
+    Treating a $0 payment with PR-1 as a denial and calling the payer about it. Read the group code first: PR-1 means the claim processed correctly and the patient owes the deductible.
+
 !!! interview "If an interviewer asks “What is adjudication?”"
     “Adjudication is the payer's process of evaluating a claim: verifying eligibility and the provider, checking for duplicates and other insurance, applying benefits, authorization and coding rules, checking medical necessity and timely filing, then pricing the claim, applying patient cost-sharing and issuing payment with an ERA. The CARC and RARC codes on the ERA tell us which check failed.”

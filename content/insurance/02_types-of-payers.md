@@ -108,5 +108,8 @@ Patients with no insurance, or who choose not to use it. RCM steps:
 3. Screen for **Medicaid** or **financial assistance** eligibility.
 4. Offer payment plans.
 
+!!! mistake "Auditor's red flag"
+    Medicare Advantage and Medicaid managed care members billed to Original Medicare or state fee-for-service Medicaid. The government name on the card isn't always the payer.
+
 !!! interview "If an interviewer asks “What are the types of payers?”"
     “Government payers like Medicare, Medicaid, TRICARE and the VA; managed government plans like Medicare Advantage and Medicaid MCOs, which are run by private companies; commercial payers like UnitedHealthcare, Aetna, Cigna and BCBS plans, including self-funded employer plans run through TPAs; liability payers like workers' compensation and auto insurance; and self-pay patients.”

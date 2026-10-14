@@ -119,5 +119,8 @@ A status of “A7 / 562” for example means the claim was rejected because an e
 
 A new provider or a change of clearinghouse without these steps means claims reject or payments come by paper check.
 
+!!! mistake "Auditor's red flag"
+    New providers or locations billed before ERA and EFT enrollment is complete. Payments arrive by paper check or stop altogether, and posting falls behind.
+
 !!! interview "If an interviewer asks “What is an 835?”"
     “The 835 is the HIPAA electronic remittance advice. It tells the provider how each claim and service line was paid: billed, allowed, paid, patient responsibility and every adjustment with group codes, CARCs and RARCs. It also carries the trace number that matches the EFT deposit, and provider-level adjustments like recoupments. Payment posting teams load it to post payments automatically.”

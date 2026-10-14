@@ -165,6 +165,8 @@ def load_lessons(section_id):
             "quiz": meta.get("quiz", []),
             "keywords": meta.get("keywords", ""),
             "updated": meta.get("updated", TODAY),
+            "track": meta.get("track", True),
+            "kind": meta.get("kind", "lesson"),
             "html": html,
             "toc": toc,
             "headings": " ".join(t["name"] for t in toc),
@@ -219,8 +221,8 @@ def build():
                      f'{l["keywords"]} {l["headings"]}', "lesson")
         section_items[sec["id"]] = [
             {"url": l["url"], "title": l["title"], "short": l["short"],
-             "description": l["description"], "minutes": l["minutes"],
-             "level": l["level"], "track": True} for l in lessons]
+             "description": l["description"], "minutes": None if l["kind"] == "tool" else l["minutes"],
+             "level": l["level"], "track": l["track"]} for l in lessons]
 
     # ---- denial code library
     cats = {c["id"]: c for c in denials["categories"]}
@@ -330,6 +332,8 @@ def build():
         n = len([i for i in section_items.get(sec["id"], []) if i["track"]])
         if sec["id"] == "glossary":
             n = len(terms)
+        if sec["id"] == "tools":
+            n = len(section_items.get("tools", []))
         if sec["id"] == "denials":
             sec["codes"] = len(denials["codes"])
         sec["count"] = n

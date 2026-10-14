@@ -176,5 +176,8 @@ Each category below follows the same pattern: **what it is**, **typical codes**,
 
 See [hospital versus professional denials](/denials/hospital-vs-professional-denials/) for inpatient-specific denials such as DRG downgrades, level of care and readmissions.
 
+!!! mistake "Auditor's red flag"
+    Every denial tagged with the same generic root cause, such as “payer issue”. Without accurate root causes, the team can't prevent anything.
+
 !!! interview "If an interviewer asks “What types of denials have you worked?”"
     Name categories, not just codes: “Eligibility denials like CO-27, COB denials like CO-22, authorization denials like CO-197, coding denials like CO-4 and CO-16 with remark codes, bundling denials like CO-97, medical necessity denials like CO-50, timely filing CO-29 and credentialing denials like CO-B7.” Then give one example with what you did and the result.

@@ -77,5 +77,8 @@ Ask: **does the payer's ERA (835) mention this claim?**
 !!! example "Scenario"
     Monday's 277CA shows 34 claims rejected by one Medicare Advantage plan with “Billing provider not on file.” All are for a new satellite location. The analyst checks with credentialing: the location's NPI wasn't added to the plan's provider file. Credentialing submits the update; once confirmed, the analyst resubmits all 34 as new claims, keeping the rejection report as a record. Timely filing (90 days for this plan) is still safe.
 
+!!! mistake "Auditor's red flag"
+    Rejected claims resent without fixing the cause, so they reject again. Check the rejection reason before every resubmission.
+
 !!! interview "If an interviewer asks “How do you handle rejections?”"
     “I work the clearinghouse and 277CA rejection reports daily, group them by reason, fix the data, such as member ID, NPI or codes, and resubmit as new claims because they never entered adjudication. I confirm acceptance the next day and report repeated causes so they're fixed at registration, charge entry or provider set-up. Daily work matters because timely filing keeps running until the payer accepts the claim.”

@@ -116,5 +116,8 @@ Many payers deny retro requests outright. If the provider failed to get a requir
 !!! example "Scenario"
     A patient on an Aetna HMO sees a dermatologist with no referral on file. The claim denies for no referral. The AR analyst calls the PCP's office, which says it forgot to send it. Some plans let the PCP issue a retro-referral within a set period; if this plan doesn't, and the patient signed a waiver that they'd pay if no referral was obtained, the balance may move to the patient. Otherwise it's a provider write-off and a training point for the front desk.
 
+!!! mistake "Auditor's red flag"
+    An authorization number on the claim that was approved for a different CPT code, provider or date range. Auditors compare the approval letter line by line, not just the presence of a number.
+
 !!! interview "If an interviewer asks “What is the difference between a referral and an authorization?”"
     “A referral is the primary care provider's approval for the patient to see a specialist, mainly required by HMO and POS plans. A prior authorization is the payer's approval for a specific service, drug or admission, based on medical necessity. Either can be required, and both have limits on dates, units and providers, so the claim must match what was approved.”

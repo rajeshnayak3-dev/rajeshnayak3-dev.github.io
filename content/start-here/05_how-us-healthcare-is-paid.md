@@ -40,6 +40,18 @@ quiz:
     why: Minimum necessary means using or sharing only the PHI needed for the specific task.
 ---
 
+## Why US healthcare costs so much
+
+The US spends more per person on healthcare than any other country. Analysts usually point to a few drivers, and several of them explain why RCM jobs exist at all:
+
+| Driver | What it means |
+|---|---|
+| **Higher prices** | Hospital services, physician fees and especially drugs cost more per unit than in other wealthy countries |
+| **Administrative complexity** | Thousands of payers, each with its own rules, forms and contracts. Billing and insurance work is a large share of spending, and it's the work RCM teams do |
+| **Technology, drugs and research** | New devices, imaging and specialty drugs are adopted quickly and priced high to recover development costs |
+| **Defensive medicine and malpractice** | Fear of lawsuits leads to extra tests and procedures, and malpractice insurance is expensive |
+| **Chronic disease** | Conditions like diabetes, heart disease and obesity drive long-term spending |
+
 ## Who sets the price?
 
 Every provider keeps a **chargemaster** (in hospitals) or **fee schedule** (in practices): a list of its standard charges for every service. That's the amount on the claim.
@@ -126,6 +138,8 @@ HIPAA requires standard electronic transactions and code sets. That's why every 
 
 !!! warning "Offshore RCM and HIPAA"
     RCM companies sign **business associate agreements (BAAs)** with US providers, which makes them legally responsible for protecting PHI. Breaking HIPAA rules can lead to termination and legal penalties, so treat every claim as confidential.
+
+For the full set of HIPAA rules and daily compliance habits, see [HIPAA and compliance for RCM teams](/start-here/hipaa-and-compliance/).
 
 !!! interview "If an interviewer asks “What is the difference between fee-for-service and capitation?”"
     “In fee-for-service, the provider is paid for each service billed, based on the payer's fee schedule. In capitation, the provider gets a fixed amount per member per month to cover a set of services, whether or not the patient is seen. Capitated claims are still sent as encounter data, and they often come back with CO-24, which we don't appeal.”

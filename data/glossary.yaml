@@ -360,8 +360,6 @@
 - term: Superbill
   aka: Encounter form
   def: A form listing common codes that the provider marks to record services for billing.
-- term: Taxonomy code
-  def: A code describing a provider's type and specialty, used in enrollment and on some claims.
 - term: Timely filing
   def: The payer's deadline for receiving a claim, counted from the date of service or discharge.
 - term: TPA
@@ -432,3 +430,79 @@
   def: Nurse practitioners, physician assistants, clinical nurse specialists and similar providers who bill independently.
 - term: Split-shared visit
   def: A visit in a facility setting performed jointly by a physician and an NPP from the same group, billed by whoever performed the substantive portion, with modifier FS.
+- term: NAS
+  aka: Non-availability statement
+  def: A legacy TRICARE document from a military hospital stating it couldn't provide certain non-emergency inpatient care. Largely eliminated by law, so rarely required today.
+  see: /insurance/tricare-and-va-ccn/
+- term: HICN
+  aka: Health Insurance Claim Number
+  def: The old Medicare ID based on the beneficiary's Social Security number. Replaced by the MBI in 2020.
+- term: POTF
+  aka: Proof of timely filing
+  def: Evidence that a claim reached the payer within its filing limit, such as a clearinghouse acceptance report or 277CA.
+- term: Swing bed
+  def: A bed in a small rural hospital or critical access hospital that can be used for either acute care or skilled nursing (SNF-level) care. Swing bed services are billed with type of bill 018x.
+- term: SLMB
+  aka: Specified Low-Income Medicare Beneficiary
+  def: A Medicare Savings Program in which Medicaid pays only the Part B premium. It doesn't cover Medicare cost-sharing.
+  see: /insurance/medicaid-qmb-spend-down/
+- term: QI
+  aka: Qualifying Individual
+  def: A Medicare Savings Program, with limited funding, in which Medicaid pays the Part B premium.
+- term: QDWI
+  aka: Qualified Disabled and Working Individual
+  def: A Medicare Savings Program that pays the Part A premium for certain working people with disabilities who lost premium-free Part A.
+- term: LOA
+  aka: Leave of absence
+  def: A planned temporary absence from an inpatient or SNF stay (for example, a home visit). LOA days are reported with occurrence span code 74 and are not billable as covered days.
+- term: UPIN
+  aka: Unique Physician Identification Number
+  def: The old Medicare physician identifier, replaced by the NPI in 2007.
+- term: CHAMPVA
+  def: A VA health plan for dependents and survivors of certain disabled or deceased veterans who aren't eligible for TRICARE.
+  see: /insurance/tricare-and-va-ccn/
+- term: Home plan
+  def: In the BlueCard program, the Blue Cross Blue Shield company the member belongs to.
+  see: /insurance/blue-cross-blue-shield/
+- term: Host plan
+  def: In the BlueCard program, the local Blue Cross Blue Shield company where the provider is located and contracted.
+  see: /insurance/blue-cross-blue-shield/
+- term: Prefix
+  aka: Alpha prefix
+  def: The first three characters of a Blue Cross Blue Shield member ID, identifying the member's home plan or national account.
+  see: /insurance/blue-cross-blue-shield/
+- term: FEP
+  aka: Federal Employee Program
+  def: The Blue Cross and Blue Shield Service Benefit Plan for federal employees. Member IDs start with R and 8 digits.
+- term: Utilization review
+  aka: UR
+  def: Review of whether hospital care is medically necessary, at the right level and for the right length of stay, done by the hospital and by payers.
+  see: /forms-billing/cdm-and-utilization-review/
+- term: Length of stay
+  aka: LOS
+  def: The number of days a patient stays in the hospital, counted from admission to discharge.
+- term: Occurrence span code
+  def: A UB-04 code with a from and through date describing a period that affects payment, such as code 70 for a qualifying hospital stay before SNF care.
+- term: Pay-to provider
+  def: The name and address where payment should be sent, when different from the billing provider's physical address (UB-04 FL 2).
+- term: Taxonomy code
+  def: A 10-character NUCC code describing a provider's type and specialty, such as 207Q00000X for family medicine.
+  see: /forms-billing/provider-identifiers/
+- term: W-9
+  def: The IRS form a provider gives payers with its legal name, address and taxpayer identification number. Payers request a new one when details change or before reissuing payments.
+- term: Stop payment
+  def: A payer's cancellation of an uncashed check, usually followed by a reissued check to the correct address.
+- term: Check tracer
+  def: A request asking the payer to trace a check the provider says it never received, including whether and where it was cashed.
+- term: Turnaround time
+  aka: TAT
+  def: The time a payer normally takes to process a claim from receipt.
+- term: Placeholder X
+  def: The letter X used in ICD-10-CM codes to fill empty positions when a seventh character is required, as in W19.XXXA.
+  see: /forms-billing/icd-10-cm-structure/
+- term: NCCI modifier indicator
+  def: A value on each NCCI code pair showing whether a modifier can bypass the edit. 0 means never, 1 means allowed with documentation, 9 means not applicable.
+  see: /forms-billing/modifiers/
+- term: Business associate
+  def: A person or company that handles PHI on behalf of a HIPAA covered entity, such as a billing company. It must sign a business associate agreement.
+  see: /start-here/hipaa-and-compliance/

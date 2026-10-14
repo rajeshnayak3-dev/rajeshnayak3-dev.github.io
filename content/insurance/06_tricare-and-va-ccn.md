@@ -74,6 +74,22 @@ For an **active-duty service member**, TRICARE is the primary payer for their ca
 - **Referrals and prior authorizations** are required for many Prime services and some Select services (for example, certain behavioral health, inpatient admissions, some advanced imaging).
 - TRICARE generally follows Medicare's payment methods and fee schedules (the CHAMPUS Maximum Allowable Charge, or CMAC).
 
+### Non-availability statements (NAS)
+Historically, TRICARE beneficiaries who weren't enrolled in Prime and lived near a military hospital had to get a **non-availability statement** from that hospital before getting certain non-emergency inpatient care from a civilian provider. Laws since the early 2000s removed this requirement for almost all care, and it's rarely seen today. If an older TRICARE claim or a training deck mentions a NAS, check the current TRICARE policy manual rather than assuming it applies.
+
+## CHAMPVA
+
+**CHAMPVA** (Civilian Health and Medical Program of the Department of Veterans Affairs) is a health plan for **family members** of certain veterans, mainly spouses and children of veterans who are permanently and totally disabled from a service-connected condition, or who died from one, and who aren't eligible for TRICARE.
+
+| | CHAMPVA | VA Community Care | TRICARE |
+|---|---|---|---|
+| Who's covered | Eligible veterans' dependents and survivors | Veterans themselves | Service members, retirees and their families |
+| Run by | VA | VA | Department of Defense |
+| Works like | Insurance: cost-sharing, deductible | VA buys care it has authorized | Insurance plans (Prime, Select, TFL) |
+| Claims go to | The VA's CHAMPVA claims processing centre | The CCN third-party administrator for the region | The TRICARE regional contractor |
+| Other insurance | CHAMPVA usually pays **after** other health insurance (except Medicaid and certain supplements) | VA pays for authorized care | TRICARE pays after other health insurance |
+| Timely filing | Generally 1 year from date of service | 180 days | 1 year |
+
 ## VA Community Care Network (CCN)
 
 ### How a veteran gets community care
@@ -108,6 +124,9 @@ Under the **MISSION Act** (2019), veterans can receive care from community provi
     - A routine visit to his family doctor is billed to **TRICARE Select**.
     - A knee MRI the VA authorized through a CCN referral for his service-connected condition is billed to the **CCN TPA**, quoting the referral number.
     - When he turns 65 and enrolls in Medicare Part A and B, his TRICARE becomes **TRICARE For Life**: Medicare first, TFL second.
+
+!!! mistake "Auditor's red flag"
+    VA community care claims billed for visits beyond the referral's approved count or end date. Compare every visit with the referral before billing.
 
 !!! interview "If an interviewer asks “What's the difference between TRICARE and the VA?”"
     “TRICARE is the Department of Defense health plan for active-duty members, retirees and their families, with plans like Prime, Select and TRICARE For Life, and it pays after other health insurance but before Medicaid. VA Community Care is the Department of Veterans Affairs paying community providers for care it has authorized for eligible veterans. Without a valid VA referral or authorization, CCN claims deny, and the timely filing limit is 180 days.”

@@ -90,5 +90,8 @@ During the election window, eligibility checks may show:
 !!! example "Scenario"
     Daniel's coverage ended 03/31 when he was laid off. He saw an orthopedist on 04/12. The claim denied CO-27 on 05/02. The AR analyst called the payer on 05/20: Daniel elected COBRA on 05/10 and paid on 05/15, and coverage is now active from 04/01. The representative sent the claim back for reprocessing under reference 3345-889. The analyst noted the call and set follow-up for 14 days.
 
+!!! mistake "Auditor's red flag"
+    Claims written off as “coverage terminated” during the 60-day COBRA election window. Check with the patient and payer before closing them; elected COBRA is retroactive.
+
 !!! interview "If an interviewer asks “What is COBRA and how does it affect billing?”"
     “COBRA is the federal law that lets employees and dependents continue their employer group health plan after events like job loss, divorce or ageing out, for 18 to 36 months, paying up to 102% of the premium. The person has 60 days to elect and coverage is retroactive, so claims during that window may deny as terminated and then be payable once COBRA is elected and paid. We track those claims and request reprocessing after reinstatement.”

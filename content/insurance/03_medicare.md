@@ -68,7 +68,18 @@ Medicare isn't income-based (that's Medicaid). Most people paid Medicare taxes w
 - **Part B:** an **annual deductible**, then generally **20% coinsurance** of the Medicare-approved amount.
 - Many preventive services have **no cost-sharing** when billed correctly (for example, the annual wellness visit).
 
-CMS changes the dollar amounts every year, so always check the current figures.
+CMS changes the dollar amounts every calendar year (CY). Always match the amount to the **year of the date of service**, not the year you're working the claim.
+
+| Amount | CY 2024 | CY 2025 | CY 2026 |
+|---|---|---|---|
+| Part A inpatient deductible (per benefit period) | $1,632 | $1,676 | $1,736 |
+| Part B annual deductible | $240 | $257 | $283 |
+| Part B standard monthly premium | $174.70 | $185.00 | $202.90 |
+
+Source: CMS annual premium and deductible fact sheets. Check CMS each November for the next year's figures.
+
+!!! tip "Auditor's red flag"
+    Estimates and patient statements that use the wrong year's deductible. A visit on December 20, 2025 that Medicare processes in January 2026 still falls under the 2025 Part B deductible ($257), not 2026's ($283). The ERA's PR-1 amount is always the source of truth for what the patient owes.
 
 ## Medicare Advantage (Part C)
 

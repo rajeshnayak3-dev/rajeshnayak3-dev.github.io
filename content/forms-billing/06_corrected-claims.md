@@ -86,5 +86,8 @@ A claim **rejected as unprocessable** by Medicare (with remark **MA130**) has no
 !!! tip "Write the reason in the notes"
     Every corrected claim note should say what changed and why: “Sent corrected claim (freq 7, orig ICN 2226…) adding modifier 25 to 99214 per coding review 10/12.” Auditors and the next analyst need to understand the change without opening the claim.
 
+!!! mistake "Auditor's red flag"
+    Corrected claims that include only the changed line. A replacement claim replaces the whole original, so missing lines are treated as removed and their payments recouped.
+
 !!! interview "If an interviewer asks “What is a corrected claim?”"
     “A corrected or replacement claim fixes billing information on a claim the payer has already adjudicated, such as a wrong code, modifier, units or provider. On the CMS-1500, it's frequency code 7 in box 22 with the payer's original claim number; on the UB-04, it's type of bill ending in 7 with the document control number in FL 64. We send the complete claim, not just the changed line. To cancel a claim we use frequency 8.”
