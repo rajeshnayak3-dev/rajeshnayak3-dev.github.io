@@ -5,7 +5,7 @@
   {{ crumbs([("About", None)]) }}
   <article class="prose about">
     <h1>About REVEX</h1>
-    <p class="lede">REVEX is a free training site for anyone who wants to work in US healthcare revenue cycle management, and for analysts preparing for their next interview.</p>
+    <p class="lede">REVEX is a free, independent learning and practice site for US healthcare revenue cycle management: for people starting out, associates building judgement, and QA specialists, leads and analysts.</p>
 
     <h2>Why it exists</h2>
     <p>{{ site.mission }}</p>
@@ -15,22 +15,35 @@
 
     <h2>How to use it</h2>
     <ul>
-      <li>New to RCM: follow the learning path on the home page in order, and take every quiz.</li>
-      <li>Already working: use the denial code library and specialty guides as a reference, and test yourself with the scenarios.</li>
-      <li>Preparing for interviews: read the interview prep section, then explain each RCM stage out loud without notes.</li>
+      <li><strong>New to RCM:</strong> follow the <a href="/learn/new-to-rcm/">New to RCM</a> path in order and take every quiz.</li>
+      <li><strong>Working in RCM:</strong> follow <a href="/learn/working-in-rcm/">Working in RCM</a>, use the <a href="/reference/">reference library</a>, and test your judgement in the <a href="/practice/">practice lab</a>.</li>
+      <li><strong>QA, leads and analysts:</strong> the <a href="/learn/qa-lead-analyst/">QA, senior, team lead and analyst</a> path covers audits, calibration, root cause, CAPA and KPIs.</li>
     </ul>
 
-    <h2>Disclaimers</h2>
+    <h2 id="sources-policy">How content is sourced</h2>
+    <p>Policy-sensitive statements (Medicare rules, ABNs, QMB, filing limits, code-set maintenance) are checked against primary sources such as CMS manuals and regulations, Medicare contractor pages and X12 code lists, and the lesson shows the date of that review. Lessons that haven't been re-reviewed yet say so. The full list is on the <a href="/sources/">official sources</a> page. KPI definitions and workflow advice are common industry practice, not regulation, and are labelled that way.</p>
+
+    <h2 id="disclaimer">Disclaimer</h2>
     <ul>
-      <li>Content is educational. It isn't legal, compliance, coding-certification or payer-specific advice. Payer rules, timely filing limits and code sets change; always confirm against the payer's provider manual, the contract, CMS manuals and the current CPT, HCPCS and ICD-10-CM books.</li>
+      <li>REVEX is an <strong>independent educational resource</strong>. It isn't legal, compliance, coding-certification or payer-specific advice.</li>
+      <li>REVEX isn't affiliated with or endorsed by CMS, X12, the AMA, AAPC, AHIMA, HFMA, any payer, clearinghouse, employer or accrediting body.</li>
+      <li>Requirements change, and they vary by payer, plan, state, contract, service and date. Always confirm against the payer's provider manual, the contract, current CMS guidance and the current CPT, HCPCS and ICD-10-CM code sets, and follow your employer's procedures.</li>
       <li>CPT® is a registered trademark of the American Medical Association. Code descriptions here are short, simplified summaries written for learning, not official descriptors.</li>
-      <li>Every patient, member ID, claim number, provider and dollar amount on this site is fictional. No protected health information (PHI) is used.</li>
-      <li>REVEX isn't affiliated with CMS, any payer, clearinghouse or employer.</li>
-      <li>Progress and quiz scores are stored only in your browser. REVEX has no accounts. The only personal data REVEX keeps is from the certification exam: your name, score and certificate ID are stored so certificates can be verified. To have yours removed, message the author on LinkedIn.</li>
+      <li>Every patient, member ID, claim number, provider, plan and dollar amount on this site is fictional.</li>
+      <li>REVEX doesn't promise jobs, claim payments or interview results. The REVEX exam certificate, when the exam is open, is an educational certificate from an open-book, unproctored exam; it isn't an accredited or licensing credential.</li>
+    </ul>
+
+    <h2 id="privacy">Privacy and your data</h2>
+    <ul>
+      <li><strong>No accounts, no tracking scripts.</strong> REVEX doesn't use analytics or advertising cookies. Pages load fonts from Google Fonts, and the exam and verification pages load two open-source libraries from cdnjs; those providers receive the usual technical request data (such as your IP address) when your browser fetches them.</li>
+      <li><strong>Learning progress stays in your browser.</strong> REVEX stores these items in your browser's local storage, on this device only: lessons marked complete and quiz scores (<code>revex-progress-v1</code>), your colour theme (<code>revex-theme</code>), the last page you read (<code>revex-last</code>), your role self-check (<code>revex-competency-v1</code>) and, if you take the exam, the exam in progress, retake timer and your certificate details (<code>revex-exam-session</code>, <code>revex-exam-lock</code>, <code>revex-cert</code>). Nothing here is sent to REVEX. Clearing your browser data, or the button on <a href="/progress/">Your learning</a>, removes it. It doesn't sync between devices.</li>
+      <li><strong>The exam (only when it's open).</strong> To score the exam and issue certificates, the name you enter, your answers' score, the time and the certificate ID are sent to a Google Apps Script service and stored in a Google Sheet owned by the site author. Failed attempts are stored too. The verification page shows only the name, certificate title, issue date and status for an ID someone already has. To have your record removed, contact the author.</li>
+      <li><strong>Calculators and the AR note generator</strong> run entirely in your browser; nothing you type is sent or stored.</li>
+      <li><strong>Never enter real patient information</strong> (names, dates of birth, member IDs, account numbers or any other PHI) into REVEX, its tools, or any public AI tool.</li>
     </ul>
 
     <h2>Found a mistake?</h2>
-    <p>Rules change and corrections are welcome. Message the author on <a href="{{ site.author.linkedin }}" target="_blank" rel="noopener">LinkedIn</a> with the page and what should change.</p>
+    <p>Rules change and corrections are welcome. <a href="https://github.com/rajeshnayak3-dev/rajeshnayak3-dev.github.io/issues" target="_blank" rel="noopener">Open an issue on GitHub</a> or message the author on <a href="{{ site.author.linkedin }}" target="_blank" rel="noopener">LinkedIn</a> with the page, what should change and, ideally, the official source.</p>
   </article>
 </div>
 {% endblock %}

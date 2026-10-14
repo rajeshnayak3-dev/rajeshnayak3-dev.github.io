@@ -117,7 +117,7 @@ quiz:
 
 | Item | Value |
 |---|---|
-| Medicare timely filing | 12 months from DOS |
+| Medicare timely filing | 1 calendar year after DOS |
 | VA Community Care timely filing | 180 days |
 | TRICARE timely filing | 1 year |
 | Medicare redetermination | 120 days |

@@ -15,6 +15,8 @@
       <p class="code-cat"><a href="/denials/codes/#{{ category.id }}">{{ category.title }}</a></p>
       <h1><span class="mono">{{ code.code }}</span>: {{ code.title }}</h1>
       {% if code.summary %}<p class="lede">{{ code.summary }}</p>{% endif %}
+      {% set is_rarc = (code.group|string|upper) in ("RARC", "") or code.code[:1] in ("M", "N") or code.code[:2] == "MA" %}
+      <p class="official-note">The title is a <strong>REVEX summary</strong>, not the official description. For the exact current wording and any stop date, see the official <a href="{{ 'https://x12.org/codes/remittance-advice-remark-codes' if is_rarc else 'https://x12.org/codes/claim-adjustment-reason-codes' }}" rel="noopener" target="_blank">X12 {{ 'Remittance Advice Remark Codes' if is_rarc else 'Claim Adjustment Reason Codes' }}</a> list.</p>
     </div>
   </header>
 
@@ -77,6 +79,18 @@
     </div>
     {% endif %}
 
+    <section class="fbox fbox-lg fbox-warn">
+      <h2 class="fbox-label">Before you act: what not to assume</h2>
+      <ul class="ticks">
+        <li>The code alone doesn't decide the action. Read it with the <strong>group code</strong>, any <strong>remark codes</strong>, the claim type and the payer's policy.</li>
+        {% if code.group == "CO" %}<li><strong>CO</strong> means the payer holds the provider responsible. Don't move a CO amount to the patient.</li>{% endif %}
+        {% if code.group == "PR" %}<li><strong>PR</strong> assigns the amount to the patient, but check protections first: QMB, Medicaid, a missing or invalid ABN or waiver, or contract terms can still stop you billing the patient.</li>{% endif %}
+        {% if code.group == "OA" %}<li><strong>OA</strong> isn't automatically patient responsibility. Check what the remark codes and the prior payer's remittance say.</li>{% endif %}
+        <li>Payers sometimes use codes loosely or differently. If the remittance doesn't make sense with the claim and the contract, research and escalate instead of guessing.</li>
+        <li>The causes, call questions and steps above are common patterns, labelled for learning. Payer, plan, state and contract rules decide the real action.</li>
+      </ul>
+    </section>
+
     {% if related %}
     <section class="related">
       <h2>Related codes in {{ category.title | lower }}</h2>
@@ -86,6 +100,7 @@
     </section>
     {% endif %}
 
+    <p class="review-date small-note">Code library entries are REVEX learning summaries and haven't each been re-checked against the current X12 list; use the official list for exact wording. <a href="https://github.com/rajeshnayak3-dev/rajeshnayak3-dev.github.io/issues" rel="noopener" target="_blank">Report an error</a>.</p>
     {{ complete_bar(code.url, None, None) }}
   </div>
 </article>

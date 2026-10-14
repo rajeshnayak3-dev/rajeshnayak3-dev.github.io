@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% from "_parts.html" import crumbs %}
+{% block main %}
+<div class="wrap">
+  {{ crumbs([("Career and certification", None)]) }}
+  <header class="section-head">
+    <span class="sh-ico">{{ icon("award", 28) }}</span>
+    <div>
+      <h1>Career and certification</h1>
+      <p class="lede">The roles in an RCM operation, the competencies each one needs, and where REVEX teaches them. Use the checklists to judge your own readiness. REVEX can't promise a job or an interview result, but it can help you walk in prepared.</p>
+    </div>
+  </header>
+
+  <nav class="jump" aria-label="On this page">
+    <a href="#roles">Roles and competencies</a><a href="#interview">Interview preparation</a><a href="#exam">REVEX exam</a>
+  </nav>
+
+  <section id="roles" aria-labelledby="roles-h">
+    <h2 id="roles-h">Roles and competencies</h2>
+    <p class="small-note">Tick what you can already do confidently. The ticks are a self-assessment saved in this browser only (<code>revex-competency-v1</code>); they aren't checked or shared.</p>
+    <div class="role-grid">
+      {% for r in roles %}
+      <details class="panel role-card" data-role="{{ r.id }}">
+        <summary>
+          <span class="role-title"><strong>{{ r.title }}</strong><small>{{ r.summary }}</small></span>
+          <span class="role-count mono" data-role-count></span>
+        </summary>
+        <ul class="comp-list">
+          {% for c in r.competencies %}
+          {% set cid = r.id ~ "-" ~ loop.index %}
+          <li>
+            <label class="check"><input type="checkbox" data-comp="{{ cid }}"> <span>{{ c.text }}</span></label>
+            <a class="comp-link" href="/{{ c.link }}">Learn: {{ c.page.short or c.page.title }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% set p = paths | selectattr("id", "equalto", r.path) | first %}
+        <p class="small-note">Suggested path: <a href="/learn/{{ p.id }}/">{{ p.title }}</a></p>
+      </details>
+      {% endfor %}
+    </div>
+    <p><button type="button" class="link-btn" data-comp-reset>{{ icon("reset", 16) }} Clear my ticks</button></p>
+  </section>
+
+  <section id="interview" aria-labelledby="int-h">
+    <h2 id="int-h">Interview preparation</h2>
+    <ul class="topic-list">
+      {% for it in interview %}
+      <li><a class="topic" href="/{{ it.url }}" data-topic="{{ it.url }}"><span class="topic-body"><span class="topic-title">{{ it.title }}</span><span class="topic-desc">{{ it.description }}</span></span><span class="topic-check" aria-hidden="true">{{ icon("check", 18) }}</span></a></li>
+      {% endfor %}
+    </ul>
+    <p>Interviewers increasingly ask scenario questions. Practise explaining your reasoning out loud with the <a href="/practice/#cases">practice cases</a>, not just the answers.</p>
+  </section>
+
+  <section id="exam" aria-labelledby="exam-h" class="panel">
+    <h2 id="exam-h">{{ icon("award", 20) }} REVEX exam</h2>
+    {% if cert.api_url %}
+    <p><span class="st-tag st-good">Open</span> A free, {{ cert.questions }}-question, {{ cert.minutes }}-minute open-book exam. Pass with {{ cert.pass_percent }}% to receive the <strong>{{ cert.name }}</strong> educational certificate, which anyone can check on the verification page.</p>
+    <p><a class="btn btn-primary" href="/certification/">About the exam</a> <a class="btn btn-ghost" href="/verify/">Verify a certificate</a></p>
+    {% else %}
+    <p><span class="st-tag st-soon">Coming soon</span> The exam isn't open yet, so no certificates can be earned or verified. When it opens, it will be a free, open-book educational exam; the certificate won't be an accredited or licensing credential.</p>
+    <p><a class="btn btn-ghost" href="/certification/">How it will work</a></p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

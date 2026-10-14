@@ -3,6 +3,7 @@ title: Corrected claims, voids and resubmissions
 short: Corrected claims
 description: When to send a corrected claim, a void, a new claim or a reconsideration, how frequency codes work on the CMS-1500 and UB-04, and how to avoid duplicate denials.
 order: 6
+reviewed: 2026-10-14
 level: Intermediate
 keywords: corrected claim replacement claim void claim frequency code 7 8 resubmission ICN DCN original reference number TOB xx7 xx8 reopening reconsideration duplicate denial
 quiz:
@@ -31,6 +32,9 @@ quiz:
     answer: 1
     why: Medicare Part B handles minor clerical corrections through reopenings. Part A claims (UB-04) use replacement TOBs (xx7).
 ---
+
+!!! warning "Check the payer's rules before you send anything"
+    The frequency codes below are the X12 and NUBC conventions, but **each payer decides** which correction route it accepts, which fields may change, and the deadline for corrections. Before sending a corrected claim, a void or a new claim, check the payer's provider manual or portal for: whether it accepts replacement claims for this claim type, whether the change needs a reopening, reconsideration or appeal instead, the correction deadline, and any required attachments or condition codes. If the payer's rule isn't clear, ask the payer and record the reference number. The examples on this page are illustrative.
 
 ## Four ways to “resend” a claim
 
@@ -69,6 +73,10 @@ quiz:
 | Part A (institutional, 837I) | **Adjustment claims** using TOB xx7, or cancel with xx8, through the MAC's system |
 
 A claim **rejected as unprocessable** by Medicare (with remark **MA130**) has no appeal rights. Correct it and send a **new claim**.
+
+Reopening rules differ by MAC and by the kind of change. For example, Noridian's Part B reopening page lists changes it won't make by reopening (such as adding or deleting claim lines, changing the billing provider or the year of service) and requires reopenings within one year of the initial determination. Check your MAC's page before choosing a route.
+
+Sources: [Noridian JF Part B, Reopenings](https://med.noridianmedicare.com/web/jfb/topics/appeals/reopening) (reviewed October 2026); [Medicare Claims Processing Manual, Chapter 34 (Reopening and revision)](https://www.cms.gov/regulations-and-guidance/guidance/manuals/downloads/clm104c34.pdf). Commercial and Medicaid correction rules come from each payer's manual.
 
 ## Choosing the right action: examples
 

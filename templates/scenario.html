@@ -3,10 +3,11 @@
 {% from "_parts.html" import crumbs, complete_bar %}
 {% block main %}
 <div class="wrap">
-  {{ crumbs([("Scenarios", "/scenarios/"), (sc.title, None)]) }}
+  {{ crumbs([("Practice lab", "/practice/"), ("Scenarios", "/scenarios/"), (sc.title, None)]) }}
 </div>
 <article class="wrap scenario">
   <header class="lesson-head">
+    <p class="step-tag mono">Case {{ sc.id }}</p>
     <h1>{{ sc.title }}</h1>
     <p class="lede">{{ sc.summary }}</p>
     <p class="meta">
@@ -17,6 +18,13 @@
     </p>
   </header>
 
+  {% if sc.objectives %}
+  <section class="objectives" aria-labelledby="obj-h">
+    <h2 id="obj-h">What this case practises</h2>
+    <ul>{% for o in sc.objectives %}<li>{{ o | md }}</li>{% endfor %}</ul>
+  </section>
+  {% endif %}
+  <p class="small-note">All names, plans, numbers and dates are fictional. Decide one step at a time; each answer is explained.</p>
   <section class="sc-setup fbox fbox-lg">
     <h2 class="fbox-label">The claim in front of you</h2>
     <div class="prose">{{ sc.setup_html | safe }}</div>
@@ -28,6 +36,17 @@
   <script type="application/json" data-scenario-data>{{ data_json | safe }}</script>
 
   <div class="sc-end" data-scenario-end hidden>
+    {% if sc.documentation or sc.escalate or sc.root_cause or sc.sources %}
+    <section class="sc-debrief fbox fbox-lg" aria-labelledby="debrief-h">
+      <h2 class="fbox-label" id="debrief-h">Case debrief</h2>
+      <dl class="debrief">
+        {% if sc.documentation %}<div><dt>What to document</dt><dd>{{ sc.documentation | md }}</dd></div>{% endif %}
+        {% if sc.escalate %}<div><dt>When to escalate</dt><dd>{{ sc.escalate | md }}</dd></div>{% endif %}
+        {% if sc.root_cause %}<div><dt>Root cause and prevention</dt><dd>{{ sc.root_cause | md }}</dd></div>{% endif %}
+        {% if sc.sources %}<div><dt>Sources</dt><dd><ul>{% for src in sc.sources %}<li><a href="{{ src.url }}" rel="noopener" target="_blank">{{ src.title }}</a></li>{% endfor %}</ul></dd></div>{% endif %}
+      </dl>
+    </section>
+    {% endif %}
     {{ complete_bar(sc.url, None, next) }}
   </div>
 </article>

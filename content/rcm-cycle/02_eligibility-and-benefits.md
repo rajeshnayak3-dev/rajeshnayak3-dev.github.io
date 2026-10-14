@@ -3,6 +3,7 @@ title: Eligibility and benefits verification
 short: Eligibility and benefits
 description: How to confirm a patient's coverage and benefits before the visit, what to record, the 270/271 transaction, and the questions to ask a payer.
 order: 2
+reviewed: 2026-10-14
 level: Beginner
 keywords: eligibility verification benefits verification EV BV 270 271 deductible coinsurance copay out of pocket active coverage
 quiz:
@@ -14,7 +15,7 @@ quiz:
       - 278 and 999
     answer: 1
     why: The 270 is the eligibility inquiry and the 271 is the payer's response. The 837 is the claim, the 835 is the remittance, and 276/277 is claim status.
-  - q: The patient's deductible is $1,500 and $1,200 has been met. The plan pays 80% after deductible. For a $500 allowed service, what does the patient owe?
+  - q: The patient's deductible is $1,500 and $1,200 has been met. The plan pays 80% after deductible. For a $500 allowed service, what does the patient owe? (Assume in-network, no copay, and the out-of-pocket maximum isn't reached.)
     options:
       - $300 plus 20% of $200 = $340
       - $100
@@ -79,21 +80,37 @@ A complete verification note includes:
 
 ## Benefits math you must be able to do
 
-The plan applies benefits in this order:
+There's no single order that every plan follows. How a claim's cost is split depends on the **plan design**, the **service category** (office visit, imaging, surgery, emergency), **network status**, how much of the **accumulators** (deductible and out-of-pocket) is met, and the payer's own processing rules. A common pattern looks like this:
 
-1. **Copay** (if the service has one; some plans waive the deductible for copay services).
-2. **Deductible** until it's met.
+1. **Copay** for services that have one. Some plans apply the deductible first even for copay services; many don't.
+2. **Deductible** until it's met, for services the deductible applies to (many plans exempt preventive care and some copay services).
 3. **Coinsurance** on the remaining allowed amount.
-4. **Out-of-pocket maximum** caps the patient's total.
+4. **Out-of-pocket maximum** stops in-network cost-sharing for covered services once it's reached. It usually doesn't cap premiums, non-covered services, out-of-network balance bills, or amounts above the allowed amount.
 
-!!! example "Worked example"
-    Allowed amount $800. Deductible $1,000 with $600 met. Coinsurance 20%. Out-of-pocket max not reached.
+!!! example "Worked example (illustrative, one common plan design)"
+    In-network, covered service. Allowed amount $800. Deductible $1,000 with $600 met. Coinsurance 20% after deductible. No copay for this service. Out-of-pocket max not reached.
 
     - Remaining deductible: $1,000 − $600 = **$400** (patient)
     - Remaining allowed: $800 − $400 = $400
     - Coinsurance: 20% × $400 = **$80** (patient)
     - Plan pays: $400 − $80 = **$320**
     - Patient total: $400 + $80 = **$480**
+
+    Change any assumption (out-of-network, a copay that applies, a deductible that's waived for this service, an out-of-pocket max that's nearly met) and the answer changes. The **ERA** shows how the payer actually applied benefits, and it's the ERA that you post from.
+
+!!! warning "Eligibility is not a guarantee of payment"
+    An active eligibility response and a benefits quote tell you what the plan expects **if** the claim is otherwise payable. The claim can still deny for authorization, medical necessity, coding, coordination of benefits, a benefit limit, or a coverage change the payer learns about later (retroactive termination). Payers say this themselves in the disclaimers on 271 responses and portal printouts. Record what you were told, by whom, and the reference number, so you can dispute an inconsistent denial.
+
+### What to verify for this specific service
+
+- The **exact service** (CPT/HCPCS) and place of service, not just "office visit" or "radiology"
+- **Provider and facility network status** for this plan (in-network for one product doesn't mean in-network for all)
+- **Authorization and referral** rules for this service and this plan
+- **Effective and termination dates**, and any pending changes
+- **Benefit limits** (visits per year, frequency) and how many are used
+- **Accumulators**: deductible and out-of-pocket met, individual and family, and the date they were current
+- **Exclusions** that apply to this service or diagnosis
+- **Other coverage** and order of benefits
 
 ## Questions to ask on an eligibility call
 

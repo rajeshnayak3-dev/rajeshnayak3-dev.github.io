@@ -8,17 +8,25 @@
     <span class="sh-ico">{{ icon("alert", 28) }}</span>
     <div>
       <h1>Denial code library</h1>
-      <p class="lede">{{ count }} claim adjustment reason codes (CARCs) and key remark codes (RARCs) you'll meet on ERAs, grouped by why the claim failed. Open any code for causes, call questions, resolution steps and prevention.</p>
+      <p class="lede">{{ count }} claim adjustment reason codes (CARCs) and key remark codes (RARCs) you'll meet on ERAs, grouped by why the claim failed. Open any code for likely causes, call questions, investigation steps, prevention and what not to assume.</p>
     </div>
   </header>
 
-  <div class="filter-row">
+  <form class="filter-row" role="search" data-code-form onsubmit="return false">
     <label class="filter">
       {{ icon("search", 18) }}
-      <input type="search" placeholder="Filter by code or meaning, e.g. 197 or authorization" data-code-filter aria-label="Filter denial codes">
+      <input type="search" placeholder="Code, meaning or keyword, e.g. 197 or authorization" data-code-filter aria-label="Filter codes by code, meaning or keyword">
     </label>
-    <p class="filter-hint"><a href="/denials/read-an-era/">How to read CO, PR, OA and PI group codes</a></p>
-  </div>
+    <label class="filter-select"><span class="visually-hidden">Category</span>
+      <select data-code-cat aria-label="Filter by category">
+        <option value="">All categories</option>
+        {% for g in groups %}<option value="{{ g.cat.id }}">{{ g.cat.title }}</option>{% endfor %}
+      </select>
+    </label>
+    <button type="button" class="btn btn-ghost" data-code-clear>Clear filters</button>
+    <p class="filter-hint" aria-live="polite" data-code-count>{{ count }} codes</p>
+  </form>
+  <p class="small-note">Titles are REVEX summaries. For exact wording, use the official <a href="https://x12.org/codes/claim-adjustment-reason-codes" rel="noopener" target="_blank">CARC</a> and <a href="https://x12.org/codes/remittance-advice-remark-codes" rel="noopener" target="_blank">RARC</a> lists. <a href="/denials/read-an-era/">How to read CO, PR, OA and PI group codes</a>.</p>
 
   <nav class="jump" aria-label="Categories">
     {% for g in groups %}<a href="#{{ g.cat.id }}">{{ g.cat.title }}</a>{% endfor %}
@@ -30,7 +38,7 @@
     <p class="cg-blurb">{{ g.cat.blurb }}</p>
     <ul class="code-table">
       {% for c in g.codes %}
-      <li data-code-row data-text="{{ (c.code ~ ' ' ~ c.carc ~ ' ' ~ c.title ~ ' ' ~ (c.summary or ''))|lower }}">
+      <li data-code-row data-cat="{{ g.cat.id }}" data-text="{{ (c.code ~ ' ' ~ c.carc ~ ' ' ~ c.title ~ ' ' ~ (c.summary or ''))|lower }}">
         <a href="/{{ c.url }}" data-topic="{{ c.url }}">
           <span class="mono ct-code">{{ c.code }}</span>
           <span class="ct-text"><strong>{{ c.title }}</strong>{% if c.summary %}<small>{{ c.summary }}</small>{% endif %}</span>
@@ -41,6 +49,6 @@
     </ul>
   </section>
   {% endfor %}
-  <p class="empty" data-code-empty hidden>No codes match that filter. Try the number only, such as 16, or a word like “eligibility”.</p>
+  <p class="empty" data-code-empty hidden>No codes match those filters. Try the number only, such as 16, a word like “eligibility”, or <button type="button" class="link-btn" data-code-clear>clear the filters</button>.</p>
 </div>
 {% endblock %}

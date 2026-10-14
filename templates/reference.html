@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% from "_parts.html" import crumbs %}
+{% block main %}
+<div class="wrap">
+  {{ crumbs([("RCM reference", None)]) }}
+  <header class="section-head">
+    <span class="sh-ico">{{ icon("book", 28) }}</span>
+    <div>
+      <h1>RCM reference</h1>
+      <p class="lede">Look things up while you work. Every entry is a summary for learning; the official source and the payer's own policy decide what applies to a claim.</p>
+      <p><button class="btn btn-ghost" type="button" data-search-open>{{ icon("search", 18) }} Search everything</button></p>
+    </div>
+  </header>
+
+  <ul class="hub-grid">
+    <li><a class="hub-card" href="/denials/codes/"><span class="mc-ico">{{ icon("alert", 24) }}</span><strong>Denial and remark codes</strong><span>{{ counts.codes }} CARC and RARC entries: meaning, likely causes, investigation steps and what not to assume. Search and filter by code, category or keyword.</span></a></li>
+    <li><a class="hub-card" href="/glossary/"><span class="mc-ico">{{ icon("book", 24) }}</span><strong>Terminology</strong><span>{{ counts.terms }} plain-language definitions of RCM and billing terms, A to Z.</span></a></li>
+    <li><a class="hub-card" href="/insurance/"><span class="mc-ico">{{ icon("shield", 24) }}</span><strong>Payers and programs</strong><span>{{ counts.insurance }} guides: plan and payer types, Medicare, Medicaid and QMB, COBRA, TRICARE and VA, WC and auto, COB and MSP.</span></a></li>
+    <li><a class="hub-card" href="/forms-billing/"><span class="mc-ico">{{ icon("form", 24) }}</span><strong>Claim forms and transactions</strong><span>{{ counts.forms }} guides: CMS-1500 and UB-04, 837, 835, 270/271, 276/277, 999 and 277CA, modifiers, corrected claims and identifiers.</span></a></li>
+    <li><a class="hub-card" href="/specialties/"><span class="mc-ico">{{ icon("stethoscope", 24) }}</span><strong>Specialty reference</strong><span>{{ counts.specialties }} specialties: services, key codes, authorization and documentation considerations, and common denial patterns.</span></a></li>
+    <li><a class="hub-card" href="/tools/filing-limits-reference/"><span class="mc-ico">{{ icon("clock", 24) }}</span><strong>Filing and appeal limits</strong><span>Limits set by law or program rules, with sources and what to verify.</span></a></li>
+    <li><a class="hub-card" href="/sources/"><span class="mc-ico">{{ icon("check", 24) }}</span><strong>Policies and official sources</strong><span>The CMS, X12, HHS and contractor sources REVEX uses, with scope and review dates.</span></a></li>
+  </ul>
+
+  <section class="panel ref-rules">
+    <h2>Using reference entries safely</h2>
+    <ul class="ticks">
+      <li><strong>Official wording first.</strong> REVEX descriptions are summaries. For a code's exact wording and its start and stop dates, use the official X12 or CMS list.</li>
+      <li><strong>Context decides the action.</strong> The same code can need different actions depending on group code, remark codes, claim type, payer policy and the contract.</li>
+      <li><strong>Examples are illustrative.</strong> Payer-specific statements in examples are fictional unless a source is linked.</li>
+    </ul>
+  </section>
+</div>
+{% endblock %}

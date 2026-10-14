@@ -34,6 +34,8 @@ attached to a Google Sheet in your own Google account.
 
 ## Day-to-day
 - **Issued certificates** appear in the Certificates tab. To revoke one, change its Status cell from `Valid` to `Revoked`.
+- **Certificate IDs** look like `RVX-202610-ABCD2345` (8 random characters, so IDs can't practically be guessed). The verification page shows only the name, certificate title, issue date and status; scores stay in the sheet.
+- **Before you announce it**, test the full flow yourself: one failed attempt, one pass, verify the new ID, verify a made-up ID, revoke your test certificate and verify it again.
 - **Attempts** lists every exam submission with name and score.
 - **When you change quiz questions**, nothing needs re-pasting: the script reads the latest answer key from the site automatically (cached for 30 minutes).
 - **If you edit Code.gs logic** (rare), use **Deploy → Manage deployments → Edit → Version: New version → Deploy** so the same URL keeps working.

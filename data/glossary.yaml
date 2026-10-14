@@ -76,7 +76,7 @@
 - term: Claim
   def: A request for payment sent by a provider to a payer for services given to a patient.
 - term: Clean claim
-  def: A claim with no errors or missing information that can be processed without extra investigation.
+  def: A claim with no errors or missing information, so nothing stops the payer from processing it. Clean doesn't mean paid; a clean claim can still be denied.
 - term: Clearinghouse
   def: A company that checks, formats and forwards electronic claims from providers to payers and returns reports.
   see: /rcm-cycle/claim-submission/
@@ -171,7 +171,7 @@
 - term: Financial class
   def: A billing system category showing who is responsible for an account balance, such as Medicare, commercial or self-pay.
 - term: First-pass resolution rate
-  def: The share of claims paid on first submission without rework.
+  def: The share of claims fully resolved on first submission without rework. Definitions vary (some count only claims with a payer payment), so check which one a report uses.
 - term: Frequency code
   def: The code showing whether a claim is original (1), a replacement (7) or a void (8).
 - term: Global period

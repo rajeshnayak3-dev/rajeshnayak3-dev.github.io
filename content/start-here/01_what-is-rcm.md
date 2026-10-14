@@ -3,6 +3,7 @@ title: What is revenue cycle management (RCM)?
 short: What is RCM?
 description: The plain-language definition of RCM, why US healthcare needs it, and how one doctor's visit turns into money in the bank.
 order: 1
+reviewed: 2026-10-14
 level: Beginner
 keywords: revenue cycle management definition medical billing meaning RCM full form
 quiz:
@@ -22,14 +23,14 @@ quiz:
       - The patient refused to pay
     answer: 2
     why: Providers bill their standard charge. In-network payers pay the contracted allowed amount, and the gap is a contractual adjustment (usually CO-45). It isn't a denial.
-  - q: A claim that pays in full the first time it is submitted is called what?
+  - q: A claim has no errors or missing information and the payer can process it without asking for anything more. What is it called?
     options:
       - A clean claim
-      - A secondary claim
+      - A paid claim
       - A corrected claim
       - An appeal
     answer: 0
-    why: A clean claim has no errors and needs no extra information, so it can be processed and paid on first submission. Clean claim rate is a core RCM metric.
+    why: A clean claim is complete and correct, so nothing stops the payer from processing it. Being clean doesn't guarantee payment; the payer can still deny it for coverage, medical necessity or benefit reasons. A "paid claim" describes the outcome, not the claim's quality.
   - q: Which of these is a back-end RCM activity?
     options:
       - Insurance eligibility verification
@@ -114,14 +115,16 @@ RCM leaders track a small set of numbers. You'll see these on every team dashboa
 
 | Metric | What it tells you | A healthy target (typical) |
 |---|---|---|
-| Clean claim rate | Share of claims accepted with no errors first time | 95% or higher |
-| First-pass resolution rate | Share of claims paid on first submission | 90% or higher |
-| Denial rate | Share of claims denied | Below 5–10% |
+| Clean claim rate | Share of claims that pass edits and are accepted with no errors on first submission | 95% or higher |
+| First-pass resolution rate | Share of claims fully resolved (paid or correctly closed) on the first submission, with no rework | 90% or higher |
+| Denial rate | Share of adjudicated claims (or dollars) denied | Below 5–10% |
 | Days in AR | How many days of charges are still unpaid | Below 35–45 days |
 | AR over 90 days | Share of AR older than 90 days | Below 15–20% |
 | Net collection rate | Collected ÷ (charges − contractual adjustments) | 95% or higher |
 
-Targets vary by specialty and payer mix, so treat these as rough benchmarks. You'll learn each one in detail in [reporting and KPIs](/rcm-cycle/reporting-and-kpis/).
+A clean claim isn't the same as a paid claim. A claim can be complete, accepted and processed, and still be denied or pay $0 because of coverage, medical necessity or benefits (for example, the whole amount goes to the deductible). That's why clean claim rate and first-pass resolution rate are tracked separately.
+
+Targets vary by specialty and payer mix, and organisations define these metrics differently, so treat them as rough benchmarks and always check the definition behind a number. You'll learn each one in detail in [reporting and KPIs](/rcm-cycle/reporting-and-kpis/).
 
 ## What RCM is not
 

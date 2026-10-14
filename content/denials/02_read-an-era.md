@@ -3,6 +3,7 @@ title: How to read an ERA and decode CARC and RARC codes
 short: Read an ERA
 description: Group codes CO, PR, OA and PI, claim adjustment reason codes, remittance advice remark codes, and a step-by-step walk through a real-looking remittance.
 order: 2
+reviewed: 2026-10-14
 level: Beginner
 keywords: ERA EOB remittance advice group codes CO PR OA PI CARC RARC remark codes MA130 N290 how to read ERA
 quiz:
@@ -42,7 +43,14 @@ Every adjustment on an ERA is described by up to three codes:
 
 Written together like **CO-16 / N290**: contractual obligation, claim lacks information, and the missing item is the rendering provider's identifier.
 
-These codes are national standards maintained by **X12** (CARC and RARC committees), and they're updated three times a year. Payers must use them on 835s.
+These codes are national standards. X12 maintains both lists and publishes updates several times a year; each update can add codes, retire codes (with a stop date) or reword descriptions, and many releases leave most codes unchanged. CMS rolls the changes into Medicare systems through a recurring change request. HIPAA requires payers to use them on 835s.
+
+Always read the **current official wording** for a code, because the short meanings on REVEX and on payer portals are summaries:
+
+- [X12 Claim Adjustment Reason Codes](https://x12.org/codes/claim-adjustment-reason-codes)
+- [X12 Remittance Advice Remark Codes](https://x12.org/codes/remittance-advice-remark-codes)
+
+Last reviewed by REVEX: October 2026.
 
 ## Group codes
 
@@ -54,7 +62,14 @@ These codes are national standards maintained by **X12** (CARC and RARC committe
 | **PI** | Payer initiated reduction | The payer reduced payment for a reason it believes isn't the patient's responsibility, without a contract basis (common with non-contracted providers). | **No** |
 
 !!! warning "The same reason code can carry different groups"
-    **CO-50** (not medically necessary, provider liable) and **PR-50** (not medically necessary, but the patient signed a valid ABN or waiver) have the same reason but opposite next steps. Always read the group code first.
+    **CO-50** and **PR-50** have the same reason (not medically necessary) but the payer has assigned liability differently. With Original Medicare, PR-50 usually appears when the claim carried modifier **GA** because an ABN was issued. Read the group code first, then confirm the rest before billing anyone:
+
+    - **CO** means the payer holds the provider liable. Don't bill the patient for a CO amount. If you believe the service was necessary, the route is an appeal, not a patient statement.
+    - **PR** means the payer assigned the amount to the patient, but that doesn't by itself prove the patient can be billed. Check the ABN or waiver is on file, signed **before** the service, specific to this service (not a routine or blanket form), with a reason and cost estimate, and that the patient chose the option to receive the service and pay.
+    - **Stop and escalate** instead of billing if the ABN is missing, was signed after the service, was given routinely to every patient, or the patient is **QMB** or has Medicaid as secondary. Dual-eligible patients can't be billed while Medicare and Medicaid processing is pending.
+    - An ABN applies only to **Original Medicare**. Medicare Advantage and commercial plans have their own pre-service and waiver rules, so read the plan's policy and the contract.
+
+    Sources: [CMS FFS ABN page](https://www.cms.gov/medicare/forms-notices/beneficiary-notices-initiative/ffs-abn) (form CMS-R-131); [Medicare Claims Processing Manual, Chapter 30](https://www.cms.gov/regulations-and-guidance/guidance/manuals/downloads/clm104c30.pdf) (ABN rules, section 50); [Noridian ABN form instructions](https://med.noridianmedicare.com/web/jeb/topics/abn/abn-instructions). Original Medicare scope; reviewed October 2026.
 
 ## CARC basics
 

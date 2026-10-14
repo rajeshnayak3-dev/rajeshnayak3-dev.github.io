@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% from "_parts.html" import crumbs %}
+{% block main %}
+<div class="wrap path-page" data-path="{{ path.id }}">
+  {{ crumbs([("Learning paths", "/learn/"), (path.title, None)]) }}
+  <header class="section-head">
+    <span class="sh-ico">{{ icon("route", 28) }}</span>
+    <div>
+      <h1>{{ path.title }}</h1>
+      <p class="lede">{{ path.audience }}.</p>
+      <p class="meta"><span class="lvl lvl-{{ path.level | slug }}">{{ path.level }}</span> <span>{{ icon("clock", 16) }} About {{ path.hours }} hours (estimate: {{ path.minutes }} minutes of reading and practice)</span></p>
+    </div>
+  </header>
+
+  <div class="path-layout">
+    <div class="path-main">
+      <section class="panel path-next" aria-live="polite">
+        <h2>Next recommended</h2>
+        <p class="path-progress" data-path-progress="{{ path.id }}" data-urls="{{ path.track_urls | join(' ') }}" data-verbose></p>
+        <p data-path-next-wrap><a class="btn btn-primary" data-path-next href="/{{ path.modules[0]['items'][0].url }}">{{ path.modules[0]['items'][0].title }}</a></p>
+      </section>
+
+      {% for m in path.modules %}
+      <section class="module" id="m{{ loop.index }}" aria-labelledby="m{{ loop.index }}-h">
+        <h2 id="m{{ loop.index }}-h"><span class="path-n">{{ loop.index }}</span> {{ m.title }}</h2>
+        <p class="module-sum">{{ m.summary }} <span class="small-note">· {{ m['items'] | length }} lessons · about {{ m.minutes }} min</span></p>
+        <ol class="topic-list">
+          {% for it in m['items'] %}
+          <li>
+            <a class="topic" href="/{{ it.url }}"{% if it.track %} data-topic="{{ it.url }}" data-path-item{% endif %}>
+              <span class="topic-body">
+                <span class="topic-title">{{ it.title }}</span>
+                <span class="topic-meta">{% if it.minutes %}<span>{{ it.minutes }} min</span>{% endif %}<span class="lvl lvl-{{ it.level | slug }}">{{ it.level }}</span></span>
+              </span>
+              <span class="topic-check" aria-hidden="true">{{ icon("check", 18) }}</span>
+              <span class="visually-hidden" data-done-sr></span>
+            </a>
+          </li>
+          {% endfor %}
+        </ol>
+      </section>
+      {% endfor %}
+
+      {% if path.practice_items %}
+      <section class="module" id="practice" aria-labelledby="pr-h">
+        <h2 id="pr-h">{{ icon("check", 20) }} Practice for this path</h2>
+        <ul class="topic-list">
+          {% for it in path.practice_items %}
+          <li>
+            <a class="topic" href="/{{ it.url }}"{% if it.track %} data-topic="{{ it.url }}" data-path-item{% endif %}>
+              <span class="topic-body">
+                <span class="topic-title">{% if it.id %}<span class="mono case-id">{{ it.id }}</span> {% endif %}{{ it.title }}</span>
+                <span class="topic-meta">{% if it.section == "tools" %}<span class="tag">Tool</span>{% else %}<span class="tag">Case</span>{% endif %}{% if it.minutes %}<span>{{ it.minutes }} min</span>{% endif %}</span>
+              </span>
+              <span class="topic-check" aria-hidden="true">{{ icon("check", 18) }}</span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+    </div>
+
+    <aside class="path-side">
+      <section class="panel">
+        <h2>Outcomes</h2>
+        <ul class="ticks">{% for o in path.outcomes %}<li>{{ o }}</li>{% endfor %}</ul>
+      </section>
+      <section class="panel">
+        <h2>Prerequisites</h2>
+        <p>{{ path.prerequisites }}</p>
+        <h2>Completion</h2>
+        <p>{{ path.completion }}</p>
+        <p class="small-note">Completion is tracked in this browser only and isn't a credential.</p>
+      </section>
+    </aside>
+  </div>
+</div>
+{% endblock %}

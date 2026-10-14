@@ -106,7 +106,7 @@ Each category below follows the same pattern: **what it is**, **typical codes**,
 
 **Ask:** which policy, LCD or NCD was applied; which diagnoses are covered; whether records will be reviewed.
 
-**Fix:** check the claim has the most specific supported diagnosis (corrected claim if not); appeal with records and the payer's own policy criteria; with a valid ABN or waiver, bill the patient (PR group).
+**Fix:** check the claim has the most specific supported diagnosis (corrected claim if not); appeal with records and the payer's own policy criteria; bill the patient only when the ERA shows PR, a valid ABN or plan waiver signed before the service is on file, and the patient isn't protected (for example QMB or Medicaid). Otherwise escalate.
 
 **Prevent:** check coverage policies at scheduling; issue ABNs and waivers when needed; document medical necessity clearly.
 

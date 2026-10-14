@@ -111,7 +111,7 @@ Every payer sets a **timely filing limit**: the time from the date of service (o
 
 | Payer | Typical limit (always confirm) |
 |---|---|
-| Medicare (Original) | 12 months from date of service |
+| Medicare (Original) | 1 calendar year after the date of service (42 CFR 424.44) |
 | Medicaid | Varies by state, often 90 days to 12 months |
 | Commercial plans | Often 90 or 180 days, set by contract |
 | Medicare Advantage | Often 90 days to 12 months, by contract |

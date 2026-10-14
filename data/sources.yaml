@@ -1,0 +1,62 @@
+# Official sources REVEX relies on. "reviewed" is when REVEX last checked the
+# link and the facts the site takes from it.
+- group: Medicare program rules
+  items:
+    - title: Medicare Claims Processing Manual (Pub. 100-04), HHS guidance portal entry
+      url: https://www.hhs.gov/guidance/document/pub-100-04medicareclaims-processing
+      scope: Original Medicare claims, filing limits, ABNs, appeals
+      reviewed: 2026-10
+    - title: 42 CFR 424.44, Time limits for filing Medicare claims
+      url: https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-424/subpart-C/section-424.44
+      scope: Original Medicare timely filing
+      reviewed: 2026-10
+    - title: CMS FFS Advance Beneficiary Notice of Non-coverage (ABN, CMS-R-131)
+      url: https://www.cms.gov/medicare/forms-notices/beneficiary-notices-initiative/ffs-abn
+      scope: Original Medicare only
+      reviewed: 2026-10
+    - title: CMS MLN7936176, Prohibition on billing Qualified Medicare Beneficiaries
+      url: https://www.cms.gov/files/document/mln7936176-prohibition-billing-qualified-medicare-beneficiaries.pdf
+      scope: Medicare Part A/B and Medicare Advantage providers
+      reviewed: 2026-10
+    - title: CMS MM9911 update, QMB indicator on remittances
+      url: https://www.cms.gov/Medicare-Medicaid-Coordination/Medicare-and-Medicaid-Coordination/Medicare-Medicaid-Coordination-Office/Downloads/MM9911Update112017.pdf
+      scope: Original Medicare remittance codes for QMB
+      reviewed: 2026-10
+- group: Medicare contractors (examples)
+  items:
+    - title: CGS Medicare, Payment timeframes for clean claims
+      url: https://www.cgsmedicare.com/parta/claims/paytimeframe.html
+      scope: Clean claim definition and processing time, Medicare FFS
+      reviewed: 2026-10
+    - title: Noridian JF Part B, Reopenings
+      url: https://med.noridianmedicare.com/web/jfb/topics/appeals/reopening
+      scope: One MAC's Part B reopening rules; check your own MAC
+      reviewed: 2026-10
+    - title: Noridian, ABN form instructions
+      url: https://med.noridianmedicare.com/web/jeb/topics/abn/abn-instructions
+      scope: ABN completion, Original Medicare
+      reviewed: 2026-10
+- group: Code sets and transactions
+  items:
+    - title: X12 Claim Adjustment Reason Codes
+      url: https://x12.org/codes/claim-adjustment-reason-codes
+      scope: Official CARC wording and start/stop dates
+      reviewed: 2026-10
+    - title: X12 Remittance Advice Remark Codes
+      url: https://x12.org/codes/remittance-advice-remark-codes
+      scope: Official RARC wording and start/stop dates
+      reviewed: 2026-10
+    - title: CMS ICD-10 code sets
+      url: https://www.cms.gov/medicare/coding-billing/icd-10-codes
+      scope: ICD-10-CM and ICD-10-PCS files
+      reviewed: 2026-10
+- group: Privacy and compliance
+  items:
+    - title: HHS, HIPAA Privacy Rule summary
+      url: https://www.hhs.gov/hipaa/for-professionals/privacy/laws-regulations/index.html
+      scope: Protected health information and minimum necessary
+      reviewed: 2026-10
+    - title: HHS OIG, RAT-STATS statistical sampling software
+      url: https://www.oig.hhs.gov/compliance/rat-stats/
+      scope: Statistical sampling used in government reviews
+      reviewed: 2026-10

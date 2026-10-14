@@ -6,45 +6,64 @@
 <div class="wrap exam-wrap">
   {{ crumbs([("Certification", None)]) }}
 
+  {% set live = cert.api_url %}
   <section class="exam-screen" data-screen="intro">
     <header class="exam-hero">
       <div>
-        <p class="eyebrow-badge">{{ icon("award", 18) }} Free certification</p>
+        {% if live %}
+        <p class="eyebrow-badge">{{ icon("award", 18) }} Free educational certificate</p>
+        {% else %}
+        <p class="eyebrow-badge badge-soon">{{ icon("clock", 18) }} Coming soon: not open yet</p>
+        {% endif %}
         <h1>{{ cert.name }}</h1>
-        <p class="lede">Prove what you know about US healthcare revenue cycle management. Pass the exam and get a certificate with a unique ID that recruiters can verify, and a one-click link to add it to LinkedIn.</p>
+        {% if live %}
+        <p class="lede">A free, open-book knowledge check on US healthcare revenue cycle management. Pass it and REVEX issues an educational certificate with a unique ID that anyone can look up on the verification page.</p>
+        {% else %}
+        <p class="lede">REVEX is preparing a free, open-book knowledge check on US healthcare revenue cycle management. The exam service isn't running yet, so <strong>no exams can be taken and no certificates have been issued</strong>. Use the lessons, quizzes and practice cases in the meantime.</p>
+        {% endif %}
       </div>
       <dl class="exam-facts">
         <div><dt>Questions</dt><dd>{{ cert.questions }}</dd></div>
         <div><dt>Time limit</dt><dd>{{ cert.minutes }} min</dd></div>
         <div><dt>Pass mark</dt><dd>{{ cert.pass_percent }}%</dd></div>
-        <div><dt>Cost</dt><dd>Free</dd></div>
+        <div><dt>Status</dt><dd>{% if live %}Open{% else %}Not open yet{% endif %}</dd></div>
       </dl>
     </header>
 
     <div class="exam-intro-grid">
       <section class="panel">
-        <h2>What the exam covers</h2>
-        <p>Questions are drawn at random from a bank of {{ bank_size }} questions across every REVEX section: the RCM cycle, insurance and payers, forms and billing, denials and remark codes, non-denials, specialties and interview topics. Every attempt gets a different set.</p>
+        <h2>{% if live %}How the exam works{% else %}How the exam will work{% endif %}</h2>
+        <p>Questions are drawn at random from a bank of {{ bank_size }} questions across every REVEX section: the RCM cycle, insurance and payers, forms and billing, denials and remark codes, non-denials, specialties and interview topics. Each attempt gets a different set.</p>
         <ul class="ticks">
-          <li>One answer per question; you can flag questions and come back.</li>
+          <li>One answer per question. Unanswered questions are marked wrong. You can flag questions and come back.</li>
           <li>The timer keeps running if you switch tabs. When it reaches zero, your answers are submitted.</li>
-          <li>Scoring happens on the REVEX server, and your result and certificate ID are recorded so anyone can verify them.</li>
+          <li>Answers are scored by the REVEX exam service (a Google Apps Script run by the site author), not in your browser.</li>
           <li>If you don't pass, you can retake the exam after {{ cert.retake_hours }} hours.</li>
         </ul>
-        <p class="small-note">Prepare first: take the quizzes at the end of each lesson and the <a href="/scenarios/">scenarios</a>. Your <a href="/progress/">progress page</a> shows what's left.</p>
+        <h2>What the certificate means, and what it doesn't</h2>
+        <ul class="ticks">
+          <li>It's a <strong>REVEX-issued educational certificate</strong>. It shows that the named person passed REVEX's online exam.</li>
+          <li>The exam is <strong>open-book and unproctored</strong>. Every answer is taught in the lessons, and the answer key is published with the site's source code, so the certificate doesn't prove supervised testing or identity.</li>
+          <li>It is <strong>not</strong> an accredited, licensing or coding credential, and it isn't endorsed by CMS, X12, AAPC, AHIMA, HFMA, any payer or any employer.</li>
+        </ul>
+        <h2>Your data</h2>
+        <p>To issue and verify a certificate, the exam service stores the name you enter, your score, the date and time, and the certificate ID in a Google Sheet owned by the site author. Failed attempts are stored too (name, score, time). The verification page shows only the name, certificate title, issue date and status for an ID someone enters; it can't list or search certificates. To have your record removed, message the author on <a href="{{ site.author.linkedin }}" rel="noopener">LinkedIn</a>. Don't enter anything other than your name.</p>
+        <p class="small-note">Prepare first: take the quizzes at the end of each lesson and the <a href="/scenarios/">practice cases</a>. Your <a href="/progress/">progress page</a> shows what's left.</p>
       </section>
 
       <section class="panel panel-accent">
+        {% if live %}
         <h2>Start the exam</h2>
         <div data-api-missing hidden>
-          <p class="notice">Certification opens soon. The exam service is being set up; check back shortly.</p>
+          <p class="notice">The exam service isn't available right now. Please try again later.</p>
         </div>
         <form class="start-form" data-start-form>
           <label class="field" for="cand-name"><span>Your full name, as it should appear on the certificate</span>
-            <input id="cand-name" type="text" maxlength="80" autocomplete="name" required>
+            <input id="cand-name" type="text" maxlength="80" autocomplete="name" required aria-describedby="cand-name-help">
           </label>
-          <label class="check"><input type="checkbox" id="cand-agree" required> <span>I'll answer on my own, and I understand my name and score are stored to verify the certificate.</span></label>
-          <p class="form-error" data-start-error hidden></p>
+          <p class="small-note" id="cand-name-help">Letters, spaces, hyphens, apostrophes and full stops. 2 to 80 characters.</p>
+          <label class="check"><input type="checkbox" id="cand-agree" required> <span>I understand this is an open-book educational exam, and that my name, score and certificate ID are stored so the certificate can be verified.</span></label>
+          <p class="form-error" data-start-error hidden role="alert"></p>
           <button class="btn btn-primary btn-lg" type="submit" data-start-btn>Start the {{ cert.minutes }}-minute exam</button>
         </form>
         <div data-resume hidden>
@@ -53,6 +72,17 @@
           <button class="link-btn" type="button" data-discard-btn>Discard it and start again</button>
         </div>
         <p class="small-note">Already have a certificate? <a href="/verify/">Verify a certificate ID</a>.</p>
+        {% else %}
+        <h2>Not open yet</h2>
+        <p class="notice">The exam service hasn't been switched on, so the exam can't be started and certificates can't be issued or verified yet. This page will change when it opens.</p>
+        <button class="btn btn-primary btn-lg" type="button" disabled aria-disabled="true">Exam not open yet</button>
+        <p>Until then:</p>
+        <ul class="ticks">
+          <li><a href="/learn/">Follow a learning path</a></li>
+          <li><a href="/practice/">Practise realistic cases</a></li>
+          <li><a href="/progress/">Track your progress</a> (saved in this browser only)</li>
+        </ul>
+        {% endif %}
       </section>
     </div>
   </section>

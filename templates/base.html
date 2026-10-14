@@ -31,26 +31,28 @@
 </script>
 {% block head %}{% endblock %}
 </head>
+{% set cur_area = area_for(url) %}
 <body class="{% block layout %}layout-shell{% endblock %} {% block body_class %}{% endblock %}" data-root="{{ rel('/') }}" data-page="{{ url }}" data-preview="{{ 1 if preview else 0 }}" data-title="{{ title }}">
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="site-head">
   <div class="head-row">
-    <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="sidebar" aria-label="Open course menu" data-topics>{{ icon("menu", 20) }}</button>
+    <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="sidebar" aria-label="Open menu" data-topics>{{ icon("menu", 20) }}</button>
     <a class="brand" href="/" aria-label="{{ site.name }} home">
       <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><rect x="2.5" y="2.5" width="19" height="19" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m7 12.5 3.3 3.3L17.5 8.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       <span class="brand-word">{{ site.name }}</span>
-      <span class="brand-tag hide-md">RCM Academy</span>
     </a>
 
     <button class="search-trigger" type="button" data-search-open aria-label="Search REVEX">
-      {{ icon("search", 18) }}<span class="hide-sm">Search lessons, codes and terms</span><kbd class="hide-sm">/</kbd>
+      {{ icon("search", 18) }}<span class="hide-sm">Search</span><kbd class="hide-sm">/</kbd>
     </button>
 
-    <nav class="head-links" aria-label="Quick links">
-      <a href="/denials/codes/" class="hide-md{% if url.startswith('denials/codes') %} is-current{% endif %}">Denial codes</a>
-      <a href="/tools/" class="hide-md{% if url.startswith('tools') %} is-current{% endif %}">Tools</a>
-      <a href="/certification/" class="head-cert hide-sm{% if url.startswith('certification') or url.startswith('verify') %} is-current{% endif %}">{{ icon("award", 17) }} Certification</a>
+    <nav class="primary-nav" aria-label="Main">
+      <ul>
+        {% for d in primary %}
+        <li><a href="{{ d.url }}"{% if cur_area == d.id %} class="is-current" aria-current="{{ 'page' if url == d.url[1:] else 'true' }}"{% endif %}>{{ d.title }}</a></li>
+        {% endfor %}
+      </ul>
     </nav>
 
     <div class="head-tools">
@@ -63,15 +65,19 @@
 </header>
 
 <div class="app">
-  <aside class="sidebar" id="sidebar" aria-label="Course navigation" data-sidebar>
+  <aside class="sidebar" id="sidebar" aria-label="Site and course navigation" data-sidebar>
     <div class="sb-mobile-head">
-      <strong>Course menu</strong>
-      <button class="icon-btn" type="button" data-topics-close aria-label="Close course menu">{{ icon("close", 20) }}</button>
+      <strong>Menu</strong>
+      <button class="icon-btn" type="button" data-topics-close aria-label="Close menu">{{ icon("close", 20) }}</button>
     </div>
     <nav class="sb-nav">
-      <a class="sb-top{% if url == '' %} is-current{% endif %}" href="/">{{ icon("compass", 18) }}<span>Dashboard</span></a>
-      <a class="sb-top{% if url.startswith('progress') %} is-current{% endif %}" href="/progress/">{{ icon("chart", 18) }}<span>My progress</span><span class="sb-overall" data-sb-overall></span></a>
-      <p class="sb-label">Course</p>
+      <div class="sb-primary">
+        {% for d in primary %}
+        <a class="sb-top{% if cur_area == d.id %} is-current{% endif %}" href="{{ d.url }}"><span class="sb-ico">{{ icon(d.icon, 18) }}</span><span>{{ d.title }}</span></a>
+        {% endfor %}
+      </div>
+      <a class="sb-top{% if url.startswith('progress') %} is-current{% endif %}" href="/progress/"><span class="sb-ico">{{ icon("chart", 18) }}</span><span>Your learning</span><span class="sb-overall" data-sb-overall></span></a>
+      <p class="sb-label">Course topics</p>
       {% for n in nav %}
         {% if n['items'] %}
         <details class="sb-sec{% if url.startswith(n.id ~ '/') %} is-active{% endif %}"{% if url.startswith(n.id ~ '/') %} open{% endif %} data-sb-sec="{{ n.id }}">
@@ -89,7 +95,11 @@
       {% endfor %}
       <a class="sb-cert-card" href="/certification/">
         {{ icon("award", 22) }}
-        <span><strong>Get certified</strong><small>{{ site.certification.questions }} questions, free, verifiable</small></span>
+        {% if site.certification.api_url %}
+        <span><strong>REVEX exam</strong><small>{{ site.certification.questions }}-question open-book exam, free</small></span>
+        {% else %}
+        <span><strong>REVEX exam</strong><small>Coming soon: not open yet</small></span>
+        {% endif %}
       </a>
     </nav>
   </aside>
@@ -104,21 +114,38 @@
   <div class="wrap foot-grid">
     <div class="foot-brand">
       <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><rect x="2.5" y="2.5" width="19" height="19" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m7 12.5 3.3 3.3L17.5 8.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="brand-word">{{ site.name }}</span></a>
-      <p>{{ site.tagline }}. Free to use, no sign-up.</p>
+      <p>{{ site.tagline }}. Free to use, no sign-up, no accounts.</p>
       <p class="foot-author">Written by <a href="{{ site.author.linkedin }}" rel="author noopener" target="_blank">{{ site.author.name }}</a>, {{ site.author.role }}.</p>
     </div>
-    <nav aria-label="Footer topics">
-      <p class="foot-h">Learn</p>
-      <ul>{% for s in sections[:5] %}<li><a href="/{{ s.id }}/">{{ s.title }}</a></li>{% endfor %}</ul>
+    <nav aria-label="Footer: learn and practise">
+      <p class="foot-h">Learn and practise</p>
+      <ul>
+        {% for p in paths %}<li><a href="/learn/{{ p.id }}/">{{ p.title }}</a></li>{% endfor %}
+        <li><a href="/practice/">Practice lab</a></li>
+        <li><a href="/progress/">Your learning</a></li>
+      </ul>
     </nav>
-    <nav aria-label="Footer practice">
-      <p class="foot-h">Practise</p>
-      <ul>{% for s in sections[5:] %}<li><a href="/{{ s.id }}/">{{ s.title }}</a></li>{% endfor %}
-      <li><a href="/progress/">Your progress</a></li><li><a href="/about/">About and disclaimers</a></li></ul>
+    <nav aria-label="Footer: reference">
+      <p class="foot-h">Reference</p>
+      <ul>
+        <li><a href="/denials/codes/">Denial and remark codes</a></li>
+        <li><a href="/glossary/">Terminology</a></li>
+        <li><a href="/specialties/">Specialties</a></li>
+        <li><a href="/sources/">Official sources</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Footer: about">
+      <p class="foot-h">About</p>
+      <ul>
+        <li><a href="/about/">About REVEX</a></li>
+        <li><a href="/about/#disclaimer">Disclaimer</a></li>
+        <li><a href="/about/#privacy">Privacy and your data</a></li>
+        <li><a href="https://github.com/rajeshnayak3-dev/rajeshnayak3-dev.github.io/issues" rel="noopener" target="_blank">Report an error</a></li>
+      </ul>
     </nav>
   </div>
-  <div class="wrap foot-legal">
-    <p>Educational content only, not legal, coding-compliance or payer-specific advice. Always confirm rules with the payer contract, CMS manuals and current code books. CPT® is a registered trademark of the American Medical Association; code descriptions on REVEX are simplified summaries. All patients, claims and amounts shown are fictional.</p>
+  <div class="wrap foot-legal" id="site-disclaimer">
+    <p><strong>Educational resource only.</strong> REVEX is independent and isn't affiliated with or endorsed by CMS, X12, the AMA, any payer, employer or accrediting body. Examples, patients, claims and amounts are fictional. Requirements vary by payer, plan, state, contract, service and date, so verify current official policy and follow your employer's procedures. Never enter real patient information (PHI) into REVEX or any public tool. CPT® is a registered trademark of the American Medical Association; code descriptions on REVEX are simplified summaries.</p>
     <p>© {{ year }} {{ site.name }}</p>
   </div>
 </footer>
@@ -132,7 +159,7 @@
       <button class="icon-btn" type="button" data-search-close aria-label="Close search">{{ icon("close", 20) }}</button>
     </div>
     <ul class="search-results" data-search-results role="listbox"></ul>
-    <p class="search-hint" data-search-hint>Try “timely filing”, “CO-45”, “spend down” or “modifier 25”.</p>
+    <p class="search-hint" data-search-hint aria-live="polite">Try “timely filing”, “CO-45”, “spend down” or “modifier 25”.</p>
   </div>
 </div>
 

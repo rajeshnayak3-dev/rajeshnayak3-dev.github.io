@@ -1,0 +1,320 @@
+# Practice cases added October 2026. All people, plans, numbers and claims are fictional.
+- title: Corrected claim or appeal?
+  slug: corrected-claim-or-appeal
+  id: SC-17
+  level: Intermediate
+  tag: Denials
+  minutes: 7
+  summary: An MRI denied for medical necessity. Is the claim wrong, or is the payer's decision wrong? The answer decides the route.
+  keywords: corrected claim vs appeal medical necessity CO-50 diagnosis coding review lumbar MRI 72148 radiculopathy
+  objectives:
+    - Decide whether a denial needs a claim correction or an appeal
+    - Route diagnosis changes through coding review instead of editing codes yourself
+    - Check the payer's correction rules and deadline before sending anything
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | Payer | Northwind Health PPO (fictional commercial plan) |
+    | Service | CPT 72148, MRI lumbar spine without contrast, DOS 08/04/2026 |
+    | Claim diagnosis | M54.50 Low back pain, unspecified |
+    | ERA | Denied **CO-50** (not medically necessary); remark points to the payer's medical policy |
+    | Payer policy (portal) | Lumbar MRI covered for radiculopathy or red-flag symptoms, or after 6 weeks of failed conservative treatment |
+    | Physician note | Documents **lumbar radiculopathy** and 8 weeks of physical therapy without improvement |
+  stages:
+    - q: What is the most likely problem?
+      choices:
+        - text: The payer is wrong; appeal straight away with the note.
+          v: ok
+          why: An appeal might work, but the claim itself doesn't show what the note documents. Fixing a claim that's wrong is usually faster and cleaner than appealing it.
+        - text: The claim doesn't carry the diagnosis the documentation supports, so it should go for coding review.
+          v: best
+          why: The note documents radiculopathy, which meets the policy, but the claim only says unspecified low back pain. If a coder confirms the more specific diagnosis is supported, the claim needs correcting.
+        - text: Change the diagnosis to M54.16 yourself and resubmit.
+          v: wrong
+          why: AR associates shouldn't change clinical codes. A certified coder must review the documentation and confirm the code. Changing codes without that review is a compliance risk.
+    - q: The coder confirms M54.16 (radiculopathy, lumbar region) is supported. What do you check before sending a corrected claim?
+      choices:
+        - text: The payer's corrected-claim rules for this claim type, the frequency code and original claim number it wants, and the correction deadline.
+          v: best
+          why: Payers differ on whether they accept replacement claims, how they want them coded, and how long you have. Checking first avoids a rejection or a duplicate denial.
+        - text: Nothing; send a new original claim with the new diagnosis.
+          v: wrong
+          why: A new original claim for an adjudicated service usually denies as a duplicate (CO-18). Use the payer's correction process.
+        - text: Wait for the payer to reprocess on its own.
+          v: wrong
+          why: The payer has no reason to reprocess. Nothing changes unless you act.
+    - q: Suppose instead the claim already had M54.16, and the payer still denied CO-50. What's the route?
+      choices:
+        - text: Corrected claim.
+          v: wrong
+          why: There's nothing wrong with the claim to correct. Resending the same data gets the same answer.
+        - text: Appeal or reconsideration, with the note, the PT records and the payer's own policy criteria, within the appeal deadline.
+          v: best
+          why: When the claim is right and the decision is wrong, the route is the payer's appeal process with evidence that meets its policy.
+        - text: Bill the patient.
+          v: wrong
+          why: CO means the payer holds the provider liable. There's no basis to bill the patient.
+  documentation: "Note the denial, the policy criteria, the coding review result and who confirmed it, the route chosen (corrected claim or appeal), the reference to the payer rule you followed, the deadline, and the follow-up date."
+  escalate: "If coding and the physician disagree on the diagnosis, if the payer won't say whether it accepts corrected claims for this case, or if the correction or appeal deadline is within a few days."
+  root_cause: "Charge entry or coding selected an unspecified diagnosis when the note supported a specific one. Prevention: coding education on specificity for imaging, and a pre-bill edit that flags lumbar MRI with only M54.50."
+  sources:
+    - title: CMS ICD-10 code sets
+      url: https://www.cms.gov/medicare/coding-billing/icd-10-codes
+  takeaways:
+    - Claim wrong? Correct it through the payer's process. Decision wrong? Appeal.
+    - Diagnosis changes go through a coder, never straight from AR.
+    - Check the payer's correction rules and deadline before you send.
+
+- title: The payment that came back
+  slug: recoupment-after-retro-termination
+  id: SC-18
+  level: Advanced
+  tag: Payment posting
+  minutes: 7
+  summary: A claim paid in March was taken back in September because the patient's coverage ended retroactively. Post it, find who really owes, and protect the deadlines.
+  keywords: recoupment takeback retro termination reversal PLB WO overpayment recovery offset new payer timely filing
+  objectives:
+    - Post a reversal and an offset so the account and the deposit both balance
+    - Work out who is now responsible for the service
+    - Protect the new payer's filing deadline
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | Original payment | Lakeside Health Plan (fictional), paid **$310.00** on 03/22/2026 for DOS 03/02/2026 |
+    | September ERA | Claim reversal for the March claim: payment **−$310.00**, CARC **27** (expenses incurred after coverage terminated) |
+    | Same ERA, provider level | PLB adjustment **WO** (overpayment recovery) −$310.00, offset against other claims on the check |
+    | Eligibility now | Coverage terminated retroactively to **02/28/2026** |
+    | Registration | No other insurance on file |
+  stages:
+    - q: How should the September ERA be posted?
+      choices:
+        - text: Post the reversal against the March claim, so its balance returns, and post the WO offset against the check so the deposit balances.
+          v: best
+          why: The money was taken from this claim, so the account must show it's open again. The PLB offset explains why the check is smaller than the claims it paid. Both sides then balance.
+        - text: Post −$310 against whichever claim has a balance on the check.
+          v: wrong
+          why: That puts the takeback on an unrelated account, hiding the open balance on the real one and creating a false credit elsewhere.
+        - text: Ignore it; the money's gone anyway.
+          v: wrong
+          why: Unposted recoupments leave the deposit unbalanced and the March account looking paid when it isn't.
+    - q: What's the next action on the March account?
+      choices:
+        - text: Confirm the termination date and reason with Lakeside, ask the patient for coverage in effect on 03/02, and bill that payer.
+          v: best
+          why: Someone else may cover the service (a new employer plan, COBRA, Medicaid). Confirm before acting, and find the right payer.
+        - text: Bill the patient $310 now.
+          v: ok
+          why: The patient may end up responsible, but billing first skips finding coverage that may exist and can upset a patient who has insurance. Ask first, then follow the client's self-pay policy if there's none.
+        - text: Appeal the recoupment because the claim was paid.
+          v: wrong
+          why: If coverage really ended before the service, the plan isn't liable. Dispute only if the termination looks wrong or breaks a recoupment limit.
+    - q: The patient has a new employer plan from 03/01/2026. Its filing limit is 90 days from the date of service, which has passed. What do you do?
+      choices:
+        - text: Write it off; the deadline has passed.
+          v: wrong
+          why: Many payers accept late claims when you show the prior payer's recoupment or denial; that depends on the payer. Check before writing anything off.
+        - text: Check the new plan's rules for claims delayed by another payer's retroactive denial or recoupment, then submit promptly with the Lakeside ERA as proof.
+          v: best
+          why: Payers often allow a period from the other payer's notice. The rules vary, so check them, act fast, and attach proof.
+        - text: Wait for the patient to tell the plan.
+          v: wrong
+          why: The provider bills the claim. Waiting only uses up whatever time is left.
+  documentation: "Note the reversal and offset with the ERA and check numbers, the confirmed termination date and source, the new coverage details, the new payer's rule for late claims and its source, the submission date, and the follow-up date."
+  escalate: "If the recoupment date looks outside the payer's contract or a state law limit on retroactive recoupment, if you can't match the offset to a claim, or if the patient disputes the termination."
+  root_cause: "Retroactive terminations come from the employer or plan, not the provider. Prevention is limited: verify eligibility at each visit, and work recoupments quickly so new payers' deadlines aren't lost."
+  sources:
+    - title: X12 Claim Adjustment Reason Codes (CARC 27)
+      url: https://x12.org/codes/claim-adjustment-reason-codes
+  takeaways:
+    - A reversal goes on the claim it came from; the PLB offset goes on the check.
+    - Retro terminations mean finding the right payer, not just billing the patient.
+    - Late-claim exceptions depend on the payer; check them and act fast.
+
+- title: The remittance that doesn't add up
+  slug: ambiguous-remit-escalate
+  id: SC-19
+  level: Intermediate
+  tag: Escalation
+  minutes: 6
+  summary: An in-network claim paid $0 with a contractual adjustment for the full charge and no explanation. Guessing is the wrong answer.
+  keywords: ambiguous remittance CO-45 full charge zero pay research escalate underpayment contract rate payment dispute
+  objectives:
+    - Recognise a remittance that doesn't make sense under the contract
+    - Research before posting a final adjustment
+    - Escalate with evidence when the payer can't explain its own result
+  setup: |
+    | Field | Detail |
+    |---|---|
+    | Payer | Bayview Advantage (fictional Medicare Advantage plan), provider in-network |
+    | Service | CPT 99213, DOS 09/10/2026, billed $220.00 |
+    | ERA | Allowed **$0.00**, paid **$0.00**, **CO-45 $220.00**, no remark code |
+    | Contract fee schedule | 99213 contracted at **$142.00** |
+    | Eligibility | Active, no other coverage |
+  stages:
+    - q: What do you do first?
+      choices:
+        - text: Post it and close the account; CO-45 is a normal contractual adjustment.
+          v: wrong
+          why: CO-45 normally takes off the difference between billed and allowed. Taking the full charge with $0 allowed on a contracted service doesn't match the contract, so it needs research, not a write-off.
+        - text: Resubmit the claim.
+          v: wrong
+          why: The claim was adjudicated, so resubmitting will likely deny as a duplicate and adds noise.
+        - text: Research it. Check the claim detail on the portal, the contract rate and any payer bulletins, then call the payer to ask how it was processed.
+          v: best
+          why: When a remittance doesn't make sense, you find out why before taking a final action.
+    - q: The rep says it "processed per contract" but can't name the rule or the allowed amount. What next?
+      choices:
+        - text: Accept it and write off the balance.
+          v: wrong
+          why: An answer that can't be explained isn't evidence. Writing off a contracted payment you're owed loses revenue.
+        - text: Document the call, then escalate to your lead and the payer's provider-relations contact, or file a payment dispute or reconsideration under the plan's process, with the contract rate attached.
+          v: best
+          why: The question is now about the contract, which needs someone with authority on both sides. Follow the plan's dispute process and keep the evidence together.
+        - text: Bill the patient.
+          v: wrong
+          why: The adjustment is CO, not PR. Nothing on the ERA makes the patient responsible.
+    - q: How should the account sit while the dispute is open?
+      choices:
+        - text: Hold the adjustment in an underpayment or review status under the client's policy, with a follow-up date.
+          v: best
+          why: That keeps the balance visible, stops it being written off by mistake, and keeps the follow-up on track.
+        - text: Close it so it doesn't age.
+          v: wrong
+          why: Closing hides an open recovery and makes AR look better than it is.
+  documentation: "Note the ERA detail, the contract rate and its source, the call with reference number and what the rep said, the escalation (to whom, when) or dispute reference, and the follow-up date."
+  escalate: "Escalate whenever the payer can't explain an adjustment, the result conflicts with the contract, or several claims show the same pattern (it may be a payer system issue)."
+  root_cause: "Unknown until the payer explains. If several claims show it, it may be a payer loading error in the fee schedule; report the pattern so it can be fixed for all claims."
+  sources:
+    - title: X12 Claim Adjustment Reason Codes (CARC 45)
+      url: https://x12.org/codes/claim-adjustment-reason-codes
+  takeaways:
+    - If a remittance doesn't match the contract, research before you adjust.
+    - "\"Processed per contract\" without the rule isn't an answer; escalate with evidence."
+    - Keep disputed balances visible until they're resolved.
+
+- title: Five accounts, one morning
+  slug: ar-worklist-prioritization
+  id: SC-20
+  level: Intermediate
+  tag: AR prioritisation
+  minutes: 6
+  summary: You have time for a few accounts before lunch. Which ones first, and why?
+  keywords: AR prioritization worklist deadline risk expected value timely filing Medicare unprocessable MA130 follow-up interval
+  objectives:
+    - Rank accounts by deadline risk, expected value and recovery potential
+    - Avoid wasting touches on claims still inside normal processing time
+    - Send unrecoverable accounts for review rather than leaving them to age
+  setup: |
+    Today is 10/14/2026. All accounts are fictional.
+
+    | Account | Payer | Expected payment | Status | Key dates |
+    |---|---|---|---|---|
+    | **A** | Commercial | $1,850 | No response; 277CA accepted | DOS 06/16/2026; filing limit 180 days from DOS; payer's normal processing 30 days |
+    | **B** | Original Medicare | $96 | Rejected as unprocessable (CO-16, MA130) 10/04 | DOS 11/10/2025; Medicare limit 1 calendar year after DOS |
+    | **C** | Commercial | $4,200 | Denied CO-50 on 09/24 | Appeal limit 180 days from the denial |
+    | **D** | Commercial | $60 | Denied CO-29 (timely filing) | DOS 08/2025; no proof of timely filing found |
+    | **E** | Commercial | $730 | Accepted 10/02 | Payer's normal processing 30 days |
+  stages:
+    - q: Which account do you work first?
+      choices:
+        - text: C, because it's the biggest balance.
+          v: ok
+          why: C matters, but its appeal deadline is months away. Balance alone shouldn't beat a deadline that's about to pass.
+        - text: B, because a new claim must reach Medicare by 11/10/2026, less than a month away.
+          v: best
+          why: An unprocessable claim has no appeal rights; it needs a corrected new claim inside the filing limit. Miss 11/10 and the $96 is lost. Deadline risk comes first.
+        - text: E, because it's the newest.
+          v: wrong
+          why: E is only 12 days into a 30-day processing window. Calling now wastes a touch.
+    - q: What comes next?
+      choices:
+        - text: A, then C. A is past normal processing with about two months to its filing limit, and C is high value with time to build a good appeal.
+          v: best
+          why: A needs a status check now (it's overdue, and if the payer has no record you need time to resubmit with proof). C is worth the most and can be worked this week with records.
+        - text: D, then E.
+          v: wrong
+          why: D has no recovery path and E isn't due. Both use time that A and C need.
+        - text: C only, for the rest of the day.
+          v: ok
+          why: C deserves careful work, but leaving A unchecked risks its filing deadline if the payer has no record of the claim.
+    - q: What should happen to D?
+      choices:
+        - text: Leave it in the queue; maybe something changes.
+          v: wrong
+          why: Accounts with no recovery path clog the queue and distort aging. They need a decision.
+        - text: Search once more for proof of timely filing; if there's none, send it for adjustment review under the client's policy, with a root-cause note.
+          v: best
+          why: That closes it correctly, leaves an audit trail and records why the filing was late so the cause can be fixed.
+        - text: Bill the patient.
+          v: wrong
+          why: A timely filing denial is the provider's responsibility under most contracts. The patient usually can't be billed.
+  documentation: "For each account, note the action, the reason for its priority if it isn't obvious, and a follow-up date based on the payer's processing time and the next deadline. For E, set follow-up shortly after the 30-day window."
+  escalate: "If an account can't be worked before its deadline (missing information, system issue), tell your lead the same day."
+  root_cause: "B: why was a Medicare claim unprocessable, and why was it only worked 10 days later? D: why did it miss filing? Both point to queue rules or front-end data issues worth fixing."
+  sources:
+    - title: 42 CFR 424.44, Time limits for filing Medicare claims
+      url: https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-424/subpart-C/section-424.44
+  takeaways:
+    - Deadline risk first, then expected value, then age.
+    - Don't touch claims still inside normal processing time.
+    - Unrecoverable accounts need a documented decision, not more aging.
+
+- title: Auditing an AR note
+  slug: qa-audit-ar-notes
+  id: SC-21
+  level: Advanced
+  tag: Quality assurance
+  minutes: 7
+  summary: You're the auditor. Score an associate's work against the SOP, set the severity, and decide what feedback and fix it needs.
+  keywords: QA audit AR note critical error non-critical error feedback root cause authorization CO-197 corrected claim auditor scenario
+  objectives:
+    - Apply checkpoints from a written standard to real work
+    - Classify errors by impact as critical or non-critical
+    - Give feedback and look for a process cause, not just a person
+  setup: |
+    **Standard:** AR SOP v3.2 (fictional). A note must include date, source, reference number (for calls), status, action, next action and follow-up date. For CO-197 denials, check the authorization log before choosing an action; if an authorization exists, send a corrected claim with it under the payer's rules.
+
+    **Account:** denied **CO-197** (authorization absent). The client's authorization log shows **auth #A778** approved for this service and date, but it wasn't on the claim.
+
+    **Associate's note:** "10/12 Called payer, claim denied, will appeal. F/U 30 days."
+  stages:
+    - q: Which checkpoints fail?
+      choices:
+        - text: Only the note format.
+          v: wrong
+          why: The note is incomplete, but the bigger problem is the action.
+        - text: The note (no reference number, no denial detail, no next action) and the action (appeal instead of a corrected claim with the existing authorization).
+          v: best
+          why: The SOP says to check the authorization log for CO-197. An approved authorization existed, so the right action was to add it to the claim, not appeal.
+        - text: Nothing; appealing a CO-197 is fine.
+          v: wrong
+          why: Appealing a claim that's missing data the provider already has is slower and may fail. The SOP sets the action.
+    - q: How severe is the wrong action under a typical impact-based rubric?
+      choices:
+        - text: Non-critical; it's only a delay.
+          v: ok
+          why: Some rubrics treat it that way. But an appeal for a correctable error can use up the correction window and risk the payment, which most impact-based rubrics count as critical.
+        - text: Critical, because the action wouldn't resolve the denial and risks losing the payment if deadlines pass. The incomplete note is a non-critical error.
+          v: best
+          why: Critical errors are defined by financial, compliance or patient impact. The note problems don't change the outcome; the action might.
+        - text: Critical for both the note and the action.
+          v: wrong
+          why: Severity should follow impact. A missing reference number is a standards issue; it doesn't put the payment at risk on its own.
+    - q: Three other associates made the same mistake this month. What do you do?
+      choices:
+        - text: Give each one a warning.
+          v: wrong
+          why: A pattern across people points to a process or training gap. Warnings alone won't fix it.
+        - text: Give each person specific feedback, and look for the shared cause, for example no step in the worklist to check the authorization log, or the log being hard to reach. Raise a corrective action with an owner and a re-audit.
+          v: best
+          why: Individual feedback fixes the accounts; finding the shared cause stops it happening again; the re-audit proves the fix worked.
+        - text: Change the rubric so it isn't an error.
+          v: wrong
+          why: The rule exists for a reason. Fix the process, not the measurement.
+  documentation: "Record each failed checkpoint with the SOP section, the severity and why, the correct action, the feedback given and when, and the CAPA reference if one is opened."
+  escalate: "If the corrected-claim window is close, tell the AR lead the same day so the account is fixed before the deadline, separately from the audit process."
+  root_cause: "Possible process causes: the authorization log isn't linked from the work queue, the SOP step is new and wasn't trained, or productivity targets push people to the quickest action."
+  takeaways:
+    - Audit against the written standard, and cite it.
+    - Severity follows impact.
+    - Patterns across people need a process fix and a re-audit.

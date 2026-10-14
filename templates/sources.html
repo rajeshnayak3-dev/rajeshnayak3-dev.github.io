@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% from "_parts.html" import crumbs %}
+{% block main %}
+<div class="wrap">
+  {{ crumbs([("RCM reference", "/reference/"), ("Official sources", None)]) }}
+  <header class="section-head">
+    <span class="sh-ico">{{ icon("check", 28) }}</span>
+    <div>
+      <h1>Official sources and review policy</h1>
+      <p class="lede">Where REVEX checks policy-sensitive statements, what each source covers, and when it was last reviewed.</p>
+    </div>
+  </header>
+
+  <section class="prose">
+    <h2>Review policy</h2>
+    <ul>
+      <li>Statements about Medicare and Medicaid rules, beneficiary protections, filing limits, notices and code-set maintenance are checked against primary sources: CMS manuals and regulations, Medicare contractor (MAC) pages, HHS, and X12.</li>
+      <li>Lessons show when their policy-sensitive statements were last reviewed. Lessons not yet re-reviewed say so.</li>
+      <li>A MAC's page applies to its own jurisdiction. REVEX uses one MAC as an example when rules are similar; check your own MAC.</li>
+      <li>Commercial payer rules come from each payer's provider manual and the provider's contract. REVEX doesn't publish payer-specific rules unless it can link a source.</li>
+      <li>Industry practice (KPI definitions, audit methods, workflow advice) is labelled as practice, not regulation.</li>
+      <li>Found something out of date? <a href="https://github.com/rajeshnayak3-dev/rajeshnayak3-dev.github.io/issues" rel="noopener" target="_blank">Report it on GitHub</a> with the source.</li>
+    </ul>
+  </section>
+
+  {% for g in groups %}
+  <section class="src-group">
+    <h2>{{ g.group }}</h2>
+    <div class="table-wrap" tabindex="0">
+      <table class="src-table">
+        <thead><tr><th scope="col">Source</th><th scope="col">What REVEX uses it for</th><th scope="col">Last reviewed</th></tr></thead>
+        <tbody>
+          {% for it in g['items'] %}
+          <tr><td><a href="{{ it.url }}" rel="noopener" target="_blank">{{ it.title }}</a></td><td>{{ it.scope }}</td><td class="mono">{{ it.reviewed }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% endfor %}
+</div>
+{% endblock %}

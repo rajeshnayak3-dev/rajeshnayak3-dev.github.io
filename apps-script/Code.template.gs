@@ -77,7 +77,8 @@ function doPost(e) {
 /* ------------------------------------------------------------ core logic (pure, testable) */
 
 function cleanName_(name) {
-  return String(name || "").replace(/[<>"`\\]/g, "").replace(/\s+/g, " ").trim().slice(0, 80);
+  // Keep letters, combining marks, spaces, full stops, apostrophes and hyphens only.
+  return String(name || "").replace(/[^\p{L}\p{M} .'\u2019-]/gu, "").replace(/\s+/g, " ").trim().slice(0, 80);
 }
 
 function scoreAttempt_(ids, answers) {
@@ -105,7 +106,7 @@ function scoreAttempt_(ids, answers) {
 function makeCertId_(date) {
   var chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
   var s = "";
-  for (var i = 0; i < 6; i++) s += chars.charAt(Math.floor(Math.random() * chars.length));
+  for (var i = 0; i < 8; i++) s += chars.charAt(Math.floor(Math.random() * chars.length));
   var ym = date.getFullYear() + ("0" + (date.getMonth() + 1)).slice(-2);
   return "RVX-" + ym + "-" + s;
 }
@@ -131,11 +132,12 @@ function submitExam_(body, now) {
 
 function verifyCertificate_(id) {
   id = String(id || "").toUpperCase().trim();
-  if (!/^RVX-\d{6}-[A-Z0-9]{6}$/.test(id)) return { ok: true, valid: false, reason: "That isn't a valid certificate ID format." };
+  if (!/^RVX-\d{6}-[A-Z0-9]{8}$/.test(id)) return { ok: true, valid: false, reason: "That isn't a valid certificate ID format." };
   var row = store_().findCert(id);
   if (!row) return { ok: true, valid: false, reason: "No certificate with this ID was found." };
   if (row[6] && row[6] !== "Valid") return { ok: true, valid: false, reason: "This certificate has been revoked." };
-  return { ok: true, valid: true, id: row[0], name: row[1], percent: row[2], score: row[3], issued: row[4], certName: row[5] };
+  // Only what's needed to confirm the certificate; the score stays private.
+  return { ok: true, valid: true, id: row[0], name: row[1], issued: row[4], certName: row[5] };
 }
 
 /* ------------------------------------------------------------ storage (Google Sheets) */

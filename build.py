@@ -140,6 +140,32 @@ def register(url, title, description, section=None, keywords="", kind="page",
                   "search": search})
 
 
+# ------------------------------------------------------------------ navigation
+PRIMARY = [
+    {"id": "dashboard", "title": "Dashboard", "url": "/", "icon": "compass"},
+    {"id": "learn", "title": "Learning paths", "url": "/learn/", "icon": "route"},
+    {"id": "reference", "title": "RCM reference", "url": "/reference/", "icon": "book"},
+    {"id": "practice", "title": "Practice lab", "url": "/practice/", "icon": "check"},
+    {"id": "career", "title": "Career & certification", "url": "/career/", "icon": "award"},
+]
+
+
+def area_for(url):
+    """Which of the five main destinations a page belongs to (for highlighting)."""
+    if url in ("", "progress/"):
+        return "dashboard"
+    if url.startswith(("reference/", "denials/codes/", "glossary/", "specialties/", "sources/",
+                       "tools/filing-limits-reference/")):
+        return "reference"
+    if url.startswith(("practice/", "scenarios/", "tools/")):
+        return "practice"
+    if url.startswith(("career/", "interview-prep/", "certification/", "verify/")):
+        return "career"
+    if url.startswith(("about/",)):
+        return ""
+    return "learn"
+
+
 # ------------------------------------------------------------------ loaders
 def load_lessons(section_id):
     folder = CONTENT / section_id
@@ -167,6 +193,9 @@ def load_lessons(section_id):
             "updated": meta.get("updated", TODAY),
             "track": meta.get("track", True),
             "kind": meta.get("kind", "lesson"),
+            "objectives": meta.get("objectives", []),
+            "sources": meta.get("sources", []),
+            "reviewed": str(meta["reviewed"]) if meta.get("reviewed") else None,
             "html": html,
             "toc": toc,
             "headings": " ".join(t["name"] for t in toc),
@@ -263,7 +292,11 @@ def build():
     for f in sorted(DATA.glob("specialties*.yaml")):
         specialties += yaml.safe_load(f.read_text(encoding="utf-8")) or []
     specialties.sort(key=lambda s: s["name"].lower())
-    scenarios = load_yaml("scenarios.yaml") or []
+    scenarios = []
+    for f in sorted(DATA.glob("scenarios*.yaml"), key=lambda f: (f.name != "scenarios.yaml", f.name)):
+        scenarios += yaml.safe_load(f.read_text(encoding="utf-8")) or []
+    for n, sc in enumerate(scenarios, 1):
+        sc.setdefault("id", f"SC-{n:02d}")
     glossary = load_yaml("glossary.yaml") or []
 
     # ---- markdown lesson sections
@@ -287,6 +320,9 @@ def build():
                      for sc in scenarios]
         nav.append({"id": sec["id"], "title": sec["title"], "icon": sec["icon"], "items": items})
     env.globals["nav"] = nav
+    env.globals["primary"] = PRIMARY
+    env.globals["area_for"] = area_for
+    env.globals["paths"] = load_yaml("paths.yaml") or []  # enriched later, used by the footer now
 
     # ---- lesson pages
     for sec in SITE["sections"]:
@@ -361,6 +397,7 @@ def build():
         nxt = scenarios[i + 1] if i + 1 < len(scenarios) else None
         s_html = dict(s)
         s_html["setup_html"] = md_to_html(s.get("setup", ""))[0]
+        s_html["sources"] = s.get("sources", [])
         render("scenario.html", s["url"], sc=s_html, section=SECTIONS["scenarios"],
                next=nxt, title=f'Scenario: {s["title"]}', description=s.get("summary", ""),
                data_json=json.dumps({"stages": s["stages"], "takeaways": s.get("takeaways", [])}))
@@ -369,7 +406,7 @@ def build():
     section_items["scenarios"] = [
         {"url": s["url"], "title": s["title"], "short": s["title"],
          "description": s.get("summary", ""), "minutes": s.get("minutes", 6),
-         "level": s.get("level", "Intermediate"), "track": True, "tag": s.get("tag")}
+         "level": s.get("level", "Intermediate"), "track": True, "tag": s.get("tag"), "id": s["id"]}
         for s in scenarios]
 
     # ---- glossary
@@ -390,6 +427,90 @@ def build():
     for t in terms:
         register(f"glossary/#{t['id']}", t["term"], re.sub(r"<[^>]+>", "", md_inline(t["def"]))[:160],
                  "glossary", t.get("aka", ""), "term")
+
+    # ---- every known page, for validating paths and hub links
+    known = {}
+    for sec in SITE["sections"]:
+        for it in section_items.get(sec["id"], []):
+            known[it["url"]] = dict(it, section=sec["id"])
+    for s in scenarios:
+        known[s["url"]] = {"url": s["url"], "title": s["title"], "short": s["title"],
+                           "minutes": s.get("minutes", 6), "track": True, "section": "scenarios",
+                           "level": s.get("level", "Intermediate"), "description": s.get("summary", ""),
+                           "id": s["id"]}
+
+    def need(u, where):
+        if u not in known:
+            raise SystemExit(f"{where}: unknown page {u!r}")
+        return known[u]
+
+    # ---- learning paths
+    paths = env.globals["paths"]
+    for pth in paths:
+        total = 0
+        for m in pth["modules"]:
+            m["items"] = [need(u, f'paths.yaml {pth["id"]}') for u in m["lessons"]]
+            m["minutes"] = sum(i["minutes"] or 0 for i in m["items"])
+            total += m["minutes"]
+        pth["practice_items"] = [need(u, f'paths.yaml {pth["id"]} practice') for u in pth.get("practice", [])]
+        total += sum(i["minutes"] or 0 for i in pth["practice_items"] if i.get("minutes"))
+        pth["minutes"] = total
+        pth["hours"] = max(0.5, round(total / 30) / 2)
+        pth["hours"] = int(pth["hours"]) if pth["hours"] == int(pth["hours"]) else pth["hours"]
+        pth["track_urls"] = [i["url"] for m in pth["modules"] for i in m["items"]] + \
+                            [i["url"] for i in pth["practice_items"] if i.get("track")]
+    for pth in paths:
+        render("path.html", f'learn/{pth["id"]}/', path=pth,
+               title=f'{pth["title"]}: RCM learning path',
+               description=f'{pth["audience"]}. Outcomes, modules, practice cases and an estimated time for the {pth["title"]} path.')
+        register(f'learn/{pth["id"]}/', f'Learning path: {pth["title"]}', pth["audience"], None,
+                 "learning path " + " ".join(pth["outcomes"]), "page")
+    render("learn.html", "learn/", title="Learning paths",
+           description="Three guided paths through REVEX: New to RCM, Working in RCM, and QA, senior, team lead and analyst.")
+    register("learn/", "Learning paths", "Guided paths for beginners, working associates and QA or leads.", None,
+             "learning path curriculum course", "page")
+
+    # ---- practice lab
+    lesson_quizzes = []
+    for sec in SITE["sections"]:
+        _, ls = lessons_by_section.get(sec["id"], (None, []))
+        n = sum(len(l["quiz"] or []) for l in ls)
+        if n:
+            lesson_quizzes.append({"section": sec, "count": n, "lessons": [l for l in ls if l["quiz"]]})
+    tags = {}
+    for s in scenarios:
+        tags.setdefault(s.get("tag") or "General", []).append(s)
+    render("practice.html", "practice/", scen_groups=sorted(tags.items()), quiz_groups=lesson_quizzes,
+           tools=section_items.get("tools", []), scen_count=len(scenarios),
+           title="Practice lab", description="Practise realistic, fictional RCM cases, quizzes and calculators, with rationales for every answer.")
+    register("practice/", "Practice lab", "Scenario library, quizzes and calculators.", None,
+             "practice cases exercises quiz scenarios", "page")
+
+    # ---- reference hub
+    ref_counts = {"codes": len(denials["codes"]), "terms": len(terms), "specialties": len(specialties),
+                  "insurance": len(lessons_by_section["insurance"][1]),
+                  "forms": len(lessons_by_section["forms-billing"][1])}
+    render("reference.html", "reference/", counts=ref_counts,
+           title="RCM reference library", description="Denial and remark codes, terminology, payers and programs, claim forms and transactions, specialties and official sources.")
+    register("reference/", "RCM reference", "Codes, terms, payers, forms, specialties and sources.", None,
+             "reference library lookup", "page")
+
+    sources = load_yaml("sources.yaml") or []
+    render("sources.html", "sources/", groups=sources,
+           title="Official sources and review policy", description="The CMS, X12, HHS and contractor sources REVEX uses, what each covers, and when REVEX last reviewed it.")
+    register("sources/", "Official sources", "CMS, X12, HHS and MAC sources with review dates.", None,
+             "sources references CMS X12 official policy", "page")
+
+    # ---- career & certification
+    roles = load_yaml("roles.yaml") or []
+    for r in roles:
+        for c in r["competencies"]:
+            c["page"] = need(c["link"], f'roles.yaml {r["id"]}')
+    render("career.html", "career/", roles=roles, cert=SITE.get("certification", {}),
+           interview=section_items.get("interview-prep", []),
+           title="Career and certification", description="RCM roles and the competencies each needs, a self-check list, interview practice, and the REVEX certificate status.")
+    register("career/", "Career and certification", "Role competencies, interview practice and certification.", None,
+             "career roles competencies AR associate denial specialist QA analyst team lead interview", "page")
 
     # ---- section landing pages (glossary has its own)
     for sec in SITE["sections"]:
@@ -430,7 +551,9 @@ def build():
     stats = {"lessons": sum(1 for _, ls in lessons_by_section.values() for l in ls if l["track"]),
              "codes": len(denials["codes"]), "specialties": len(specialties),
              "scenarios": len(scenarios), "tools": len(section_items.get("tools", []))}
-    render("home.html", "", featured=featured_codes, stats=stats,
+    featured_cases = [s for s in scenarios if s["slug"] in (
+        "ar-worklist-prioritization", "corrected-claim-or-appeal", "qmb-balance", "ambiguous-remit-escalate")]
+    render("home.html", "", featured=featured_codes, stats=stats, cases=featured_cases,
            title=f'{SITE["name"]}: free US healthcare RCM training',
            description=SITE["description"],
            first_lesson=(section_items.get("start-here") or [{"url": "start-here/"}])[0]["url"])
@@ -448,8 +571,8 @@ def build():
     render("certification.html", "certification/", exam_sections=exam_sections,
            bank_size=len(bank), cert=SITE.get("certification", {}),
            title="REVEX RCM certification exam",
-           description="Pass a 50-question exam on US healthcare revenue cycle management and earn a free, verifiable REVEX certificate.")
-    register("certification/", "REVEX RCM certification", "Take the certification exam and earn a verifiable certificate.",
+           description="The REVEX open-book exam on US healthcare revenue cycle management, how the educational certificate works, and its current status.")
+    register("certification/", "REVEX RCM certification", "Exam status and how the REVEX educational certificate works.",
              None, "certificate certification exam test", "page")
     render("verify.html", "verify/", cert=SITE.get("certification", {}),
            title="Verify a REVEX certificate",

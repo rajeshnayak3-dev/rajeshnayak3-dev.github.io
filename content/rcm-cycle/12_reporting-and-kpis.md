@@ -3,6 +3,7 @@ title: Reporting and RCM KPIs
 short: Reporting and KPIs
 description: The metrics every RCM team reports, with formulas, worked examples and typical benchmarks, so you can read a dashboard and explain it in an interview.
 order: 12
+reviewed: 2026-10-14
 level: Intermediate
 keywords: KPI days in AR net collection rate gross collection rate clean claim rate first pass resolution denial rate AR over 90 cost to collect charge lag
 quiz:
@@ -81,19 +82,36 @@ Easy to calculate, but it reflects the provider's fee schedule more than team pe
 
 ## Clean claim rate
 
-**Share of claims accepted with no edits or rejections on first submission.**
+**Share of claims that pass edits and are accepted with no errors on first submission.**
 
-> Clean claim rate = Claims accepted without errors ÷ Total claims submitted × 100
+> Clean claim rate = Claims accepted on first submission with no edits or rejections ÷ Total claims submitted × 100
 
-**Typical target:** 95% or higher.
+**Typical target:** 95% or higher. Many teams measure it at the clearinghouse (claims that pass scrubber edits); others measure payer acceptance (277CA). Say which one you mean.
+
+A **clean claim** is one with no defect that stops the payer from processing it. CMS describes a clean claim as one "that does not have any circumstance or defect that would inhibit timely payment"; Medicare contractors have up to 30 days to process clean claims before interest applies. Clean describes the claim's quality, **not** its outcome: a clean claim can still be denied for coverage or medical necessity, or pay $0 because the allowed amount went to the deductible.
 
 ## First-pass resolution rate (FPRR)
 
-**Share of claims paid on first submission without any rework.**
+**Share of claims fully resolved on first submission, with no rework.**
 
-> FPRR = Claims paid on first submission ÷ Total claims adjudicated × 100
+> FPRR = Claims resolved on first submission (paid, or correctly adjudicated to patient responsibility) ÷ Total claims adjudicated × 100
 
-**Typical target:** 90% or higher.
+**Typical target:** 90% or higher. Some organisations call a closely related measure **first-pass payment rate** and count only claims with a payer payment, so a claim that adjudicates entirely to the deductible counts differently. Check the definition before comparing numbers.
+
+## Keep these measures apart
+
+| Measure | Question it answers | Where it's measured |
+|---|---|---|
+| **Clean claim rate** | Did the claim pass edits and get accepted first time? | Scrubber / clearinghouse / 277CA |
+| **First-pass acceptance** | Did the payer accept the claim into adjudication (not reject it)? | 999 / 277CA acknowledgments |
+| **Rejection** | Was the claim returned *before* adjudication because of a data or format error? | Clearinghouse or payer front end |
+| **First-pass resolution / payment rate** | Was the claim resolved (or paid) with no rework after the first adjudication? | 835 ERA |
+| **Denial rate** | What share of adjudicated claims (or dollars) were denied? | 835 ERA |
+| **Final adjudication** | What did the payer finally decide, after any corrections, reopenings or appeals? | Last 835 for the claim |
+
+A claim can be clean, accepted, and still denied. A rejected claim was never adjudicated, so it isn't a denial and shouldn't be counted in the denial rate.
+
+Source: [CGS Medicare, Payment timeframes for clean claims](https://www.cgsmedicare.com/parta/claims/paytimeframe.html) (Medicare FFS; reviewed October 2026). KPI definitions above are common industry usage, not a regulation; your organisation's definitions control.
 
 ## Denial rate
 

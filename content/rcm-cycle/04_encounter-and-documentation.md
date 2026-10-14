@@ -3,6 +3,7 @@ title: The patient encounter and clinical documentation
 short: Encounter and documentation
 description: Why “if it isn't documented, it didn't happen” drives payment, what a complete note contains, how E/M levels are chosen, and what an ABN is.
 order: 4
+reviewed: 2026-10-14
 level: Beginner
 keywords: clinical documentation SOAP note medical necessity E/M level MDM time ABN superbill encounter form signature
 quiz:
@@ -107,12 +108,15 @@ Errors here create problems later:
 
 For **Original Medicare** patients, if the provider expects Medicare may deny a service as not medically necessary or too frequent, it must give the patient an **ABN (form CMS-R-131)** before the service. The patient picks an option: receive the service and accept financial responsibility, or decline it.
 
-- With a valid ABN, bill with modifier **GA**. If Medicare denies, the patient can be billed (the denial comes as **PR-50** or similar, patient responsibility).
-- Without an ABN, the denial is **CO**, provider liability, and the patient can't be billed.
+- With a valid ABN, bill with modifier **GA**. If Medicare denies, the denial usually comes as **PR-50** (patient responsibility) and the patient can generally be billed, provided the ABN really is valid and the patient isn't protected (for example, QMB).
+- Without a valid ABN, the denial is usually **CO** (provider liability) and the patient can't be billed.
+- An ABN is **not** a blanket waiver. It must be given before the service, name the specific service, give a real reason Medicare may not pay and a good-faith cost estimate, and the patient must choose an option themselves. ABNs given routinely to every patient, signed after the service, or with an option pre-selected by staff aren't valid. ABNs shouldn't be used in emergency or urgent care situations.
 - For services that are never covered by Medicare (statutorily excluded), an ABN isn't required, but modifier **GY** tells Medicare you know it's excluded so it denies quickly and the secondary can process.
 - Modifier **GZ** says you expected a denial but didn't get an ABN.
 
 Commercial and Medicare Advantage plans use their own waiver rules; an ABN only applies to Original Medicare.
+
+Sources: [CMS FFS ABN](https://www.cms.gov/medicare/forms-notices/beneficiary-notices-initiative/ffs-abn); [Medicare Claims Processing Manual, Chapter 30](https://www.cms.gov/regulations-and-guidance/guidance/manuals/downloads/clm104c30.pdf); [Noridian ABN form instructions](https://med.noridianmedicare.com/web/jeb/topics/abn/abn-instructions). Original Medicare scope; reviewed October 2026.
 
 ## Documentation errors auditors find most
 

@@ -5,8 +5,8 @@ name: REVEX
 tagline: Learn US healthcare revenue cycle, one claim at a time
 description: >-
   REVEX is a free US healthcare revenue cycle management (RCM) academy.
-  Learn the claim cycle, insurance, billing forms, denials, specialties
-  and real AR scenarios, from first principles to interview-ready.
+  Learn the claim cycle, insurance, billing forms, denials, specialties,
+  quality and analytics, then practise realistic, fictional cases.
 
 # Full public address of the site, without a trailing slash.
 # GitHub Pages example: https://YOUR-USERNAME.github.io/revex
@@ -34,7 +34,8 @@ mission: >-
   US healthcare gets paid and walk into an RCM interview ready.
 
 # Certification exam. Paste your Apps Script web app URL into api_url
-# (see apps-script/SETUP.md). Until then the exam page shows "opening soon".
+# (see apps-script/SETUP.md). While api_url is empty, the site says the exam
+# is "coming soon", hides the start form and makes no certificate claims.
 certification:
   api_url: ""
   name: REVEX Certified RCM Associate
@@ -88,6 +89,10 @@ sections:
     title: Interview prep
     blurb: Questions interviewers ask freshers and experienced analysts, with model answers.
     icon: chat
+  - id: quality
+    title: Quality and analytics
+    blurb: Audit scope, sampling, scoring, calibration, root cause, CAPA and AR prioritisation, for QA, leads and analysts.
+    icon: chart
   - id: tools
     title: AR tools
     blurb: Timely filing dates, payment and secondary math, KPIs, therapy units and AR notes, calculated for you.

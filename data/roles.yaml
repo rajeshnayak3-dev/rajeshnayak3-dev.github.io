@@ -1,0 +1,106 @@
+# Career roles, the competencies each needs, and where REVEX teaches them.
+# Competency checklists are self-assessments stored only in the learner's browser.
+- id: eligibility-specialist
+  title: Eligibility and authorization specialist
+  summary: Confirms coverage, benefits and authorization before the visit so claims don't deny later.
+  path: new-to-rcm
+  competencies:
+    - text: Verify eligibility and benefits for a specific service, including network status and accumulators
+      link: rcm-cycle/eligibility-and-benefits/
+    - text: Identify Medicare, Medicare Advantage, Medicaid and dual-eligible coverage, including QMB
+      link: insurance/medicaid-qmb-spend-down/
+    - text: Determine primary and secondary coverage using COB and MSP rules
+      link: insurance/coordination-of-benefits/
+    - text: Request and track prior authorizations and referrals
+      link: rcm-cycle/prior-authorization-and-referrals/
+- id: payment-poster
+  title: Payment poster
+  summary: Posts insurance and patient payments from ERAs and EOBs so every account balances.
+  path: new-to-rcm
+  competencies:
+    - text: Read an ERA line using group code, CARC and RARC together
+      link: denials/read-an-era/
+    - text: Post payments, contractual adjustments and patient responsibility so paid + adjustments + patient = billed
+      link: rcm-cycle/payment-posting/
+    - text: Post reversals, recoupments and provider-level (PLB) adjustments correctly
+      link: non-denials/recoupments-and-offsets/
+    - text: Transfer balances to secondary payers and recognise QMB and Medicaid protections
+      link: non-denials/secondary-and-crossover/
+- id: ar-associate
+  title: AR associate
+  summary: Follows up unpaid claims with payers until they're paid or correctly closed.
+  path: working-in-rcm
+  competencies:
+    - text: Prioritise a worklist by deadline risk, expected value and recovery potential
+      link: quality/ar-prioritization-and-work-queues/
+    - text: Check claim status by portal, IVR, 276/277 and phone, and find where a claim stopped
+      link: rcm-cycle/denials-and-ar-follow-up/
+    - text: Work no-response and paid-not-received claims with proof of timely filing
+      link: non-denials/no-response-claims/
+    - text: Write a complete AR note with reference number, action, next action and follow-up date
+      link: tools/ar-note-generator/
+- id: denial-specialist
+  title: Denial management specialist
+  summary: Works denied claims to the right fix and feeds root causes back to prevent them.
+  path: working-in-rcm
+  competencies:
+    - text: Classify a denial by category and find the root cause, not just the code
+      link: denials/denial-categories/
+    - text: Choose between corrected claim, reopening, reconsideration, appeal and escalation
+      link: forms-billing/corrected-claims/
+    - text: Write an appeal with the right evidence inside the deadline
+      link: denials/appeals/
+    - text: Know when a denial can and can't move to the patient
+      link: denials/read-an-era/
+- id: senior-associate
+  title: Senior associate
+  summary: Handles complex and escalated accounts and helps newer associates.
+  path: working-in-rcm
+  competencies:
+    - text: Resolve underpayments against the contract
+      link: non-denials/underpayments/
+    - text: Handle credit balances and refunds under payer and program rules
+      link: non-denials/credit-balances-and-refunds/
+    - text: Recognise ambiguous remittances and escalate with evidence
+      link: scenarios/ambiguous-remit-escalate/
+    - text: Explain hospital versus professional billing differences
+      link: forms-billing/hospital-vs-professional-billing/
+- id: qa-analyst
+  title: QA analyst or auditor
+  summary: Audits completed work against the standard, calibrates, and drives corrective action.
+  path: qa-lead-analyst
+  competencies:
+    - text: Write an audit scope with population, period, standard and checkpoints
+      link: quality/audit-purpose-and-scope/
+    - text: Choose a sample and report accuracy with its limits
+      link: quality/sampling/
+    - text: Apply critical and non-critical error definitions consistently
+      link: quality/error-definitions-and-scoring/
+    - text: Run calibration and measure inter-rater agreement
+      link: quality/calibration/
+- id: team-lead
+  title: Team lead
+  summary: Runs the team's inventory, quality and productivity, and coaches people.
+  path: qa-lead-analyst
+  competencies:
+    - text: Read inventory, backlog, aging and touches as signals of process health
+      link: quality/ar-prioritization-and-work-queues/
+    - text: Run corrective and preventive action with an effectiveness check
+      link: quality/capa-feedback-and-coaching/
+    - text: Give specific, standard-based feedback and plan re-audits
+      link: quality/capa-feedback-and-coaching/
+    - text: Lead denial prevention with the front end and coding teams
+      link: denials/preventing-denials/
+- id: operations-analyst
+  title: Operations or RCM analyst
+  summary: Turns billing data into measures and findings that leaders can act on.
+  path: qa-lead-analyst
+  competencies:
+    - text: Define each KPI with formula, denominator, period, exclusions and data source
+      link: rcm-cycle/reporting-and-kpis/
+    - text: Build a Pareto of denials by dollars and counts and drill into root causes
+      link: quality/root-cause-and-pareto/
+    - text: Calculate KPIs correctly and handle missing or zero values
+      link: tools/kpi-calculator/
+    - text: Break results down by payer, provider, specialty and denial category
+      link: denials/preventing-denials/

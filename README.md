@@ -57,7 +57,9 @@ Google usually starts showing pages within days to a few weeks.
 
 ## Certification exam
 
-The free certification exam needs a one-time setup of a Google Sheet and Apps Script in your Google account. Follow `apps-script/SETUP.md`, then paste the web app URL into `certification: api_url` in `site.yaml`.
+The exam needs a one-time setup of a Google Sheet and Apps Script in your Google account. Follow `apps-script/SETUP.md`, then paste the web app URL into `certification: api_url` in `site.yaml`.
+
+While `api_url` is empty, the site says the exam is **coming soon**, hides the start form, and makes no certificate claims anywhere. Once it's set, the certificate is described as a REVEX-issued **educational** certificate from an **open-book, unproctored** exam (the answer key is public in this repository), not an accredited credential. Test the full flow (pass, fail, verify, revoke) before announcing it.
 
 ## Part 2: Edit content later (no coding)
 
@@ -69,11 +71,16 @@ All content lives in two folders. Edit any file in GitHub with the pencil icon; 
 | Lessons (Start here, RCM cycle, Insurance, Forms, Denials, Non-denials, Interview prep) | `content/<section>/*.md` |
 | Denial code pages | `data/denials*.yaml` |
 | Specialty guides | `data/specialties-*.yaml` |
-| Scenarios | `data/scenarios.yaml` |
+| Scenarios (practice cases) | `data/scenarios*.yaml` |
 | Glossary terms | `data/glossary.yaml` |
+| Learning paths (modules, outcomes, practice) | `data/paths.yaml` |
+| Career roles and competencies | `data/roles.yaml` |
+| Official sources page | `data/sources.yaml` |
+
+The build stops with an error if a learning path or role links to a page that doesn't exist.
 
 ### Lesson files
-Each lesson starts with a header between `---` lines (title, description, order, level and quiz), followed by normal text. Useful formatting:
+Each lesson starts with a header between `---` lines (title, description, order, level and quiz), followed by normal text. Optional header fields: `objectives` (a list shown at the top), `sources` (a list of `title`/`url`/`note`) and `reviewed` (the date policy-sensitive statements were last checked against sources; lessons without it say they haven't been re-reviewed). Useful formatting:
 
 - `## Heading` makes a section (and an “On this page” link)
 - `**bold**`, `- bullet`, `1. numbered`
@@ -122,9 +129,16 @@ pip install -r requirements.txt
 python build.py            # builds ./dist
 python build.py --preview  # links include index.html, for opening files directly
 python -m http.server -d dist 8000
+
+# tests
+node tests/calc.test.js                 # calculator formulas and edge cases
+python tests/linkcheck.py dist          # internal links and anchors
+pip install playwright && python tests/e2e.py http://localhost:8000 docs/e2e-results.md
 ```
 
-No frameworks, no tracking and no cookies. Learner progress is stored in the browser's localStorage only.
+Audit and QA documents live in `docs/`.
+
+No frameworks, no tracking and no cookies. Learner progress is stored in the browser's localStorage only (keys listed on the About page).
 
 ## Disclaimer
 

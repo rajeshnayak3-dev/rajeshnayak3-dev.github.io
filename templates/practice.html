@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% from "_parts.html" import crumbs %}
+{% block main %}
+<div class="wrap">
+  {{ crumbs([("Practice lab", None)]) }}
+  <header class="section-head">
+    <span class="sh-ico">{{ icon("check", 28) }}</span>
+    <div>
+      <h1>Practice lab</h1>
+      <p class="lede">Make decisions on realistic, fictional accounts and get the reasoning behind every choice, including why the tempting wrong answers are wrong. Completed cases count towards <a href="/progress/">your learning</a> on this device.</p>
+    </div>
+  </header>
+
+  <nav class="jump" aria-label="Practice sections">
+    <a href="#cases">Scenario library</a><a href="#quizzes">Quizzes</a><a href="#tools">Calculators and tools</a><a href="#interview">Interview practice</a><a href="#planned">Planned</a>
+  </nav>
+
+  <section id="cases" aria-labelledby="cases-h">
+    <h2 id="cases-h">Scenario library <small class="small-note">{{ scen_count }} cases</small></h2>
+    <div class="filter-row">
+      <label class="filter-select"><span>Level</span>
+        <select data-case-level aria-label="Filter cases by level"><option value="">All levels</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select>
+      </label>
+      <label class="filter-select"><span>Topic</span>
+        <select data-case-tag aria-label="Filter cases by topic"><option value="">All topics</option>{% for tag, _ in scen_groups %}<option>{{ tag }}</option>{% endfor %}</select>
+      </label>
+      <button type="button" class="btn btn-ghost" data-case-clear>Clear filters</button>
+      <p class="filter-hint" aria-live="polite" data-case-count></p>
+    </div>
+    <ul class="topic-list case-grid">
+      {% for tag, items in scen_groups %}{% for s in items %}
+      <li data-case data-level="{{ s.level or 'Intermediate' }}" data-tag="{{ tag }}">
+        <a class="topic" href="/{{ s.url }}" data-topic="{{ s.url }}">
+          <span class="topic-body">
+            <span class="topic-title"><span class="mono case-id">{{ s.id }}</span> {{ s.title }}</span>
+            <span class="topic-desc">{{ s.summary }}</span>
+            <span class="topic-meta"><span>{{ s.minutes or 6 }} min</span><span class="lvl lvl-{{ (s.level or 'Intermediate') | slug }}">{{ s.level or "Intermediate" }}</span><span class="tag">{{ tag }}</span></span>
+          </span>
+          <span class="topic-check" aria-hidden="true">{{ icon("check", 18) }}</span>
+        </a>
+      </li>
+      {% endfor %}{% endfor %}
+    </ul>
+    <p class="empty" data-case-empty hidden>No cases match. <button type="button" class="link-btn" data-case-clear>Clear the filters</button>.</p>
+  </section>
+
+  <section id="quizzes" aria-labelledby="quiz-h">
+    <h2 id="quiz-h">Quizzes</h2>
+    <p>Every lesson ends with a short quiz that explains each answer. Your scores are saved on <a href="/progress/">your learning</a> page.</p>
+    <div class="quiz-groups">
+      {% for g in quiz_groups %}
+      <details class="panel quiz-group">
+        <summary><strong>{{ g.section.title }}</strong> <span class="small-note">{{ g.count }} questions in {{ g.lessons | length }} lessons</span></summary>
+        <ul>{% for l in g.lessons %}<li><a href="/{{ l.url }}#quiz-h">{{ l.short }}</a> <span class="small-note">({{ l.quiz | length }})</span></li>{% endfor %}</ul>
+      </details>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section id="tools" aria-labelledby="tools-h">
+    <h2 id="tools-h">Calculators and tools</h2>
+    <p>Each tool shows its assumptions. Use fictional or de-identified data only.</p>
+    <ul class="hub-grid">
+      {% for t in tools %}
+      <li><a class="hub-card" href="/{{ t.url }}"><span class="mc-ico">{{ icon("calc", 22) }}</span><strong>{{ t.short }}</strong><span>{{ t.description }}</span></a></li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section id="interview" aria-labelledby="int-h">
+    <h2 id="int-h">Interview practice</h2>
+    <p>Model answers explain the reasoning so you can answer in your own words. See <a href="/career/">Career and certification</a> for role competencies.</p>
+    <ul class="hub-grid">
+      <li><a class="hub-card" href="/interview-prep/mock-payer-calls/"><strong>Mock payer calls</strong><span>Practise the AR call flow with scripted payer responses.</span></a></li>
+      <li><a class="hub-card" href="/interview-prep/rapid-fire/"><strong>Rapid-fire round</strong><span>Quick definitions and codes interviewers ask.</span></a></li>
+      <li><a class="hub-card" href="/interview-prep/experienced-questions/"><strong>Experienced questions</strong><span>Scenario questions for working analysts and leads.</span></a></li>
+    </ul>
+  </section>
+
+  <section id="planned" aria-labelledby="plan-h" class="panel planned">
+    <h2 id="plan-h">Planned, not built yet</h2>
+    <p>These are on the roadmap. They're listed so you know they're coming; they don't work yet.</p>
+    <ul class="planned-list">
+      <li><span class="st-tag st-soon">Planned</span> Claim lifecycle simulation: follow one claim through every status and decide what to do at each stop.</li>
+      <li><span class="st-tag st-soon">Planned</span> Interactive denial decision tree.</li>
+      <li><span class="st-tag st-soon">Planned</span> Final capstone with a scoring rubric.</li>
+    </ul>
+  </section>
+</div>
+{% endblock %}

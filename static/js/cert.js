@@ -59,7 +59,7 @@
       ctx.fillText("US Healthcare Revenue Cycle Management", 180, 330);
 
       ctx.fillStyle = RED; ctx.font = "700 40px " + sans;
-      ctx.fillText("Certificate of achievement", 180, 450);
+      ctx.fillText("Educational certificate", 180, 450);
 
       ctx.fillStyle = INK2; ctx.font = "400 34px " + sans;
       ctx.fillText("This certifies that", 180, 530);
@@ -70,17 +70,19 @@
       ctx.strokeStyle = LINE; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(180, 700); ctx.lineTo(W - 420, 700); ctx.stroke();
 
       ctx.fillStyle = INK2; ctx.font = "400 34px " + sans;
-      wrap(ctx, "has passed the REVEX certification exam in US healthcare revenue cycle management, covering the RCM cycle, insurance and payers, claim forms, denials, non-denials and specialty billing, and is awarded the title", 180, 775, W - 620, 48);
+      wrap(ctx, "has passed the REVEX online exam (open-book) in US healthcare revenue cycle management, covering the RCM cycle, insurance and payers, claim forms, denials, non-denials and specialty billing, and is awarded the title", 180, 775, W - 620, 48);
       ctx.fillStyle = NAVY; ctx.font = "700 52px " + sans;
       ctx.fillText(data.certName, 180, 960);
 
       // facts row (form boxes)
-      var facts = [["Score", data.percent + "%"], ["Date issued", fmtDate(data.issued)], ["Certificate ID", data.id]];
-      var x = 180, y = 1040, bw = [260, 420, 460];
+      var facts = [["Date issued", fmtDate(data.issued)], ["Certificate ID", data.id]];
+      var bw = [420, 520];
+      if (data.percent !== null && data.percent !== undefined) { facts.unshift(["Score", data.percent + "%"]); bw.unshift(260); }
+      var x = 180, y = 1040;
       facts.forEach(function (f, i) {
         ctx.strokeStyle = RED; ctx.lineWidth = 2; roundRect(ctx, x, y, bw[i], 120, 6); ctx.stroke();
         ctx.fillStyle = RED; ctx.font = "600 24px " + sans; ctx.fillText(f[0], x + 22, y + 40);
-        ctx.fillStyle = NAVY; ctx.font = (i === 2 ? "600 36px " + mono : "700 38px " + sans); ctx.fillText(f[1], x + 22, y + 92);
+        ctx.fillStyle = NAVY; ctx.font = (f[0] === "Certificate ID" ? "600 36px " + mono : "700 38px " + sans); ctx.fillText(f[1], x + 22, y + 92);
         x += bw[i] + 28;
       });
 
@@ -98,7 +100,7 @@
       }
 
       ctx.fillStyle = "#6B7488"; ctx.font = "400 22px " + sans;
-      ctx.fillText("Verify at " + data.verifyUrl.replace(/^https?:\/\//, "") + ". Issued by REVEX, a free training programme. Not an accredited or licensing credential.", 180, H - 130);
+      ctx.fillText("Verify at " + data.verifyUrl.replace(/^https?:\/\//, "") + ". Issued by REVEX, an independent free training site. Not an accredited, licensing or coding credential.", 180, H - 130);
       return canvas;
     });
   }

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% from "_parts.html" import crumbs %}
+{% block main %}
+<div class="wrap">
+  {{ crumbs([("Learning paths", None)]) }}
+  <header class="section-head">
+    <span class="sh-ico">{{ icon("route", 28) }}</span>
+    <div>
+      <h1>Learning paths</h1>
+      <p class="lede">Pick the path that matches where you are. Each one lists its outcomes, prerequisites, modules and practice cases. Times are estimates based on reading at study pace.</p>
+    </div>
+  </header>
+
+  <ul class="path-cards">
+    {% for p in paths %}
+    <li class="path-card panel">
+      <p class="path-card-top"><span class="lvl lvl-{{ p.level | slug }}">{{ p.level }}</span> <span class="small-note">{{ p.modules | length }} modules · about {{ p.hours }} hours (estimate)</span></p>
+      <h2><a href="/learn/{{ p.id }}/">{{ p.title }}</a></h2>
+      <p>{{ p.audience }}.</p>
+      <p class="small-note"><strong>Prerequisites:</strong> {{ p.prerequisites }}</p>
+      <h3>You'll be able to</h3>
+      <ul class="ticks">{% for o in p.outcomes[:3] %}<li>{{ o }}</li>{% endfor %}</ul>
+      <p class="path-progress" data-path-progress="{{ p.id }}" data-urls="{{ p.track_urls | join(' ') }}" data-verbose></p>
+      <a class="btn btn-primary" href="/learn/{{ p.id }}/">Open the path</a>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <section class="panel learn-more">
+    <h2>Prefer to browse by topic?</h2>
+    <p>Every lesson is also grouped by topic in the menu: {% for s in sections if s.id not in ("tools",) %}<a href="/{{ s.id }}/">{{ s.title }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.</p>
+  </section>
+</div>
+{% endblock %}

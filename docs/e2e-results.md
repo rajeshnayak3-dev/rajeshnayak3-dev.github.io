@@ -1,0 +1,25 @@
+| Test ID | Feature | Steps/input | Expected | Actual | Result | Notes |
+|---|---|---|---|---|---|---|
+| R-01 | All routes | Load all 220 routes at 1280px | HTTP 200, no JS errors | 220/220 clean | PASS |  |
+| R-02 | Responsive layout | 22 key pages at 360, 390, 768, 1024, 1280, 1440px | No horizontal page scroll | none | PASS |  |
+| NAV-01 | Desktop navigation | Open /learn/working-in-rcm/ at 1280px | 5 destinations visible; 'Learning paths' current | visible=True, ['Dashboard', 'Learning paths', 'RCM reference', 'Practice lab', 'Career & certification'], current=Learning paths | PASS |  |
+| NAV-02 | Current-area highlight | Visit a page in each area | Matching destination highlighted | all correct | PASS |  |
+| NAV-03 | Mobile menu | 390px: tap menu, check destinations, tap close | Header nav hidden; drawer opens with destinations; aria-expanded true; closes | hidden_nav=True, opened=True, destinations=True, aria-expanded=true, closed=True | PASS |  |
+| KB-01 | Keyboard access | Tab, Enter on skip link, Tab again | Skip link first; jumps to #main; next focus has a visible outline | first='Skip to content', at_main=True, outline=solid | PASS |  |
+| SRCH-01 | Global search | Press /, type CO-197, then nonsense | Results include CO-197; nonsense shows an empty-state message | 5 hits, first='DenialsCO-197 denial: Precertification, ', empty='No results for “CO-197zzzzqqq”. Try a shorter word' | PASS |  |
+| REF-01 | Code library search and filters | Type 'authorization'; choose Timely filing; type nonsense; Clear | Narrowed results; empty state; clear restores all | total=71, text=3, cat=1, empty=True, cleared=71, count='71 codes' | PASS |  |
+| REF-02 | Code page caveats | Open CO-50 | Shows REVEX-summary note with X12 link and 'what not to assume' box | official=True, caveat=True | PASS |  |
+| PROG-01 | Progress save, path progress, reset | Mark 'What is RCM?' complete; open path; open progress; reset twice | Path shows 1 complete and next lesson moves on; reset clears to 0 | path='1 of 33 lessons and cases completed (3%) on this device.', next='Revenue cycle in general business vs in healthcare', before='1%of REVEX completed', after='0%of REVEX completed' | PASS |  |
+| PROG-02 | Competency self-check | Tick one competency, reload | Tick persists; count shows 1/4 | kept=True, count=1/4 | PASS |  |
+| CERT-01 | Certification status | Open /certification/ with api_url empty | No start form; 'coming soon'; disabled button; no verifiable-certificate claims | form=False, soon=True, disabled=True, claims=[] | PASS |  |
+| CERT-02 | Verification while closed | Open /verify/?id=… | Explains no certificates have been issued | Verification isn't available yet because the REVEX exam hasn't opened. No REVEX  | PASS |  |
+| CERT-03 | No certificate claims elsewhere | Read sidebar card and home page | Sidebar says 'Coming soon'; home makes no 'verifiable' claim | sidebar='REVEX examComing soon: not open yet', home_ok=True | PASS |  |
+| TOOL-01 | Timely filing UI | 390px: no limit chosen; then 1 calendar year from 01/03/2026 with workday roll | Asks for a limit first; then deadline Mon 01/04/2027 with roll note and assumptions | before='Choose the filing or appeal limit from t', after has 01/04/2027=True, roll note=True | PASS |  |
+| TOOL-02 | KPI calculator validation UI | Set claims submitted = 0 and clear charges | Errors shown, no NaN/Infinity | Days in AR–Enter charges for the AR period.AR over 90 days15.0%Within common rangeCommon target: under 15–20%Net collect | PASS |  |
+| TOOL-03 | Payment calculator validation UI | Enter a negative allowed amount | Error, no result | Error Amounts can't be negative. | PASS |  |
+| TOOL-04 | AR note generator | Check PHI warning; empty note placeholders; fill; clear | Warning visible; placeholders not invented; filled values appear; clear removes them | phi=True, placeholder=True, filled=True, cleared=True | PASS |  |
+| QUIZ-01 | Quiz scoring and rationale | Answer every question correctly on /quality/calibration/ | Every rationale shown; score 3/3 | why=3/3, score='You scored 3 out of 3. Well done. This t' | PASS |  |
+| SCN-01 | Scenario flow and debrief | Play SC-19 through three decisions | Summary and debrief (documentation, escalation, root cause) appear | debrief=True | PASS |  |
+| PRIV-01 | Disclaimer and privacy | Lesson footer, review box, About#privacy | Disclaimer and review box on lessons; privacy lists every storage key | footer=True, review_box=True, privacy=True | PASS |  |
+| PRACT-01 | Practice lab filters and planned items | Filter Advanced, clear; check planned items | Filter narrows and clears; planned items have no links | all=21, advanced=5, cleared=21, planned_links=0 | PASS |  |
+| THEME-01 | Theme | Load home; toggle; navigate | Light by default; dark persists across pages | default=None, after=dark | PASS |  |

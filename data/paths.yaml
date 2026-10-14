@@ -1,0 +1,167 @@
+# Learning paths. Every "lessons" and "practice" entry is a site URL; the build
+# fails if one doesn't exist, so paths can't silently point at missing pages.
+- id: new-to-rcm
+  title: New to RCM
+  audience: Freshers, career changers and anyone who has never worked a claim
+  level: Beginner
+  prerequisites: None. Start here.
+  outcomes:
+    - Explain the revenue cycle from scheduling to final payment, and who does what
+    - Read an insurance card, an eligibility response and a CMS-1500 or UB-04 at a basic level
+    - Tell a rejection from a denial, and a clean claim from a paid claim
+    - Read an ERA line using group code, CARC and RARC
+    - Know which patient balances can and can't be billed
+  completion: Mark every lesson in the path as complete. Taking each lesson's quiz is strongly recommended.
+  modules:
+    - title: RCM foundations
+      summary: The vocabulary and the big picture.
+      lessons:
+        - start-here/what-is-rcm/
+        - start-here/rcm-general-vs-healthcare/
+        - start-here/provider-payer-patient/
+        - start-here/ar-and-ap/
+        - start-here/rcm-team-roles/
+        - start-here/how-us-healthcare-is-paid/
+        - start-here/hipaa-and-compliance/
+    - title: Insurance and eligibility
+      summary: Who pays, under which plan, in which order, and what to verify before the visit.
+      lessons:
+        - insurance/types-of-plans/
+        - insurance/types-of-payers/
+        - insurance/medicare/
+        - insurance/medicaid-qmb-spend-down/
+        - insurance/coordination-of-benefits/
+        - rcm-cycle/eligibility-and-benefits/
+        - rcm-cycle/prior-authorization-and-referrals/
+    - title: Registration, coding and claim creation
+      summary: How a visit becomes a claim, and the identifiers and codes on it.
+      lessons:
+        - rcm-cycle/scheduling-and-registration/
+        - rcm-cycle/encounter-and-documentation/
+        - rcm-cycle/medical-coding/
+        - rcm-cycle/charge-entry/
+        - forms-billing/provider-identifiers/
+        - forms-billing/pos-and-revenue-codes/
+        - forms-billing/cms-1500/
+        - forms-billing/ub-04/
+    - title: Submission, acknowledgments and adjudication
+      summary: Where a claim goes after it leaves the billing system, and how to tell where it stopped.
+      lessons:
+        - rcm-cycle/claim-submission/
+        - forms-billing/edi-transactions/
+        - non-denials/rejections/
+        - rcm-cycle/adjudication/
+    - title: Payment posting and patient balances
+      summary: Reading the remittance and posting every dollar to the right place.
+      lessons:
+        - denials/read-an-era/
+        - rcm-cycle/payment-posting/
+        - rcm-cycle/patient-billing-and-collections/
+  practice:
+    - scenarios/timely-filing-rejection/
+    - scenarios/medicare-advantage-wrong-payer/
+    - scenarios/birthday-rule-cob/
+    - scenarios/qmb-balance/
+    - tools/payment-calculator/
+
+- id: working-in-rcm
+  title: Working in RCM
+  audience: AR, denial, posting and eligibility associates who want to work accounts with sound judgement
+  level: Intermediate
+  prerequisites: The New to RCM path, or equivalent experience working claims.
+  outcomes:
+    - Prioritise an AR worklist by deadline risk, balance and recovery potential
+    - Work no-response, denied, underpaid and recouped claims to a correct next action
+    - Choose between a corrected claim, reopening, reconsideration, appeal and escalation
+    - Write AR notes that another analyst or an auditor can act on
+    - Spot when the right answer is to research or escalate rather than guess
+  completion: Mark every lesson as complete and finish the practice cases listed.
+  modules:
+    - title: AR follow-up
+      summary: Worklists, status checks, payer calls and notes.
+      lessons:
+        - rcm-cycle/denials-and-ar-follow-up/
+        - quality/ar-prioritization-and-work-queues/
+        - non-denials/no-response-claims/
+        - non-denials/payer-call-workflows/
+        - interview-prep/mock-payer-calls/
+    - title: Denial management
+      summary: Root cause, the right fix, and deadlines.
+      lessons:
+        - denials/what-is-a-denial/
+        - denials/denial-categories/
+        - forms-billing/modifiers/
+        - forms-billing/corrected-claims/
+        - denials/appeals/
+        - denials/hospital-vs-professional-denials/
+    - title: Payments that aren't denials
+      summary: Underpayments, missing payments, secondaries, credits and recoupments.
+      lessons:
+        - non-denials/underpayments/
+        - non-denials/paid-not-received/
+        - non-denials/secondary-and-crossover/
+        - non-denials/credit-balances-and-refunds/
+        - non-denials/recoupments-and-offsets/
+    - title: Programs and claim types
+      summary: Coverage and billing rules you'll meet on specific accounts.
+      lessons:
+        - insurance/cobra/
+        - insurance/tricare-and-va-ccn/
+        - insurance/workers-comp-auto-pip/
+        - insurance/blue-cross-blue-shield/
+        - forms-billing/hospital-vs-professional-billing/
+        - forms-billing/icd-10-cm-structure/
+        - forms-billing/cdm-and-utilization-review/
+  practice:
+    - scenarios/claim-not-on-file/
+    - scenarios/missing-auth-mri/
+    - scenarios/modifier-25-bundling/
+    - scenarios/corrected-claim-or-appeal/
+    - scenarios/underpayment-fee-schedule/
+    - scenarios/duplicate-denial/
+    - scenarios/recoupment-after-retro-termination/
+    - scenarios/lab-medical-necessity-abn/
+    - scenarios/ambiguous-remit-escalate/
+    - scenarios/ar-worklist-prioritization/
+    - tools/timely-filing-calculator/
+    - tools/ar-note-generator/
+
+- id: qa-lead-analyst
+  title: QA, senior, team lead and analyst
+  audience: QA specialists, senior associates, team leads and operations analysts
+  level: Advanced
+  prerequisites: The Working in RCM path, or experience working AR and denials.
+  outcomes:
+    - Scope, sample, score and calibrate an RCM quality audit
+    - Report accuracy with its sample size and limits
+    - Find root causes with data and run corrective and preventive action
+    - Define KPIs with formula, denominator, period and exclusions
+    - Lead improvements that hold, and prove they worked
+  completion: Mark every lesson as complete and finish the QA audit and prioritisation cases.
+  modules:
+    - title: Quality assurance
+      summary: Audit design, scoring, calibration and corrective action.
+      lessons:
+        - quality/audit-purpose-and-scope/
+        - quality/sampling/
+        - quality/error-definitions-and-scoring/
+        - quality/calibration/
+        - quality/root-cause-and-pareto/
+        - quality/capa-feedback-and-coaching/
+    - title: Analytics and operations
+      summary: Measures that mean what they say, and using them to run the work.
+      lessons:
+        - rcm-cycle/reporting-and-kpis/
+        - quality/ar-prioritization-and-work-queues/
+        - denials/preventing-denials/
+    - title: Compliance refresher
+      summary: The rules an auditor must never miss.
+      lessons:
+        - start-here/hipaa-and-compliance/
+        - rcm-cycle/encounter-and-documentation/
+        - insurance/medicaid-qmb-spend-down/
+  practice:
+    - scenarios/qa-audit-ar-notes/
+    - scenarios/ar-worklist-prioritization/
+    - scenarios/ambiguous-remit-escalate/
+    - tools/kpi-calculator/

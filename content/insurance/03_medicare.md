@@ -122,7 +122,7 @@ An 11-character ID, randomly generated, for example **1EG4-TE5-MK73** (shown wit
 | Home health episode bundling | Consolidated billing denial |
 | NCCI edits | CO-97, CO-236 |
 | Provider not enrolled or not eligible | CO-B7, CO-185 |
-| ABN rules (GA, GZ, GY modifiers) | PR-50 with valid ABN; CO-50 without |
+| ABN rules (GA, GZ, GY modifiers) | Usually PR-50 when GA and a valid ABN; CO-50 when no valid ABN (GZ). Verify the ABN before billing the patient |
 
 ## Medicare appeals at a glance
 

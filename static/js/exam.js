@@ -48,6 +48,7 @@
 
   /* ---------- intro */
   var form = $("[data-start-form]"), errEl = $("[data-start-error]");
+  if (!form) return; // exam not open: the page is rendered without the start form
   function startError(msg) { errEl.textContent = msg; errEl.hidden = !msg; }
 
   function init() {
@@ -67,7 +68,8 @@
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var name = $("#cand-name").value.replace(/\s+/g, " ").trim();
-    if (name.length < 2 || name.split(" ").length < 2) { startError("Enter your full name (first and last) as it should appear on the certificate."); return; }
+    if (name.length < 2 || name.length > 80 || name.split(" ").length < 2) { startError("Enter your full name (first and last) as it should appear on the certificate."); return; }
+    if (!/^[\p{L}\p{M}][\p{L}\p{M} .'\u2019-]*$/u.test(name)) { startError("Use letters, spaces, hyphens, apostrophes and full stops only."); return; }
     if (!$("#cand-agree").checked) { startError("Tick the box to confirm before you start."); return; }
     startError("");
     $("[data-start-btn]").disabled = true; $("[data-start-btn]").textContent = "Loading questions…";

@@ -218,7 +218,7 @@
         var cl = $("[data-continue-link]"); cl.href = href(last.u); cl.textContent = "Continue";
       }
       var cert = JSON.parse(localStorage.getItem("revex-cert"));
-      if (cert && cert.id) {
+      if (cert && cert.id && $("[data-dash-cert]")) {
         $("[data-dash-cert]").textContent = "Certified";
         $("[data-dash-cert-meta]").textContent = "Certificate " + cert.id + ", score " + cert.percent + "%.";
         var dl = $("[data-dash-cert-link]"); dl.textContent = "View certificate"; dl.href = href("verify/") + "?id=" + encodeURIComponent(cert.id);
@@ -290,7 +290,25 @@
       $(emptySel).hidden = any;
     });
   }
-  setupFilter("[data-code-filter]", "[data-code-row]", "[data-code-group]", "[data-code-empty]");
+  (function codeFilter() {
+    var inp = $("[data-code-filter]"), cat = $("[data-code-cat]");
+    if (!inp || !cat) return;
+    function run() {
+      var q = norm(inp.value), c = cat.value, n = 0;
+      $$("[data-code-row]").forEach(function (el) {
+        var hit = (!q || norm(el.getAttribute("data-text")).indexOf(q) >= 0) && (!c || el.getAttribute("data-cat") === c);
+        el.hidden = !hit; if (hit) n++;
+      });
+      $$("[data-code-group]").forEach(function (g) { g.hidden = !$$("[data-code-row]", g).some(function (el) { return !el.hidden; }); });
+      $("[data-code-empty]").hidden = n > 0;
+      $("[data-code-count]").textContent = n + (n === 1 ? " code" : " codes") + (q || c ? " match" : "");
+      var nav = $(".jump"); if (nav) nav.hidden = !!(q || c);
+    }
+    inp.addEventListener("input", run); cat.addEventListener("change", run);
+    $$("[data-code-clear]").forEach(function (b) { b.addEventListener("click", function () { inp.value = ""; cat.value = ""; run(); inp.focus(); }); });
+    var q0 = new URLSearchParams(location.search).get("q"); if (q0) { inp.value = q0; }
+    run();
+  })();
   setupFilter("[data-gloss-filter]", "[data-gloss-item]", "[data-gloss-letter]", "[data-gloss-empty]");
 
   /* ------------------------------------------------ scenarios */
@@ -386,10 +404,86 @@
     drawProgress();
     $("[data-prog-reset]").addEventListener("click", function () {
       var b = $("[data-prog-reset]");
-      if (!b.classList.contains("is-confirm")) { b.classList.add("is-confirm"); b.lastChild.textContent = " Click again to clear everything"; return; }
+      if (!b.classList.contains("is-confirm")) { b.classList.add("is-confirm"); b.lastChild.textContent = " Click again to clear lessons and quiz scores"; return; }
       state = { done: {}, quiz: {} }; save(state); drawProgress(); markUI();
       b.classList.remove("is-confirm"); b.lastChild.textContent = " Progress cleared";
     });
+  }
+
+  /* ------------------------------------------------ learning paths */
+  $$("[data-path-progress]").forEach(function (el) {
+    var urls = (el.getAttribute("data-urls") || "").split(" ").filter(Boolean);
+    var d = urls.filter(function (u) { return state.done[u]; }).length;
+    var pct = urls.length ? Math.round(d / urls.length * 100) : 0;
+    el.textContent = el.hasAttribute("data-verbose")
+      ? (d ? d + " of " + urls.length + " lessons and cases completed (" + pct + "%) on this device." : "Not started on this device.")
+      : (d ? pct + "% complete" : "");
+  });
+  var nextBtn = $("[data-path-next]");
+  if (nextBtn) {
+    var items = $$("[data-path-item]");
+    var next = items.filter(function (a) { return !state.done[a.getAttribute("data-topic")]; })[0];
+    if (next) { nextBtn.href = next.getAttribute("href"); nextBtn.textContent = $(".topic-title", next).textContent.trim(); }
+    else if (items.length) { $("[data-path-next-wrap]").innerHTML = "<strong>Path complete on this device.</strong> Try the practice cases again, or move on to the next path."; }
+  }
+  $$("[data-done-sr]").forEach(function (sp) { var a = sp.closest("a"); sp.textContent = a && state.done[a.getAttribute("data-topic")] ? " (completed)" : ""; });
+
+  /* ------------------------------------------------ suggested practice (home) */
+  var sugg = $("[data-suggest]");
+  if (sugg) {
+    try {
+      var urls = JSON.parse(sugg.textContent), pick = urls.filter(function (u) { return !state.done[u]; })[0];
+      if (pick) {
+        var a = $('.case-list a[href$="' + pick.split("/").slice(-2).join("/") + '"]');
+        if (a) { $("[data-suggest-title]").textContent = a.textContent.replace(/^\s*SC-\d+\s*/, ""); $("[data-suggest-link]").href = a.getAttribute("href"); $("[data-suggest-meta]").textContent = "A practice case you haven't finished yet."; }
+      } else if (urls.length) { $("[data-suggest-title]").textContent = "All featured cases done"; $("[data-suggest-meta]").textContent = "More cases are waiting in the practice lab."; $("[data-suggest-link]").href = href("practice/"); $("[data-suggest-link]").textContent = "Open the practice lab"; }
+    } catch (e) {}
+  }
+
+  /* ------------------------------------------------ practice lab filters */
+  var lvlSel = $("[data-case-level]"), tagSel = $("[data-case-tag]");
+  if (lvlSel && tagSel) {
+    var runCases = function () {
+      var n = 0;
+      $$("[data-case]").forEach(function (li) {
+        var hit = (!lvlSel.value || li.getAttribute("data-level") === lvlSel.value) && (!tagSel.value || li.getAttribute("data-tag") === tagSel.value);
+        li.hidden = !hit; if (hit) n++;
+      });
+      $("[data-case-count]").textContent = n + (n === 1 ? " case" : " cases");
+      $("[data-case-empty]").hidden = n > 0;
+    };
+    lvlSel.addEventListener("change", runCases); tagSel.addEventListener("change", runCases);
+    $$("[data-case-clear]").forEach(function (b) { b.addEventListener("click", function () { lvlSel.value = ""; tagSel.value = ""; runCases(); lvlSel.focus(); }); });
+    runCases();
+  }
+
+  /* ------------------------------------------------ competency self-check */
+  var COMP_KEY = "revex-competency-v1";
+  if ($("[data-comp]")) {
+    var comp = {};
+    try { comp = JSON.parse(localStorage.getItem(COMP_KEY)) || {}; } catch (e) { comp = {}; }
+    var drawComp = function () {
+      $$("[data-role]").forEach(function (card) {
+        var boxes = $$("[data-comp]", card), n = boxes.filter(function (b) { return b.checked; }).length;
+        $("[data-role-count]", card).textContent = n + "/" + boxes.length;
+      });
+    };
+    $$("[data-comp]").forEach(function (b) {
+      b.checked = !!comp[b.getAttribute("data-comp")];
+      b.addEventListener("change", function () {
+        if (b.checked) comp[b.getAttribute("data-comp")] = 1; else delete comp[b.getAttribute("data-comp")];
+        try { localStorage.setItem(COMP_KEY, JSON.stringify(comp)); } catch (e) {}
+        drawComp();
+      });
+    });
+    var cr = $("[data-comp-reset]");
+    if (cr) cr.addEventListener("click", function () {
+      if (!cr.classList.contains("is-confirm")) { cr.classList.add("is-confirm"); cr.lastChild.textContent = " Click again to clear your ticks"; return; }
+      comp = {}; try { localStorage.removeItem(COMP_KEY); } catch (e) {}
+      $$("[data-comp]").forEach(function (b) { b.checked = false; }); drawComp();
+      cr.classList.remove("is-confirm"); cr.lastChild.textContent = " Ticks cleared";
+    });
+    drawComp();
   }
 
   /* ------------------------------------------------ hero claim ticket */

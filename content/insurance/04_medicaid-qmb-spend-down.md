@@ -3,6 +3,7 @@ title: Medicaid, QMB, dual eligibles and spend-down
 short: Medicaid, QMB and spend-down
 description: How Medicaid works, managed Medicaid, payer of last resort, the Medicare Savings Programs (QMB, SLMB, QI, QDWI), dual-eligible billing and the Medicaid spend-down explained with examples.
 order: 4
+reviewed: 2026-10-14
 level: Intermediate
 keywords: Medicaid QMB SLMB QI QDWI Medicare Savings Program dual eligible full dual partial dual spend down medically needy payer of last resort retroactive eligibility balance billing CHIP
 quiz:
@@ -113,14 +114,26 @@ Federal law **prohibits** Medicare providers from billing QMB individuals for **
 
 - This applies even if the state pays **less than** the full cost-sharing or nothing at all (many states pay only up to the Medicaid rate, which is often lower than Medicare's).
 - It applies even if the provider doesn't accept Medicaid.
-- The remaining amount is written off.
+- A QMB patient **can't waive** the protection or agree to pay.
+- Bill the **state Medicaid program** for the cost-sharing (most states receive it automatically through the Medicare crossover, noted on the ERA). Whatever Medicaid doesn't pay is handled under the client's adjustment policy, not billed to the patient. Institutional providers that claim it as Medicare bad debt must first bill the state and receive a Medicaid remittance.
+- If cost-sharing was already billed or collected, recall the statements, stop collection activity and **refund** the patient.
+- For **Medicare Advantage** members, ask the MA plan how it identifies QMB members on eligibility responses and remittances; the plan's processes control.
+- The protection covers Medicare Part A and Part B cost-sharing. It doesn't stop a provider billing for services Medicare doesn't cover at all, though Medicaid rules and the client's policy may still restrict that, so check before billing.
 
 !!! example "QMB example"
     Medicare allowed $150 for a visit, paid $120, and assigned $30 coinsurance (PR-2). The patient is QMB. The state Medicaid rate for the visit is $110, which is less than Medicare's $120 payment, so Medicaid pays $0 toward the coinsurance.
 
     The provider **can't bill the patient $30**. It writes off the $30 according to the client's adjustment policy.
 
-How to identify QMB status: the Medicare eligibility response (HETS) and MAC portals show QMB indicators, and Medicare ERAs include remark codes such as **N781–N784** telling you the patient is QMB and must not be billed. Train posting teams to look for them.
+How to identify QMB status:
+
+- The **MAC portal**, or a clearinghouse that passes through **HETS** QMB data, shows QMB status for the date of service.
+- **Original Medicare remittances** flag QMB claims. Medicare's QMB indicator initiative added remark **N781** (patient is Medicaid/QMB, no deductible may be collected) and **N782** (no coinsurance may be collected), with the amount shown as **OA-209**, so it moves to Medicaid and not to the patient. Read the current code wording on the official X12 list.
+- The **state Medicaid eligibility system**, or the patient's Medicaid or QMB documentation.
+
+Train posting teams to look for these flags.
+
+Sources: [CMS MLN7936176, Prohibition on billing Qualified Medicare Beneficiaries](https://www.cms.gov/files/document/mln7936176-prohibition-billing-qualified-medicare-beneficiaries.pdf) (September 2025); [CMS MM9911 update, QMB remittance codes](https://www.cms.gov/Medicare-Medicaid-Coordination/Medicare-and-Medicaid-Coordination/Medicare-Medicaid-Coordination-Office/Downloads/MM9911Update112017.pdf). Medicare Part A/B and Medicare Advantage scope; reviewed October 2026.
 
 !!! warning "A common compliance failure"
     Automated patient statements that bill QMB patients for Medicare coinsurance are a regulatory violation. Billing systems should flag QMB status so statements are suppressed.

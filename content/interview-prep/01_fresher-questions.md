@@ -62,7 +62,7 @@ ICD-10-CM codes describe the diagnosis, the reason for the service. CPT codes de
 <details class="qa" markdown="1">
 <summary>What is a clean claim?</summary>
 
-A claim with no errors or missing information that the payer can process and pay on first submission.
+A claim with no errors or missing information, so the payer can process it without asking for anything more. Clean doesn't guarantee payment: the payer can still deny it for coverage or medical necessity, or apply the whole amount to the deductible.
 </details>
 
 <details class="qa" markdown="1">
