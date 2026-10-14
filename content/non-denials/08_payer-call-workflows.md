@@ -46,7 +46,21 @@ Always close a call with: **“May I have your name and a call reference number?
 - “Has a letter been sent to the patient? On what date, and how many?”
 - “When should it finalise?”
 
-## 2. Claim paid: check or EFT
+## 2. Claim approved to pay (finalised, payment not issued yet)
+
+**Goal:** confirm when and how the payment will be issued, so you don't follow up too early or miss it.
+
+1. Confirm the claim is finalised and approved, with the allowed and approved payment amounts.
+2. Ask for the expected payment date. Many payers issue payments in weekly or twice-weekly cycles, so an approved claim can wait several days.
+3. Ask whether it will be paid by check or EFT, and whether it will be part of a bulk payment.
+4. Set a follow-up for a few days after the expected date, then confirm the payment details (see the next workflow).
+
+**Ask the rep:**
+- “What are the allowed and approved payment amounts?”
+- “When is payment expected to be issued, and by check or EFT?”
+- “Is any of the amount patient responsibility?”
+
+## 3. Claim paid: check or EFT
 
 **Goal:** confirm the payment matches what's expected and that it reached the right place.
 
@@ -65,7 +79,7 @@ Always close a call with: **“May I have your name and a call reference number?
 - “What pay-to address was it sent to?” or “What account (last four digits) was the EFT sent to?”
 - “Has the check been cashed? Can you send a copy of the cancelled check, or place a stop payment and reissue?”
 
-## 3. Payment applied to an offset (recoupment)
+## 4. Payment applied to an offset (recoupment)
 
 **Goal:** identify the original overpaid claim so it can be posted and reviewed.
 
@@ -79,7 +93,7 @@ Always close a call with: **“May I have your name and a call reference number?
 - “Why was the original claim considered overpaid?”
 - “Can you send the offset EOB or overpayment letter?”
 
-## 4. Secondary paid nothing after the primary (OA-23)
+## 5. Secondary paid nothing after the primary (OA-23)
 
 **Goal:** confirm whether the secondary owes anything.
 
@@ -91,7 +105,7 @@ Always close a call with: **“May I have your name and a call reference number?
 - “What's your allowed amount for this code?”
 - “The primary paid [amount], which is less than your allowed [amount]. Can the claim be reprocessed for the difference?”
 
-## 5. Patient enrolled in hospice (CO-B9)
+## 6. Patient enrolled in hospice (CO-B9)
 
 1. Get the hospice election dates and the hospice provider's name and NPI.
 2. If the service is **related** to the terminal condition, it's the hospice's responsibility: bill the hospice under your arrangement.
@@ -100,7 +114,7 @@ Always close a call with: **“May I have your name and a call reference number?
 
 **Ask the rep:** “What are the hospice start and end dates? Which hospice is it, and what's its NPI? Can the claim be resubmitted with GW for an unrelated service?”
 
-## 6. Missing or invalid CLIA number (CO-16 with MA120)
+## 7. Missing or invalid CLIA number (CO-16 with MA120)
 
 1. Confirm the lab test codes on the claim and that the practice's 10-character CLIA number was in box 23.
 2. Check the certificate was active on the date of service and covers that test level (waived tests need modifier **QW** for Medicare).
@@ -108,7 +122,7 @@ Always close a call with: **“May I have your name and a call reference number?
 
 **Ask the rep:** “Which line is missing the CLIA number? If we send a corrected claim with CLIA [number], can it be reprocessed? What's the timeframe?”
 
-## 7. Missing or invalid NDC (CO-16 with M119)
+## 8. Missing or invalid NDC (CO-16 with M119)
 
 1. Find the drug line and check the NDC in the record (11 digits, 5-4-2 format, leading zeros added).
 2. Confirm it's reported as **N4** + NDC + unit qualifier (**UN, ML, GR, F2** or **ME**) + quantity.
@@ -116,7 +130,7 @@ Always close a call with: **“May I have your name and a call reference number?
 
 **Ask the rep:** “Which drug line has the NDC problem? What's the deadline for a corrected claim?”
 
-## 8. Newborn not added to the policy (CO-31, CO-26 or CO-32)
+## 9. Newborn not added to the policy (CO-31, CO-26 or CO-32)
 
 1. Calculate the baby's age on the date of service.
 2. Many plans and state laws cover a newborn from birth for about the first month (often 31 days), sometimes under the parent's ID, but the parent must enroll the baby within the plan's window to keep coverage. Rules differ by plan and state.
@@ -124,7 +138,7 @@ Always close a call with: **“May I have your name and a call reference number?
 
 **Ask the rep:** “The baby was [age] days old on the date of service. How does this plan cover newborns, and can the claim be processed under the parent's policy? Has the subscriber enrolled the baby yet, and what ID will the baby have?”
 
-## 9. Service furnished by another provider (CO-B20)
+## 10. Service furnished by another provider (CO-B20)
 
 1. Ask which provider was paid for the same service on the same date.
 2. If it's a provider in **your own group**, the service was likely billed twice. Confirm with the client and adjust the duplicate.
@@ -132,7 +146,7 @@ Always close a call with: **“May I have your name and a call reference number?
 
 **Ask the rep:** “Which provider was paid for this service on this date, and what specialty and TIN?”
 
-## 10. Benefit maximum or limits (CO-119, CO-151)
+## 11. Benefit maximum or limits (CO-119, CO-151)
 
 1. Ask whether the limit is by **number of visits**, **dollars** or **frequency**, and when it was reached.
 2. If the limit is truly met, bill the secondary with the primary's denial, or the patient if they were informed.

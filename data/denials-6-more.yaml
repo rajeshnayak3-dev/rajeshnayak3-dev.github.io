@@ -1,0 +1,398 @@
+codes:
+  # ---------------------------------------------------------------- coding: demographics vs codes
+  - code: CO-7
+    carc: "7"
+    group: CO
+    category: coding
+    title: Procedure or revenue code inconsistent with the patient's sex
+    summary: The service is normally limited to one sex, and the patient's sex on file doesn't match.
+    meaning: >-
+      The payer's edits found that the procedure is normally performed only for one sex (for example a Pap smear, a
+      prostate biopsy or an obstetric ultrasound) and the patient's sex on the claim or in the payer's records is the other.
+    causes:
+      - Sex entered wrong at registration.
+      - Payer's member record has a different sex from the claim.
+      - Transgender or intersex patient receiving care that payer edits link to the other sex.
+      - Wrong procedure code selected.
+    ask:
+      - What sex does the payer have on file for the member?
+      - Does the payer have a process (such as a condition code or modifier) for sex-specific services for transgender patients?
+    steps:
+      - Compare the claim with registration and the insurance card.
+      - If registration was wrong, correct it and send a corrected claim.
+      - If the payer's member record is wrong, ask the patient to update it with the payer, then request reprocessing.
+      - For transgender patients, follow the payer's instructions. Medicare uses condition code 45 on institutional claims and modifier KX on professional claims to show the service is appropriate.
+      - If the code was wrong, have coding correct it.
+    prevention:
+      - Confirm sex against the insurance card at registration.
+      - Know each payer's process for sex-specific services for transgender patients.
+    interview: >-
+      CO-7 means the procedure doesn't match the patient's sex on file. I check registration and the payer's member record,
+      correct whichever is wrong, and for transgender patients use the payer's override, such as KX for Medicare
+      professional claims.
+
+  - code: CO-8
+    carc: "8"
+    group: CO
+    category: provider
+    title: Procedure code inconsistent with the provider type or specialty (taxonomy)
+    summary: The payer doesn't expect this service from the rendering provider's specialty on file.
+    meaning: >-
+      The payer links services to provider specialties through enrollment and taxonomy codes. This denial says the
+      rendering provider's type or specialty on file isn't one the payer pays for this procedure.
+    causes:
+      - Wrong or missing taxonomy code on the claim.
+      - Provider enrolled with the payer under a different specialty.
+      - Service billed under the wrong rendering provider (for example a therapist's service under a physician, or the reverse).
+      - Payer restricts certain codes to specific specialties.
+    ask:
+      - What specialty and taxonomy does the payer have for this provider?
+      - Which specialties can bill this code under the payer's policy?
+    steps:
+      - Check the rendering provider and taxonomy on the claim against enrollment.
+      - If the claim was wrong, correct the provider or taxonomy and resubmit.
+      - If enrollment is wrong or incomplete, ask credentialing to update the payer's record, then request reprocessing.
+      - If the payer's policy truly excludes this specialty, adjust per client policy.
+    prevention:
+      - Keep taxonomy codes in the billing system matched to payer enrollment.
+      - Add the right specialty when providers start offering new services.
+    interview: >-
+      CO-8 means the service doesn't match the provider's specialty on file. I check the taxonomy and rendering provider on
+      the claim against enrollment, fix the claim or the enrollment, and resubmit.
+
+  - code: CO-9
+    carc: "9"
+    group: CO
+    category: coding
+    title: Diagnosis inconsistent with the patient's age
+    summary: The diagnosis code is defined for a different age group than the patient's.
+    meaning: >-
+      Some ICD-10-CM codes are valid only for certain ages, such as newborn and perinatal codes (P codes) or codes for
+      conditions of adulthood. The payer's edit found that the patient's age doesn't fit the diagnosis.
+    causes:
+      - Wrong date of birth at registration.
+      - Perinatal (P) code used for an older child or an adult.
+      - Pediatric or adult-only diagnosis coded for the wrong patient.
+      - Mother's and baby's claims mixed up.
+    ask:
+      - What date of birth does the payer have on file?
+    steps:
+      - Check the date of birth on the claim, registration and insurance card.
+      - If the DOB is wrong, correct it and send a corrected claim.
+      - If the diagnosis doesn't fit the age, have coding review and correct it.
+    prevention:
+      - Age edits in the claim scrubber; DOB checked against the insurance card.
+    interview: >-
+      CO-9 means the diagnosis doesn't fit the patient's age. I check the date of birth first, then have coding review the
+      diagnosis, and send a corrected claim.
+
+  - code: CO-10
+    carc: "10"
+    group: CO
+    category: coding
+    title: Diagnosis inconsistent with the patient's sex
+    summary: The diagnosis is normally limited to one sex, and the patient's sex on file is the other.
+    meaning: >-
+      Some diagnoses apply only to one sex, such as pregnancy codes or prostate conditions. The payer found the diagnosis
+      doesn't match the patient's sex on file.
+    causes:
+      - Sex entered wrong at registration or in the payer's records.
+      - Mother's and baby's claims mixed up (for example a pregnancy code on a newborn's claim).
+      - Coding error.
+      - Transgender patient with a diagnosis linked by the edit to the other sex.
+    ask:
+      - What sex does the payer have on file for the member?
+    steps:
+      - Compare registration, the insurance card and the claim.
+      - Correct registration or the code, or ask the patient to update the payer's record, then resubmit.
+      - For transgender patients, use the payer's override process (Medicare uses condition code 45 or modifier KX).
+    prevention:
+      - Confirm sex at registration; keep mother and baby accounts clearly separate.
+    interview: >-
+      CO-10 means the diagnosis doesn't fit the patient's sex on file. I check registration and the payer record, correct
+      what's wrong, and use the payer's override for transgender patients.
+
+  - code: CO-182
+    carc: "182"
+    group: CO
+    category: coding
+    title: Procedure modifier was invalid on the date of service
+    summary: A modifier on the claim didn't exist or wasn't valid on the date of service.
+    meaning: >-
+      The modifier was retired, not yet effective, or isn't a recognised modifier for this payer on the date of service.
+    causes:
+      - Retired modifier still set up in the billing system (for example an old telehealth modifier).
+      - New modifier used before the payer recognised it.
+      - Typo in the modifier.
+    ask:
+      - Which modifier is invalid, and what does the payer accept instead?
+    steps:
+      - Identify the modifier and check its effective dates.
+      - Have coding confirm the correct modifier for the date of service.
+      - Send a corrected claim.
+    prevention:
+      - Update modifier tables with each CPT and HCPCS release and payer bulletin.
+    interview: >-
+      CO-182 means a modifier wasn't valid on the date of service. I confirm the correct modifier for that date with coding
+      and send a corrected claim.
+
+  # ---------------------------------------------------------------- eligibility
+  - code: CO-13
+    carc: "13"
+    group: CO
+    category: eligibility
+    title: The date of death precedes the date of service
+    summary: The payer's records show the patient died before the date of service on the claim.
+    meaning: >-
+      The payer (often Medicare, using Social Security death records) has a date of death earlier than the date of service,
+      so it won't pay.
+    causes:
+      - Wrong date of service on the claim (for example a typo in the year).
+      - Wrong patient (two patients with similar names or IDs).
+      - Payer's date of death is wrong.
+      - Services billed after death, such as recurring supply orders that weren't stopped.
+    ask:
+      - What date of death does the payer have on file?
+    steps:
+      - Check the date of service in the medical record.
+      - If the DOS or patient was wrong, send a corrected claim or void and rebill under the right patient.
+      - If the payer's date of death is wrong, the family or the patient (if living) must have it corrected with Social Security; then request reprocessing.
+      - If services were billed after death in error, adjust them, and refund any payments received.
+    prevention:
+      - Check eligibility responses for date of death; stop recurring orders when a patient dies.
+    interview: >-
+      CO-13 means the payer shows the patient died before the date of service. I verify the date of service and the
+      patient, correct the claim if either is wrong, and if the payer's death record is wrong, it has to be corrected with
+      Social Security before reprocessing.
+
+  # ---------------------------------------------------------------- provider
+  - code: CO-183
+    carc: "183"
+    group: CO
+    category: provider
+    title: The referring provider is not eligible to refer the service billed
+    summary: The provider in box 17 isn't enrolled or allowed to order or refer this service.
+    meaning: >-
+      For many services (such as lab, imaging, DME and therapy), the payer checks the referring or ordering provider. It
+      denies when that provider isn't enrolled with the payer, isn't eligible to order this type of service, or the NPI or
+      name doesn't match.
+    causes:
+      - Ordering provider not enrolled in Medicare (PECOS) or the payer.
+      - Referring provider type not allowed to order this service.
+      - Name in box 17 doesn't match the NPI in box 17b.
+      - Wrong qualifier (DN, DK, DQ) in box 17.
+    ask:
+      - Which referring provider and NPI did the payer receive, and why isn't the provider eligible?
+    steps:
+      - Look up the ordering provider's NPI in the NPPES registry and, for Medicare, check PECOS enrollment.
+      - Correct the name, NPI or qualifier if they were entered wrong, and send a corrected claim.
+      - If the provider isn't enrolled, ask them to enroll (or to order and refer only, for Medicare), then resubmit.
+    prevention:
+      - Validate ordering providers against PECOS before services that require an eligible orderer.
+    interview: >-
+      CO-183 means the referring or ordering provider isn't eligible. I check the NPI and name in box 17 and PECOS
+      enrollment, correct the claim or have the provider enroll, then resubmit.
+
+  # ---------------------------------------------------------------- coding level
+  - code: CO-150
+    carc: "150"
+    group: CO
+    category: necessity
+    title: Information submitted does not support this level of service
+    summary: The payer thinks the level billed (often an E/M level) is higher than the diagnosis or records support.
+    meaning: >-
+      The payer reduced or denied the line because it believes the documentation or diagnosis doesn't support the level of
+      service billed, for example a high-level E/M visit for a minor problem. Some payers downcode automatically and pay at
+      a lower level.
+    causes:
+      - E/M level higher than medical decision making or time in the note.
+      - Diagnosis codes that look minor for the level billed.
+      - Payer downcoding policy for certain E/M levels.
+      - Consultation codes billed to a payer that doesn't accept them.
+    ask:
+      - Was the line denied or downcoded, and to what level?
+      - Which policy was applied? Will the payer review records on appeal?
+    steps:
+      - Have coding review the note for MDM or total time.
+      - If the level is supported, appeal with the note and an explanation of the MDM elements or documented time.
+      - If it isn't, accept the lower level or send a corrected claim at the supported level.
+    prevention:
+      - Regular E/M audits; document MDM elements and total time clearly.
+    interview: >-
+      CO-150 means the payer thinks the level of service isn't supported. Coding reviews MDM or time; if supported, I appeal
+      with the note, and if not, we correct to the supported level.
+
+  # ---------------------------------------------------------------- COB / payment
+  - code: CO-129
+    carc: "129"
+    group: CO
+    category: cob
+    title: Prior processing information appears incorrect
+    summary: The primary payer's information on a secondary claim doesn't add up or doesn't match the payer's records.
+    meaning: >-
+      Usually seen on secondary claims. The payer found the prior payer's paid amount, adjustments or dates on the claim
+      inconsistent, for example amounts that don't balance to the charge, or a primary payment the secondary can't match.
+    causes:
+      - Primary adjustments keyed incorrectly in the secondary claim (loop 2320/2430 or paper EOB).
+      - Line-level primary amounts that don't add up to the billed charge.
+      - Primary EOB from a different claim or date of service attached.
+      - Primary claim later reprocessed, so the amounts changed.
+    ask:
+      - Which prior payer amounts look incorrect?
+      - What primary information do you have on file?
+    steps:
+      - Compare the secondary claim with the primary ERA line by line; check that paid plus adjustments equal billed on every line.
+      - Check whether the primary reprocessed the claim after the secondary was billed.
+      - Send a corrected secondary claim with accurate primary information, or the correct EOB.
+    prevention:
+      - Build secondary claims from the posted ERA data rather than keying amounts by hand.
+    rarc:
+      - code: MA04
+        text: Secondary payment can't be considered without the identity of or payment information from the primary payer.
+    interview: >-
+      CO-129 means the prior payer information on a secondary claim looks wrong. I compare it with the primary ERA line by
+      line, fix amounts that don't balance or the wrong EOB, and send a corrected secondary claim.
+
+  - code: PR-100
+    carc: "100"
+    group: PR
+    category: adjustments
+    title: Payment made to the patient, insured or responsible party
+    summary: The payer paid the patient instead of the provider. The patient now owes the provider that amount.
+    group_note: Payers report this with different group codes (PR, OA or CO). The action is the same.
+    meaning: >-
+      The payer sent the payment to the patient or subscriber rather than the provider, often because the provider is out of
+      network or assignment of benefits wasn't indicated. The ERA shows the payment amount and that it went to the member.
+    causes:
+      - Provider out of network, and the plan pays members directly for non-participating providers.
+      - Assignment of benefits not indicated on the claim (box 13 or 27).
+      - Plan policy to pay the member for certain services.
+    ask:
+      - How much was paid to the member, on what date, and by check or EFT?
+      - Can the payment be reissued to the provider if the assignment of benefits is sent?
+    steps:
+      - Post the insurance processing per client SOP and move the amount paid to the patient into patient responsibility.
+      - Bill the patient for the payment they received, plus their cost-sharing.
+      - If a signed assignment of benefits was on file and the claim showed it, ask the payer whether it will recover the payment and reissue it to the provider.
+      - Fix the claim settings (box 13, 27) for future claims.
+    prevention:
+      - Make sure claims show assignment of benefits; collect from patients upfront for out-of-network services when policy allows.
+    interview: >-
+      CARC 100 means the payer paid the patient. The amount becomes patient responsibility, so we bill the patient for it,
+      and if assignment was on file, ask the payer to recover and reissue to the provider.
+
+  # ---------------------------------------------------------------- info
+  - code: CO-163
+    carc: "163"
+    group: CO
+    category: info
+    title: Attachment or other documentation referenced on the claim was not received
+    summary: The claim said documents were coming, but the payer never matched them to the claim.
+    meaning: >-
+      The claim indicated an attachment (for example through the PWK segment or a note in box 19), but the payer didn't
+      receive it, or couldn't match it to the claim, within its time limit.
+    causes:
+      - Attachment never sent after the claim.
+      - Attachment sent without the claim number or attachment control number, so it couldn't be matched.
+      - Sent to the wrong fax, address or portal.
+      - Sent after the payer's window (often 7 to 14 days).
+    ask:
+      - What documentation does the payer need, where should it go, and what reference should it carry?
+      - Can the claim be reopened once it's received?
+    steps:
+      - Confirm what was required.
+      - Send the documents with the claim number and attachment control number on the cover sheet, through the payer's preferred channel.
+      - Keep proof of submission and request reprocessing; send a corrected claim if the payer requires.
+    prevention:
+      - Send attachments the same day as the claim, with matching control numbers.
+    interview: >-
+      CO-163 means the attachment referenced on the claim wasn't received. I confirm what's needed, send it with the claim
+      and control numbers so it can be matched, keep proof, and ask for reprocessing.
+
+  # ---------------------------------------------------------------- remark codes
+  - code: MA04
+    carc: MA04
+    group: RARC
+    category: remarks
+    title: Secondary payment needs the primary payer's information
+    summary: The secondary payer can't process the claim without the primary payer's identity or payment details.
+    group_note: MA04 is a remark code, so it appears with a denial code, usually CO-16 or CO-22.
+    meaning: >-
+      The claim was sent to this payer as secondary, but it didn't include the primary payer's name or adjudication (paid
+      amounts and adjustments), or the information was unreadable.
+    causes:
+      - Secondary claim sent electronically without the primary's loop 2320/2430 data.
+      - Paper secondary claim sent without the primary EOB attached.
+      - Primary EOB illegible or for a different claim.
+      - Payer's COB record shows a primary the claim didn't mention.
+    ask:
+      - Which primary payer does the secondary have on file?
+      - How should the primary EOB be sent (electronic claim, portal upload or fax)?
+    steps:
+      - Confirm the primary has processed and posted.
+      - Resend the secondary claim with complete primary adjudication data, or attach the primary EOB.
+      - If the payer lists a primary the patient no longer has, have the patient update COB.
+    prevention:
+      - Send secondary claims only after primary posting, built from the ERA data.
+    interview: >-
+      MA04 means the secondary needs the primary's information. I resend the secondary claim with the primary's payment and
+      adjustments, or the primary EOB.
+
+  - code: M119
+    carc: M119
+    group: RARC
+    category: remarks
+    title: Missing, incomplete, invalid, deactivated or withdrawn NDC
+    summary: A drug line has no NDC, or the NDC is wrong, inactive or in the wrong format.
+    group_note: M119 is a remark code, usually paired with CO-16.
+    meaning: >-
+      The payer requires the National Drug Code for physician-administered drugs, and the NDC on this line is missing,
+      formatted wrong, doesn't match the HCPCS code, or was deactivated.
+    causes:
+      - NDC left off the drug line.
+      - 10-digit NDC not converted to the 11-digit 5-4-2 format.
+      - Missing N4 qualifier or unit qualifier.
+      - NDC of a different package or product than the one given.
+      - NDC deactivated by the manufacturer.
+    ask:
+      - Which line has the NDC problem, and what's wrong with it?
+      - What's the deadline for a corrected claim?
+    steps:
+      - Get the NDC from the administration record or the vial used.
+      - Convert it to 11 digits (add the leading zero in the right segment).
+      - Report N4 + NDC + unit qualifier (UN, ML, GR, F2 or ME) + quantity in the box 24 shaded line or UB-04 FL 43.
+      - Send a corrected claim.
+    prevention:
+      - Store the NDC with each drug in the charge master or fee schedule and update it when the supply changes.
+    interview: >-
+      M119 means the NDC is missing or invalid. I get the NDC from the drug actually given, put it in 11-digit format with
+      N4, the unit qualifier and quantity, and send a corrected claim.
+
+  - code: MA120
+    carc: MA120
+    group: RARC
+    category: remarks
+    title: Missing, incomplete or invalid CLIA certification number
+    summary: A lab test was billed without a valid CLIA number for the testing site.
+    group_note: MA120 is a remark code, usually paired with CO-16 or CO-B7.
+    meaning: >-
+      Lab tests must be billed with the CLIA number of the lab that performed them. This one is missing, has the wrong
+      format, belongs to a different location, or doesn't cover the test's complexity level.
+    causes:
+      - CLIA number not entered in box 23.
+      - CLIA from another office location used.
+      - Certificate expired or not yet effective on the date of service.
+      - Practice holds only a certificate of waiver but billed a non-waived test.
+      - Waived test billed without modifier QW.
+    ask:
+      - Which line is missing the CLIA number, and what number does the payer show?
+      - If we provide the CLIA number now, can the claim be reprocessed?
+    steps:
+      - Confirm the CLIA number for the location where the test was performed and that it was active on the date of service.
+      - Check the certificate type covers the test (waived tests need QW for Medicare).
+      - Send a corrected claim with the 10-character CLIA number in box 23.
+    prevention:
+      - Set up the CLIA number per location in the billing system and track certificate renewal dates.
+    interview: >-
+      MA120 means the CLIA number is missing or invalid. I confirm the right CLIA for the testing location and date, check
+      the certificate covers the test with QW for waived tests, and send a corrected claim.

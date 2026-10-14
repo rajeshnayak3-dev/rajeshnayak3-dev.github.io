@@ -41,6 +41,9 @@ categories:
   - id: info
     title: Information requests
     blurb: Records, attachments or answers the payer asked for weren't received.
+  - id: remarks
+    title: Remark codes (RARCs) that drive denials
+    blurb: Remark codes that tell you exactly what's missing or wrong, usually alongside CO-16 or CO-22.
   - id: adjustments
     title: Payment adjustments (not denials)
     blurb: Codes that explain normal payments, patient responsibility and contractual write-offs.

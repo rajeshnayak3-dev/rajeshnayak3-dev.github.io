@@ -9,7 +9,7 @@
 <article class="wrap code-page">
   <header class="code-head">
     <div class="code-badge" aria-hidden="true">
-      <span class="cb-group">{{ code.group }}</span><span class="cb-num">{{ code.carc }}</span>
+      <span class="cb-group">{{ code.group }}</span><span class="cb-num{% if code.carc|string|length > 3 %} cb-long{% endif %}">{{ code.carc }}</span>
     </div>
     <div>
       <p class="code-cat"><a href="/denials/codes/#{{ category.id }}">{{ category.title }}</a></p>

@@ -675,3 +675,4 @@ td:first-child { font-weight: 600; }
 .note-out pre { white-space: pre-wrap; word-break: break-word; font: 400 .95rem/1.6 var(--mono); color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; margin: 0 0 12px; }
 .note-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .lvl-tool { background: var(--green-soft); color: var(--green); }
+.cb-num.cb-long { font-size: 1.45rem; }
