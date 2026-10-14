@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-10-15 — Dotted canvas, flowcharts and lesson structure
+
+- **Figma-style dotted canvas** behind every page; lessons, code pages, cases and About sit on it as white frames.
+- **Flowcharts:** a new `flow` block in lesson Markdown draws step flows, yes/no decision trees and phase maps as accessible HTML (no images, works on phones). 22 diagrams added: the RCM cycle, how one visit becomes money, money and information flow, claim journey, rejection vs denial, payer checks, posting decisions, choosing the AR action, five steps for any denial, ERA codes, who owes the amount, Medicare appeal ladder, corrected-claim routes, COB order, QMB billing, verification, authorization, no-response answers, secondary billing, rejection routine, underpayment disputes, root cause and CAPA. Where a diagram showed the same steps as a long list, the list was removed.
+- **Lesson structure (instructional design):** a path ribbon on every path lesson ("New to RCM › Module 2 of 5 › Lesson 3 of 7" with progress dots); Next follows the learning path; a "Remember this" recap before the quiz on all 29 New to RCM lessons; a prompt to practice at the end of a path.
+
 ## 2026-10-15 — Light Google-style theme, simpler navigation, US spelling
 
 - **Spelling:** the whole site now uses US English (practice, prioritize, organization, program, anesthesia, center, behavior and others: 269 changes in 77 files). Related-code headings no longer lowercase acronyms ("NCCI", "RARCs"). New `tests/spellcheck.py` checks every page against a US English dictionary plus a reviewed allowlist of medical and payer terms.

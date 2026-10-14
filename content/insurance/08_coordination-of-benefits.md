@@ -5,6 +5,11 @@ description: How to decide which payer is primary, secondary and tertiary. The b
 order: 8
 level: Intermediate
 keywords: coordination of benefits COB birthday rule primary secondary tertiary Medicare Secondary Payer MSP working aged 20 employees 100 employees ESRD 30 month coordination period CO-22 OA-23 MA04
+takeaways:
+  - "When a patient has two plans, COB rules decide which one pays first."
+  - "For children of married parents, the birthday rule usually picks the primary plan."
+  - "Medicare can be primary or secondary depending on the patient's situation (MSP rules)."
+  - "Bill the secondary with the primary's payment details."
 quiz:
   - q: A child is covered by both parents' plans. Mom's birthday is 03/15/1985; Dad's is 01/20/1990. Whose plan is primary under the birthday rule?
     options:
@@ -47,6 +52,31 @@ When a patient has more than one plan, the plans **coordinate** so that together
 Billing in the wrong order is one of the most common causes of denials and later recoupments.
 
 ## General COB rules (commercial plans)
+
+```flow
+type: steps
+title: Work down the rules until one decides who is primary
+numbered: true
+steps:
+  - t: No COB provision
+    d: A plan without one pays first
+    c: blue
+  - t: Subscriber before dependent
+    d: The plan covering the person as the employee pays first
+    c: blue
+  - t: Birthday rule
+    d: For children of married or cohabiting parents, the parent whose birthday comes first in the year
+    c: green
+  - t: Divorced or separated parents
+    d: Court order, then custody rules
+    c: green
+  - t: Active before retiree or COBRA
+    d: Active employee coverage pays first
+    c: yellow
+  - t: Longer coverage first
+    d: If nothing else decides
+    c: purple
+```
 
 Most commercial plans follow rules modeled on the NAIC (National Association of Insurance Commissioners) guidelines. Apply them **in order**; stop at the first rule that decides.
 

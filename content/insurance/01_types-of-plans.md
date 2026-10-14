@@ -5,6 +5,10 @@ description: How each plan type works, what it means for referrals, networks and
 order: 1
 level: Beginner
 keywords: HMO PPO EPO POS HDHP HSA FSA HRA indemnity self funded ERISA fully insured ACA marketplace metal tiers plan types
+takeaways:
+  - "The plan type decides networks, referrals and how much the patient pays."
+  - "HMOs usually need referrals and in-network care; PPOs allow more choice at a higher cost."
+  - "Self-funded employer plans follow federal ERISA rules; fully insured plans also follow state insurance law."
 quiz:
   - q: Which plan type typically requires a PCP referral and covers no out-of-network care except emergencies?
     options:

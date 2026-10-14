@@ -6,6 +6,11 @@ order: 2
 reviewed: 2026-10-14
 level: Beginner
 keywords: eligibility verification benefits verification EV BV 270 271 deductible coinsurance copay out of pocket active coverage
+takeaways:
+  - "Eligibility asks \"is the patient covered on this date?\"; benefits ask \"what does the plan pay for this service?\""
+  - "How cost-sharing is applied depends on the plan design, so examples are illustrative."
+  - "Eligibility is not a guarantee of payment."
+  - "Always record the date, the method and a reference number."
 quiz:
   - q: Which EDI transaction pair is used to check eligibility electronically?
     options:
@@ -49,6 +54,28 @@ These two words are often said together, but they answer different questions.
 - **Benefits:** *What does the plan pay for this service, and what will the patient owe?*
 
 A patient can be eligible and still have no benefit for a particular service, such as a cosmetic procedure or, under many plans, routine hearing aids.
+
+```flow
+type: steps
+title: A verification, start to finish
+numbered: true
+steps:
+  - t: Coverage
+    d: Active on the date of service? Primary?
+    c: blue
+  - t: Network
+    d: Provider in-network for this plan?
+    c: blue
+  - t: Benefits for this service
+    d: Covered? Limits? Deductible, copay, coinsurance met?
+    c: green
+  - t: Authorization or referral
+    d: Needed for this code and place of service?
+    c: yellow
+  - t: Record it
+    d: Date, method, reference number, patient estimate
+    c: purple
+```
 
 ## How eligibility is checked
 

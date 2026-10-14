@@ -5,6 +5,11 @@ description: The difference between a referral, a prior authorization and a pre-
 order: 3
 level: Beginner
 keywords: prior authorization precertification referral pre determination retro authorization 278 auth number units dates CO-197 CO-198
+takeaways:
+  - "A referral sends the patient to a specialist; a prior authorization approves a specific service."
+  - "Missing approvals usually deny as CO-197 and are hard to fix after the fact."
+  - "An authorization isn't a promise of payment; eligibility and coverage still apply."
+  - "Record the approval number so it prints on the claim."
 quiz:
   - q: An HMO requires the primary care doctor to send the patient to a specialist. What is this called?
     options:
@@ -72,12 +77,32 @@ Original Medicare traditionally requires little prior authorization, though CMS 
 
 ## The authorization workflow
 
-1. **Identify the need** at scheduling: check the payer's list for the CPT code, diagnosis and place of service.
-2. **Gather clinical information:** office notes, test results, failed conservative treatment, and the ordering provider's details.
-3. **Submit the request** through the payer portal, by fax, by phone or by 278 transaction. Many payers delegate to vendors such as Evolent, Carelon or EviCore for imaging and specialty services.
-4. **Track the decision.** Urgent requests are decided faster than standard ones.
-5. **Record the approval** in the billing system so it prints on the claim (CMS-1500 box 23 or UB-04 FL 63).
-6. **Handle a denial** with a peer-to-peer review (the ordering doctor speaks to the payer's medical reviewer) or an appeal.
+```flow
+type: steps
+title: The authorization workflow
+numbered: true
+steps:
+  - t: Identify the need
+    d: Check the payer's list at scheduling
+    c: blue
+  - t: Gather clinicals
+    d: Notes, test results, prior treatment
+    c: blue
+  - t: Submit
+    d: Portal, fax, phone or 278
+    c: yellow
+  - t: Track the decision
+    d: Urgent requests are faster
+    c: yellow
+  - t: Record the approval
+    d: So it prints on the claim
+    c: green
+  - t: If denied
+    d: Peer-to-peer or appeal
+    c: pink
+```
+
+Many payers delegate imaging and specialty requests to vendors such as Evolent, Carelon or EviCore. Urgent requests are decided faster than standard ones. Record the approval so it prints on the claim (CMS-1500 box 23 or UB-04 FL 63). If the request is denied, the ordering doctor can ask for a peer-to-peer review with the payer's medical reviewer, or you can appeal.
 
 ## What to record on an approval
 

@@ -5,6 +5,11 @@ description: Fee-for-service, fee schedules, RVUs, DRGs, APCs, capitation and va
 order: 5
 level: Beginner
 keywords: fee for service capitation value based care RVU MPFS DRG APC OPPS HIPAA PHI fee schedule chargemaster
+takeaways:
+  - "Most payment is still fee-for-service: a price per service, often based on a fee schedule."
+  - "Hospitals are often paid per stay or per grouped service rather than per line item."
+  - "Capitation and value-based care pay for patients and outcomes, not just services."
+  - "The patient's share comes from deductibles, copays and coinsurance."
 quiz:
   - q: Medicare pays most physician services using what?
     options:

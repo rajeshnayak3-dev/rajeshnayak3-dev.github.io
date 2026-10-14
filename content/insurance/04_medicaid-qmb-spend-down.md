@@ -6,6 +6,11 @@ order: 4
 reviewed: 2026-10-14
 level: Intermediate
 keywords: Medicaid QMB SLMB QI QDWI Medicare Savings Program dual eligible full dual partial dual spend down medically needy payer of last resort retroactive eligibility balance billing CHIP
+takeaways:
+  - "Medicaid is run by each state and is usually the payer of last resort."
+  - "Dual-eligible patients have both Medicare and Medicaid; Medicare pays first."
+  - "Never bill a QMB patient for Medicare deductibles, coinsurance or copays."
+  - "Spend-down patients qualify for Medicaid only after their medical bills reach a set amount."
 quiz:
   - q: A QMB patient has Original Medicare. Medicare paid and applied $28 coinsurance. The state Medicaid pays $0 toward it. Can the provider bill the patient the $28?
     options:
@@ -109,6 +114,24 @@ State Medicaid programs help low-income Medicare beneficiaries pay Medicare cost
 Only **QMB** covers cost-sharing, which is why it matters most in RCM.
 
 ## QMB: the balance-billing rule
+
+```flow
+type: branch
+title: Can you bill the patient for Medicare cost-sharing?
+start:
+  t: Medicare paid and left a deductible, coinsurance or copay
+  c: gray
+question: Is the patient a Qualified Medicare Beneficiary (QMB)?
+options:
+  - label: "Yes"
+    t: Never bill the patient
+    c: pink
+    then: [Bill the state Medicaid program (often by crossover), Adjust what Medicaid doesn't pay under the client's policy, Recall statements and refund anything collected]
+  - label: "No"
+    t: Follow the normal order
+    c: green
+    then: [Bill any secondary payer first, Then bill the patient their remaining share]
+```
 
 Federal law **prohibits** Medicare providers from billing QMB individuals for **any** Medicare cost-sharing (deductible, coinsurance, copay), for services under both Original Medicare and Medicare Advantage.
 

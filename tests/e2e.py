@@ -301,6 +301,22 @@ async def main():
         rec("PRACT-01", "Practice lab filters and planned items", "Filter Advanced, clear; check planned items", "Filter narrows and clears; planned items have no links", f"all={allc}, advanced={adv}, cleared={back}, planned_links={planned_links}", 0 < adv < allc and back == allc and planned_links == 0)
         await ctx.close()
 
+        # ---------- FLOW-01: diagrams, path ribbon and recap render on lessons
+        ctx, pg = await new_page(browser, 1280)
+        total_flows, leftovers = 0, 0
+        for r in routes:
+            html = (DIST / r.strip("/") / "index.html").read_text(encoding="utf-8") if r != "/" else (DIST / "index.html").read_text(encoding="utf-8")
+            total_flows += html.count('<figure class="flow ')
+            leftovers += html.count("FLOWBLOCK")
+        await pg.goto(BASE + "/insurance/coordination-of-benefits/")
+        ribbon = await pg.text_content(".path-ribbon")
+        nxt = await pg.get_attribute(".pager-link.next", "href")
+        recap = await pg.is_visible(".recap")
+        rec("FLOW-01", "Diagrams and lesson anatomy", "Count flow diagrams in the build; open the COB lesson", "Diagrams render (no leftover placeholders); ribbon shows path, module and lesson; Next follows the path; recap shown",
+            f"flows={total_flows}, leftovers={leftovers}, ribbon='{' '.join(ribbon.split())[:70]}', next={nxt}, recap={recap}",
+            total_flows >= 20 and leftovers == 0 and "Module 2 of 5" in ribbon and nxt.endswith("rcm-cycle/eligibility-and-benefits/") and recap)
+        await ctx.close()
+
         # ---------- THEME-01: light theme, plain layout on hubs, sidebar only on lessons
         ctx, pg = await new_page(browser, 1280)
         await pg.goto(BASE + "/practice/")
@@ -308,7 +324,7 @@ async def main():
         hub_side = await pg.query_selector(".sidebar")
         await pg.goto(BASE + "/start-here/what-is-rcm/")
         lesson_side = await pg.is_visible(".sidebar")
-        rec("THEME-01", "Light theme and layout", "Open a hub page and a lesson at 1280px", "White background; no sidebar on hubs; lesson outline on lessons", f"bg={bg}, hub_sidebar={bool(hub_side)}, lesson_sidebar={lesson_side}", bg == "rgb(255, 255, 255)" and not hub_side and lesson_side)
+        rec("THEME-01", "Light theme and layout", "Open a hub page and a lesson at 1280px", "Light dotted canvas (#F5F7FA); no sidebar on hubs; lesson outline on lessons", f"bg={bg}, hub_sidebar={bool(hub_side)}, lesson_sidebar={lesson_side}", bg == "rgb(245, 247, 250)" and not hub_side and lesson_side)
         await ctx.close()
 
         await browser.close()

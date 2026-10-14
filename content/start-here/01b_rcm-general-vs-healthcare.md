@@ -6,6 +6,10 @@ order: 1.5
 slug: rcm-general-vs-healthcare
 level: Beginner
 keywords: revenue cycle meaning general business order to cash O2C revenue management hotel airline healthcare RCM difference third party payer
+takeaways:
+  - "Every business has a revenue cycle: sell, invoice, collect."
+  - "Healthcare is different because a third party (the payer) decides what to pay, after the service."
+  - "Prices, coverage and patient share depend on the plan, the contract and the rules, not just the bill."
 quiz:
   - q: In most businesses, the revenue cycle is usually called what?
     options:

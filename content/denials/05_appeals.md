@@ -47,6 +47,29 @@ Appeals take time and analyst effort. If a phone call or a corrected claim fixes
 
 ## Medicare's five appeal levels
 
+```flow
+type: steps
+title: Original Medicare appeal ladder
+numbered: true
+steps:
+  - t: Redetermination
+    d: MAC · file within 120 days
+    c: blue
+  - t: Reconsideration
+    d: QIC · file within 180 days
+    c: blue
+  - t: ALJ hearing
+    d: OMHA · 60 days · minimum amount in controversy
+    c: yellow
+  - t: Appeals Council review
+    d: Medicare Appeals Council · 60 days
+    c: purple
+  - t: Judicial review
+    d: Federal district court · 60 days · higher minimum
+    c: purple
+note: Deadlines count from receipt of the previous decision (presumed 5 days after its date). Send all evidence by level 2 if you can.
+```
+
 | Level | Name | Decided by | Deadline to file | Decision time (typical) |
 |---|---|---|---|---|
 | 1 | **Redetermination** | MAC (different staff from the original decision) | **120 days** from receipt of the initial determination | 60 days |

@@ -77,11 +77,27 @@ A denial rate that creeps from 5% to 10% can mean hundreds of thousands of dolla
 
 ## The five-step way to work any denial
 
-1. **Read** the ERA: group code, CARC, RARC, the line it hits and the payer's claim number.
-2. **Investigate:** check the claim as billed, eligibility, authorization, notes, documentation and payer policy. Confirm the payer's reason is correct.
-3. **Decide the action:** corrected claim, reprocessing request, records, appeal, bill another payer, patient contact, or write-off with approval.
-4. **Act and document:** take the action, and record what you did, the reference number and the follow-up date.
-5. **Prevent:** tag the **root cause** so the upstream team can stop it from happening again.
+```flow
+type: steps
+title: Work any denial in five steps
+numbered: true
+steps:
+  - t: Read
+    d: Group code, CARC, RARC, the line and the payer's claim number
+    c: blue
+  - t: Investigate
+    d: Claim as billed, eligibility, auth, notes, payer policy. Is the payer right?
+    c: blue
+  - t: Decide
+    d: Corrected claim, reprocessing, records, appeal, other payer, patient contact, or approved write-off
+    c: yellow
+  - t: Act and document
+    d: Do it; note the action, reference number and follow-up date
+    c: green
+  - t: Prevent
+    d: Tag the root cause so the upstream team can fix it
+    c: purple
+```
 
 ## Denial categories at a glance
 

@@ -6,6 +6,10 @@ order: 2
 reviewed: 2026-10-14
 level: Beginner
 keywords: ERA EOB remittance advice group codes CO PR OA PI CARC RARC remark codes MA130 N290 how to read ERA
+takeaways:
+  - "Every adjustment has a group code (who), a CARC (why) and sometimes a RARC (more detail)."
+  - "CO means the provider is responsible; never bill the patient for a CO amount."
+  - "PR assigns the amount to the patient, but check protections like QMB before billing."
 quiz:
   - q: An ERA line shows PR-2 $40. Who owes the $40?
     options:
@@ -35,6 +39,23 @@ quiz:
 
 ## The three layers of an adjustment
 
+```flow
+type: steps
+title: Three codes, read left to right
+steps:
+  - t: Group code
+    d: Who is responsible (CO, PR, OA, PI)
+    c: blue
+    a: then
+  - t: CARC
+    d: Why the amount was adjusted
+    c: yellow
+    a: then
+  - t: RARC
+    d: More detail, or an alert
+    c: green
+```
+
 Every adjustment on an ERA is described by up to three codes:
 
 1. **Group code:** *who* is responsible for the adjusted amount.
@@ -53,6 +74,29 @@ Always read the **current official wording** for a code, because the short meani
 Last reviewed by REVEX: October 2026.
 
 ## Group codes
+
+```flow
+type: branch
+title: Who owes the adjusted amount?
+question: Read the group code first
+options:
+  - label: CO
+    t: The provider
+    d: Contractual obligation. Never bill the patient for it.
+    c: blue
+  - label: PR
+    t: The patient (or next payer)
+    d: Still check QMB, Medicaid and ABN or waiver rules before billing.
+    c: yellow
+  - label: OA
+    t: Other
+    d: Usually not the patient. Read the remark codes.
+    c: gray
+  - label: PI
+    t: Payer-initiated reduction
+    d: Not the patient's responsibility.
+    c: purple
+```
 
 | Group | Name | Meaning | Can the patient be billed? |
 |---|---|---|---|

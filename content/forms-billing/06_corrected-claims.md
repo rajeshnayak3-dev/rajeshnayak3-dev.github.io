@@ -38,6 +38,29 @@ quiz:
 
 ## Four ways to “resend” a claim
 
+```flow
+type: branch
+title: Which route fixes this claim?
+question: What actually went wrong?
+options:
+  - label: Rejected, never processed
+    t: New claim
+    d: Fix it and send as an original (frequency 1).
+    c: green
+  - label: Billing data was wrong
+    t: Corrected claim
+    d: Replacement (frequency 7) under the payer's rules. Medicare Part B uses a reopening.
+    c: blue
+  - label: Claim shouldn't exist
+    t: Void
+    d: Cancel it (frequency 8), then bill correctly if needed.
+    c: yellow
+  - label: Claim right, decision wrong
+    t: Reconsideration or appeal
+    d: With documents, within the payer's limit.
+    c: purple
+```
+
 | Action | Use when | How |
 |---|---|---|
 | **New (original) claim** | The claim was **rejected** and never adjudicated, or a **void** has removed the original | Frequency **1**, no original claim number |

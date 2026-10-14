@@ -405,6 +405,7 @@
   }
 
   /* ------------------------------------------------ learning paths */
+  $$("[data-dot]").forEach(function (d) { if (state.done[d.getAttribute("data-dot")]) d.classList.add("is-done"); });
   $$("[data-path-progress]").forEach(function (el) {
     var urls = (el.getAttribute("data-urls") || "").split(" ").filter(Boolean);
     var d = urls.filter(function (u) { return state.done[u]; }).length;
@@ -504,7 +505,7 @@
       var walker = document.createTreeWalker(prose, NodeFilter.SHOW_TEXT, {
         acceptNode: function (n) {
           var p = n.parentElement;
-          if (!p || p.closest("a, h1, h2, h3, h4, code, pre, button, .quiz, .term, summary, .admonition-title, th, .review-box, .objectives")) return NodeFilter.FILTER_REJECT;
+          if (!p || p.closest("a, h1, h2, h3, h4, code, pre, button, .quiz, .term, summary, .admonition-title, th, .review-box, .objectives, .flow")) return NodeFilter.FILTER_REJECT;
           return n.nodeValue.trim().length > 2 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
         }
       });

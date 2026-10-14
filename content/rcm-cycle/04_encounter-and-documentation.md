@@ -6,6 +6,10 @@ order: 4
 reviewed: 2026-10-14
 level: Beginner
 keywords: clinical documentation SOAP note medical necessity E/M level MDM time ABN superbill encounter form signature
+takeaways:
+  - "The provider's note is the evidence for the bill: if it isn't documented, it didn't happen."
+  - "Medical necessity means the diagnosis supports the service under the payer's policy."
+  - "An ABN applies only to Original Medicare and must be given before the service to shift liability to the patient."
 quiz:
   - q: An auditor finds a 99214 billed, but the note supports only 99213. What is the risk?
     options:

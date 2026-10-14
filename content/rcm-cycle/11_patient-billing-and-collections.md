@@ -5,6 +5,10 @@ description: How patient balances are calculated and billed, statement cycles, p
 order: 11
 level: Intermediate
 keywords: patient statements self pay patient responsibility payment plan collections bad debt charity care financial assistance No Surprises Act good faith estimate balance billing
+takeaways:
+  - "Bill the patient only after every payer has processed the claim."
+  - "Patients can be billed for deductibles, copays, coinsurance and agreed non-covered services, not contractual write-offs."
+  - "Offer clear statements, payment options and financial assistance where it applies."
 quiz:
   - q: When should a patient be billed for a service covered by insurance?
     options:

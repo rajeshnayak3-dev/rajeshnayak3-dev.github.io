@@ -5,6 +5,11 @@ description: Who qualifies, what each part covers, Medigap, Medicare Advantage, 
 order: 3
 level: Beginner
 keywords: Medicare Part A Part B Part C Part D Medicare Advantage Medigap MAC MBI crossover PTAN enrollment ABN eligibility ESRD
+takeaways:
+  - "Medicare has four parts: A (hospital), B (medical), C (Medicare Advantage) and D (drugs)."
+  - "Original Medicare is run regionally by Medicare Administrative Contractors (MACs)."
+  - "A Medicare Advantage patient's claims go to the plan, not to Original Medicare."
+  - "Patients are identified by their MBI, not their Social Security number."
 quiz:
   - q: Which part of Medicare covers physician office visits?
     options:

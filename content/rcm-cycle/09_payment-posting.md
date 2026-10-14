@@ -5,6 +5,10 @@ description: How to post insurance and patient payments line by line, read an ER
 order: 9
 level: Intermediate
 keywords: payment posting ERA 835 EOB EFT lockbox reconciliation zero pay takeback recoupment contractual adjustment transfer to secondary
+takeaways:
+  - "Posting records each payment and adjustment from the ERA, line by line."
+  - "Every line must balance: billed = paid + all adjustments."
+  - "Never write off a denial at posting; send it to the denial or AR queue."
 quiz:
   - q: Billed $250, allowed $150, paid $120, PR-2 $30. What is the contractual adjustment?
     options:
@@ -90,6 +94,30 @@ On every line:
 If the numbers don't balance, stop and investigate before posting.
 
 ## What to post for each situation
+
+```flow
+type: branch
+title: What does the ERA line say?
+question: Read the line, then post it the matching way
+options:
+  - label: Paid
+    t: Post payment and contractual adjustment
+    d: Move the PR amount to the next payer or the patient.
+    c: green
+  - label: Denied ($0)
+    t: Post $0 with the denial codes
+    d: No write-off. Route it to the denial or AR queue.
+    c: pink
+  - label: Overpaid
+    t: Post the payment as received
+    d: Flag the credit balance for review.
+    c: yellow
+  - label: Takeback
+    t: Post a negative payment
+    d: Against the original claim; post the corrected payment when it arrives.
+    c: purple
+note: "Every line must balance: billed = paid + all adjustments."
+```
 
 | Situation | What to post | Then |
 |---|---|---|

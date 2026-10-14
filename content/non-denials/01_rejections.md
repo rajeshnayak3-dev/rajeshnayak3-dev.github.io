@@ -5,6 +5,10 @@ description: Clearinghouse and payer front-end rejections, how to read them, the
 order: 1
 level: Beginner
 keywords: claim rejection clearinghouse rejection payer rejection 277CA 999 rejection reasons subscriber not found invalid NPI payer ID rejection queue
+takeaways:
+  - "A rejection means the claim never entered the payer's system."
+  - "Group rejections by reason so one fix solves many claims."
+  - "Fix, resubmit as a new claim, and confirm acceptance the next day."
 quiz:
   - q: A claim rejected for “subscriber not found.” What should you send after fixing it?
     options:
@@ -58,11 +62,29 @@ Rejections come from three places:
 
 ## The daily rejection routine
 
-1. **Pull the reports** from the clearinghouse every morning (rejections, 277CA rejections, unacknowledged batches).
-2. **Group rejections by reason.** Twenty claims rejected for the same NPI problem need one fix in the provider set-up, not twenty manual edits.
-3. **Fix and resubmit** as new claims.
-4. **Confirm acceptance** on the next day's report.
-5. **Track the root cause** (registration, charge entry, provider set-up) so the error stops at the source.
+```flow
+type: steps
+title: The daily rejection routine
+numbered: true
+steps:
+  - t: Pull reports
+    d: Clearinghouse, 277CA, unacknowledged batches
+    c: blue
+  - t: Group by reason
+    d: One root cause, one fix
+    c: blue
+  - t: Fix and resubmit
+    d: As new claims
+    c: yellow
+  - t: Confirm acceptance
+    d: On the next day's report
+    c: green
+  - t: Track the root cause
+    d: Registration, charge entry or provider set-up
+    c: purple
+```
+
+Twenty claims rejected for the same NPI problem need one fix in the provider set-up, not twenty manual edits.
 
 !!! warning "A claim can reject quietly"
     Some payers return rejections only on the 277CA, which many billing systems don't show on the claim itself. If a claim has no ERA after 30 days, check whether it was ever accepted.

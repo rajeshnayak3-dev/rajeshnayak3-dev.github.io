@@ -5,6 +5,10 @@ description: The HIPAA X12 transactions behind eligibility, claims, status, auth
 order: 4
 level: Intermediate
 keywords: EDI X12 HIPAA transactions 270 271 276 277 277CA 278 275 834 835 837P 837I 999 TA1 EFT ERA enrollment
+takeaways:
+  - "EDI transactions are standard electronic files: 837 claims, 835 remittances, 270/271 eligibility, 276/277 status."
+  - "The 999 and 277CA confirm a claim was received and accepted."
+  - "Posting teams work from the 835; AR teams use 276/277 to check status."
 quiz:
   - q: Which transaction carries the remittance advice?
     options:

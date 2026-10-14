@@ -111,6 +111,25 @@ quiz:
 
 If a value contains a colon followed by a space, wrap it in double quotes.
 
+### Flowcharts
+Add a diagram anywhere in a lesson with a fenced `flow` block (YAML inside):
+
+````
+```flow
+type: steps            # steps | branch | phases
+title: Where a claim goes after you click send
+steps:
+  - t: Billing system
+    d: Scrubber edits catch errors
+    c: blue            # blue, green, yellow, purple, pink, teal, gray
+    a: claim file      # optional label on the arrow to the next box
+  - t: Clearinghouse
+    d: Format edits
+```
+````
+
+`branch` takes `question` and `options` (each with `label`, `t`, `d`, `c` and optional `then` list); `phases` takes `phases` (each with `name`, `d`, `c`, `steps`) and an optional `loop` note. Recap bullets go in the lesson header as `takeaways:`.
+
 ---
 
 ## Part 3: Custom domain (later, optional)

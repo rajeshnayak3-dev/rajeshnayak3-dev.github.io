@@ -5,6 +5,10 @@ description: What happens inside the payer after a claim is accepted, the order 
 order: 8
 level: Intermediate
 keywords: claim adjudication auto adjudication pended claim medical review allowed amount processing time prompt pay laws
+takeaways:
+  - "Adjudication is the payer deciding whether and how much to pay."
+  - "Payers check eligibility, provider status, duplicates, COB, benefits, authorization, coding and medical necessity."
+  - "The allowed amount comes from the contract or fee schedule, not the billed charge."
 quiz:
   - q: Which check usually happens first in adjudication?
     options:
@@ -38,15 +42,40 @@ quiz:
 
 ## The usual order of checks
 
-1. **Front-end edits.** Already passed at acceptance (format, required data).
-2. **Member and eligibility.** Is this person a member, covered on the date of service, under this plan?
-3. **Provider status.** Is the provider enrolled, credentialed and in-network, with a valid NPI and tax ID?
-4. **Duplicate check.** Has this exact service already been processed? (CO-18 if so.)
-5. **Coordination of benefits.** Is this payer primary? Does it need another payer's information first? (CO-22, MA04)
-6. **Benefits and coverage.** Is the service a covered benefit? Any limits or exclusions? (CO-96, CO-204, CO-119)
-7. **Authorization and referral.** Was approval required and obtained? Does it match? (CO-197, CO-198)
-8. **Coding edits.** NCCI, MUEs, modifier logic, age and sex edits, payer-specific edits. (CO-97, CO-4, CO-151)
-9. **Medical necessity.** Do the diagnoses support the service under the payer's policy? (CO-50, CO-167)
+```flow
+type: steps
+title: The checks a payer runs, in the usual order
+numbered: true
+steps:
+  - t: Front-end edits
+    d: Format and required data (already passed at acceptance)
+    c: gray
+  - t: Member and eligibility
+    d: Covered on the date of service, under this plan?
+    c: blue
+  - t: Provider status
+    d: Enrolled, credentialed, in-network, valid NPI and tax ID?
+    c: blue
+  - t: Duplicate check
+    d: Already processed? (CO-18)
+    c: yellow
+  - t: Coordination of benefits
+    d: Is this payer primary? (CO-22, MA04)
+    c: yellow
+  - t: Benefits and coverage
+    d: Covered benefit? Limits or exclusions? (CO-96, CO-204, CO-119)
+    c: green
+  - t: Authorization and referral
+    d: Required, obtained and matching? (CO-197, CO-198)
+    c: green
+  - t: Coding edits
+    d: NCCI, MUEs, modifiers, age and sex edits (CO-97, CO-4, CO-151)
+    c: purple
+  - t: Medical necessity
+    d: Do the diagnoses support the service? (CO-50, CO-167)
+    c: purple
+note: The codes in brackets are the denials you see when a check fails. Payers differ in the exact order.
+```
 10. **Timely filing.** Received within the limit? (CO-29)
 11. **Pricing.** Apply the fee schedule or contract to get the **allowed amount**.
 12. **Patient cost-sharing.** Apply deductible, copay and coinsurance.

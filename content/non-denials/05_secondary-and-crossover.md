@@ -74,9 +74,22 @@ When you bill directly, include the primary's adjudication: paid amount and each
 
 After each payer finalizes:
 
-1. Post its payment and adjustments.
-2. Transfer the remaining **patient responsibility** to the next payer in order.
-3. Only after the last payer has processed, transfer what remains to the patient (respecting QMB, Medicaid and contract rules).
+```flow
+type: steps
+title: After each payer pays
+steps:
+  - t: Post
+    d: Its payment and adjustments
+    c: blue
+    a: then
+  - t: Transfer
+    d: Patient responsibility to the next payer in order
+    c: yellow
+    a: last payer done
+  - t: Patient
+    d: Bill what's left, respecting QMB, Medicaid and contract rules
+    c: green
+```
 
 Billing systems use **financial class** or **responsible party** fields to show who owes the balance now. A balance sitting under “Medicare” after Medicare paid is a red flag on any aging report.
 

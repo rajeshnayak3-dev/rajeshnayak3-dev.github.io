@@ -5,6 +5,10 @@ description: How services become charges in the billing system, the fields that 
 order: 6
 level: Beginner
 keywords: charge entry charge capture charge lag missed charges place of service units fee schedule batch reconciliation
+takeaways:
+  - "Charge entry turns codes into billable lines: patient, date, provider, place of service, codes, units and charge."
+  - "Charge lag delays cash; missed charges lose it entirely."
+  - "Most charge entry errors come back as denials, so check before release."
 quiz:
   - q: What is charge lag?
     options:

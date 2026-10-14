@@ -9,7 +9,18 @@
 {% endblock %}
 {% block main %}
 <div class="wrap">
+  {% if pctx %}
+  <nav class="path-ribbon" aria-label="Your place in the learning path">
+    <a class="pr-path" href="/learn/{{ pctx.path.id }}/">{{ icon("route", 16) }} {{ pctx.path.title }}</a>
+    <span class="pr-sep" aria-hidden="true">›</span>
+    <span class="pr-mod">Module {{ pctx.module_n }} of {{ pctx.module_total }}: {{ pctx.module.title }}</span>
+    <span class="pr-sep" aria-hidden="true">›</span>
+    <span class="pr-les">Lesson {{ pctx.lesson_n }} of {{ pctx.lesson_total }}</span>
+    <span class="pr-dots" aria-hidden="true">{% for u in pctx.dots %}<i data-dot="{{ u }}"{% if u == page.url %} class="is-here"{% endif %}></i>{% endfor %}</span>
+  </nav>
+  {% else %}
   {{ crumbs([(section.title, "/" ~ section.id ~ "/"), (page.short, None)]) }}
+  {% endif %}
 </div>
 <article class="wrap lesson-grid">
   <header class="lesson-head">
@@ -35,6 +46,12 @@
     </section>
     {% endif %}
     {{ page.html | safe }}
+    {% if page.takeaways %}
+    <section class="recap" aria-labelledby="recap-h">
+      <h2 id="recap-h">{{ icon("check", 20) }} Remember this</h2>
+      <ul>{% for t in page.takeaways %}<li>{{ t | md }}</li>{% endfor %}</ul>
+    </section>
+    {% endif %}
     {{ quiz(page.quiz, page.url) }}
     <details class="review-box">
       <summary>{{ icon("book", 16) }} Sources, scope and review date</summary>
@@ -45,6 +62,9 @@
       <p class="review-date">{% if page.reviewed %}Policy-sensitive statements last reviewed against sources: {{ page.reviewed }}.{% else %}Not yet re-reviewed under the October 2026 source policy; policy-sensitive statements should be checked against the <a href="/sources/">official sources</a>.{% endif %} <a href="https://github.com/rajeshnayak3-dev/rajeshnayak3-dev.github.io/issues" rel="noopener" target="_blank">Report an error</a>.</p>
     </details>
     {% if page.track %}{{ complete_bar(page.url, prev, next) }}{% else %}{{ complete_bar_nav(prev, next) }}{% endif %}
+    {% if pctx and not pctx.next %}
+    <p class="path-done"><strong>That's the last lesson in {{ pctx.path.title }}.</strong> <a href="/learn/{{ pctx.path.id }}/#practice">Practice the cases for this path</a> to lock it in.</p>
+    {% endif %}
   </div>
 </article>
 {% endblock %}

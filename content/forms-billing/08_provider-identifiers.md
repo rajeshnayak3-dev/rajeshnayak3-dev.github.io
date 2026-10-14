@@ -5,6 +5,10 @@ description: Every number that identifies a provider on a claim, what it looks l
 order: 8
 level: Beginner
 keywords: NPI Type 1 Type 2 NPPES TIN EIN SSN W-9 PTAN taxonomy code CLIA number UPIN Medicaid provider number provider identifiers
+takeaways:
+  - "The NPI identifies the provider, the TIN identifies who gets paid, and the PTAN is the Medicare enrollment number."
+  - "Billing, rendering and referring providers each have their own place on the claim."
+  - "Mismatched identifiers cause rejections and denials."
 quiz:
   - q: A group practice bills under its organization NPI. What type is it?
     options:

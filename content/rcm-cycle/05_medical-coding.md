@@ -5,6 +5,11 @@ description: ICD-10-CM, CPT, HCPCS, ICD-10-PCS and revenue codes explained for b
 order: 5
 level: Beginner
 keywords: ICD-10-CM CPT HCPCS Level II ICD-10-PCS revenue codes NDC code sets diagnosis pointer NCCI MUE unbundling upcoding
+takeaways:
+  - "ICD-10-CM says why the patient was seen; CPT and HCPCS say what was done."
+  - "Modifiers add detail such as side of the body or a separate service."
+  - "NCCI edits and MUEs block code pairs and unit counts that payers don't pay together."
+  - "Only qualified coders should change codes."
 quiz:
   - q: Which code set describes WHY a service was performed?
     options:

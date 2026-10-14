@@ -40,6 +40,27 @@ quiz:
 
 ## Three levels of fix
 
+```flow
+type: steps
+title: From fixing accounts to fixing the process
+steps:
+  - t: Correction
+    d: Fix the accounts that went wrong
+    c: pink
+    a: then
+  - t: Corrective action
+    d: Remove the cause
+    c: yellow
+    a: then
+  - t: Preventive action
+    d: Stop it happening elsewhere
+    c: blue
+    a: prove it
+  - t: Effectiveness check
+    d: Re-audit; close only on data
+    c: green
+```
+
 | Term | What it does | Example |
 |---|---|---|
 | **Correction** | Fixes the specific accounts that went wrong | Recall statements sent to QMB patients and refund payments |

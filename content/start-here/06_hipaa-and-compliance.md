@@ -5,6 +5,10 @@ description: The HIPAA rules that shape every RCM job, what a business associate
 order: 6
 level: Beginner
 keywords: HIPAA privacy rule security rule breach notification rule transactions and code sets unique identifiers business associate agreement BAA PHI minimum necessary compliance offshore RCM
+takeaways:
+  - "HIPAA protects patient health information (PHI) held by providers, payers, clearinghouses and their business associates."
+  - "Use and share only the minimum PHI needed for the task."
+  - "Never put real patient details into personal email, chat apps or public AI tools."
 quiz:
   - q: Which HIPAA rule requires every payer to accept the 837 claim and use ICD-10-CM and CPT?
     options:

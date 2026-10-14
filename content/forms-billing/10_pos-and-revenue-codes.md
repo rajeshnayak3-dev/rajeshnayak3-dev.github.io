@@ -5,6 +5,10 @@ description: The place of service codes for professional claims and the revenue 
 order: 10
 level: Beginner
 keywords: place of service codes POS 11 21 22 23 24 02 10 19 31 32 81 revenue codes 0450 0300 0250 0636 0360 0120 0762 type of bill reference
+takeaways:
+  - "Place of service (POS) codes go on professional claims and say where care happened."
+  - "Revenue codes go on hospital claims and say which department provided the service."
+  - "A wrong POS can change the payment or cause a denial."
 ---
 
 ## Which code goes where

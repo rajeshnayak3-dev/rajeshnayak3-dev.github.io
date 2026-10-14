@@ -82,6 +82,33 @@ Payer-specific questions for each denial are on its page in the [denial code lib
 
 ## Choosing the action
 
+```flow
+type: branch
+title: Pick the action that matches the problem
+question: Why wasn't the claim paid?
+options:
+  - label: Our billing error
+    t: Corrected claim
+    d: Using the payer's correction process (Medicare Part B uses reopenings).
+    c: blue
+  - label: Payer processing error
+    t: Reprocessing or reconsideration
+    d: Ask on the call, or in writing.
+    c: green
+  - label: Payer needs information
+    t: Send what's missing
+    d: Records, itemized bill or COB form.
+    c: yellow
+  - label: We disagree with the decision
+    t: Appeal
+    d: With evidence, within the appeal limit.
+    c: purple
+  - label: Wrong payer
+    t: Bill the correct payer
+    d: Protect that payer's filing deadline.
+    c: teal
+```
+
 | Situation | Action |
 |---|---|
 | Billing error on the claim | **Corrected claim** (frequency code 7 on CMS-1500 box 22 with the original claim number; type of bill xx7 on UB-04) |

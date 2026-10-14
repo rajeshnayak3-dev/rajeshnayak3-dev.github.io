@@ -6,6 +6,11 @@ order: 1
 reviewed: 2026-10-14
 level: Beginner
 keywords: revenue cycle management definition medical billing meaning RCM full form
+takeaways:
+  - "RCM is everything that turns a patient visit into payment, from scheduling to the last dollar collected."
+  - "Work splits into front end (before the visit), mid-cycle (care becomes a claim) and back end (the claim becomes cash)."
+  - "A clean claim is complete and correct, but clean doesn't guarantee it gets paid."
+  - "Most denials start in the front end and are discovered in the back end."
 quiz:
   - q: Which statement best describes revenue cycle management?
     options:
@@ -62,6 +67,32 @@ Because of this, a medium-sized physician group can easily have thousands of ope
 
 Follow a fictional patient, Maya, through a routine visit to a family doctor.
 
+```flow
+type: steps
+title: How Maya's visit turns into payment
+numbered: true
+steps:
+  - t: Scheduling and eligibility
+    d: Book the visit, confirm the plan is active
+    c: blue
+  - t: Visit and coding
+    d: Doctor documents; coder assigns codes
+    c: green
+  - t: Claim submission
+    d: Charges entered, claim sent to the payer
+    c: green
+  - t: Adjudication
+    d: The payer decides what to pay
+    c: yellow
+  - t: Posting and follow-up
+    d: Payment posted; unpaid claims worked
+    c: purple
+  - t: Patient billing
+    d: Maya gets a statement for her share
+    c: purple
+note: Each box is a full stage in the RCM cycle, and each one can break. The table below adds who does the work.
+```
+
 | Step | What happens | Who does it |
 |---|---|---|
 | Scheduling | Maya books an appointment and gives her insurance details | Front desk or call center |
@@ -80,6 +111,23 @@ Each row is a full stage in [the RCM cycle](/rcm-cycle/), and each one can break
 ## Front end, mid-cycle and back end
 
 RCM work is usually divided into three blocks. Interviewers love this split.
+
+```flow
+type: steps
+title: Front end, mid-cycle, back end
+steps:
+  - t: Front end
+    d: Scheduling, registration, eligibility, authorization, upfront collections
+    c: blue
+    a: care is given
+  - t: Mid-cycle
+    d: Documentation, coding, charge entry, claim scrubbing
+    c: green
+    a: claim leaves
+  - t: Back end
+    d: Submission, posting, denials, AR follow-up, appeals, patient collections
+    c: purple
+```
 
 - **Front end (before and at the visit):** scheduling, registration, eligibility and benefits verification, prior authorization, and upfront patient collections.
 - **Mid-cycle (turning care into a claim):** clinical documentation, medical coding, charge capture and charge entry, and claim scrubbing.

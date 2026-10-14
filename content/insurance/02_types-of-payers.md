@@ -5,6 +5,10 @@ description: Government, commercial, Blue Cross Blue Shield, managed government 
 order: 2
 level: Beginner
 keywords: commercial payers government payers BCBS BlueCard home plan host plan TPA rental network Medicare Advantage managed Medicaid self pay liability payers
+takeaways:
+  - "Payers fall into families: government, managed government plans, commercial, TPAs, liability and self-pay."
+  - "Medicare Advantage and managed Medicaid are run by private companies, so bill the plan, not the government program."
+  - "Liability payers (workers' comp, auto) can come before health insurance."
 quiz:
   - q: A patient from Texas with a BCBS Texas card is treated in Ohio by an Anthem Ohio network provider. Where does the provider send the claim?
     options:

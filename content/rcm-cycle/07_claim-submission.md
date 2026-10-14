@@ -5,6 +5,11 @@ description: How a claim is checked, sent through a clearinghouse and accepted o
 order: 7
 level: Beginner
 keywords: claim scrubber clearinghouse 837P 837I 999 277CA rejection vs denial payer ID paper claim timely filing proof
+takeaways:
+  - "Claims pass through the scrubber, the clearinghouse and the payer front end before adjudication."
+  - "The 999 and 277CA acknowledgments tell you whether the claim was accepted."
+  - "A rejected claim was never processed, so it isn't a denial: fix it and send a new claim."
+  - "Every claim must reach the payer within its timely filing limit."
 quiz:
   - q: What is the key difference between a rejection and a denial?
     options:
@@ -31,6 +36,28 @@ quiz:
     answer: 1
     why: An acceptance report showing the payer received the claim within the limit is the standard proof of timely filing.
 ---
+
+```flow
+type: steps
+title: Where a claim goes after you click send
+steps:
+  - t: Billing system
+    d: Scrubber edits catch errors before release
+    c: blue
+    a: claim file
+  - t: Clearinghouse
+    d: Format edits; 999 confirms the file structure
+    c: teal
+    a: forwards
+  - t: Payer front end
+    d: 277CA says accepted or rejected
+    c: yellow
+    a: accepted
+  - t: Adjudication
+    d: The payer decides what to pay
+    c: green
+note: A claim rejected at any of the first three boxes never reached adjudication, so it's a **rejection**, not a denial.
+```
 
 ## Step 1: scrubbing
 
@@ -79,6 +106,23 @@ After submission, watch for these responses:
 Once a claim is accepted on the 277CA, it's in the payer's adjudication system and will eventually appear on an ERA as paid, denied or pended.
 
 ## Rejection versus denial
+
+```flow
+type: branch
+title: Rejection or denial?
+question: Did the payer accept the claim into adjudication?
+options:
+  - label: "No"
+    t: Rejection
+    d: Stopped at the clearinghouse or payer front end (999 or 277CA).
+    c: yellow
+    then: [Fix the data, Send a **new** claim, Confirm acceptance next day]
+  - label: "Yes, but it wasn't paid"
+    t: Denial
+    d: Processed and refused, shown on the ERA with CARC and RARC codes.
+    c: pink
+    then: [Read the ERA codes, "Correct, reprocess or appeal", Document and follow up]
+```
 
 This is the single most common fresher interview question.
 

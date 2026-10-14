@@ -5,6 +5,10 @@ description: What accounts receivable and accounts payable mean in healthcare, w
 order: 3
 level: Beginner
 keywords: accounts receivable accounts payable AR caller AR analyst AR follow up aging buckets credit balance refunds
+takeaways:
+  - "AR is money owed to the provider; AP is money the provider owes others."
+  - "In RCM, AR is unpaid claims and patient balances, tracked by age."
+  - "AP shows up in RCM mainly as refunds of overpayments and credit balances."
 quiz:
   - q: From the provider's point of view, an unpaid insurance claim is part of what?
     options:

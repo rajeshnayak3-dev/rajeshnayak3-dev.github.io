@@ -40,6 +40,27 @@ quiz:
 
 ## Symptom versus root cause
 
+```flow
+type: steps
+title: Dig past the symptom
+steps:
+  - t: Symptom
+    d: CO-197 denials rising
+    c: pink
+    a: why?
+  - t: Direct cause
+    d: No auth number on the claims
+    c: yellow
+    a: why?
+  - t: Root cause
+    d: Nobody tracks the payer's auth list changes
+    c: blue
+    a: fix
+  - t: Process fix
+    d: Owner, monthly review, scheduling edit
+    c: green
+```
+
 - **Symptom:** what you see. A denial code, an audit error, a rising AR over 90 days.
 - **Direct cause:** what went wrong on the claim. Missing auth number, wrong modifier, wrong payer.
 - **Root cause:** why the process allowed it. No step to update the auth list, no system edit for the modifier, registration screen that defaults to the old payer.

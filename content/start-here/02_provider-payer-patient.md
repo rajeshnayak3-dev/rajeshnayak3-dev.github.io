@@ -5,6 +5,10 @@ description: The three parties in every claim, what each one wants, the identifi
 order: 2
 level: Beginner
 keywords: provider payer patient guarantor subscriber NPI tax ID member ID insured dependent clearinghouse
+takeaways:
+  - "The provider gives care, the payer decides what to pay, and the patient owes their share."
+  - "Claims go out as 837s; payments come back with an 835 ERA."
+  - "The provider gets the remittance (ERA); the patient gets the EOB."
 quiz:
   - q: A 10-year-old is covered under her father's employer plan. Who is the subscriber?
     options:
@@ -123,12 +127,30 @@ The **patient** is the person who received care. On a claim, the patient is link
 
 ## How money and information move
 
-1. The patient gives demographics and insurance details to the provider.
-2. The provider checks eligibility with the payer (EDI 270 request, 271 response).
-3. The provider sends a claim (837) to a **clearinghouse**, which checks format and forwards it to the payer.
-4. The payer adjudicates and sends payment by EFT, with an electronic remittance advice (835 ERA) explaining each line.
-5. The payer sends the patient an **explanation of benefits (EOB)** showing what they owe.
-6. The provider bills the patient for their share.
+```flow
+type: steps
+title: How money and information move
+numbered: true
+steps:
+  - t: Patient → provider
+    d: Demographics and insurance details
+    c: pink
+  - t: Provider ↔ payer
+    d: "Eligibility check: 270 request, 271 response"
+    c: blue
+  - t: Provider → clearinghouse → payer
+    d: Claim (837); the clearinghouse checks format and forwards it
+    c: blue
+  - t: Payer → provider
+    d: Payment by EFT, with an 835 ERA explaining each line
+    c: green
+  - t: Payer → patient
+    d: Explanation of benefits (EOB) showing what they owe
+    c: yellow
+  - t: Provider → patient
+    d: Statement for the patient's share
+    c: pink
+```
 
 !!! tip "Remember the direction of documents"
     The provider receives an **ERA or remittance advice**. The patient receives an **EOB**. In everyday speech, people call both “the EOB”, so ask which one someone means.

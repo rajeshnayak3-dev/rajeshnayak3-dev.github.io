@@ -78,7 +78,77 @@ def make_rel(url):
     return rel
 
 
+# ------------------------------------------------------------------ diagrams
+FLOW_RE = re.compile(r"^```flow[ \t]*\n(.*?)\n```[ \t]*$", re.S | re.M)
+COLORS = {"blue", "green", "yellow", "purple", "pink", "teal", "gray"}
+
+
+def _c(x, default="blue"):
+    c = (x or default)
+    return c if c in COLORS else default
+
+
+def _node(n, cls="fn"):
+    t = md_inline(n.get("t", ""))
+    d = md_inline(n["d"]) if n.get("d") else ""
+    return (f'<span class="{cls} c-{_c(n.get("c"))}"><span class="fn-t">{t}</span>'
+            + (f'<span class="fn-d">{d}</span>' if d else "") + "</span>")
+
+
+def render_flow(src):
+    """Render a ```flow YAML block into an accessible HTML/CSS diagram."""
+    spec = yaml.safe_load(src) or {}
+    kind = spec.get("type", "steps")
+    title = escape(str(spec.get("title", "")))
+    head = f'<figcaption class="flow-title"><span class="flow-tag">Flow</span>{title}</figcaption>' if title else ""
+    note = f'<p class="flow-note">{md_inline(spec["note"])}</p>' if spec.get("note") else ""
+    if kind == "steps":
+        steps = spec["steps"]
+        mode = spec.get("layout") or ("row" if len(steps) <= 4 else "column")
+        items = []
+        for i, st in enumerate(steps):
+            arrow = ""
+            if i < len(steps) - 1:
+                lab = md_inline(st["a"]) if st.get("a") else ""
+                arrow = f'<span class="fa" aria-hidden="{"false" if lab else "true"}"><span class="fa-l">{lab}</span></span>'
+            num = f'<span class="fn-n">{i + 1}</span>' if spec.get("numbered") else ""
+            items.append(f'<li>{_node(st).replace("<span class=\"fn-t\">", num + "<span class=\"fn-t\">", 1)}{arrow}</li>')
+        return (f'<figure class="flow flow-steps flow-{mode}" role="group" aria-label="{title}">{head}'
+                f'<ol class="flow-track">{"".join(items)}</ol>{note}</figure>')
+    if kind == "branch":
+        start = _node(spec["start"], "fn fn-start") + '<span class="fa fa-down" aria-hidden="true"><span class="fa-l"></span></span>' if spec.get("start") else ""
+        q = f'<span class="fb-q">{md_inline(spec["question"])}</span>'
+        opts = []
+        for o in spec["options"]:
+            then = "".join(f"<li>{md_inline(x)}</li>" for x in o.get("then", []))
+            opts.append(f'<li class="fb-opt c-{_c(o.get("c"), "gray")}"><span class="fb-label">{md_inline(o["label"])}</span>'
+                        f'<span class="fn-t">{md_inline(o["t"])}</span>'
+                        + (f'<span class="fn-d">{md_inline(o["d"])}</span>' if o.get("d") else "")
+                        + (f'<ul class="fb-then">{then}</ul>' if then else "") + "</li>")
+        return (f'<figure class="flow flow-branch" role="group" aria-label="{title}">{head}'
+                f'<div class="fb-top">{start}{q}</div><ul class="fb-opts n-{len(opts)}">{"".join(opts)}</ul>{note}</figure>')
+    if kind == "phases":
+        ph = []
+        for i, p in enumerate(spec["phases"]):
+            lis = "".join(f"<li>{md_inline(x)}</li>" for x in p["steps"])
+            start = p.get("start", 1)
+            arrow = '<span class="fp-arrow" aria-hidden="true"></span>' if i < len(spec["phases"]) - 1 else ""
+            ph.append(f'<section class="fp c-{_c(p.get("c"))}"><h4 class="fp-h">{md_inline(p["name"])}</h4>'
+                      + (f'<p class="fp-d">{md_inline(p["d"])}</p>' if p.get("d") else "")
+                      + f'<ol start="{start}">{lis}</ol></section>{arrow}')
+        loop = f'<p class="fp-loop"><span aria-hidden="true">↺</span> {md_inline(spec["loop"])}</p>' if spec.get("loop") else ""
+        return (f'<figure class="flow flow-phases" role="group" aria-label="{title}">{head}'
+                f'<div class="fp-row n-{len(ph)}">{"".join(ph)}</div>{loop}{note}</figure>')
+    raise SystemExit(f"Unknown flow type {kind!r}")
+
+
 def md_to_html(text):
+    blocks = []
+
+    def stash(m):
+        blocks.append(render_flow(m.group(1)))
+        return f"\n\nFLOWBLOCK{len(blocks) - 1}X\n\n"
+    text = FLOW_RE.sub(stash, text)
     md = markdown.Markdown(
         extensions=[
             "tables", "fenced_code", "attr_list", "admonition",
@@ -90,6 +160,8 @@ def md_to_html(text):
     html = md.convert(text)
     toc = [{"id": t["id"], "name": re.sub(r"<[^>]+>", "", t["name"])}
            for t in md.toc_tokens if t["level"] == 2]
+    for i, b in enumerate(blocks):
+        html = html.replace(f"<p>FLOWBLOCK{i}X</p>", b)
     html = re.sub(r"<table>", '<div class="table-wrap" tabindex="0"><table>', html)
     html = html.replace("</table>", "</table></div>")
     return html, toc
@@ -193,6 +265,7 @@ def load_lessons(section_id):
             "track": meta.get("track", True),
             "kind": meta.get("kind", "lesson"),
             "objectives": meta.get("objectives", []),
+            "takeaways": meta.get("takeaways", []),
             "sources": meta.get("sources", []),
             "reviewed": str(meta["reviewed"]) if meta.get("reviewed") else None,
             "html": html,
@@ -330,13 +403,34 @@ def build():
     env.globals["area_for"] = area_for
     env.globals["paths"] = load_yaml("paths.yaml") or []  # enriched later, used by the footer now
 
+    # ---- where each lesson sits in a learning path (first path that lists it)
+    by_url = {l["url"]: l for _, ls in lessons_by_section.values() for l in ls}
+    path_ctx = {}
+    for pth in env.globals["paths"]:
+        flat = [(mi, m, u) for mi, m in enumerate(pth["modules"]) for u in m["lessons"]]
+        for k, (mi, m, u) in enumerate(flat):
+            if u in path_ctx or u not in by_url:
+                continue
+            in_mod = [x for x in m["lessons"]]
+            path_ctx[u] = {
+                "path": pth, "module_n": mi + 1, "module_total": len(pth["modules"]), "module": m,
+                "lesson_n": in_mod.index(u) + 1, "lesson_total": len(in_mod),
+                "dots": [by_url[x]["url"] for x in in_mod if x in by_url],
+                "prev": by_url.get(flat[k - 1][2]) if k > 0 else None,
+                "next": by_url.get(flat[k + 1][2]) if k + 1 < len(flat) else None,
+            }
+
     # ---- lesson pages
     for sec in SITE["sections"]:
         intro, lessons = lessons_by_section[sec["id"]]
         for i, l in enumerate(lessons):
             prev_l = lessons[i - 1] if i > 0 else None
             next_l = lessons[i + 1] if i + 1 < len(lessons) else None
-            render("lesson.html", l["url"], page=l, section=sec,
+            ctx = path_ctx.get(l["url"])
+            if ctx:
+                prev_l = ctx["prev"] or prev_l
+                next_l = ctx["next"]
+            render("lesson.html", l["url"], page=l, section=sec, pctx=ctx,
                    prev=prev_l, next=next_l, step=(i + 1 if sec.get("sequence") else None),
                    total=len(lessons),
                    title=l["title"], description=l["description"])

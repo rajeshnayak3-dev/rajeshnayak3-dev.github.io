@@ -30,6 +30,29 @@ A **no-response** claim has been billed, but there's no payment, no denial and n
 
 ## The four answers you'll get
 
+```flow
+type: branch
+title: You check the claim status. What did the payer say?
+question: Status of the claim
+options:
+  - label: Not on file
+    t: Find out why, then resubmit
+    d: Protect timely filing with proof of submission.
+    c: pink
+  - label: In process
+    t: Note the received date
+    d: Follow up after the expected completion date.
+    c: blue
+  - label: Pended
+    t: Supply what's missing
+    d: Records, COB details, review or pricing.
+    c: yellow
+  - label: Finalized
+    t: Get the details
+    d: Find the payment, or request a copy of the ERA or EOB.
+    c: green
+```
+
 | Status | What it means | What to do |
 |---|---|---|
 | **Not on file (NOF)** | The payer has no record of the claim | Find out why (below), then resubmit and protect timely filing |

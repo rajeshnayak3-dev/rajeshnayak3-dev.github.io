@@ -56,6 +56,28 @@ Many billing systems and contract management tools load payer fee schedules and 
 
 ## How to dispute
 
+```flow
+type: steps
+title: Dispute an underpayment
+numbered: true
+steps:
+  - t: Confirm the contract
+    d: Payer, plan, code and date
+    c: blue
+  - t: Calculate the variance
+    d: Expected minus paid, with working
+    c: blue
+  - t: Call for simple errors
+    d: Many are reprocessed on the call
+    c: yellow
+  - t: Dispute in writing
+    d: Contract section plus calculation
+    c: yellow
+  - t: Track recoveries
+    d: Group repeat errors into one project
+    c: green
+```
+
 1. **Confirm the contract terms** for that payer, plan, code and date (amendments matter).
 2. **Calculate the expected payment** and the variance, showing your working.
 3. **Call the payer** for simple cases (wrong fee schedule, units): many will reprocess on the call.

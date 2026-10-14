@@ -5,6 +5,10 @@ description: Every role you'll find in an RCM company, from front desk to QA aud
 order: 4
 level: Beginner
 keywords: RCM jobs career AR caller payment poster charge entry medical coder credentialing QA auditor team lead career path
+takeaways:
+  - "Each stage of the cycle has its own team: front end, mid-cycle, back end, and quality and leadership."
+  - "Entry roles are usually eligibility, charge entry, payment posting and AR follow-up."
+  - "Every role needs accuracy, clear notes and the habit of asking why a claim failed."
 quiz:
   - q: Who checks a sample of completed work against standards and gives feedback?
     options:

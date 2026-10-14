@@ -5,6 +5,10 @@ description: The first stage of the cycle, where most avoidable denials begin. W
 order: 1
 level: Beginner
 keywords: patient registration demographics insurance card front desk scheduling pre-registration new patient
+takeaways:
+  - "Registration is the first and most important stage: bad data here causes denials later."
+  - "Capture the name, date of birth and member ID exactly as the insurance card shows them."
+  - "Check for other insurance and accident or work injury details at every visit."
 quiz:
   - q: A claim denies because the patient's date of birth doesn't match the payer's records. Where did the error most likely start?
     options:
