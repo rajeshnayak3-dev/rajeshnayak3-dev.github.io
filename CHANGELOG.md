@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-15 — First-version look with the current learning structure
+
+- **Identity restored:** navy ink and form-red REVEX mark with "RCM Academy", Public Sans with bold headings, IBM Plex Mono for codes and amounts, squarer form-like buttons. The four tabs keep their shadowed segmented control, with a red underline on the current tab.
+- **Home:** the animated claim ticket (Charge → Scrub → Accepted → Adjudicated → Paid) is back, next to the headline, two actions, search and real counts. The caption now states the deductible is met so the $28.10 coinsurance adds up.
+- **Lessons:** the course sidebar with progress counts is always visible from 1280px; below that it opens from "All lessons". The local bar and path ribbon are merged into one sticky bar with Next. The right rail shows when there is room.
+- **Flowcharts:** step flows switch to a vertical layout when their box is too narrow, so text no longer wraps word by word.
+
 ## 2026-10-15 — Layout that uses the width, shadowed tabs, content re-validation
 
 - **Header:** frosted white header; the four tabs sit in a segmented control with soft shadows, and the current tab is raised.
