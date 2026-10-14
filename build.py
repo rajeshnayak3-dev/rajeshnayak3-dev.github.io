@@ -416,6 +416,7 @@ def build():
                 "path": pth, "module_n": mi + 1, "module_total": len(pth["modules"]), "module": m,
                 "lesson_n": in_mod.index(u) + 1, "lesson_total": len(in_mod),
                 "dots": [by_url[x]["url"] for x in in_mod if x in by_url],
+                "mod_items": [by_url[x] for x in in_mod if x in by_url],
                 "prev": by_url.get(flat[k - 1][2]) if k > 0 else None,
                 "next": by_url.get(flat[k + 1][2]) if k + 1 < len(flat) else None,
             }
@@ -430,7 +431,7 @@ def build():
             if ctx:
                 prev_l = ctx["prev"] or prev_l
                 next_l = ctx["next"]
-            render("lesson.html", l["url"], page=l, section=sec, pctx=ctx,
+            render("lesson.html", l["url"], page=l, section=sec, pctx=ctx, siblings=lessons,
                    prev=prev_l, next=next_l, step=(i + 1 if sec.get("sequence") else None),
                    total=len(lessons),
                    title=l["title"], description=l["description"])
@@ -628,6 +629,7 @@ def build():
                 for c in denials["categories"]]
         render("section.html", url, section=sec, intro=intro,
                items=section_items.get(sec["id"], []),
+               next=(section_items.get(sec["id"]) or [None])[0],
                title=intro["meta"].get("title", sec["title"]),
                description=intro["meta"].get("description", sec["blurb"]), **extra)
         register(url, sec["title"], sec["blurb"], sec["id"], "", "section")

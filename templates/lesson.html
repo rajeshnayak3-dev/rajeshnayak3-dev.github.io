@@ -7,6 +7,17 @@
 {"@context":"https://schema.org","@type":"LearningResource","name":{{ page.title | tojson }},"description":{{ page.description | tojson }},"educationalLevel":{{ page.level | tojson }},"timeRequired":"PT{{ page.minutes }}M","inLanguage":"en-US","isAccessibleForFree":true,"dateModified":"{{ page.updated }}","author":{"@type":"Person","name":{{ site.author.name | tojson }},"url":{{ site.author.linkedin | tojson }}},"publisher":{"@type":"Organization","name":"{{ site.name }}"}}
 </script>
 {% endblock %}
+{% block localnav %}
+<div class="local-nav">
+  <div class="wrap ln-row">
+    <a class="ln-title" href="/{{ section.id }}/">{{ section.title }}</a>
+    <div class="ln-actions">
+      <button class="ln-btn" type="button" aria-expanded="false" aria-controls="sidebar" data-topics>{{ icon("menu", 18) }}<span>All lessons</span></button>
+      {% if next %}<a class="ln-next" href="/{{ next.url }}"><span class="hide-sm">Next: </span>{{ next.short or next.title }}{{ icon("right", 16) }}</a>{% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
 {% block main %}
 <div class="wrap">
   {% if pctx %}
@@ -24,7 +35,7 @@
 </div>
 <article class="wrap lesson-grid">
   <header class="lesson-head">
-    {% if step %}<p class="step-tag">Stage {{ step }} of {{ total }}</p>{% endif %}
+    {% if step and not pctx %}<p class="step-tag">Stage {{ step }} of {{ total }}</p>{% endif %}
     <h1>{{ page.title }}</h1>
     {% if page.description %}<p class="lede">{{ page.description }}</p>{% endif %}
     <p class="meta">
@@ -34,8 +45,34 @@
     </p>
   </header>
 
-  <aside class="lesson-side">
-    {{ toc_box(page.toc) }}
+  <aside class="lesson-side" aria-label="Lesson navigation">
+    <div class="side-stick">
+      {{ toc_box(page.toc) }}
+      {% set list_items = pctx.mod_items if pctx else siblings %}
+      {% if list_items | length > 1 %}
+      <nav class="side-card side-list" aria-label="{{ 'In this module' if pctx else 'In this topic' }}">
+        <p class="side-h">{{ ("In this module: " ~ pctx.module.title) if pctx else ("In " ~ section.title) }}</p>
+        <ol>
+          {% for it in list_items %}
+          <li><a href="/{{ it.url }}"{% if it.track %} data-topic="{{ it.url }}"{% endif %}{% if it.url == page.url %} class="is-here" aria-current="page"{% endif %}><span class="sl-dot" aria-hidden="true"></span><span>{{ it.short }}</span></a></li>
+          {% endfor %}
+        </ol>
+      </nav>
+      {% endif %}
+      {% if next %}
+      <a class="side-card side-next" href="/{{ next.url }}">
+        <span class="side-h">Up next</span>
+        <strong>{{ next.short or next.title }}</strong>
+        <span class="sn-go">Continue {{ icon("right", 16) }}</span>
+      </a>
+      {% elif pctx %}
+      <a class="side-card side-next" href="/learn/{{ pctx.path.id }}/#practice">
+        <span class="side-h">Path complete</span>
+        <strong>Practice the cases</strong>
+        <span class="sn-go">Open {{ icon("right", 16) }}</span>
+      </a>
+      {% endif %}
+    </div>
   </aside>
 
   <div class="prose">

@@ -33,6 +33,19 @@ Categories: Confirmed error · Needs verification · Incomplete coverage · UX i
 | F-24 | Practice cases | Missing required cases: corrected claim vs appeal, recoupment, ambiguous/escalate, AR prioritization, QA audit | Incomplete coverage | P1 | Required case list incomplete | SC-17…SC-21 added with objectives, evidence, rationale per choice, documentation, escalation, root cause, sources | Per case | Yes | SCN-01 |
 | F-25 | Home page | "REVEX takes you from zero to working RCM analyst" | Confirmed error (over-promise) | P3 | Implied an employment outcome | New hero copy without outcome promises; trust strip | n/a | Yes | CERT-03 (home text read) |
 
+## Second validation pass (2026-10-15)
+
+Checked again with a senior RCM reviewer lens. All items matched the primary rule or the official code meaning; no corrections were needed.
+
+| Area | Checked | Result |
+|---|---|---|
+| Deadlines | Medicare 1 calendar year filing (42 CFR 424.44), redetermination 120 days, QIC 180 days, ALJ / Council / court 60 days, 5-day receipt presumption; ERISA 180-day member appeal; COBRA 44/60/45 days and 18/29/36 months; 60-day overpayment rule; 3-day payment window; VA CCN 180 days; Medicaid 3-month retroactive eligibility | Accurate |
+| Coordination of benefits | Working aged 20+ employees, disability 100+, ESRD 30-month coordination, birthday rule | Accurate |
+| Patient liability | QMB billing prohibition, ABN with GA/GZ/GY, PR-50 vs CO-50, "PR does not by itself prove billable" caveat | Accurate |
+| Coding and forms | 2021 office E/M (MDM or total time), new-patient 3-year rule, modifiers 50/62/AS payment percentages, POS facility vs non-facility, CMS-1500 and UB-04 fields | Accurate |
+| Amounts | Part B deductible $257 (2025), $283 (2026), limiting charge 115% | Accurate |
+| Code library | 71 CARC/RARC titles (CO-4 … CO-288, MA04, M119, MA120) compared with official meanings; REVEX titles are plain-English summaries and link to the X12 list | Consistent |
+
 ## Open items carried forward
 
 1. Re-review the remaining 51 lesson/tool pages, starting with denials, non-denials and insurance, adding `reviewed` and `sources`.

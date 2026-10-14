@@ -235,7 +235,7 @@
       });
     }, { rootMargin: "-20% 0px -70% 0px" });
     heads.forEach(function (h) { io.observe(h); });
-    if (innerWidth <= 1400) $$("[data-toc]").forEach(function (d) { d.open = false; });
+    if (innerWidth < 1360) $$("[data-toc]").forEach(function (d) { d.open = false; });
   }
 
   /* ------------------------------------------------ quizzes */

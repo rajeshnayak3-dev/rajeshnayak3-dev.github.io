@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-15 — Layout that uses the width, shadowed tabs, content re-validation
+
+- **Header:** frosted white header; the four tabs sit in a segmented control with soft shadows, and the current tab is raised.
+- **Lessons and topic pages:** a sticky local bar under the header shows the topic, an **All lessons** button (opens the lesson list as a drawer) and **Next**. The left sidebar no longer takes up space, so content is centered (max 1240px) and a right rail holds "On this page", "In this module" and "Up next". This removes the empty space on the right of lessons. Topic intros use the full width.
+- **Content validation:** a second expert pass over filing limits, appeal levels and windows, Medicare Secondary Payer employer-size rules, QMB, ABN and modifiers GA/GZ/GY, E/M level selection (MDM or time), and all 71 code-library titles against the official CARC/RARC meanings. No factual errors found; see docs/RCM_CONTENT_AUDIT.md.
+- **Tests:** e2e now checks the local bar, drawer and centered lesson width (THEME-01, LAYOUT-01): 25/25 pass.
+
 ## 2026-10-15 — Dotted canvas, flowcharts and lesson structure
 
 - **Figma-style dotted canvas** behind every page; lessons, code pages, cases and About sit on it as white frames.

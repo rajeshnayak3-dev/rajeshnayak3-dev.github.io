@@ -323,8 +323,22 @@ async def main():
         bg = await pg.evaluate("getComputedStyle(document.body).backgroundColor")
         hub_side = await pg.query_selector(".sidebar")
         await pg.goto(BASE + "/start-here/what-is-rcm/")
-        lesson_side = await pg.is_visible(".sidebar")
-        rec("THEME-01", "Light theme and layout", "Open a hub page and a lesson at 1280px", "Light dotted canvas (#F5F7FA); no sidebar on hubs; lesson outline on lessons", f"bg={bg}, hub_sidebar={bool(hub_side)}, lesson_sidebar={lesson_side}", bg == "rgb(245, 247, 250)" and not hub_side and lesson_side)
+        local_nav = await pg.is_visible(".local-nav [data-topics]")
+        drawer_closed = not await pg.evaluate("document.body.classList.contains('sb-open') || document.querySelector('.sidebar').getBoundingClientRect().right > 0")
+        await pg.click(".local-nav [data-topics]")
+        await pg.wait_for_timeout(300)
+        drawer_open = await pg.evaluate("document.body.classList.contains('sb-open') && document.querySelector('.sidebar').getBoundingClientRect().right > 0")
+        rec("THEME-01", "Light theme and layout", "Open a hub page and a lesson at 1280px; open All lessons", "Light dotted canvas (#F5F7FA); no sidebar on hubs; lessons have a sticky local nav whose All lessons button opens the lesson drawer", f"bg={bg}, hub_sidebar={bool(hub_side)}, local_nav={local_nav}, drawer_closed_first={drawer_closed}, drawer_opens={drawer_open}", bg == "rgb(245, 247, 250)" and not hub_side and local_nav and drawer_closed and drawer_open)
+        await ctx.close()
+
+        # ---------- LAYOUT-01: lesson uses the width (content centered, right rail) at 1440px
+        ctx, pg = await new_page(browser, 1440)
+        await pg.goto(BASE + "/rcm-cycle/claim-submission/")
+        box = await pg.evaluate("""() => { const a = document.querySelector('.lesson-grid').getBoundingClientRect();
+          const r = document.querySelector('.lesson-side'); const rb = r ? r.getBoundingClientRect() : null;
+          return {left: Math.round(a.left), right: Math.round(innerWidth - a.right), rail: rb ? Math.round(rb.width) : 0, railVisible: !!(r && r.offsetParent)}; }""")
+        balanced = abs(box["left"] - box["right"]) <= 24 and box["railVisible"] and box["rail"] >= 220
+        rec("LAYOUT-01", "Lesson width", "Open a lesson at 1440px", "Content centered (left and right margins within 24px) with a visible right rail of at least 220px", str(box), balanced)
         await ctx.close()
 
         await browser.close()
