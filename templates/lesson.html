@@ -36,14 +36,14 @@
     {% endif %}
     {{ page.html | safe }}
     {{ quiz(page.quiz, page.url) }}
-    <aside class="review-box" aria-label="Scope and review">
-      <p class="review-h">{{ icon("book", 16) }} Scope and review</p>
+    <details class="review-box">
+      <summary>{{ icon("book", 16) }} Sources, scope and review date</summary>
       <p>US healthcare RCM, for education. Rules vary by payer, plan, state, contract, service and date; examples are illustrative and fictional. Verify current official policy and follow your employer's procedures.</p>
       {% if page.sources %}
       <ul class="review-sources">{% for src in page.sources %}<li><a href="{{ src.url }}" rel="noopener" target="_blank">{{ src.title }}</a>{% if src.note %} <small>({{ src.note }})</small>{% endif %}</li>{% endfor %}</ul>
       {% endif %}
       <p class="review-date">{% if page.reviewed %}Policy-sensitive statements last reviewed against sources: {{ page.reviewed }}.{% else %}Not yet re-reviewed under the October 2026 source policy; policy-sensitive statements should be checked against the <a href="/sources/">official sources</a>.{% endif %} <a href="https://github.com/rajeshnayak3-dev/rajeshnayak3-dev.github.io/issues" rel="noopener" target="_blank">Report an error</a>.</p>
-    </aside>
+    </details>
     {% if page.track %}{{ complete_bar(page.url, prev, next) }}{% else %}{{ complete_bar_nav(prev, next) }}{% endif %}
   </div>
 </article>

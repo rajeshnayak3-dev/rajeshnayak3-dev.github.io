@@ -220,7 +220,7 @@
   addEventListener("scroll", onScroll, { passive: true }); onScroll();
 
   // Home: heartbeat claim track plays once, then the PAID stamp lands.
-  var ecg = $("[data-ecg]"), heroArt = $(".hero-art");
+  var ecg = $("[data-ecg]"), heroArt = $(".hero-art") || $(".hx");
   if (ecg && heroArt) {
     var playEcg = function () {
       ecg.classList.remove("is-on"); heroArt.classList.remove("is-played"); void ecg.offsetWidth;
@@ -264,8 +264,9 @@
       var last = JSON.parse(localStorage.getItem("revex-last"));
       if (last && last.u) {
         $("[data-continue-title]").textContent = last.t;
-        $("[data-continue-meta]").textContent = "Pick up where you left off.";
+        if ($("[data-continue-meta]")) $("[data-continue-meta]").textContent = "Pick up where you left off.";
         var cl = $("[data-continue-link]"); cl.href = href(last.u); cl.textContent = "Continue";
+        if ($("[data-resume-strip]")) $("[data-resume-strip]").hidden = false;
       }
       var cert = JSON.parse(localStorage.getItem("revex-cert"));
       if (cert && cert.id && $("[data-dash-cert]")) {
@@ -291,7 +292,7 @@
       });
     }, { rootMargin: "-20% 0px -70% 0px" });
     heads.forEach(function (h) { io.observe(h); });
-    if (innerWidth <= 1000) $$("[data-toc]").forEach(function (d) { d.open = false; });
+    if (innerWidth <= 1400) $$("[data-toc]").forEach(function (d) { d.open = false; });
   }
 
   /* ------------------------------------------------ quizzes */
@@ -534,6 +535,102 @@
       cr.classList.remove("is-confirm"); cr.lastChild.textContent = " Ticks cleared";
     });
     drawComp();
+  }
+
+  /* ------------------------------------------------ jargon helper: hover or tap a term for its meaning */
+  var prose = $(".lesson-grid > .prose");
+  if (prose) {
+    fetch(ROOT + "static/glossary.json").then(function (r) { return r.json(); }).then(function (gl) {
+      var map = {}, pats = [];
+      gl.forEach(function (g) {
+        var forms = [g.t];
+        if (g.a && g.a.length <= 8 && /^[A-Z0-9\-\/]+$/.test(g.a)) forms.push(g.a);
+        forms.forEach(function (f) {
+          var acronym = /^[A-Z0-9][A-Z0-9\-\/]{1,7}$/.test(f);
+          var multi = f.indexOf(" ") > 0;
+          if (!acronym && !multi) return; // single ordinary words are too noisy
+          if (map[f.toLowerCase()]) return;
+          map[acronym ? f : f.toLowerCase()] = g;
+          pats.push({ f: f, acronym: acronym });
+        });
+      });
+      pats.sort(function (a, b) { return b.f.length - a.f.length; });
+      var escRe = function (x) { return x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); };
+      var re = new RegExp("(^|[^A-Za-z0-9-])(" + pats.map(function (p) { return escRe(p.f); }).join("|") + ")(?![A-Za-z0-9])", "i");
+      var used = {}, count = 0, MAX = 14;
+      var walker = document.createTreeWalker(prose, NodeFilter.SHOW_TEXT, {
+        acceptNode: function (n) {
+          var p = n.parentElement;
+          if (!p || p.closest("a, h1, h2, h3, h4, code, pre, button, .quiz, .term, summary, .admonition-title, th, .review-box, .objectives")) return NodeFilter.FILTER_REJECT;
+          return n.nodeValue.trim().length > 2 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+        }
+      });
+      var nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(function (node) {
+        if (count >= MAX) return;
+        var text = node.nodeValue, m = re.exec(text), guard = 0;
+        while (m && guard++ < 20) {
+          var word = m[2], key = /^[A-Z0-9][A-Z0-9\-\/]{1,7}$/.test(word) ? word : word.toLowerCase();
+          var g = map[key];
+          var acronymOk = !/^[A-Z0-9][A-Z0-9\-\/]{1,7}$/.test(word) || map[word];
+          if (g && acronymOk && !used[g.t]) {
+            used[g.t] = 1; count++;
+            var start = m.index + m[1].length;
+            var after = node.splitText(start); after.nodeValue = after.nodeValue.slice(word.length);
+            var b = document.createElement("button");
+            b.type = "button"; b.className = "term"; b.textContent = word;
+            b.setAttribute("data-term", g.t); b.setAttribute("aria-label", word + ": show definition");
+            after.parentNode.insertBefore(b, after);
+            node = after; text = node.nodeValue;
+            if (count >= MAX) break;
+            m = re.exec(text);
+          } else {
+            var skip = m.index + m[0].length;
+            var rest = re.exec(text.slice(skip));
+            if (!rest) break;
+            rest.index += skip; m = rest;
+          }
+        }
+      });
+      var byTerm = {}; gl.forEach(function (g) { byTerm[g.t] = g; });
+      var tip = null, owner = null;
+      function hide() { if (tip) { tip.remove(); tip = null; } if (owner) owner.setAttribute("aria-expanded", "false"); owner = null; }
+      function show(btn) {
+        if (owner === btn) return;
+        hide();
+        var g = byTerm[btn.getAttribute("data-term")]; if (!g) return;
+        owner = btn; btn.setAttribute("aria-expanded", "true");
+        tip = document.createElement("div"); tip.className = "term-tip"; tip.setAttribute("role", "tooltip"); tip.id = "term-tip";
+        tip.innerHTML = "<strong>" + esc(g.t) + (g.a ? " (" + esc(g.a) + ")" : "") + "</strong>" + esc(g.d) +
+          (g.s ? ' <a href="' + esc(href(g.s.replace(/^\//, ""))) + '">Learn more</a>' : "");
+        document.body.appendChild(tip);
+        btn.setAttribute("aria-describedby", "term-tip");
+        var r = btn.getBoundingClientRect(), tw = tip.offsetWidth, th = tip.offsetHeight;
+        var left = Math.min(Math.max(12, r.left + scrollX - 16), scrollX + document.documentElement.clientWidth - tw - 12);
+        var below = r.bottom + th + 16 < innerHeight;
+        tip.style.left = left + "px";
+        tip.style.top = (below ? r.bottom + scrollY + 10 : r.top + scrollY - th - 10) + "px";
+        tip.classList.toggle("is-above", !below);
+        tip.style.setProperty("--ax", Math.max(10, Math.min(tw - 22, r.left + scrollX - left + r.width / 2 - 6)) + "px");
+      }
+      prose.addEventListener("mouseover", function (e) { var b = e.target.closest(".term"); if (b) show(b); });
+      prose.addEventListener("mouseout", function (e) { var b = e.target.closest(".term"); if (b && (!e.relatedTarget || !tip || !tip.contains(e.relatedTarget))) setTimeout(function () { if (tip && !tip.matches(":hover") && !owner.matches(":hover")) hide(); }, 120); });
+      prose.addEventListener("click", function (e) { var b = e.target.closest(".term"); if (b) { e.preventDefault(); if (owner === b) hide(); else show(b); } });
+      prose.addEventListener("focusin", function (e) { var b = e.target.closest(".term"); if (b) show(b); });
+      document.addEventListener("click", function (e) { if (tip && !e.target.closest(".term, .term-tip")) hide(); });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") hide(); });
+      addEventListener("scroll", function () { if (tip && document.activeElement !== owner) hide(); }, { passive: true });
+    }).catch(function () {});
+
+    // Reading progress bar along the top of lessons.
+    var bar = document.createElement("div"); bar.className = "read-progress"; bar.setAttribute("aria-hidden", "true");
+    document.body.appendChild(bar);
+    var updBar = function () {
+      var r = prose.getBoundingClientRect(), total = r.height - innerHeight * 0.6;
+      var p = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 1;
+      bar.style.transform = "scaleX(" + p.toFixed(3) + ")";
+    };
+    addEventListener("scroll", updBar, { passive: true }); updBar();
   }
 
   /* ------------------------------------------------ hero claim ticket */

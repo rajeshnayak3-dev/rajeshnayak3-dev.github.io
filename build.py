@@ -431,6 +431,9 @@ def build():
            description="Plain-language definitions of US healthcare revenue cycle and medical billing terms.")
     register("glossary/", "RCM terminology", "Glossary of medical billing terms.", "glossary",
              "glossary terms definitions", "page")
+    (OUT / "static" / "glossary.json").write_text(json.dumps(
+        [{"t": t["term"], "a": str(t.get("aka") or ""), "d": re.sub(r"<[^>]+>", "", md_inline(t["def"])),
+          "s": t.get("see") or ""} for t in terms], ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     for t in terms:
         register(f"glossary/#{t['id']}", t["term"], re.sub(r"<[^>]+>", "", md_inline(t["def"]))[:160],
                  "glossary", t.get("aka", ""), "term")
@@ -557,7 +560,8 @@ def build():
     featured_codes = [c for c in denials["codes"] if c.get("featured")][:8]
     stats = {"lessons": sum(1 for _, ls in lessons_by_section.values() for l in ls if l["track"]),
              "codes": len(denials["codes"]), "specialties": len(specialties),
-             "scenarios": len(scenarios), "tools": len(section_items.get("tools", []))}
+             "scenarios": len(scenarios), "tools": len(section_items.get("tools", [])),
+             "terms": len(terms)}
     featured_cases = [s for s in scenarios if s["slug"] in (
         "ar-worklist-prioritization", "corrected-claim-or-appeal", "qmb-balance", "ambiguous-remit-escalate")]
     render("home.html", "", featured=featured_codes, stats=stats, cases=featured_cases,

@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-10-14 — Professional look and simpler learning
+
+- New palette: midnight navy, clinical blue, healthcare teal and mint, with three levels of navy-tinted shadow for depth.
+- Home hero is now a midnight panel with abstract glows, flowing contour lines and a dot grid, plus three floating "product" cards that teach: a fictional member insurance card, a claim status tracker and an ERA payment breakdown with a chart. The heartbeat claim journey now glows inside the hero.
+- Home simplified to five blocks: hero, how REVEX works (learn, practise, check), choose your path, start with a topic, and why you can trust it. A "continue where you left off" bar appears only once you've started.
+- Learning paths page cut down to one clear card per path.
+- Lessons: hover or tap underlined RCM terms (ERA, CARC, COB, timely filing…) to see a plain-English definition from the glossary; a reading progress bar along the top; the "On this page" list starts collapsed on laptops; sources and review details fold into one line you can open.
+- Inner page headers get a soft abstract background in each area's accent colour.
+
 ## 2026-10-14 — Friendlier visual layer
 
 - Clinical teal added to the palette, with one accent colour per main area (Learning paths teal, Reference blue, Practice amber, Career red).
